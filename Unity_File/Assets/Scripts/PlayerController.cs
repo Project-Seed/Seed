@@ -209,9 +209,14 @@ public class PlayerController : MonoBehaviour
         if (item != null)                         //아이템과 부딪혔다면 함수를 호출하고 지움.
         {
             item.Collided();
-            if (GameSystem.instance.item_num[other.name] == 0)
+
+            if (GameSystem.instance.item_num[other.name] == 0) // 못먹었던 아이템이면
                 GameSystem.instance.item_time.Add(other.name);
             GameSystem.instance.item_num[other.name] += 1;
+
+            if (GameSystem.instance.dictionary_num[other.name] == false) // '한번도' 못먹었던 아이템이면 (도감용)
+                GameSystem.instance.dictionary_num[other.name] = true;
+
             Destroy(other.gameObject);
         }
     }
