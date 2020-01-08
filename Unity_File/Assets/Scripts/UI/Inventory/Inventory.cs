@@ -13,7 +13,7 @@ public class Inventory : MonoBehaviour
     public Text item_explanation;
     
     private string item_choose = null; // 어떤 아이템을 눌렀는지
-    private int item_move = 0; // 몇번째 아이템에 커서가 있는지
+    // private int item_move = 0; // 몇번째 아이템에 커서가 있는지
     
     private void Awake()
     {
