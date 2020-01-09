@@ -14,7 +14,7 @@ public class GameSystem : MonoBehaviour
     public float hp; // 현재 HP
     public float max_hp; // 전체 HP
 
-    public List<Dictionary<string, string>> item_list; // 먹는 아이템
+    public List<Dictionary<string, string>> item_list; // 아이템 DB
     public List<Dictionary<string, string>> combination_list; // 조합 테이블
 
     public List<string> item_time; // 먹은 아이템 순서

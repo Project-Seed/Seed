@@ -15,6 +15,8 @@ public class Illustrate : MonoBehaviour
 
     private string item_choose = null; // 어떤 아이템을 눌렀는지
 
+    bool have_on = false; // false는 일반정렬 true는 있는것만 표기
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -26,29 +28,21 @@ public class Illustrate : MonoBehaviour
             item_box[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Item2D/" + GameSystem.instance.dictionary_time[i]);
 
             if (GameSystem.instance.dictionary_num[GameSystem.instance.dictionary_time[i]] == true)
-            {
                 item_box[i].GetComponent<Image>().color = new Color(1, 1, 1, 1);
-            }
             else
-            {
                 item_box[i].GetComponent<Image>().color = new Color(1, 1, 1, 0.2f);
-            }
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < GameSystem.instance.dictionary_num.Count; i++)
+        for (int i = 0; i < item_box.Count; i++)
         {
             if (GameSystem.instance.dictionary_num[GameSystem.instance.dictionary_time[i]] == true)
-            {
                 item_box[i].GetComponent<Image>().color = new Color(1, 1, 1, 1);
-            }
             else
-            {
                 item_box[i].GetComponent<Image>().color = new Color(1, 1, 1, 0.2f);
-            }
         }
     }
 
@@ -71,6 +65,27 @@ public class Illustrate : MonoBehaviour
                     break;
                 }
             }
+        }
+    }
+
+    public void have_click()
+    {
+        if (have_on == false)
+        {
+            for (int i = 0; i < item_box.Count; i++)
+            {
+                if (GameSystem.instance.dictionary_num[GameSystem.instance.dictionary_time[i]] == false)
+                    item_box[i].SetActive(false);
+            }
+            have_on = true;
+        }
+        else
+        {
+            for (int i = 0; i < item_box.Count; i++)
+            {
+                item_box[i].SetActive(true);
+            }
+            have_on = false;
         }
     }
 }

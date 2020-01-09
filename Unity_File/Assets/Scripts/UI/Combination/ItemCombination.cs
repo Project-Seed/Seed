@@ -78,9 +78,12 @@ public class ItemCombination : MonoBehaviour
 
         if (ok)
         {
-            if (GameSystem.instance.item_num[recipe_choose] == 0)
+            if (GameSystem.instance.item_num[recipe_choose] == 0) // 못먹었던 아이템이면
                 GameSystem.instance.item_time.Add(recipe_choose);
             GameSystem.instance.item_num[recipe_choose] += 1;
+
+            if (GameSystem.instance.dictionary_num[recipe_choose] == false) // '한번도' 못먹었던 아이템이면 (도감용)
+                GameSystem.instance.dictionary_num[recipe_choose] = true;
 
             for (int i = 1; i <= System.Convert.ToInt32(GameSystem.instance.combination_list[seach_num]["item_num"]); i++)
             {
