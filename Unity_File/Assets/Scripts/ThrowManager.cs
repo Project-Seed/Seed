@@ -20,7 +20,9 @@ public class ThrowManager : MonoBehaviour
         gravity = 9.8f;
     }
 
-    private void OnMouseDown()
+
+
+    private void OnThrowMode()
     {
         throw_mode = true;
         //낙하지점예상하기
@@ -35,12 +37,18 @@ public class ThrowManager : MonoBehaviour
 
     }
 
-    private void OnMouseUp()
+    private Vector3 Compute
+
+    private void ExitThrowMode()
     {
         //그 지점으로 던지기.
         
 
         //던지기모드 종료
         throw_mode = false;
+    }
+
+    void Throw()
+    {
     }
 }

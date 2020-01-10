@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     public GameObject diary; // 다이어리
 
     public ThirdCamera tc;
+    private ThrowManager GetThrowManager {get;}
 
     IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 1초간 점프금지
     {
@@ -105,13 +106,6 @@ public class PlayerController : MonoBehaviour
         {
             throw_mode = true;
             //낙하지점예상하기
-
-            float throw_angle;
-            throw_angle = tc.mouse_move.x;
-            float throw_speed;
-            throw_speed = 10.0f;
-            throw_position = (throw_speed * throw_speed * Mathf.Sin(throw_angle * 2)) / 9.8f;
-            Debug.Log("throw at : " + throw_position);
             //이 곳에 원 그리기
         }
         if (Input.GetMouseButtonUp(0))
