@@ -26,10 +26,7 @@ public class GameSystem : MonoBehaviour
 
     public static GameSystem Instance
     {
-        get
-        {
-            return instance;
-        }
+        get { return instance;}
     }
 
     private void Awake()
@@ -56,5 +53,18 @@ public class GameSystem : MonoBehaviour
     public void Gamestart()
     {
         SceneManager.LoadScene("Game_Scene");
+    }
+
+    public string item_search(string name, string category) // 아이템 서치 알고리즘
+    {
+        for (int i = 0; i < item_list.Count; i++)
+        {
+            if (item_list[i]["name"] == name)
+            {
+                return item_list[i][category];
+            }
+        }
+
+        return null;
     }
 }

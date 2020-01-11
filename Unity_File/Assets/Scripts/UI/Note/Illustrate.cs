@@ -13,11 +13,14 @@ public class Illustrate : MonoBehaviour
     public Text item_explanation;
     public Image item_image;
 
+    public List<string> category;
+    int now_category = 0; // 현재 카테고리
+
     private string item_choose = null; // 어떤 아이템을 눌렀는지
 
     bool have_on = false; // false는 일반정렬 true는 있는것만 표기
 
-    // Start is called before the first frame update
+
     void Awake()
     {
         for (int i = 0; i < GameSystem.instance.dictionary_num.Count; i++)
@@ -32,9 +35,10 @@ public class Illustrate : MonoBehaviour
             else
                 item_box[i].GetComponent<Image>().color = new Color(1, 1, 1, 0.2f);
         }
+
+        reset_dictionary();
     }
 
-    // Update is called once per frame
     void Update()
     {
         for (int i = 0; i < item_box.Count; i++)
@@ -55,37 +59,38 @@ public class Illustrate : MonoBehaviour
 
         if (GameSystem.instance.dictionary_num[item_choose] == true)
         {
-            for (int i = 0; i < GameSystem.instance.item_list.Count; i++)
-            {
-                if (GameSystem.instance.item_list[i]["name"] == item_choose)
-                {
-                    item_explanation.text = GameSystem.instance.item_list[i]["explanation_ko"];
-                    item_names.text = GameSystem.instance.item_list[i]["name_ko"];
-                    item_image.sprite = Resources.Load<Sprite>("Item2D/" + item_choose);
-                    break;
-                }
-            }
+            item_explanation.text = GameSystem.instance.item_search(item_choose, "explanation_ko");
+            item_names.text = GameSystem.instance.item_search(item_choose, "name_ko");
+            item_image.sprite = Resources.Load<Sprite>("Item2D/" + item_choose);
         }
     }
 
-    public void have_click()
+    public void have_click() // 보유중만 보기 클릭
     {
         if (have_on == false)
-        {
-            for (int i = 0; i < item_box.Count; i++)
-            {
-                if (GameSystem.instance.dictionary_num[GameSystem.instance.dictionary_time[i]] == false)
-                    item_box[i].SetActive(false);
-            }
             have_on = true;
-        }
         else
-        {
-            for (int i = 0; i < item_box.Count; i++)
-            {
-                item_box[i].SetActive(true);
-            }
             have_on = false;
+
+        reset_dictionary();
+    }
+
+    public void category_click(int num)
+    {
+        now_category = num;
+
+        reset_dictionary();
+    }
+
+    public void reset_dictionary()
+    {
+        for (int i = 0; i < item_box.Count; i++)
+        {
+            if ((GameSystem.instance.dictionary_num[GameSystem.instance.dictionary_time[i]] == false && have_on == true) ||
+                (GameSystem.instance.item_search(GameSystem.instance.dictionary_time[i], "category") != category[now_category]))
+                item_box[i].SetActive(false);
+            else
+                item_box[i].SetActive(true);
         }
     }
 }

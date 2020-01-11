@@ -309,8 +309,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -485, y: 175}
-  m_SizeDelta: {x: 150, y: 50}
+  m_AnchoredPosition: {x: -510, y: 175}
+  m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &380915936058796320
 CanvasRenderer:
@@ -390,7 +390,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 626027723793027901}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2003852238397460638}
+        m_MethodName: category_click
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &658355829846656439
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,6 +1089,9 @@ MonoBehaviour:
   item_names: {fileID: 7306396140674876627}
   item_explanation: {fileID: 9216413670764384362}
   item_image: {fileID: 2643671747139582569}
+  category:
+  - material
+  - consumable
 --- !u!1 &1230885509271581406
 GameObject:
   m_ObjectHideFlags: 0
@@ -4985,7 +4999,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6281119420091283949
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5669,8 +5683,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -335, y: 175}
-  m_SizeDelta: {x: 150, y: 50}
+  m_AnchoredPosition: {x: -410, y: 175}
+  m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8473051494960304669
 CanvasRenderer:
@@ -5750,7 +5764,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5930688525334682060}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2003852238397460638}
+        m_MethodName: category_click
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8731125228304537123
 GameObject:
   m_ObjectHideFlags: 0

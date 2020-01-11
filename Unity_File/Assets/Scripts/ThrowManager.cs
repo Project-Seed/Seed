@@ -37,7 +37,7 @@ public class ThrowManager : MonoBehaviour
 
     }
 
-    private Vector3 Compute
+    private Vector3 Compute;
 
     private void ExitThrowMode()
     {
