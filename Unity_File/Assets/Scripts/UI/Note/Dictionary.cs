@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Illustrate : MonoBehaviour
+public class Dictionary : MonoBehaviour
 {
     public GameObject viewport;
     public GameObject content;
@@ -20,6 +20,7 @@ public class Illustrate : MonoBehaviour
 
     bool have_on = false; // false는 일반정렬 true는 있는것만 표기
 
+    public InputField search_data;
 
     void Awake()
     {
@@ -50,7 +51,7 @@ public class Illustrate : MonoBehaviour
         }
     }
 
-    public void Illustrated_click(GameObject gameObject) // 도감 내용물 클릭
+    public void Dictionary_click(GameObject gameObject) // 도감 내용물 클릭
     {
         string item_name = gameObject.name;
         item_name = item_name.Substring(15, item_name.Length - 15);
@@ -82,12 +83,19 @@ public class Illustrate : MonoBehaviour
         reset_dictionary();
     }
 
+    public void search_click()
+    {
+        reset_dictionary();
+        search_data.text = "";
+    }
+
     public void reset_dictionary()
     {
         for (int i = 0; i < item_box.Count; i++)
         {
             if ((GameSystem.instance.dictionary_num[GameSystem.instance.dictionary_time[i]] == false && have_on == true) ||
-                (GameSystem.instance.item_search(GameSystem.instance.dictionary_time[i], "category") != category[now_category]))
+                (GameSystem.instance.item_search(GameSystem.instance.dictionary_time[i], "category") != category[now_category]) ||
+                ((search_data.text.Length != 0) && !(GameSystem.instance.item_search(GameSystem.instance.dictionary_time[i], "name_ko").Contains(search_data.text))))
                 item_box[i].SetActive(false);
             else
                 item_box[i].SetActive(true);
