@@ -35,7 +35,7 @@ public class Spawner : MonoBehaviour
             int choose = Random.Range(0, 2);
             GameObject items = Instantiate(item[choose], new Vector3(random_x, 0.5f, random_z), Quaternion.identity, transform); // ItemSpawner 밑 자식으로 복제
             items.name = item[choose].name;
-            Debug.Log("Spawn : " + random_x + ", " + random_z);
+            //Debug.Log("Spawn : " + random_x + ", " + random_z);
         }
     }
 }
