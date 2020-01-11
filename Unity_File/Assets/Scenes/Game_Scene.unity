@@ -306,12 +306,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a03d3010387de8b439e5c54b25227d5a, type: 3}
---- !u!1 &144843403 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7004180022932413123, guid: a03d3010387de8b439e5c54b25227d5a,
-    type: 3}
-  m_PrefabInstance: {fileID: 31353592}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &144843404 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5026011618165326219, guid: a03d3010387de8b439e5c54b25227d5a,
@@ -971,8 +965,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da82c5efba22b124fbb7063da7d6f294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  s: 0
+  throw_at: {x: 0, y: 0, z: 0}
   throw_mode: 0
+  mode: 0
+  circle_sprite: {fileID: 0}
 --- !u!1 &567346041
 GameObject:
   m_ObjectHideFlags: 0
@@ -2374,6 +2370,7 @@ MonoBehaviour:
   hp: 100
   max_hp: 100
   item_time: []
+  dictionary_time: []
 --- !u!4 &1739530163
 Transform:
   m_ObjectHideFlags: 0
@@ -3225,29 +3222,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8780300512582525260, guid: 60283bddc5264024893416fd49fc70aa,
         type: 3}
-      propertyPath: camera
-      value: 
-      objectReference: {fileID: 1179107958}
-    - target: {fileID: 8780300512582525260, guid: 60283bddc5264024893416fd49fc70aa,
-        type: 3}
-      propertyPath: inventory
-      value: 
-      objectReference: {fileID: 144843403}
-    - target: {fileID: 8780300512582525260, guid: 60283bddc5264024893416fd49fc70aa,
-        type: 3}
       propertyPath: composer
       value: 
       objectReference: {fileID: 1352558358}
-    - target: {fileID: 8780300512582525260, guid: 60283bddc5264024893416fd49fc70aa,
-        type: 3}
-      propertyPath: main_camera
-      value: 
-      objectReference: {fileID: 1179107958}
-    - target: {fileID: 8780300512582525260, guid: 60283bddc5264024893416fd49fc70aa,
-        type: 3}
-      propertyPath: mouse_sensitivity
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 8780300512582525260, guid: 60283bddc5264024893416fd49fc70aa,
         type: 3}
       propertyPath: diary
