@@ -58,19 +58,12 @@ public class Inventory : MonoBehaviour
         string item_name = gameObject.name;
         item_name = item_name.Substring(14, item_name.Length - 14);
         int item_int = System.Convert.ToInt32(item_name);
+        item_choose = GameSystem.instance.item_time[item_int];
+
         if (item_int < GameSystem.instance.item_time.Count)
         {
-            item_choose = GameSystem.instance.item_time[item_int];
-
-            for (int i = 0; i < GameSystem.instance.item_list.Count; i++)
-            {
-                if (GameSystem.instance.item_list[i]["name"] == item_choose)
-                {
-                    item_explanation.text = GameSystem.instance.item_list[i]["explanation_ko"];
-                    item_names.text = GameSystem.instance.item_list[i]["name_ko"];
-                    break;
-                }
-            }
+            item_explanation.text = GameSystem.instance.item_search(item_choose, "explanation_ko");
+            item_names.text = GameSystem.instance.item_search(item_choose, "name_ko");
         }
     }
 }
