@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8780300512582525261}
   - component: {fileID: 8780300512582525262}
+  - component: {fileID: 8780300512582525263}
   - component: {fileID: 8780300512582525256}
   - component: {fileID: 8780300512582525260}
   - component: {fileID: 2099339391914708341}
@@ -44,6 +45,44 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8780300512582525257}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &8780300512582525263
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8780300512582525257}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: d38f8773d424ee44d90ff25ea28f3cd2, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!136 &8780300512582525256
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -72,15 +111,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player_transform: {fileID: 8780300512582525261}
   turning: 0
-  throw_mode: 0
-  throw_position: 0
+  main_camera: {fileID: 0}
   player_speed: 4
-  mouse_sensitivity: 10
-  mouse_move: {x: 0, y: 0, z: 0}
   inventory: {fileID: 0}
   composer: {fileID: 0}
-  diary: {fileID: 0}
-  tc: {fileID: 0}
 --- !u!114 &2099339391914708341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,12 +127,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7497c70675d3f04ab14d6ea1d287544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gravity: 9.81
   run_speed: 5
+  mouse_sensitivity: 6
+  cam_speed: 2
   distance_cur: 3
   height_cur: 0.75
   smooth: 1
-  offset: {x: 0, y: 0, z: 0}
-  mouse_move: {x: 0, y: 0, z: 0}
 --- !u!54 &8780300512582525251
 Rigidbody:
   m_ObjectHideFlags: 0
