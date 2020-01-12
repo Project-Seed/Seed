@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,6 +24,13 @@ public class GameSystem : MonoBehaviour
     public List<string> dictionary_time; // 도감 순서
     public Dictionary<string, bool> dictionary_num = new Dictionary<string, bool>(); // 도감 false면 미획득 true면 획득
 
+    [Flags]
+    public enum Mode
+    {
+        BasicMode = 0,    // 기본
+        ThrowMode = 1,    // 발사 모드
+        CinemaMode = 2    // 시네마틱 모드
+    }
 
     public static GameSystem Instance
     {
