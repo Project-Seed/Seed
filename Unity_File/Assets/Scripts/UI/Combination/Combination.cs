@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemCombination : MonoBehaviour
+public class Combination : MonoBehaviour
 {
     public GameObject viewport;
     public GameObject content;

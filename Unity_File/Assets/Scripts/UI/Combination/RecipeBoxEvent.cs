@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class RecipeBoxEvent : MonoBehaviour
 {
-    public GameObject itemCombination;
+    public GameObject Combination;
 
     private void Start()
     {
-        itemCombination = GameObject.Find("ItemCombination");
+        Combination = GameObject.Find("Combination");
     }
 
     public void click()
     {
-        itemCombination.GetComponent<ItemCombination>().recipe_click(gameObject);
+        Combination.GetComponent<Combination>().recipe_click(gameObject);
     }
 }

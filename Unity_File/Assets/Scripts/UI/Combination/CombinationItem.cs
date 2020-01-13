@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ComvinationItem : MonoBehaviour
+public class CombinationItem : MonoBehaviour
 {
+    // 조합할때 레시피를 고른후 필요한 아이템을 보여주는 코드
+
     public GameObject viewport;
     public GameObject content;
     public List<GameObject> item_box;
@@ -21,8 +23,8 @@ public class ComvinationItem : MonoBehaviour
     {
         gameObject.name = gameObject.name.Substring(0, gameObject.name.Length - 7);
 
-        GameObject itemCombination = GameObject.Find("ItemCombination");
-        seach_num_get = itemCombination.GetComponent<ItemCombination>().seach_num;
+        GameObject itemCombination = GameObject.Find("Combination");
+        seach_num_get = itemCombination.GetComponent<Combination>().seach_num;
 
         image.sprite = Resources.Load<Sprite>("Item2D/" + gameObject.name);
         for (int i = 1; i <= 4; i++)
