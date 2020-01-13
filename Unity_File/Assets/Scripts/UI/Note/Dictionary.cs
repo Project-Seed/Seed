@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class Dictionary : MonoBehaviour
 {
+    public static Dictionary instance; // 현재 클레스를 인스턴트화
+
+    public List<string> dictionary_time; // 도감 순서
+    public Dictionary<string, bool> dictionary_num = new Dictionary<string, bool>(); // 도감 false면 미획득 true면 획득
+
+
     public GameObject viewport;
     public GameObject content;
     public List<GameObject> item_box;
@@ -22,16 +28,33 @@ public class Dictionary : MonoBehaviour
 
     public InputField search_data;
 
+    public static Dictionary Instance
+    {
+        get { return instance; }
+    }
+
+
     void Awake()
     {
-        for (int i = 0; i < GameSystem.instance.dictionary_num.Count; i++)
+        instance = this;
+
+        for (int i = 0; i < GameSystem.instance.item_list.Count; i++)
+        {
+            // 도감에 아이템 이름 등록
+            dictionary_time.Add(GameSystem.instance.item_list[i]["name"]);
+            dictionary_num.Add(GameSystem.instance.item_list[i]["name"], false); 
+        }
+
+
+
+        for (int i = 0; i < dictionary_num.Count; i++)
         {
             GameObject gameObject = Instantiate(content, new Vector3(0, 0, 0), Quaternion.identity, viewport.transform); // viewport 밑 자식으로 복제
             gameObject.name = "Illustrate_box_" + i;
             item_box.Add(gameObject);
-            item_box[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Item2D/" + GameSystem.instance.dictionary_time[i]);
+            item_box[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Item2D/" + dictionary_time[i]);
 
-            if (GameSystem.instance.dictionary_num[GameSystem.instance.dictionary_time[i]] == true)
+            if (dictionary_num[dictionary_time[i]] == true)
                 item_box[i].GetComponent<Image>().color = new Color(1, 1, 1, 1);
             else
                 item_box[i].GetComponent<Image>().color = new Color(1, 1, 1, 0.2f);
@@ -44,7 +67,7 @@ public class Dictionary : MonoBehaviour
     {
         for (int i = 0; i < item_box.Count; i++)
         {
-            if (GameSystem.instance.dictionary_num[GameSystem.instance.dictionary_time[i]] == true)
+            if (dictionary_num[dictionary_time[i]] == true)
                 item_box[i].GetComponent<Image>().color = new Color(1, 1, 1, 1);
             else
                 item_box[i].GetComponent<Image>().color = new Color(1, 1, 1, 0.2f);
@@ -56,9 +79,9 @@ public class Dictionary : MonoBehaviour
         string item_name = gameObject.name;
         item_name = item_name.Substring(15, item_name.Length - 15);
         int item_int = System.Convert.ToInt32(item_name);
-        item_choose = GameSystem.instance.dictionary_time[item_int];
+        item_choose = dictionary_time[item_int];
 
-        if (GameSystem.instance.dictionary_num[item_choose] == true)
+        if (dictionary_num[item_choose] == true)
         {
             item_explanation.text = GameSystem.instance.item_search(item_choose, "explanation_ko");
             item_names.text = GameSystem.instance.item_search(item_choose, "name_ko");
@@ -93,9 +116,9 @@ public class Dictionary : MonoBehaviour
     {
         for (int i = 0; i < item_box.Count; i++)
         {
-            if ((GameSystem.instance.dictionary_num[GameSystem.instance.dictionary_time[i]] == false && have_on == true) ||
-                (GameSystem.instance.item_search(GameSystem.instance.dictionary_time[i], "category") != category[now_category]) ||
-                ((search_data.text.Length != 0) && !(GameSystem.instance.item_search(GameSystem.instance.dictionary_time[i], "name_ko").Contains(search_data.text))))
+            if ((dictionary_num[dictionary_time[i]] == false && have_on == true) ||
+                (GameSystem.instance.item_search(dictionary_time[i], "category") != category[now_category]) ||
+                ((search_data.text.Length != 0) && !(GameSystem.instance.item_search(dictionary_time[i], "name_ko").Contains(search_data.text))))
                 item_box[i].SetActive(false);
             else
                 item_box[i].SetActive(true);
