@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 mouse_move;
     public GameObject inventory; // 인벤토리
     public GameObject composer; // 합성창
-    public GameObject diary; // 다이어리
+    public GameObject note; // 다이어리
 
     public ThirdCamera tc;
     public ThrowManager GetThrowManager;
@@ -97,10 +97,10 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            if (diary.activeSelf == true)
-                diary.SetActive(false);
+            if (note.activeSelf == true)
+                note.SetActive(false);
             else
-                diary.SetActive(true);
+                note.SetActive(true);
         }
         if (Input.GetMouseButtonDown(0))
         {
