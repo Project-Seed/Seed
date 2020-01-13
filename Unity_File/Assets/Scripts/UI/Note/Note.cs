@@ -8,7 +8,12 @@ public class Note : MonoBehaviour
     public GameObject illustrated;
     public GameObject diary;
 
-    
+
+    private void Awake()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void On_illustrated()
     {
         illustrated.SetActive(true);
