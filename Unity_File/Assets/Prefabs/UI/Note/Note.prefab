@@ -391,7 +391,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2003852238397460638}
+      - m_Target: {fileID: 184854485759877811}
         m_MethodName: category_click
         m_Mode: 3
         m_Arguments:
@@ -998,9 +998,9 @@ GameObject:
   - component: {fileID: 5122550521209966887}
   - component: {fileID: 4141867174955735864}
   - component: {fileID: 3914874892387429757}
-  - component: {fileID: 2003852238397460638}
+  - component: {fileID: 184854485759877811}
   m_Layer: 5
-  m_Name: Dictionary
+  m_Name: Dictionarys
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1072,7 +1072,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2003852238397460638
+--- !u!114 &184854485759877811
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1081,9 +1081,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1217416707364987334}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecc3e0470d84d314eb31962892a2de9d, type: 3}
+  m_Script: {fileID: 11500000, guid: 422672d09e7e43f41a7717f9a8e1581a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dictionary_time: []
   viewport: {fileID: 3169816556175043024}
   content: {fileID: 5197965311099216088, guid: c60ff5796d65da642ae2c15520a4864a, type: 3}
   item_box: []
@@ -3869,7 +3870,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2003852238397460638}
+      - m_Target: {fileID: 0}
         m_MethodName: search_click
         m_Mode: 1
         m_Arguments:
@@ -4312,7 +4313,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2003852238397460638}
+      - m_Target: {fileID: 0}
         m_MethodName: have_click
         m_Mode: 1
         m_Arguments:
@@ -5973,7 +5974,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2003852238397460638}
+      - m_Target: {fileID: 184854485759877811}
         m_MethodName: category_click
         m_Mode: 3
         m_Arguments:

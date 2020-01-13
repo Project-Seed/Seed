@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Dictionary_box : MonoBehaviour
 {
-    public GameObject dictionary;
+    public GameObject dictionarys;
 
     private void Start()
     {
-        dictionary = GameObject.Find("Dictionary");
+        dictionarys = GameObject.Find("Dictionarys");
     }
 
     public void click()
     {
-        dictionary.GetComponent<Dictionary>().Dictionary_click(gameObject);
+        dictionarys.GetComponent<Dictionarys>().Dictionary_click(gameObject);
     }
 }

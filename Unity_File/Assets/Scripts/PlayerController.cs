@@ -208,8 +208,8 @@ public class PlayerController : MonoBehaviour
                 GameSystem.instance.item_time.Add(other.name);
             GameSystem.instance.item_num[other.name] += 1;
 
-            if (Dictionary.instance.dictionary_num[other.name] == false) // '한번도' 못먹었던 아이템이면 (도감용)
-                Dictionary.instance.dictionary_num[other.name] = true;
+            if (Dictionarys.instance.dictionary_num[other.name] == false) // '한번도' 못먹었던 아이템이면 (도감용)
+                Dictionarys.instance.dictionary_num[other.name] = true;
 
             Destroy(other.gameObject);
         }

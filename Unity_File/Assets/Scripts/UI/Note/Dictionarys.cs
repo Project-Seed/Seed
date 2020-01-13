@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Dictionary : MonoBehaviour
+public class Dictionarys : MonoBehaviour
 {
-    public static Dictionary instance; // 현재 클레스를 인스턴트화
+    public static Dictionarys instance; // 현재 클레스를 인스턴트화
 
     public List<string> dictionary_time; // 도감 순서
     public Dictionary<string, bool> dictionary_num = new Dictionary<string, bool>(); // 도감 false면 미획득 true면 획득
@@ -28,7 +28,7 @@ public class Dictionary : MonoBehaviour
 
     public InputField search_data;
 
-    public static Dictionary Instance
+    public static Dictionarys Instance
     {
         get { return instance; }
     }
