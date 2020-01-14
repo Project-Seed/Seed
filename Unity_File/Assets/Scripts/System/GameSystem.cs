@@ -21,6 +21,8 @@ public class GameSystem : MonoBehaviour
     public List<string> item_time; // 먹은 아이템 순서
     public Dictionary<string, int> item_num = new Dictionary<string, int>(); // 먹은 아이템 갯수
 
+    public float time = 660; // 현재 시간
+
     [Flags]
     public enum Mode
     {
