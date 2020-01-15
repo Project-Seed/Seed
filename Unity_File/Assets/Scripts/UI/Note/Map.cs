@@ -17,6 +17,7 @@ public class Map : MonoBehaviour
 
     void Update()
     {
+        // 시간 위치 표시
         Vector3 pos = Input.mousePosition;
 
         if(GameSystem.instance.time < 60 * 12)
@@ -35,6 +36,7 @@ public class Map : MonoBehaviour
         TimePosition.text = "시간 " + time_switch + " " + time_hour.ToString() + ":" + time_minute.ToString() + "\n위치 (" + ((int)pos.x).ToString() + ", " + ((int)pos.y).ToString() + ")";
 
 
+        // 지도 이동
         if (Input.GetMouseButtonDown(0))
         {
             move_start = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
@@ -43,6 +45,18 @@ public class Map : MonoBehaviour
         else if(Input.GetMouseButton(0))
         {
             map_bg.transform.position = move_now - (move_start - new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+        }
+
+
+        // 지도 확대 축소
+        float wheelInput = Input.GetAxis("Mouse ScrollWheel");
+        if (wheelInput > 0)
+        {
+            map_bg.transform.localScale = new Vector3(map_bg.transform.localScale.x + 0.1f, map_bg.transform.localScale.y + 0.1f, 1);
+        }
+        else if (wheelInput < 0)
+        {
+            map_bg.transform.localScale = new Vector3(map_bg.transform.localScale.x - 0.1f, map_bg.transform.localScale.y - 0.1f, 1);
         }
      }
 }
