@@ -11,10 +11,9 @@ public class Map : MonoBehaviour
     int time_hour;
     int time_minute;
 
-    void Start()
-    {
-        
-    }
+    public GameObject map_bg;
+    Vector3 move_start; // 이동 할때 누르기 시작시 좌표
+    Vector3 move_now; // 이동 할때 누르기 시작할때 이미지 좌표
 
     void Update()
     {
@@ -34,5 +33,16 @@ public class Map : MonoBehaviour
         }
 
         TimePosition.text = "시간 " + time_switch + " " + time_hour.ToString() + ":" + time_minute.ToString() + "\n위치 (" + ((int)pos.x).ToString() + ", " + ((int)pos.y).ToString() + ")";
-    }
+
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            move_start = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+            move_now = map_bg.transform.position;
+        }
+        else if(Input.GetMouseButton(0))
+        {
+            map_bg.transform.position = move_now - (move_start - new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+        }
+     }
 }
