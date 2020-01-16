@@ -35,4 +35,9 @@ public class Note : MonoBehaviour
         diary.SetActive(false);
         map.SetActive(true);
     }
+
+    public void close_note()
+    {
+        gameObject.SetActive(false);
+    }
 }
