@@ -975,6 +975,7 @@ MonoBehaviour:
   throw_mode: 0
   mode: 0
   circle_sprite: {fileID: 0}
+  seed: {fileID: 0}
 --- !u!1 &567346041
 GameObject:
   m_ObjectHideFlags: 0
@@ -3311,5 +3312,16 @@ PrefabInstance:
       propertyPath: m_Interpolate
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2979638713187819255, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: circle_sprite
+      value: 
+      objectReference: {fileID: 715930718675461904, guid: 337e2b5b199e13a41a84f75556d97a04,
+        type: 3}
+    - target: {fileID: 2979638713187819255, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: seed
+      value: 
+      objectReference: {fileID: 100000, guid: 9ed1e8a25f964bd4298944675e425a0d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60283bddc5264024893416fd49fc70aa, type: 3}
