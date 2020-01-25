@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7131723512890896612}
   - component: {fileID: 2475232995530843922}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Character_Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 4896369841600358934}
   - component: {fileID: 2827493714080286443}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: LookArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -292,3 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df34f0964cb3b854b9eb0b98578ccb8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lookarea: {fileID: 6205681994825997166}
+  cameras: {fileID: 0}
+  character_point: {fileID: 169490076561326381}
+  character: {fileID: 0}

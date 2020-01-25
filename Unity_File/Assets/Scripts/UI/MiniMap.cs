@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class MiniMap : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject lookarea;
+    public GameObject cameras;
+
+    public GameObject character_point;
+    public GameObject character;
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        lookarea.transform.rotation = Quaternion.Euler(0,0,-cameras.transform.rotation.eulerAngles.y + 180 - 45);
+        character_point.transform.rotation = Quaternion.Euler(0, 0, -character.transform.rotation.eulerAngles.y);
     }
 }
