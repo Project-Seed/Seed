@@ -77,15 +77,22 @@ public class ThrowManager : MonoBehaviour
     IEnumerator ThrowingSeed()
     {
         if (!tmp) yield break;
-        t += 0.1f;
+        t += 0.05f;
         float z = throw_speed * Mathf.Cos(throw_angle) * t;
         float y = throw_speed * Mathf.Sin(throw_angle) - (0.5f * gravity * Mathf.Pow(t, 2));
         tmp.transform.localPosition = new Vector3(transform.position.x, transform.position.y + y, transform.position.z + z);
+        //Debug.Log("go to " +tmp.transform.localPosition);
+
         if (y < 0)
+        {
+            t = 0;
+            DestroyImmediate(tmp);
+            //Debug.Log("break");
             yield break;
+        }
         else
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
             StartCoroutine(ThrowingSeed());
         }
     }
