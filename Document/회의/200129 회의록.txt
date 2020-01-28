@@ -1,0 +1,38 @@
+안건 : Class 구상
+내용 : Seed, Item, Plant 클래스 구상
+1. Seed
+Name
+Desc
+
+---SeedModelData---
+Model
+Texture
+------------------------
+
+-------GrowInfo-------
+Type (설치형/확장형)
+Install Type (벽/바닥)
+Force
+Enviroment (선호환경)
+Growth rate (성장 속도)
+---------------------------
+
+성장 단계 flag (설치, 성장, 죽음)
+선호 환경 flag
+
+2. Item
+재료 / 치료제 두 타입으로 나뉨
+Name
+Desc
+Respawn time
+Spawn Area (지역별로 세분화)
+
+치료제의 경우
++회복량
+
+3. Plant
+Pos
+Rotation (씨앗이 발사된 지점에서 충돌한 오브젝트의 표면과 지면이 이루는 각을 받아옴)
+SeedModelData
+GrowInfo
+
