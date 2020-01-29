@@ -109,7 +109,6 @@ public class Dictionarys : MonoBehaviour
     public void search_click()
     {
         reset_dictionary();
-        search_data.text = "";
     }
 
     public void reset_dictionary()
