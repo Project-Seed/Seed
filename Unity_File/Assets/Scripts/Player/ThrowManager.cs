@@ -13,6 +13,7 @@ public class ThrowManager : MonoBehaviour
     private float gravity;
     private float throw_angle;
     private float throw_speed;
+    private bool throw_done;
 
     ThirdCamera tc;
     public GameSystem.Mode mode;
@@ -34,14 +35,15 @@ public class ThrowManager : MonoBehaviour
 
     public void OnThrowMode()
     {
+        if (!throw_done) return;
         mode = GameSystem.Mode.ThrowMode;
+        throw_done = false;
         CalcThrow();
     }
 
     private void CalcThrow()
     {
         // 낙하지점 계산
-        
         float horizonDist;  //수평 도달 거리
         throw_angle = tc.mouse_move.x;
         throw_speed = 10.0f;
@@ -67,7 +69,7 @@ public class ThrowManager : MonoBehaviour
     public void ExitThrowMode()
     {
         //던지기모드 종료
-        mode = GameSystem.Mode.ThrowMode;
+        mode = GameSystem.Mode.BasicMode;
 
         //씨앗 발사시킴
         Throw();
@@ -87,7 +89,7 @@ public class ThrowManager : MonoBehaviour
         {
             t = 0;
             DestroyImmediate(tmp);
-            //Debug.Log("break");
+            throw_done = true;
             yield break;
         }
         else
