@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour
     public GameObject inventory; // 인벤토리
     public GameObject composer; // 합성창
     public GameObject note; // 다이어리
-    public GameObject dialogue; // 다이얼로그
 
     public ThirdCamera tc;
     public ThrowManager GetThrowManager;
@@ -131,18 +130,6 @@ public class PlayerController : MonoBehaviour
             Jumping();
      
     }
-
-    private void OnTriggerStay(Collider collision)
-    {
-        if (collision.name == "EX_NPC")
-        {
-            if (dialogue.activeSelf == false)
-            {
-                dialogue.SetActive(true);
-            }
-        }
-    }
-
 
     private void OnMouseDrag()
     {
