@@ -98,19 +98,23 @@ public class ThirdCamera : MonoBehaviour
         input_mouse_wheel = Input.GetAxis("Mouse ScrollWheel");
         distance_cur = Mathf.Clamp(distance_cur - input_mouse_wheel*4, distance_min, distance_max); // 현재 거리 갱신
         height_cur = Mathf.Clamp(height_cur - input_mouse_wheel, height_min, height_max); // 현재 높이 갱신
-        var new_position = my_transform.position - (my_transform.forward * distance_cur) + my_transform.up * height_cur; // 카메라 위치 설정(타겟과 일정거리 유지)
-        Vector3 smooth_postion = Vector3.Lerp(my_transform.position, new_position + offset, smooth);
+
+        var new_position = my_transform.position + offset - (my_transform.forward * distance_cur) + my_transform.up * height_cur; // 카메라 위치 설정(타겟과 일정거리 유지)
+
+        Vector3 smooth_postion = Vector3.Lerp(my_transform.position, new_position, smooth);
         //camera_transform.position = Vector3.Slerp(camera_transform.position, new_position, Time.deltaTime * move_speed);           // 카메라 이동         
         camera_parent_transform.position = smooth_postion;
         //my_transtorm.position = smooth_postion;
 
 
-
         //공전 마우스 인풋 만큼 회전. 마우스 중앙에서 모서리로 가는 만큼 
-        float cam_speed = pc.mouse_move.y / 360.0f;
-        camera_parent_transform.RotateAround(my_transform.position, my_transform.up, cam_speed * Time.deltaTime); // 타겟을 중심으로, y축 회전(공전), 회전각도
-
-        mouse_move += new Vector3(-Input.GetAxisRaw("Mouse Y") * pc.mouse_sensitivity, 0, 0);
+        //pc.mouse_move --> 캐릭터 컨트롤러에서 mouseMove값. 좌우가 y, 상하가 x
+        float cam_speed_x = pc.mouse_move.y / 360.0f;
+        float mouse_move_y = Input.GetAxis("Mouse Y") * pc.mouse_sensitivity;
+        if (cam_speed_x != 0)
+            camera_parent_transform.RotateAround(my_transform.position + offset, my_transform.up, cam_speed_x * Time.deltaTime); // 타겟을 중심으로, y축 회전(공전), 회전각도
+        
+        mouse_move += new Vector3(-mouse_move_y, 0, 0);
         if (mouse_move.x + my_transform.rotation.x < -20)
         {
             mouse_move.x = -20;
@@ -121,10 +125,13 @@ public class ThirdCamera : MonoBehaviour
         }
         if (-20 <= mouse_move.x + my_transform.rotation.x && mouse_move.x + my_transform.rotation.x <= 10)
         {
+            //if (mouse_move_y != 0)
+            //    camera_parent_transform.RotateAround(my_transform.position, my_transform.right, mouse_move_y / 180.0f * Time.deltaTime); // 타겟을 중심으로, x축 회전(공전), 회전각도
             lookat_offset = new Vector3(0, -mouse_move.x/10 + 2.0f, 0);
         }
         else
             lookat_offset = new Vector3(0, 2.0f, 0);
+
         camera_parent_transform.LookAt(my_transform.position + lookat_offset);
         //각도 mouse_move.x
 

@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour
                 inventory.SetActive(true);
             
         }
+
         if (Input.GetKeyDown(KeyCode.O))
         {
             if (composer.activeSelf == true)
@@ -95,6 +96,7 @@ public class PlayerController : MonoBehaviour
             else
                 composer.SetActive(true);
         }
+
         if (Input.GetKeyDown(KeyCode.P))
         {
             if (note.activeSelf == true)
@@ -102,28 +104,23 @@ public class PlayerController : MonoBehaviour
             else
                 note.SetActive(true);
         }
+
         if (Input.GetMouseButtonDown(0))
-        {
             GetThrowManager.OnThrowMode();
-            //낙하지점예상하기
-            //이 곳에 원 그리기
-        }
+
         if (Input.GetMouseButtonUp(0))
-        {
-            //throw_position = 0.0f; //초기화
             GetThrowManager.ExitThrowMode();
-        }
-        //움직임
-        //Debug.Log("Horizontal : " + input_horizontal.ToString());
-        //Debug.Log("Vertical : " + input_vertical.ToString());
+
+        //이동
         movement.Set(input_horizontal, 0, input_vertical);
         movement = movement * player_speed * Time.deltaTime;
         player_transform.Translate(movement.normalized * player_speed * Time.deltaTime, Space.Self);
 
-       // mouse_input = Input.GetAxisRaw("Mouse X") * mouse_sensitivity;
+        //마우스에 따른 회전
+        //캐릭터는 y축회전만해야함. Mouse X가 좌우 이동이니까 이 값을 mouse_move.y에 대입.
         mouse_move += new Vector3(0, Input.GetAxis("Mouse X") * mouse_sensitivity, 0);
+        //그리고 그 mouse_move를 플레이어 오일러 앵글에 대입.
         player_transform.localEulerAngles = mouse_move;
-        //Debug.Log("캐릭터 : " + mouse_move.y);
 
         //점프
         if (is_jumping && in_ground)

@@ -22,6 +22,7 @@ public class ThrowManager : MonoBehaviour
     private GameObject throw_sprite;    // 임시스프라이트
     private GameObject tmp;  //임시씨앗
 
+    Vector3 start_transform;
     private float t;
 
     private void Start()
@@ -31,6 +32,7 @@ public class ThrowManager : MonoBehaviour
         throw_at =
         windVec = 
         s = Vector3.zero;
+        start_transform = transform.position + new Vector3(0, 1.3f, 0);
     }
 
     public void OnThrowMode()
@@ -50,7 +52,9 @@ public class ThrowManager : MonoBehaviour
         horizonDist = (Mathf.Pow(throw_speed, 2) * Mathf.Sin(2 * throw_angle)) / gravity;
         s = new Vector3(windVec.x * wind_power, 0, horizonDist + windVec.z * wind_power);
         throw_at = transform.forward + s;
-        Debug.Log("throw at : " + throw_angle + " " + throw_at);
+        Debug.Log("forward : " + transform.forward);
+
+        Debug.Log("throw at : " + throw_angle + " " + throw_at+"d "+horizonDist);
 
         // 해당 지점에 스프라이트 그리기
         // 오브젝트 생성
@@ -58,14 +62,6 @@ public class ThrowManager : MonoBehaviour
             DestroyImmediate(throw_sprite);
         throw_sprite = Instantiate(circle_sprite, throw_at, Quaternion.AngleAxis(0f, Vector3.right));
     }
-    private void Throw()
-    {
-        //씨앗 생성
-        tmp = Instantiate(seed);
-        
-        StartCoroutine(ThrowingSeed());
-    }
-
     public void ExitThrowMode()
     {
         //던지기모드 종료
@@ -75,16 +71,25 @@ public class ThrowManager : MonoBehaviour
         Throw();
         DestroyImmediate(throw_sprite);
     }
+    private void Throw()
+    {
+        //씨앗 생성
+        tmp = Instantiate(seed);
+        
+        StartCoroutine(ThrowingSeed());
+    }
+
 
     IEnumerator ThrowingSeed()
     {
         if (!tmp) yield break;
         t += 0.05f;
         float z = throw_speed * Mathf.Cos(throw_angle) * t;
-        float y = throw_speed * Mathf.Sin(throw_angle) - (0.5f * gravity * Mathf.Pow(t, 2));
-        tmp.transform.localPosition = new Vector3(transform.position.x, transform.position.y + y, transform.position.z + z);
+        float y = throw_speed * Mathf.Sin(throw_angle) * t - (0.5f * gravity * Mathf.Pow(t, 2));
+        tmp.transform.localPosition = new Vector3(start_transform.x, start_transform.y + y, start_transform.z + z);
         //Debug.Log("go to " +tmp.transform.localPosition);
 
+        //아래 조건 착지했을 때(지면 or 오브젝트와 충돌했을 때)로 바꿀 예정
         if (y < 0)
         {
             t = 0;
