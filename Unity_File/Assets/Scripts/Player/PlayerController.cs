@@ -85,9 +85,7 @@ public class PlayerController : MonoBehaviour
             if (inventory.activeSelf == true)
                 inventory.SetActive(false);
             else
-                inventory.SetActive(true);
-            
-        }
+                inventory.SetActive(true);        }
 
         if (Input.GetKeyDown(KeyCode.O))
         {
@@ -118,51 +116,14 @@ public class PlayerController : MonoBehaviour
 
         //마우스에 따른 회전
         //캐릭터는 y축회전만해야함. Mouse X가 좌우 이동이니까 이 값을 mouse_move.y에 대입.
-        mouse_move += new Vector3(0, Input.GetAxis("Mouse X") * mouse_sensitivity, 0);
-        //그리고 그 mouse_move를 플레이어 오일러 앵글에 대입.
-        player_transform.localEulerAngles = mouse_move;
+        mouse_move += new Vector3( -Input.GetAxis("Mouse Y") * mouse_sensitivity,
+                                    Input.GetAxis("Mouse X") * mouse_sensitivity, 0);
+        //그리고 그 mouse_move를 플레이어 오일러 앵글에 대입. (y만~~)
+        player_transform.localEulerAngles = new Vector3(0, mouse_move.y, 0);
 
         //점프
         if (is_jumping && in_ground)
             Jumping();
-     
-    }
-
-    private void OnMouseDrag()
-    {
-        
-    }
-
-    private void LateUpdate()
-    {
-        //player_transform.rotation.Set(0, main_camera.rotation.y, 0, 0);
-        //player_transform.eulerAngles = new Vector3(0, main_camera.eulerAngles.y, 0);
-    }
-
-    private void Moving()
-    {   
-        //Vector3 cam_front = (main_camera.up + main_camera.forward);
-        movement.Set(input_horizontal, 0, input_vertical);
-        movement = movement * player_speed * Time.deltaTime;
-
-        // Transform 쓰는 방법
-        player_transform.Translate(movement.normalized * player_speed * Time.deltaTime, Space.Self);
-
-        // 회전 프레임 당 각도 계산해서 딱 180도 돌게함
-        //if (turning)
-        //{
-        //    float DegreesThisFrame = (amount * Time.deltaTime) / time;
-
-        //    if (DegreesThisFrame > DegreesLeft)
-        //    {
-        //        DegreesThisFrame = DegreesLeft;
-        //        turning = false;
-        //    }
-
-        //    transform.Rotate(0f, DegreesThisFrame, 0f);
-        //    DegreesLeft -= DegreesThisFrame;
-        //}
-      
     }
 
     private void Jumping()
