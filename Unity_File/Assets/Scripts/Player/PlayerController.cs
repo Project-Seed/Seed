@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Transform player_transform;     // 플레이어의 위치정보를 가져옴
+    private Transform player_transform;
+    // 플레이어의 위치정보를 가져옴   
+    public Transform Player_transform { get => player_transform; }
+
     private Rigidbody player_rigidbody;
     private float input_horizontal;         // 수직방향 입력 ws
     private float input_vertical;           // 수평방향 입력 ad
@@ -18,23 +21,22 @@ public class PlayerController : MonoBehaviour
 
     Vector3 movement;                       // 계산결과로 나올 이동 벡터.
 
+    public Vector3 targetVec;
+    Vector3 offset;
     //public Transform main_camera;           // 카메라 트랜스폼 가져옴
     //public Transform aim;
     public bool throw_mode;                 // 던지기 모드
     public float throw_position;
 
-
     [SerializeField]
     private float player_speed = 4.0f;         // 캐릭터 속도
     private float player_jump_power = 4.0f;    // 캐릭터 점프력
     float mouse_input;
-    public float mouse_sensitivity = 10.0f; // 마우스 감도
     public Vector3 mouse_move;
     public GameObject inventory; // 인벤토리
     public GameObject composer; // 합성창
     public GameObject note; // 다이어리
 
-    public ThirdCamera tc;
     public ThrowManager GetThrowManager;
 
     IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 1초간 점프금지
@@ -44,9 +46,10 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
-        player_transform = GetComponent<Transform>();
         player_rigidbody = GetComponent<Rigidbody>();
-        tc = GetComponent<ThirdCamera>();
+        player_transform = GetComponent<Transform>();
+        offset = new Vector3(0f, 1.5f, 0f);
+        targetVec = player_transform.position + offset;
         is_jumping = false;
         turning = false;
         is_back = false;
@@ -54,9 +57,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()                               // 키 입력은 Update에서 받고
     {
+        targetVec = player_transform.position + offset;
 
-        // 카메라 회전하면 캐릭터도 회전
-      
         input_horizontal = Input.GetAxis("Horizontal");
         input_vertical = Input.GetAxis("Vertical");
 
@@ -113,13 +115,12 @@ public class PlayerController : MonoBehaviour
         movement.Set(input_horizontal, 0, input_vertical);
         movement = movement * player_speed * Time.deltaTime;
         player_transform.Translate(movement.normalized * player_speed * Time.deltaTime, Space.Self);
-
         //마우스에 따른 회전
         //캐릭터는 y축회전만해야함. Mouse X가 좌우 이동이니까 이 값을 mouse_move.y에 대입.
-        mouse_move += new Vector3( -Input.GetAxis("Mouse Y") * mouse_sensitivity,
-                                    Input.GetAxis("Mouse X") * mouse_sensitivity, 0);
+        //mouse_move += new Vector3( -Input.GetAxis("Mouse Y") * mouse_sensitivity,
+                                    //Input.GetAxis("Mouse X") * mouse_sensitivity, 0);
         //그리고 그 mouse_move를 플레이어 오일러 앵글에 대입. (y만~~)
-        player_transform.localEulerAngles = new Vector3(0, mouse_move.y, 0);
+        //player_transform.localEulerAngles = new Vector3(0, mouse_move.y, 0);
 
         //점프
         if (is_jumping && in_ground)

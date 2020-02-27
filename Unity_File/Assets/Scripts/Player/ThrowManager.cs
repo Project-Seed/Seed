@@ -102,6 +102,6 @@ public class ThrowManager : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
             StartCoroutine(ThrowingSeed());
         }
-    }
+    } 
 
 }

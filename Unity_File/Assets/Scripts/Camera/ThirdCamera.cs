@@ -23,15 +23,11 @@ public class ThirdCamera : MonoBehaviour
     //[SerializeField] private float offset = 1.0f;                // 타겟 좌표에서의 offset (타켓의 발 밑이 좌표라서 주는거)
     private float input_mouse_wheel;
     public float smooth = 2.0f;
-    public Vector3 offset;  // 캐릭터 transform + offset 만큼이 카메라 위치.
-    Vector3 lookat_offset;
-    Transform my_transform; //캐릭터 위치
-    Transform model;
-    Transform camera_parent_transform;  //카메라 리그 위치
+    Transform camera_rig_transform;  //카메라 리그 위치
     Transform camera_transform;         //카메라 위치
-    Vector3 targerVec;
-    PlayerController pc;
-    ThrowManager tm;
+
+    public PlayerController GetPlayerController;
+    ThrowManager GetThrowManager;
   
     public Vector3 mouse_move;
     Vector3 throw_position;
@@ -43,6 +39,7 @@ public class ThirdCamera : MonoBehaviour
     Quaternion targetRotation;
     Vector3 gap;
     Vector3 axisVec;
+    public float mouse_sensitivity = 10.0f; // 마우스 감도
 
     // 왜 떨리는가?
     // 마우스 움직일 때마다 카메라가 회전. 동시에 캐릭터도 회전.
@@ -54,52 +51,47 @@ public class ThirdCamera : MonoBehaviour
 
     // 클릭하면 던지기 모드 on. 
     // 마우스 포인터 가운데로 고정
-    void Awake()
+
+    private void Start()
     {
-        my_transform = transform;
-        pc = GetComponent<PlayerController>();
-        tm = GameObject.Find("Main Camera").GetComponent<ThrowManager>();
-        model = transform.GetChild(0);
-        camera_transform = Camera.main.transform;
-        camera_parent_transform = camera_transform.parent;
-        offset = new Vector3(0f, 2f, 0f);
+        //GetPlayerController = GetComponent<PlayerController>();
+        GetThrowManager = GetComponent<ThrowManager>();
+        camera_transform = GetComponentInChildren<Transform>();
+        camera_rig_transform = transform;
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        //mouse_move += new Vector3(-Input.GetAxis("Mouse Y") * mouse_sensitivity,
+        //                            Input.GetAxis("Mouse X") * mouse_sensitivity, 0);
 
         //Debug.Log("카메라 : " + mouse_input);
-        MoveCalc(1.0f);
+        //MoveCalc(1.0f);
     }
 
     void LateUpdate()
     {
-        if (pc.throw_mode)
-        {
-            //던지기 모드 활성화 -> 포물선 (힘, 각도) 도착지점 계산. 도착지점에 표시. 그곳으로 카메라 움직임.
+        //if (pc.throw_mode)
+        //{
+        //던지기 모드 활성화 -> 포물선 (힘, 각도) 도착지점 계산. 도착지점에 표시. 그곳으로 카메라 움직임.
 
-            //throw_position = my_transform.forward + new Vector3(0, 0, pc.throw_position);
+        //throw_position = my_transform.forward + new Vector3(0, 0, pc.throw_position);
 
-            //float power; //던지는 힘
-            //float m; //질량
-            //float a;//가속도
-            //float v;//속도
-            //Vector3 dir;//방향
-            //power = 10.0f;
-            //m = 0.1f;
-            //dir = new Vector3(mouse_move,)
-            //Vector3 throw_vec = new Vector3(0, 0, pc.throw_position);
-            //my_transform.position = my_transform.forward + throw_vec;
-            //Debug.Log("aim change " + my_transform);
-            
+        //float power; //던지는 힘
+        //float m; //질량
+        //float a;//가속도
+        //float v;//속도
+        //Vector3 dir;//방향
+        //power = 10.0f;
+        //m = 0.1f;
+        //dir = new Vector3(mouse_move,)
+        //Vector3 throw_vec = new Vector3(0, 0, pc.throw_position);
+        //my_transform.position = my_transform.forward + throw_vec;
+        //Debug.Log("aim change " + my_transform);
 
-        }
-        else
-        {
-            my_transform = transform;
-        }
 
-        targerVec = my_transform.position + offset;
+        //}
+        Vector3 targetVec = GetPlayerController.targetVec;
 
         //이동
         //줌인,아웃
@@ -107,54 +99,29 @@ public class ThirdCamera : MonoBehaviour
         distance_cur = Mathf.Clamp(distance_cur - input_mouse_wheel*4, distance_min, distance_max); // 현재 거리 갱신
         height_cur = Mathf.Clamp(height_cur - input_mouse_wheel, height_min, height_max); // 현재 높이 갱신
 
-        var new_position = targerVec - (my_transform.forward * distance_cur) + my_transform.up * height_cur; // 카메라 위치 설정(타겟과 일정거리 유지)
+        var new_position = targetVec - (GetPlayerController.transform.forward * distance_cur) + GetPlayerController.transform.up * height_cur; // 카메라 위치 설정(타겟과 일정거리 유지)
 
-        Vector3 smooth_postion = Vector3.Lerp(targerVec, new_position, smooth);
-        //camera_transform.position = Vector3.Slerp(camera_transform.position, new_position, Time.deltaTime * move_speed);           // 카메라 이동         
-        camera_parent_transform.position = smooth_postion;
-        //my_transtorm.position = smooth_postion;
+        Vector3 smooth_postion = Vector3.Lerp(targetVec, new_position, smooth);  
+        camera_rig_transform.position = smooth_postion;
 
 
         //공전 마우스 인풋 만큼 회전.마우스 중앙에서 모서리로 가는 만큼
         //pc.mouse_move-- > 캐릭터 컨트롤러에서 mouseMove값. 좌우가 y, 상하가 x
-        float cam_angle_x = pc.mouse_move.y / 180.0f;
-        float cam_angle_y = pc.mouse_move.x / 180.0f;
 
-        //float mouse_move_y = Input.GetAxis("Mouse Y") * pc.mouse_sensitivity;
-        if (cam_angle_x != 0)
-            camera_parent_transform.RotateAround(targerVec, my_transform.up, cam_angle_x * Time.deltaTime); // 타겟을 중심으로, y축 회전(공전), 회전각도
+         mouse_move += new Vector3(-Input.GetAxis("Mouse Y") * mouse_sensitivity,
+                                    Input.GetAxis("Mouse X") * mouse_sensitivity, 0);
 
-        //mouse_move += new Vector3(-mouse_move_y, 0, 0);
-        if (mouse_move.x + my_transform.rotation.x < -20)
-        {
-            mouse_move.x = -20;
-        }
-        else if (10 < mouse_move.x + my_transform.rotation.x)
-        {
-            mouse_move.x = 10;
-        }
-        if (-20 <= mouse_move.x + my_transform.rotation.x && mouse_move.x + my_transform.rotation.x <= 10)
-        {
-            //if (mouse_move_y != 0)
-            //    camera_parent_transform.RotateAround(my_transform.position, my_transform.right, mouse_move_y / 180.0f * Time.deltaTime); // 타겟을 중심으로, x축 회전(공전), 회전각도
-            lookat_offset = new Vector3(0, -mouse_move.x / 10 + 2.0f, 0);
-        }
-        else
-            lookat_offset = new Vector3(0, 2.0f, 0);
+        //float move_x = mouse_move.y;
+        //float move_y = mouse_move.x;
 
-        camera_parent_transform.LookAt(my_transform.forward + lookat_offset);
-        //각도 mouse_move.x
+        mouse_move.y = Mathf.Clamp(mouse_move.y, -60, 60);
+        mouse_move.x = Mathf.Clamp(mouse_move.x, -30, 30);
 
-        //rotation넣는법
-        //ca.rotation = Quaternion.Slerp(transform.rotation, targetRotation, run_speed);
-        //gap.x += -Input.GetAxis("Mouse Y") * run_speed;
-        //gap.x = Mathf.Clamp(gap.x, -20f, 10f);
-        //gap.y += Input.GetAxis("Mouse X") * run_speed;
-        //targetRotation = Quaternion.Euler(gap);
+        //rotateAround가 중첩되는 문제.
+        camera_rig_transform.RotateAround(targetVec, camera_rig_transform.up, mouse_move.y); // 타겟을 중심으로, y축 회전(공전), 회전각도
+        camera_rig_transform.RotateAround(targetVec, camera_rig_transform.right, mouse_move.x); // 타겟을 중심으로, x축 회전(공전), 회전각도
 
-        //Quaternion q = targetRotation;
-        //q.x = q.z = 0;
-        //camera_parent_transform.rotation = q;
+        camera_rig_transform.LookAt(targetVec);
     }
 
     void Balance()
@@ -174,44 +141,44 @@ public class ThirdCamera : MonoBehaviour
        
     }
 
-    void MoveCalc(float ratio)
-    {
-        float tempMoveY = move.y;
-        move.y = 0; //이동에는 xz값만 필요하므로 temp에 저장해놓고 일단 0으로 만듦
-        Vector3 inputMoveXZ = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        //대각선 이동이 루트2 배의 속도를 갖는 것을 막기위해 속도가 1 이상 된다면 노말라이즈 후 속도를 곱해 어느 방향이든 항상 일정한 속도가 되게 한다.
-        float inputMoveXZMgnitude = inputMoveXZ.sqrMagnitude; //sqrMagnitude연산을 두 번 할 필요 없도록 따로 저장
-        inputMoveXZ = camera_transform.TransformDirection(inputMoveXZ);
-        if (inputMoveXZMgnitude <= 1)
-            inputMoveXZ *= run_speed;
-        else
-            inputMoveXZ = inputMoveXZ.normalized * run_speed;
+    //void MoveCalc(float ratio)
+    //{
+    //    float tempMoveY = move.y;
+    //    move.y = 0; //이동에는 xz값만 필요하므로 temp에 저장해놓고 일단 0으로 만듦
+    //    Vector3 inputMoveXZ = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+    //    //대각선 이동이 루트2 배의 속도를 갖는 것을 막기위해 속도가 1 이상 된다면 노말라이즈 후 속도를 곱해 어느 방향이든 항상 일정한 속도가 되게 한다.
+    //    float inputMoveXZMgnitude = inputMoveXZ.sqrMagnitude; //sqrMagnitude연산을 두 번 할 필요 없도록 따로 저장
+    //    inputMoveXZ = camera_transform.TransformDirection(inputMoveXZ);
+    //    if (inputMoveXZMgnitude <= 1)
+    //        inputMoveXZ *= run_speed;
+    //    else
+    //        inputMoveXZ = inputMoveXZ.normalized * run_speed;
 
-        //조작 중에만 카메라의 방향에 상대적으로 캐릭터가 움직이도록 한다.
-        if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
-        {
-            Quaternion cameraRotation = camera_parent_transform.rotation;
-            cameraRotation.x = cameraRotation.z = 0;    //y축만 필요하므로 나머지 값은 0으로 바꾼다.
-            //카메라 리그가 돌아가는 대로 카메라 돌리고 그대로 모델도 돌림.
-            //camera_transform.rotation = Quaternion.Slerp(camera_transform.rotation, cameraRotation, 10.0f * Time.deltaTime);
+    //    //조작 중에만 카메라의 방향에 상대적으로 캐릭터가 움직이도록 한다.
+    //    if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+    //    {
+    //        Quaternion cameraRotation = camera_parent_transform.rotation;
+    //        cameraRotation.x = cameraRotation.z = 0;    //y축만 필요하므로 나머지 값은 0으로 바꾼다.
+    //        //카메라 리그가 돌아가는 대로 카메라 돌리고 그대로 모델도 돌림.
+    //        //camera_transform.rotation = Quaternion.Slerp(camera_transform.rotation, cameraRotation, 10.0f * Time.deltaTime);
             
-            if (move != Vector3.zero)//Quaternion.LookRotation는 (0,0,0)이 들어가면 경고를 내므로 예외처리 해준다.
-            {
-                Quaternion characterRotation = Quaternion.LookRotation(move); //보는 방향이 캐릭터 방향임.
-                characterRotation.x = characterRotation.z = 0;
-                model.rotation = Quaternion.Slerp(model.rotation, characterRotation, 10.0f * Time.deltaTime);   //그쪽으로 모델 돌림
-            }
+    //        if (move != Vector3.zero)//Quaternion.LookRotation는 (0,0,0)이 들어가면 경고를 내므로 예외처리 해준다.
+    //        {
+    //            Quaternion characterRotation = Quaternion.LookRotation(move); //보는 방향이 캐릭터 방향임.
+    //            characterRotation.x = characterRotation.z = 0;
+    //            model.rotation = Quaternion.Slerp(model.rotation, characterRotation, 10.0f * Time.deltaTime);   //그쪽으로 모델 돌림
+    //        }
 
-            //관성을 위해 MoveTowards를 활용하여 서서히 이동하도록 한다.
-            move = Vector3.MoveTowards(move, inputMoveXZ, ratio * run_speed);
-        }
-        else
-        {
-            //조작이 없으면 서서히 멈춘다.
-            move = Vector3.MoveTowards(move, Vector3.zero, (1 - inputMoveXZMgnitude) * run_speed * ratio);
-        }
-        move.y = tempMoveY; //y값 복구
-    }
+    //        //관성을 위해 MoveTowards를 활용하여 서서히 이동하도록 한다.
+    //        move = Vector3.MoveTowards(move, inputMoveXZ, ratio * run_speed);
+    //    }
+    //    else
+    //    {
+    //        //조작이 없으면 서서히 멈춘다.
+    //        move = Vector3.MoveTowards(move, Vector3.zero, (1 - inputMoveXZMgnitude) * run_speed * ratio);
+    //    }
+    //    move.y = tempMoveY; //y값 복구
+    //}
 
     void GradientCheck()
     {
@@ -230,19 +197,19 @@ public class ThirdCamera : MonoBehaviour
     void DrawArc()
     {
         Debug.Log("Arc");
-        Plane player_plane = new Plane(Vector3.up, my_transform.position);
-        Ray ray = Camera.main.ScreenPointToRay(my_transform.position);
+        Plane player_plane = new Plane(Vector3.up, GetPlayerController.transform.position);
+        Ray ray = Camera.main.ScreenPointToRay(GetPlayerController.transform.position);
         float hitdist = 0.0f;
-        Vector3 target_point = my_transform.position;
+        Vector3 target_point = GetPlayerController.transform.position;
         if (player_plane.Raycast(ray,out hitdist))
         {
-            center = (my_transform.position + target_point) * 0.5f;
+            center = (GetPlayerController.transform.position + target_point) * 0.5f;
             center.y -= 2.0f;
-            Quaternion target_rotation = Quaternion.LookRotation(center - my_transform.position);
-            my_transform.rotation = Quaternion.Slerp(my_transform.rotation, target_rotation, 1.0f * Time.deltaTime);
+            Quaternion target_rotation = Quaternion.LookRotation(center - GetPlayerController.transform.position);
+            GetPlayerController.transform.rotation = Quaternion.Slerp(GetPlayerController.transform.rotation, target_rotation, 1.0f * Time.deltaTime);
             RaycastHit hit_info;
 
-            if(Physics.Linecast(my_transform.position,target_point,out hit_info))
+            if(Physics.Linecast(GetPlayerController.transform.position,target_point,out hit_info))
             {
                 target_point = hit_info.point;
 
@@ -250,9 +217,9 @@ public class ThirdCamera : MonoBehaviour
         }
         else
         {
-            target_point = my_transform.position;
+            target_point = GetPlayerController.transform.position;
         }
-        Vector3 rel_center = my_transform.position - center;
+        Vector3 rel_center = GetPlayerController.transform.position - center;
         Vector3 aim_rel_center = target_point - center;
 
         for(float index = 0.0f,interval = -0.0417f; interval < 1.0f;)
