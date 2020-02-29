@@ -2354,11 +2354,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue: {fileID: 166139792}
-  text: {fileID: 504634083}
-  name: {fileID: 1393818225}
-  texts: {fileID: 504634080}
-  names: {fileID: 551856193}
-  cameras: {fileID: 534669904}
   name_position: {fileID: 267475368}
 --- !u!1 &1179107956
 GameObject:
@@ -3666,7 +3661,7 @@ PrefabInstance:
     - target: {fileID: 7003082181865127081, guid: 4cc294d605ee56d498e421cfee0f17da,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7003082181865127080, guid: 4cc294d605ee56d498e421cfee0f17da,
         type: 3}
@@ -3773,6 +3768,26 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3480326632139354146, guid: 4cc294d605ee56d498e421cfee0f17da,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5485524822163468928, guid: 4cc294d605ee56d498e421cfee0f17da,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5381643378934885378, guid: 4cc294d605ee56d498e421cfee0f17da,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5561241103213202319, guid: 4cc294d605ee56d498e421cfee0f17da,
+        type: 3}
+      propertyPath: cameras
+      value: 
+      objectReference: {fileID: 534669904}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cc294d605ee56d498e421cfee0f17da, type: 3}
 --- !u!1001 &8403896949087218588
