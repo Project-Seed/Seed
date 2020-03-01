@@ -17,9 +17,12 @@ public class GameSystem : MonoBehaviour
 
     public List<Dictionary<string, string>> item_list; // 아이템 DB
     public List<Dictionary<string, string>> combination_list; // 조합 테이블
+    public List<Dictionary<string, string>> quest_list; // 퀘스트 DB
 
     public List<string> item_time; // 먹은 아이템 순서
     public Dictionary<string, int> item_num = new Dictionary<string, int>(); // 먹은 아이템 갯수
+
+    public Dictionary<int, int> quest_state = new Dictionary<int, int>(); // 퀘스트 상태  0 시작전, 1 진행중, 2 클리어 대기, 3 완료
 
     public float time = 660; // 현재 시간
 
@@ -54,7 +57,14 @@ public class GameSystem : MonoBehaviour
         {
             item_num.Add(item_list[i]["name"], 0); // 먹은 아이템 갯수에 아이템 이름 등록
         }
-        combination_list = CSV_Reader.Read("Combination_Table");
+
+        combination_list = CSV_Reader.Read("Combination_Table"); // 조합 로드
+
+        quest_list = CSV_Reader.Read("Quest_Table"); // 퀘스트 로드
+        for (int i = 0; i < quest_list.Count; i++)
+        {
+            quest_state.Add(i+1, 0); // 퀘스트 진행상태 등록
+        }
     }
 
     public void Gamestart()

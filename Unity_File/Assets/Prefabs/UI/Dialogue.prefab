@@ -32,7 +32,7 @@ RectTransform:
   - {fileID: 789395438655377143}
   - {fileID: 1790307151357074945}
   m_Father: {fileID: 7003082181865127080}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -257,7 +257,7 @@ Transform:
   - {fileID: 7003082180495131072}
   - {fileID: 8679944649863962299}
   m_Father: {fileID: 7003082181865127080}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5485524822163468928
 GameObject:
@@ -289,7 +289,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7003082181865127080}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -796,9 +796,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8174498384418122602}
   - {fileID: 3521136182555323542}
   - {fileID: 7676597262194151580}
+  - {fileID: 8174498384418122602}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -844,7 +844,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9a4b2fe0e12ec48892fe34b6e6736a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameras: {fileID: 0}
   npc_name: {fileID: 3480326632139354146}
   talk_guide: {fileID: 5485524822163468928}
   dialogue_box: {fileID: 5381643378934885378}
@@ -854,6 +853,7 @@ MonoBehaviour:
   quest_start: {fileID: 21300000, guid: a898312e129c20c48a5c05040407389b, type: 3}
   quest_ing: {fileID: 21300000, guid: 76657ccb22caa4f44add66b5d4421347, type: 3}
   quest_end: {fileID: 21300000, guid: 7069bd0447a7d3448950d04c76739bda, type: 3}
+  cameras: {fileID: 0}
 --- !u!1 &7003082181989333778
 GameObject:
   m_ObjectHideFlags: 0

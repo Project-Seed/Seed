@@ -7789,7 +7789,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &868986749971549768
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7968,7 +7968,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8472153855023516301}
-        m_MethodName: On_map
+        m_MethodName: On_quest
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8196,6 +8196,7 @@ MonoBehaviour:
   illustrated: {fileID: 1217416707364987334}
   diary: {fileID: 6036013295413487970}
   map: {fileID: 2097675194041414253}
+  quest: {fileID: 8843145189596597852}
 --- !u!1 &7155590036118320614
 GameObject:
   m_ObjectHideFlags: 0

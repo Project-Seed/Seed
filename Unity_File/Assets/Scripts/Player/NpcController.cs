@@ -8,6 +8,7 @@ public class NpcController : MonoBehaviour
     public GameObject dialogue; // 다이얼로그
 
     public GameObject name_position;
+    public string npc_name;
 
     void Start()
     {
@@ -23,7 +24,7 @@ public class NpcController : MonoBehaviour
     {
         if (collision.name == "Player")
         {
-            dialogue.GetComponent<Dialogue>().quest_on(gameObject, name_position, "코난");
+            dialogue.GetComponent<Dialogue>().quest_on(gameObject, name_position, npc_name);
         }
     }
     private void OnTriggerExit(Collider collision)

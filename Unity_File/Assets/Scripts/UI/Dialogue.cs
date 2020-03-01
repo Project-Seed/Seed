@@ -25,6 +25,10 @@ public class Dialogue : MonoBehaviour
     GameObject npc_ob;
     GameObject name_position;
 
+    int quest_num; // 충돌 npc의 퀘스트 번호
+    int quest_now; // 충돌 npc의 퀘스트 진행상태
+
+
     void Start()
     {
 
@@ -45,6 +49,7 @@ public class Dialogue : MonoBehaviour
                 if (dialogue_box.activeSelf == false)
                 {
                     dialogue_box.SetActive(true);
+
                 }
             }
         }
@@ -60,6 +65,33 @@ public class Dialogue : MonoBehaviour
         name_text.text = name;
 
         quest_bool = true;
+
+        for(int i=0; i<GameSystem.instance.quest_list.Count; i++)
+        {
+            if(GameSystem.instance.quest_list[i]["name"] == name && // npc이름이 같고
+                GameSystem.instance.quest_state[i+1] != 3 && // 클리어 안된 퀘스트 이고
+                (GameSystem.instance.quest_list[i]["preceding"] == "0" || GameSystem.instance.quest_state[System.Convert.ToInt32(GameSystem.instance.quest_list[i]["preceding"])] == 3)) // 선행조건이 클리어 된경우
+            {
+                quest_num = i + 1;
+                quest_now = GameSystem.instance.quest_state[quest_num];
+
+                switch(quest_now)
+                {
+                    case 0:
+                        quest_image.sprite = quest_start;
+                        break;
+
+                    case 1:
+                        quest_image.sprite = quest_ing;
+                        break;
+
+                    case 2:
+                        quest_image.sprite = quest_end;
+                        break;
+                }
+                break;
+            }
+        }
     }
 
     public void quest_off()
