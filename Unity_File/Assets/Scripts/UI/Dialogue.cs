@@ -50,6 +50,12 @@ public class Dialogue : MonoBehaviour
                 {
                     dialogue_box.SetActive(true);
 
+                    if(quest_now == 0)
+                        gameObject.GetComponent<Text_system>().StartDialogue(System.Convert.ToInt32(GameSystem.instance.quest_list[quest_num - 1]["start_talk"]));
+                    else if (quest_now == 1)
+                        gameObject.GetComponent<Text_system>().StartDialogue(System.Convert.ToInt32(GameSystem.instance.quest_list[quest_num - 1]["ing_talk"]));
+                    else
+                        gameObject.GetComponent<Text_system>().StartDialogue(System.Convert.ToInt32(GameSystem.instance.quest_list[quest_num - 1]["end_talk"]));
                 }
             }
         }

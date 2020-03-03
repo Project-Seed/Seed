@@ -15,68 +15,60 @@ public class Text_system : MonoBehaviour
     public GameObject character1;
     public GameObject character2;
 
-    public string Player_name;
+    public string Player_name = "시드";
 
-    private Queue<string> Name_q;
-    private Queue<string> Messge_q;
+    private string Name_q;
+    private string Messge_q;
+
+    int start_text_num = -1;
+    int now_text_num = -1;
 
     private void Awake()
     {
         TextList = CSV_Reader.Read("Text");
     }
 
-    void Start()
+    public void StartDialogue(int text_num) // 처음 대화 시작
     {
-        Name_q = new Queue<string>();
-        Messge_q = new Queue<string>();
+        Name_q = null;
+        Messge_q = null;
 
-        Player_name = "시드";
+        for(int i=0; i< TextList.Count; i++)
+        {
+            if(TextList[i]["scene"] == text_num.ToString())
+            {
+                start_text_num = i;
+                break;
+            }
+        }
 
-        StartDialogue(); // 시작해버림
+        now_text_num = start_text_num;
+
+        Next_text();
     }
 
-    public void StartDialogue() // 처음 대화 시작
+    public void Next_text()
     {
-        Name_q.Clear();
-        Messge_q.Clear();
-
-
-        for (int i = 0; i < 5; i++)
-        {
-            if ((string)TextList[i]["name"] == "user")
-                Name_q.Enqueue(Player_name);
-            else
-                Name_q.Enqueue((string)TextList[i]["name"]);
-
-            Messge_q.Enqueue((string)TextList[i]["text"]);
-        }
-
-
-        DisplayNextSentence();
-    }
-
-    public void DisplayNextSentence() // 대화 진행
-    {
-        if (Name_q.Count == 0)
-        {
-            EndDialogue();
-            return;
-        }
-
-        string Name_eq = Name_q.Dequeue();
-        string Messge_wq = Messge_q.Dequeue();
-
-        if (Name_eq == "choice")
-        {
-
-        }
+        if ((string)TextList[now_text_num]["name"] == "user")
+            Name_q = Player_name;
         else
-        {
-            Name_Text.text = Name_eq;
+            Name_q = (string)TextList[now_text_num]["name"];
 
-            StopAllCoroutines();
-            StartCoroutine(TypeSentence(Messge_wq));
-        }
+        Messge_q = (string)TextList[now_text_num]["text"];
+
+
+
+        Name_Text.text = Name_q;
+
+        StopAllCoroutines();
+        StartCoroutine(TypeSentence(Messge_q));
+
+
+
+        if (TextList[now_text_num]["type"] == "end")
+            gameObject.SetActive(false);
+        else
+            now_text_num++; // 다음 숫자로 이동으로 고쳐야됨
     }
 
     IEnumerator TypeSentence(string sentence) // 한글자씩 출력
@@ -87,11 +79,5 @@ public class Text_system : MonoBehaviour
             Messge_Text.text += letter;
             yield return null;
         }
-    }
-
-    void EndDialogue()
-    {
-        Name_Text.text = "대화 종료";
-        Messge_Text.text = "대화 종료";
     }
 }
