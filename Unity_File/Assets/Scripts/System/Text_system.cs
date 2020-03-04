@@ -129,6 +129,11 @@ public class Text_system : MonoBehaviour
         else
             now_text_num = System.Convert.ToInt32(TextList[now_text_num]["next_num3"]) - 1;
 
+        if(TextList[now_text_num]["quest_num"] != "")
+        {
+            GameSystem.instance.quest_state[System.Convert.ToInt32(TextList[now_text_num]["quest_num"])]++;
+        }
+
         choose1.SetActive(false);
         choose2.SetActive(false);
         choose3.SetActive(false);

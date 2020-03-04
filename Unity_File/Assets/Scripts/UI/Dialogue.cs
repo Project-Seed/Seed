@@ -49,7 +49,6 @@ public class Dialogue : MonoBehaviour
             {
                 if (dialogue_box_bool == false)
                 {
-                    Debug.Log("h");
                     dialogue_box.SetActive(true);
                     dialogue_box_bool = true;
 
@@ -115,5 +114,7 @@ public class Dialogue : MonoBehaviour
     {
         dialogue_box.SetActive(false);
         dialogue_box_bool = false;
+
+        quest_on(npc_ob, name_position, name_text.text);
     }
 }

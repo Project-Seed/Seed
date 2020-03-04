@@ -1,9 +1,9 @@
-scene,num,type,name,text,choice_num,choice1,choice2,choice3,next_num,next_num1,next_num2,next_num3,quset_num
+scene,num,type,name,text,choice_num,choice1,choice2,choice3,next_num,next_num1,next_num2,next_num3,quest_num
 1,1,talk,코난,거기너 잠깐 이리좀 와봐,,,,,2,,,,
 1,2,talk,user,무슨 일로?,,,,,3,,,,
 1,3,talk,코난,긴급사건이야 바나나를 구해와,,,,,4,,,,
 1,4,choice,user,,2,네,아니요,,,5,6,,
 1,5,end,코난,그래 빨리 구해와,,,,,,,,,1
 1,6,end,코난,다시 생각해 보는게 좋을껄?,,,,,,,,,
-2,1,talk,코난,지금 급하다고 빨리!,,,,,,,,,
-3,1,talk,코난,수고 많았어,,,,,,,,,
+2,1,end,코난,지금 급하다고 빨리!,,,,,,,,,
+3,1,end,코난,수고 많았어,,,,,,,,,
