@@ -20,6 +20,7 @@ public class Dialogue : MonoBehaviour
     bool quest_bool = false;
     bool talk_bool = false;
 
+    bool dialogue_box_bool = false;
 
     public Camera cameras;
     GameObject npc_ob;
@@ -46,9 +47,11 @@ public class Dialogue : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.H))
             {
-                if (dialogue_box.activeSelf == false)
+                if (dialogue_box_bool == false)
                 {
+                    Debug.Log("h");
                     dialogue_box.SetActive(true);
+                    dialogue_box_bool = true;
 
                     if(quest_now == 0)
                         gameObject.GetComponent<Text_system>().StartDialogue(System.Convert.ToInt32(GameSystem.instance.quest_list[quest_num - 1]["start_talk"]));
@@ -108,8 +111,9 @@ public class Dialogue : MonoBehaviour
         quest_bool = false;
     }
 
-    public void talk_box()
+    public void talk_end()
     {
-
+        dialogue_box.SetActive(false);
+        dialogue_box_bool = false;
     }
 }
