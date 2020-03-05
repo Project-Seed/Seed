@@ -22,9 +22,10 @@ public class PlayerController : MonoBehaviour
     Vector3 movement;                       // 계산결과로 나올 이동 벡터.
 
     public Vector3 targetVec;
+    public Vector3 upVec;
+    public Vector3 rightVec;
+
     Vector3 offset;
-    //public Transform main_camera;           // 카메라 트랜스폼 가져옴
-    //public Transform aim;
     public bool throw_mode;                 // 던지기 모드
     public float throw_position;
 
@@ -58,6 +59,9 @@ public class PlayerController : MonoBehaviour
     private void Update()                               // 키 입력은 Update에서 받고
     {
         targetVec = player_transform.position + offset;
+        upVec = player_transform.up;
+        rightVec = player_transform.right;
+
 
         input_horizontal = Input.GetAxis("Horizontal");
         input_vertical = Input.GetAxis("Vertical");
@@ -87,7 +91,8 @@ public class PlayerController : MonoBehaviour
             if (inventory.activeSelf == true)
                 inventory.SetActive(false);
             else
-                inventory.SetActive(true);        }
+                inventory.SetActive(true);
+        }
 
         if (Input.GetKeyDown(KeyCode.O))
         {

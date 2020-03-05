@@ -66,16 +66,17 @@ public class ThrowManager : MonoBehaviour
     {
         //던지기모드 종료
         mode = GameSystem.Mode.BasicMode;
+        DestroyImmediate(throw_sprite);
 
         //씨앗 발사시킴
         Throw();
-        DestroyImmediate(throw_sprite);
     }
     private void Throw()
     {
         //씨앗 생성
         tmp = Instantiate(seed);
         
+        //궤도를 따라 움직이는 코루틴 시작
         StartCoroutine(ThrowingSeed());
     }
 
@@ -87,10 +88,9 @@ public class ThrowManager : MonoBehaviour
         float z = throw_speed * Mathf.Cos(throw_angle) * t;
         float y = throw_speed * Mathf.Sin(throw_angle) * t - (0.5f * gravity * Mathf.Pow(t, 2));
         tmp.transform.localPosition = new Vector3(start_transform.x, start_transform.y + y, start_transform.z + z);
-        //Debug.Log("go to " +tmp.transform.localPosition);
-
+        
         //아래 조건 착지했을 때(지면 or 오브젝트와 충돌했을 때)로 바꿀 예정
-        if (y < 0)
+        if (y <= 0)
         {
             t = 0;
             DestroyImmediate(tmp);
@@ -99,6 +99,7 @@ public class ThrowManager : MonoBehaviour
         }
         else
         {
+            throw_done = false;
             yield return new WaitForSeconds(0.05f);
             StartCoroutine(ThrowingSeed());
         }

@@ -38,7 +38,6 @@ public class ThirdCamera : MonoBehaviour
 
     Quaternion targetRotation;
     Vector3 gap;
-    Vector3 axisVec;
     public float mouse_sensitivity = 10.0f; // 마우스 감도
 
     // 왜 떨리는가?
@@ -92,6 +91,9 @@ public class ThirdCamera : MonoBehaviour
 
         //}
         Vector3 targetVec = GetPlayerController.targetVec;
+        Vector3 upVec = GetPlayerController.upVec;
+        Vector3 rightVec = GetPlayerController.rightVec;
+
 
         //이동
         //줌인,아웃
@@ -114,14 +116,20 @@ public class ThirdCamera : MonoBehaviour
         //float move_x = mouse_move.y;
         //float move_y = mouse_move.x;
 
-        mouse_move.y = Mathf.Clamp(mouse_move.y, -60, 60);
+        //mouse_move.y = Mathf.Clamp(mouse_move.y, -60, 60);
         mouse_move.x = Mathf.Clamp(mouse_move.x, -30, 30);
 
-        //rotateAround가 중첩되는 문제.
-        camera_rig_transform.RotateAround(targetVec, camera_rig_transform.up, mouse_move.y); // 타겟을 중심으로, y축 회전(공전), 회전각도
-        camera_rig_transform.RotateAround(targetVec, camera_rig_transform.right, mouse_move.x); // 타겟을 중심으로, x축 회전(공전), 회전각도
-
+        //rotateAround할 때 캐릭터 앞쪽/뒷쪽에서 축이 반대여야 의도대로 돌아감. ->절댓값으로 앞/뒤 구분 -> 실패
+        //중첩문제!!!!
+        camera_rig_transform.RotateAround(targetVec, upVec, mouse_move.y); // 타겟을 중심으로, y축 회전(공전), 회전각도
+        camera_rig_transform.RotateAround(targetVec, rightVec, mouse_move.x); // 타겟을 중심으로, x축 회전(공전), 회전각도
+        
         camera_rig_transform.LookAt(targetVec);
+        
+        //커서 숨기기. **인풋매니저에 넣을것**
+        //Ctrl+Shift+c 하면 다시 생김
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Balance()
