@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     private float input_vertical;           // 수평방향 입력 ad
     public bool turning;                   // 회전 중
     private float amount = 180.0f;          // 회전 각도
-    //private float time = 0.5f;              // 회전 시간
     private float DegreesLeft;              // 남은 각 계산
     private bool is_jumping;                // 점프키를 입력하면 true.
     private bool in_ground;                 // 땅에 있으면 true.
@@ -26,7 +25,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 rightVec;
 
     Vector3 offset;
-    public bool throw_mode;                 // 던지기 모드
+    public bool throw_mode = false;                 // 던지기 모드
     public float throw_position;
 
     [SerializeField]
@@ -111,10 +110,16 @@ public class PlayerController : MonoBehaviour
         }
 
         if (Input.GetMouseButtonDown(0))
+        {
+            throw_mode = true;
             GetThrowManager.OnThrowMode();
+        }
 
         if (Input.GetMouseButtonUp(0))
+        {
+            throw_mode = false;
             GetThrowManager.ExitThrowMode();
+        }
 
         //이동
         movement.Set(input_horizontal, 0, input_vertical);
