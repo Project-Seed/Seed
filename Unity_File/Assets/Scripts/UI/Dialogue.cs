@@ -18,7 +18,6 @@ public class Dialogue : MonoBehaviour
     public Sprite quest_end;
 
     bool quest_bool = false;
-    bool talk_bool = false;
 
     bool dialogue_box_bool = false;
 

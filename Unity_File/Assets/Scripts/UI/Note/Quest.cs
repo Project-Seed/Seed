@@ -17,8 +17,6 @@ public class Quest : MonoBehaviour
     public Text data_npc;
     public Text data_content;
 
-    int now_click = 0; // 0이면 메인퀘스트, 1이면 서브퀘스트
-
     private void OnEnable()
     {
         data_title.text = null;
@@ -90,14 +88,12 @@ public class Quest : MonoBehaviour
 
     public void main_button()
     {
-        now_click = 0;
         view_main.SetActive(true);
         view_sub.SetActive(false);
     }
 
     public void sub_button()
     {
-        now_click = 1;
         view_main.SetActive(false);
         view_sub.SetActive(true);
     }
