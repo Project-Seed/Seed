@@ -26,7 +26,6 @@ public class GameSystem : MonoBehaviour
 
     public float time = 660; // 현재 시간
 
-    private Mode mode { get => mode; set => SetMode((int)value); }
 
     [Flags]
     public enum Mode
@@ -35,12 +34,14 @@ public class GameSystem : MonoBehaviour
         ThrowMode = 1,    // 발사 모드
         CinemaMode = 2    // 시네마틱 모드
     }
+    Mode mode;
+
     public int GetModeNum()
     {
         return (int)mode;
     }
 
-    public Mode SetMode(int state)
+    public void SetMode(int state)
     {
         switch (state)
         {
@@ -54,7 +55,6 @@ public class GameSystem : MonoBehaviour
                 mode = Mode.CinemaMode;
                 break;
         }
-        return mode;
     }
 
     public static GameSystem Instance
