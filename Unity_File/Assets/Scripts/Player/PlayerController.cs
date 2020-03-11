@@ -25,19 +25,17 @@ public class PlayerController : MonoBehaviour
     public Vector3 rightVec;
 
     Vector3 offset;
-    public bool throw_mode = false;                 // 던지기 모드
+    public bool throw_mode = false;                 // 던지기 모드 (임시변수)
     public float throw_position;
 
     [SerializeField]
     private float player_speed = 4.0f;         // 캐릭터 속도
     private float player_jump_power = 4.0f;    // 캐릭터 점프력
-    float mouse_input;
-    public Vector3 mouse_move;
+
     public GameObject inventory; // 인벤토리
     public GameObject composer; // 합성창
     public GameObject note; // 다이어리
 
-    public ThrowManager GetThrowManager;
 
     IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 1초간 점프금지
     {
@@ -112,26 +110,20 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             throw_mode = true;
-            GetThrowManager.OnThrowMode();
+            GameSystem.instance.SetMode(1);
         }
 
         if (Input.GetMouseButtonUp(0))
         {
             throw_mode = false;
-            GetThrowManager.ExitThrowMode();
+            GameSystem.instance.SetMode(0);
         }
 
         //이동
         movement.Set(input_horizontal, 0, input_vertical);
         movement = movement * player_speed * Time.deltaTime;
         player_transform.Translate(movement.normalized * player_speed * Time.deltaTime, Space.Self);
-        //마우스에 따른 회전
-        //캐릭터는 y축회전만해야함. Mouse X가 좌우 이동이니까 이 값을 mouse_move.y에 대입.
-        //mouse_move += new Vector3( -Input.GetAxis("Mouse Y") * mouse_sensitivity,
-                                    //Input.GetAxis("Mouse X") * mouse_sensitivity, 0);
-        //그리고 그 mouse_move를 플레이어 오일러 앵글에 대입. (y만~~)
-        //player_transform.localEulerAngles = new Vector3(0, mouse_move.y, 0);
-
+     
         //점프
         if (is_jumping && in_ground)
             Jumping();

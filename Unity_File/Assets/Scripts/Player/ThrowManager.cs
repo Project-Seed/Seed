@@ -94,6 +94,7 @@ public class ThrowManager : MonoBehaviour
         {
             t = 0;
             DestroyImmediate(tmp);
+            PlantSeed(tmp.transform.localPosition);
             throw_done = true;
             yield break;
         }
@@ -105,4 +106,9 @@ public class ThrowManager : MonoBehaviour
         }
     } 
 
+    void PlantSeed(Vector3 pos)
+    {
+        //지면의 각도 구하기 = rotation
+        //Plant plant = new Plant(pos, rotation);
+    }
 }
