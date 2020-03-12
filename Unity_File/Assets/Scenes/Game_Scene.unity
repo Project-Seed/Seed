@@ -2042,7 +2042,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8780300512459813963}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1087988907}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e73d6f35a5d16e44b322240a5526cb9, type: 3}
@@ -2105,12 +2105,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b0f8caf6ec3ed644bf9751040d84dcb, type: 3}
---- !u!1 &947547523 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9144438266605598072, guid: 60283bddc5264024893416fd49fc70aa,
-    type: 3}
-  m_PrefabInstance: {fileID: 8780300512459813963}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &991204468 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 74d835b756ff5654f8060c76cbcb4e19,
@@ -2234,6 +2228,12 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: -3996760141626369306, guid: 1cae1b413214c1747ab302e0233dfe2a, type: 3}
+--- !u!1 &1087988907 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8780300512582525257, guid: 60283bddc5264024893416fd49fc70aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 8780300512459813963}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1099885574 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 50912a5d3c9322a46afa5ca162962a5c,
@@ -2436,7 +2436,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7497c70675d3f04ab14d6ea1d287544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  run_speed: 5
   distance_cur: 3
   height_cur: 0.75
   smooth: 2
@@ -2872,7 +2871,7 @@ PrefabInstance:
         type: 3}
       propertyPath: character
       value: 
-      objectReference: {fileID: 947547523}
+      objectReference: {fileID: 1087988907}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0e559afbcc121e45aef52b70e3cc579, type: 3}
 --- !u!1 &1527741496 stripped
@@ -3025,6 +3024,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1739530163}
   - component: {fileID: 1739530162}
+  - component: {fileID: 1739530165}
   - component: {fileID: 1739530164}
   m_Layer: 0
   m_Name: GameSystem
@@ -3162,6 +3162,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1739530165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739530161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5171cde508158b44962612727ef7b19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  click_mod: 0
 --- !u!1 &1907865654
 GameObject:
   m_ObjectHideFlags: 0

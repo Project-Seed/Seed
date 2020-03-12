@@ -16,6 +16,15 @@ public class Note : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    private void OnEnable()
+    {
+        InputManager.instance.click_mod = 1;
+    }
+    private void OnDisable()
+    {
+        InputManager.instance.click_mod = 0;
+    }
+
     public void On_illustrated()
     {
         illustrated.SetActive(true);
