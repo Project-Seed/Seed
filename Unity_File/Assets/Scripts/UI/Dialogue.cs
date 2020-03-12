@@ -44,10 +44,12 @@ public class Dialogue : MonoBehaviour
             npc_name.transform.position = new Vector3(name_pos.x, name_pos.y, npc_name.transform.position.z);
             talk_guide.transform.position = new Vector3(guide_pos.x, guide_pos.y, talk_guide.transform.position.z);
 
-            if (Input.GetKeyDown(KeyCode.H))
+            if (Input.GetKeyDown(KeyCode.H) && InputManager.instance.click_mod == 0)
             {
                 if (dialogue_box_bool == false)
                 {
+                    InputManager.instance.click_mod = 1;
+
                     dialogue_box.SetActive(true);
                     dialogue_box_bool = true;
 
@@ -111,6 +113,8 @@ public class Dialogue : MonoBehaviour
 
     public void talk_end()
     {
+        InputManager.instance.click_mod = 0;
+
         dialogue_box.SetActive(false);
         dialogue_box_bool = false;
 
