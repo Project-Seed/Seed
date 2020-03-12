@@ -26,6 +26,7 @@ public class GameSystem : MonoBehaviour
 
     public float time = 660; // 현재 시간
 
+    public static bool switch_mode;
 
     [Flags]
     public enum Mode
@@ -43,6 +44,7 @@ public class GameSystem : MonoBehaviour
 
     public void SetMode(int state)
     {
+        Mode currentMode = mode;
         switch (state)
         {
             case 0:
@@ -55,6 +57,7 @@ public class GameSystem : MonoBehaviour
                 mode = Mode.CinemaMode;
                 break;
         }
+        switch_mode = currentMode != mode ? true : false;
     }
 
     public static GameSystem Instance
