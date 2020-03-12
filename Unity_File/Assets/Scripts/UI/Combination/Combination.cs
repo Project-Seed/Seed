@@ -29,6 +29,15 @@ public class Combination : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        InputManager.instance.click_mod = 1;
+    }
+    private void OnDisable()
+    {
+        InputManager.instance.click_mod = 0;
+    }
+
     private void Update()
     {
         for (int i = 0; i < GameSystem.instance.combination_list.Count; i++)

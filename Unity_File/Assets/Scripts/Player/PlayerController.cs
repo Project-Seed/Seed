@@ -63,70 +63,73 @@ public class PlayerController : MonoBehaviour
         input_horizontal = Input.GetAxis("Horizontal");
         input_vertical = Input.GetAxis("Vertical");
 
-        if (Input.GetButtonDown("Jump"))
+        if (InputManager.instance.click_mod == 0)
         {
-            is_jumping = true;
-            Debug.Log("Jump!");
-        }
+            if (Input.GetButtonDown("Jump"))
+            {
+                is_jumping = true;
+                Debug.Log("Jump!");
+            }
 
-        if (!is_back && Input.GetKeyDown(KeyCode.S)) //앞인상태에서 S누르면
-        {
-            turning = true;
-            is_back = true;
-            DegreesLeft = amount;
-        }
+            if (!is_back && Input.GetKeyDown(KeyCode.S)) //앞인상태에서 S누르면
+            {
+                turning = true;
+                is_back = true;
+                DegreesLeft = amount;
+            }
 
-        if (is_back && Input.GetKeyDown(KeyCode.W)) //뒤인상태에서 w누르면
-        {
-            turning = true;
-            is_back = false;
-            DegreesLeft = amount;
+            if (is_back && Input.GetKeyDown(KeyCode.W)) //뒤인상태에서 w누르면
+            {
+                turning = true;
+                is_back = false;
+                DegreesLeft = amount;
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                throw_mode = true;
+                GameSystem.instance.SetMode(1);
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                throw_mode = false;
+                GameSystem.instance.SetMode(0);
+            }
+
+            //이동
+            movement.Set(input_horizontal, 0, input_vertical);
+            movement = movement * player_speed * Time.deltaTime;
+            player_transform.Translate(movement.normalized * player_speed * Time.deltaTime, Space.Self);
+
+            //점프
+            if (is_jumping && in_ground)
+                Jumping();
         }
 
         if (Input.GetKeyDown(KeyCode.I))
         {
             if (inventory.activeSelf == true)
                 inventory.SetActive(false);
-            else
+            else if (InputManager.instance.click_mod == 0)
                 inventory.SetActive(true);
         }
 
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.O) && InputManager.instance.click_mod == 0)
         {
             if (composer.activeSelf == true)
                 composer.SetActive(false);
-            else
+            else if(InputManager.instance.click_mod == 0)
                 composer.SetActive(true);
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P) && InputManager.instance.click_mod == 0)
         {
             if (note.activeSelf == true)
                 note.SetActive(false);
-            else
+            else if (InputManager.instance.click_mod == 0)
                 note.SetActive(true);
         }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            throw_mode = true;
-            GameSystem.instance.SetMode(1);
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            throw_mode = false;
-            GameSystem.instance.SetMode(0);
-        }
-
-        //이동
-        movement.Set(input_horizontal, 0, input_vertical);
-        movement = movement * player_speed * Time.deltaTime;
-        player_transform.Translate(movement.normalized * player_speed * Time.deltaTime, Space.Self);
-     
-        //점프
-        if (is_jumping && in_ground)
-            Jumping();
     }
 
     private void Jumping()
