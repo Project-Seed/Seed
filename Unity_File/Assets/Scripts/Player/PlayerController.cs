@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private bool is_jumping;                // 점프키를 입력하면 true.
     private bool in_ground;                 // 땅에 있으면 true.
     private bool is_back;                   // 반대방향을 보고있는지.
+    private bool is_run;                    // 달리고 있는지.
 
     Vector3 movement;                       // 계산결과로 나올 이동 벡터.
 
@@ -29,12 +30,15 @@ public class PlayerController : MonoBehaviour
     public float throw_position;
 
     [SerializeField]
-    private float player_speed = 4.0f;         // 캐릭터 속도
+    private float player_speed = 2.0f;         // 캐릭터 걷는 속도
+    private float player_run_speed = 6.0f;     // 캐릭터 달리는 속도
     private float player_jump_power = 4.0f;    // 캐릭터 점프력
 
     public GameObject inventory; // 인벤토리
     public GameObject composer; // 합성창
     public GameObject note; // 다이어리
+
+    public Animator animator;
 
 
     IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 1초간 점프금지
@@ -51,6 +55,7 @@ public class PlayerController : MonoBehaviour
         is_jumping = false;
         turning = false;
         is_back = false;
+        is_run = false;
     }
 
     private void Update()                               // 키 입력은 Update에서 받고
@@ -85,6 +90,33 @@ public class PlayerController : MonoBehaviour
                 DegreesLeft = amount;
             }
 
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                animator.SetBool("front", true);
+            }
+            else if (Input.GetKeyUp(KeyCode.W))
+            {
+                animator.SetBool("front", false);
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                animator.SetBool("back", true);
+            }
+            else if (Input.GetKeyUp(KeyCode.S))
+            {
+                animator.SetBool("back", false);
+            }
+            if(Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                animator.SetBool("run", true);
+                is_run = true;
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                animator.SetBool("run", false);
+                is_run = false;
+            }
+
             if (Input.GetMouseButtonDown(0))
             {
                 throw_mode = true;
@@ -98,9 +130,19 @@ public class PlayerController : MonoBehaviour
             }
 
             //이동
-            movement.Set(input_horizontal, 0, input_vertical);
-            movement = movement * player_speed * Time.deltaTime;
-            player_transform.Translate(movement.normalized * player_speed * Time.deltaTime, Space.Self);
+            if (is_run == false)
+            {
+                movement.Set(input_horizontal, 0, input_vertical);
+                movement = movement * player_speed * Time.deltaTime;
+                player_transform.Translate(movement.normalized * player_speed * Time.deltaTime, Space.Self);
+            }
+            else
+            {
+                movement.Set(input_horizontal, 0, input_vertical);
+                movement = movement * player_run_speed * Time.deltaTime;
+                player_transform.Translate(movement.normalized * player_run_speed * Time.deltaTime, Space.Self);
+            }
+
 
             //점프
             if (is_jumping && in_ground)
