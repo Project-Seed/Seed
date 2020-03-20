@@ -76,9 +76,8 @@ public class ThirdCamera : MonoBehaviour
             if (input_mouse_wheel != 0)
                 camera_offset += new Vector3(0,0,input_mouse_wheel);
 
-            float mouse_Y = Mathf.Clamp(-Input.GetAxis("Mouse Y"), -60f, 60f);
             Quaternion camera_angle_X = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * rotate_speed, Vector3.up);
-            Quaternion camera_angle_Y = Quaternion.AngleAxis(mouse_Y * rotate_speed, Vector3.right);
+            Quaternion camera_angle_Y = Quaternion.AngleAxis(-Input.GetAxis("Mouse Y") * rotate_speed, Vector3.right);
             Quaternion camera_angle = Quaternion.Slerp(camera_angle_X, camera_angle_Y, 0.5f);
 
             camera_offset = camera_angle * camera_offset;
