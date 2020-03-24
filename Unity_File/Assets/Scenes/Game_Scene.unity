@@ -487,7 +487,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.8e-43, y: 0, z: 2.3509887e-38, w: -2.306054e+18}
+  m_BoundingSphereOverride: {x: 11, y: -33, z: 11, w: 4.5e-44}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -3025,6 +3025,7 @@ GameObject:
   - component: {fileID: 1739530163}
   - component: {fileID: 1739530162}
   - component: {fileID: 1739530165}
+  - component: {fileID: 1739530166}
   - component: {fileID: 1739530164}
   m_Layer: 0
   m_Name: GameSystem
@@ -3175,6 +3176,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   click_mod: 0
+--- !u!114 &1739530166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739530161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e8970424775af44bed3a4bfe5d8920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1907865654
 GameObject:
   m_ObjectHideFlags: 0

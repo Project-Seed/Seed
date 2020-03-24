@@ -62,6 +62,10 @@ public class Text_system : MonoBehaviour
     {
         if(next_end == true)
         {
+            if (TextList[now_text_num]["quest_num"] != "")
+            {
+                GameSystem.instance.quest_state[System.Convert.ToInt32(TextList[now_text_num]["quest_num"])]++;
+            }
             gameObject.GetComponent<Dialogue>().talk_end();
         }
         else if (TextList[now_text_num]["type"] == "talk" || TextList[now_text_num]["type"] == "end")
@@ -126,13 +130,8 @@ public class Text_system : MonoBehaviour
             now_text_num = System.Convert.ToInt32(TextList[now_text_num]["next_num1"]) - 1;
         else if (select == 2)
             now_text_num = System.Convert.ToInt32(TextList[now_text_num]["next_num2"]) - 1;
-        else
+        else if (select == 3)
             now_text_num = System.Convert.ToInt32(TextList[now_text_num]["next_num3"]) - 1;
-
-        if(TextList[now_text_num]["quest_num"] != "")
-        {
-            GameSystem.instance.quest_state[System.Convert.ToInt32(TextList[now_text_num]["quest_num"])]++;
-        }
 
         choose1.SetActive(false);
         choose2.SetActive(false);

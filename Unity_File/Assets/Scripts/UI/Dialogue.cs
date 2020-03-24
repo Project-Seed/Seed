@@ -25,6 +25,8 @@ public class Dialogue : MonoBehaviour
     GameObject npc_ob;
     GameObject name_position;
 
+    int onss = 0; // 1이면 퀘스트 있음
+
     int quest_num; // 충돌 npc의 퀘스트 번호
     int quest_now; // 충돌 npc의 퀘스트 진행상태
 
@@ -44,7 +46,7 @@ public class Dialogue : MonoBehaviour
             npc_name.transform.position = new Vector3(name_pos.x, name_pos.y, npc_name.transform.position.z);
             talk_guide.transform.position = new Vector3(guide_pos.x, guide_pos.y, talk_guide.transform.position.z);
 
-            if (Input.GetKeyDown(KeyCode.H) && InputManager.instance.click_mod == 0)
+            if (Input.GetKeyDown(KeyCode.H) && InputManager.instance.click_mod == 0 && onss == 1)
             {
                 if (dialogue_box_bool == false)
                 {
@@ -57,7 +59,7 @@ public class Dialogue : MonoBehaviour
                         gameObject.GetComponent<Text_system>().StartDialogue(System.Convert.ToInt32(GameSystem.instance.quest_list[quest_num - 1]["start_talk"]));
                     else if (quest_now == 1)
                         gameObject.GetComponent<Text_system>().StartDialogue(System.Convert.ToInt32(GameSystem.instance.quest_list[quest_num - 1]["ing_talk"]));
-                    else
+                    else if(quest_now == 2)
                         gameObject.GetComponent<Text_system>().StartDialogue(System.Convert.ToInt32(GameSystem.instance.quest_list[quest_num - 1]["end_talk"]));
                 }
             }
@@ -66,6 +68,8 @@ public class Dialogue : MonoBehaviour
 
     public void quest_on(GameObject npc_obs, GameObject name_positions, string name)
     {
+        onss = 0;
+
         npc_name.SetActive(true);
         talk_guide.SetActive(true);
 
@@ -83,8 +87,11 @@ public class Dialogue : MonoBehaviour
             {
                 quest_num = i + 1;
                 quest_now = GameSystem.instance.quest_state[quest_num];
+                onss = 1;
 
-                switch(quest_now)
+                Debug.Log(quest_now);
+
+                switch (quest_now)
                 {
                     case 0:
                         quest_image.sprite = quest_start;
@@ -100,6 +107,16 @@ public class Dialogue : MonoBehaviour
                 }
                 break;
             }
+        }
+
+        if(onss != 1)
+        {
+            talk_guide.SetActive(false);
+            quest_image.color = new Color(0, 0, 0, 0);
+        }
+        else
+        {
+            quest_image.color = new Color(1, 1, 1, 1);
         }
     }
 
@@ -117,6 +134,14 @@ public class Dialogue : MonoBehaviour
 
         dialogue_box.SetActive(false);
         dialogue_box_bool = false;
+
+
+        StartCoroutine(res()); //퀘스트 갱신때매 잠시 딜레이
+    }
+
+    IEnumerator res()
+    {
+        yield return new WaitForSeconds(0.1f);
 
         quest_on(npc_ob, name_position, name_text.text);
     }

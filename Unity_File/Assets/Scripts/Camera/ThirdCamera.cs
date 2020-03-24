@@ -91,7 +91,7 @@ public class ThirdCamera : MonoBehaviour
             camera_rig_transform.RotateAround(targetVec, rightVec, mouse_move.x); // 타겟을 중심으로, x축 회전(공전), 회전각도
 
             camera_rig_transform.LookAt(targetVec);
-            Debug.Log(targetVec);
+            //Debug.Log(targetVec);
 
             //공전 마우스 인풋 만큼 회전.마우스 중앙에서 모서리로 가는 만큼
             //pc.mouse_move-- > 캐릭터 컨트롤러에서 mouseMove값. 좌우가 y, 상하가 x

@@ -70,7 +70,6 @@ public class Map : MonoBehaviour
                 move_start = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
                 move_now = map_bg.transform.position;
             }
-
         }
 
 
