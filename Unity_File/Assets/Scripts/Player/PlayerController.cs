@@ -182,6 +182,8 @@ public class PlayerController : MonoBehaviour
         player_rigidbody.AddForce(Vector3.up * player_jump_power, ForceMode.Impulse);   //점프
         
         StartCoroutine("StopJumping");
+
+        animator.SetTrigger("jump");
     }
 
     private void OnCollisionEnter(Collision collision)
