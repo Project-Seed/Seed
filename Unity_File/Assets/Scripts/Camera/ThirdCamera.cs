@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,8 +7,13 @@ public class ThirdCamera : MonoBehaviour
 {
     public float smooth = 2.0f;
     public Transform camera_rig_transform;  //카메라 리그 위치
+    public Transform aim_transform;
     private float rotate_speed = 5.0f;
     private Vector3 camera_offset;
+    private Vector3 throw_mode_offset;
+    private Vector3 old_offset;
+
+
     public bool rotate_cam = true;
     public bool look_player = false;
 
@@ -26,6 +32,8 @@ public class ThirdCamera : MonoBehaviour
     Vector3 arc;
     LineRenderer  line_renderer;
     bool switch_mode;
+    float scroll;
+    float input_mouse_wheel;
 
     public float mouse_sensitivity = 10.0f; // 마우스 감도
 
@@ -37,38 +45,38 @@ public class ThirdCamera : MonoBehaviour
         camera_rig_transform = transform;
         //유지할 거리
         camera_offset = camera_rig_transform.localPosition - GetPlayerController.transform.localPosition;
+        old_offset = camera_offset;
+        //throw mode일때 거리
+        throw_mode_offset = GetPlayerController.transform.localPosition + new Vector3(0f, 0.7f, -3f);
     }
-
 
     void LateUpdate()
     {
         if (InputManager.instance.click_mod == 0)
         {
-            Vector3 targetVec;
-            Vector3 aim = new Vector3(GetPlayerController.transform.localPosition.x +0.5f,
-                GetPlayerController.transform.localPosition.y, 
-                GetPlayerController.transform.localPosition.z);
-
-            //throw mode 일 때 카메라 위치는 플레이어 옆쪽.
-            targetVec = GetPlayerController.throw_mode ? 
-                aim /*임시값. 월드로 더해지네..*/
-                : GetPlayerController.transform.localPosition;
-           
+            Vector3 targetVec = GetPlayerController.transform.localPosition;
+            Quaternion camera_angle;
             if (GameSystem.switch_mode)
             {
                 //lerp주기.
             }
 
-            //줌인,아웃
-            float input_mouse_wheel = Input.GetAxis("Mouse ScrollWheel");
+            //줌인,아웃 z 단순히 더하는거 안됨. 회전하면 바뀌니까 뒤쪽으로 이동시켜야함 얘도 self 좌표계로.
+            //나중에 제한 두기.
+            //연산은 아래에서.
+            input_mouse_wheel = Input.GetAxisRaw("Mouse ScrollWheel");
+            scroll += input_mouse_wheel;
 
-            if (input_mouse_wheel != 0)
-                camera_offset += new Vector3(0,0,input_mouse_wheel);
+                //camera_rig_transform.Translate(-camera_rig_transform.forward * input_mouse_wheel, Space.Self);
 
-            //마우스로 시야 전환 각도제한은 camera_rig_transform의 rotation값을 제한.
+            //    Vector3.MoveTowards(camera_rig_transform.localPosition, -camera_rig_transform.forward, 0.5f);
+
+
+            //마우스로 시야 전환 throwmode 일땐 rotate speed 줄이기.
+            //각도제한은 camera_rig_transform의 rotation값을 제한.
             //쿼터니언 클램프 어캐함; ; ;
             MouseX = Input.GetAxis("Mouse X") * rotate_speed;
-            MouseY = Input.GetAxis("Mouse Y") * rotate_speed;
+            MouseY = Input.GetAxis("Mouse Y") * rotate_speed / 2;
             //MouseY = Mathf.Clamp(MouseY, -5f, 70f); --> 인풋은 -1,1 이라 소용없다. 입력값제한은 아님.
 
             Quaternion camera_angle_X;
@@ -79,13 +87,13 @@ public class ThirdCamera : MonoBehaviour
 
 
             ///쿼터니언 클램프 시행착오들...일단 최종 쿼터니언 회전값은 camera_angle이다.
-            
+
             //Quaternion initY = transform.localRotation * camera_angle_Y;
             //if (Quaternion.Angle(transform.rotation, initY) > 70f)
             //    camera_angle_Y = initY;
 
             //Quaternion camera_angle = camera_angle_X * camera_angle_Y;
-            Quaternion camera_angle = Quaternion.Slerp(camera_angle_X, camera_angle_Y, 0.5f);
+            camera_angle = Quaternion.Slerp(camera_angle_X, camera_angle_Y, 0.5f);
 
 
             //각도 제한을 위해 쿼터니언 x값을 float로 변환하고 clamp 한 다음 다시 변환해서 넣어줌.
@@ -105,21 +113,39 @@ public class ThirdCamera : MonoBehaviour
 
             camera_offset = camera_angle * camera_offset;
 
+            //여기에 throwmode 일때 클로즈업 하는 거 추가하기.
+
+            //클로즈업
+            if (input_mouse_wheel != 0 && !GetPlayerController.throw_mode)
+                camera_offset = 
+                    new Vector3(camera_offset.x, camera_offset.y, camera_offset.z + input_mouse_wheel);
+
+            Vector3 aim;
+            aim = GetPlayerController.throw_mode ? aim_transform.position : targetVec;
+
             Vector3 newPos = targetVec + camera_offset;
             camera_rig_transform.localPosition = Vector3.Slerp(targetVec, newPos, smooth);
-            camera_rig_transform.LookAt(targetVec);
-           
+            camera_rig_transform.LookAt(aim);
+            
             //커서 숨기기. **인풋매니저에 넣을것**
             //Ctrl+Shift+c 하면 다시 생김
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-
         }
         else
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
+    }
+
+    private IEnumerator SubCam()
+    {
+        if (!GetPlayerController.throw_mode)
+            yield break;
+
+        camera_rig_transform.Translate(-camera_rig_transform.forward * input_mouse_wheel, Space.Self);
+        yield return null;
     }
 
     void DrawArc()

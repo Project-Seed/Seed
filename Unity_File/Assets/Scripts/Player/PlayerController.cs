@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
 
             input_horizontal = Input.GetAxisRaw("Horizontal");
             input_vertical = Input.GetAxisRaw("Vertical");
-
+            
             Vector3 movement = new Vector3(input_horizontal, 0, input_vertical);
             movement = movement.normalized;
             //키 입력이 들어온 순간 캐릭터의 vec을 카메라 vec에 맞춤. (rotate)
