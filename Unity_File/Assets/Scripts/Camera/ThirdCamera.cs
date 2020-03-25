@@ -4,26 +4,18 @@ using UnityEngine;
 
 public class ThirdCamera : MonoBehaviour
 {
-    [SerializeField]
-    private float distance_cur = 1.0f;        // 타겟과의 거리 (현재)
-    private float distance_max = 1.0f;                         // 타겟과의 거리 (최대)
-    private float distance_min = -1.0f;                          // 타겟과의 거리 (최소)
-
-    [SerializeField]
-    private float height_cur = 0.75f;            // 카메라 높이 (현재)
-    private float height_max = 3.0f;                             // 카메라 높이 (최대)
-    private float height_min = 0.75f;                             // 카메라 높이 (최소)
-
-    //[SerializeField] private float offset = 1.0f;                // 타겟 좌표에서의 offset (타켓의 발 밑이 좌표라서 주는거)
     public float smooth = 2.0f;
     public Transform camera_rig_transform;  //카메라 리그 위치
-    Transform camera_transform;         //카메라 위치
-    Camera cam;
     private float rotate_speed = 5.0f;
     private Vector3 camera_offset;
     public bool rotate_cam = true;
     public bool look_player = false;
-    
+
+    [SerializeField]
+    float MouseX;
+    [SerializeField]
+    float MouseY;
+
     public PlayerController GetPlayerController;
     ThrowManager GetThrowManager;
   
@@ -33,6 +25,7 @@ public class ThirdCamera : MonoBehaviour
     Vector3 center;
     Vector3 arc;
     LineRenderer  line_renderer;
+    bool switch_mode;
 
     public float mouse_sensitivity = 10.0f; // 마우스 감도
 
@@ -41,10 +34,6 @@ public class ThirdCamera : MonoBehaviour
 
     private void Start()
     {
-        //GetPlayerController = GetComponent<PlayerController>();
-        //GetThrowManager = GetComponent<ThrowManager>();
-        camera_transform = GetComponentInChildren<Transform>();
-        cam = GetComponentInChildren<Camera>();
         camera_rig_transform = transform;
         //유지할 거리
         camera_offset = camera_rig_transform.localPosition - GetPlayerController.transform.localPosition;
@@ -56,15 +45,15 @@ public class ThirdCamera : MonoBehaviour
         if (InputManager.instance.click_mod == 0)
         {
             Vector3 targetVec;
+            Vector3 aim = new Vector3(GetPlayerController.transform.localPosition.x +0.5f,
+                GetPlayerController.transform.localPosition.y, 
+                GetPlayerController.transform.localPosition.z);
 
-            Vector3 upVec = GetPlayerController.upVec;
-            Vector3 rightVec = GetPlayerController.rightVec;
-
-            //throw mode 일 때 카메라 위치는 플레이어 옆쪽. LookAt은 착지 예상지점.
+            //throw mode 일 때 카메라 위치는 플레이어 옆쪽.
             targetVec = GetPlayerController.throw_mode ? 
-                GetPlayerController.transform.position + new Vector3(0.5f, 0f, 2f) /*임시값*/
-                : GetPlayerController.targetVec;
-
+                aim /*임시값. 월드로 더해지네..*/
+                : GetPlayerController.transform.localPosition;
+           
             if (GameSystem.switch_mode)
             {
                 //lerp주기.
@@ -76,47 +65,55 @@ public class ThirdCamera : MonoBehaviour
             if (input_mouse_wheel != 0)
                 camera_offset += new Vector3(0,0,input_mouse_wheel);
 
-            Quaternion camera_angle_X = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * rotate_speed, Vector3.up);
-            Quaternion camera_angle_Y = Quaternion.AngleAxis(-Input.GetAxis("Mouse Y") * rotate_speed, Vector3.right);
+            //마우스로 시야 전환 각도제한은 camera_rig_transform의 rotation값을 제한.
+            //쿼터니언 클램프 어캐함; ; ;
+            MouseX = Input.GetAxis("Mouse X") * rotate_speed;
+            MouseY = Input.GetAxis("Mouse Y") * rotate_speed;
+            //MouseY = Mathf.Clamp(MouseY, -5f, 70f); --> 인풋은 -1,1 이라 소용없다. 입력값제한은 아님.
+
+            Quaternion camera_angle_X;
+            camera_angle_X = Quaternion.AngleAxis(MouseX, Vector3.up);
+
+            Quaternion camera_angle_Y;
+            camera_angle_Y = Quaternion.AngleAxis(MouseY, -Vector3.right);
+
+
+            ///쿼터니언 클램프 시행착오들...일단 최종 쿼터니언 회전값은 camera_angle이다.
+            
+            //Quaternion initY = transform.localRotation * camera_angle_Y;
+            //if (Quaternion.Angle(transform.rotation, initY) > 70f)
+            //    camera_angle_Y = initY;
+
+            //Quaternion camera_angle = camera_angle_X * camera_angle_Y;
             Quaternion camera_angle = Quaternion.Slerp(camera_angle_X, camera_angle_Y, 0.5f);
+
+
+            //각도 제한을 위해 쿼터니언 x값을 float로 변환하고 clamp 한 다음 다시 변환해서 넣어줌.
+            //float angleY = 2.0f * Mathf.Rad2Deg * Mathf.Atan(camera_angle.x);
+            //angleY = Mathf.Clamp(angleY, -5f, 30f);
+            //camera_angle.x = Mathf.Tan(0.5f * Mathf.Deg2Rad * angleY);
+
+            //쿼터니언 각을 오일러로 때려넣는 방법. 왜 안될가
+            //camera_angle = Quaternion.Euler(Mathf.Clamp(camera_angle.eulerAngles.x, -5f, 30f), 
+            //    camera_angle.eulerAngles.y, 
+            //    camera_angle.eulerAngles.z);
+            //if (camera_rig_transform.localEulerAngles.x > 70f)
+            //    camera_rig_transform.localEulerAngles.Set(70f, camera_rig_transform.localEulerAngles.y, camera_rig_transform.localEulerAngles.z);
+
+
+            ///
 
             camera_offset = camera_angle * camera_offset;
 
-            Vector3 newPos = GetPlayerController.transform.localPosition + camera_offset;
-            
-            camera_rig_transform.localPosition = Vector3.Slerp(camera_rig_transform.localPosition, newPos, smooth);
-
-            camera_rig_transform.LookAt(GetPlayerController.transform);
+            Vector3 newPos = targetVec + camera_offset;
+            camera_rig_transform.localPosition = Vector3.Slerp(targetVec, newPos, smooth);
+            camera_rig_transform.LookAt(targetVec);
            
             //커서 숨기기. **인풋매니저에 넣을것**
             //Ctrl+Shift+c 하면 다시 생김
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
 
-            if (GetPlayerController.throw_mode)
-            {
-                camera_rig_transform.localRotation.SetLookRotation(targetVec);
-
-                //착지 지점이 잘 보이는 지 확인하기.
-                //던지기 카메라는 줌인 줌아웃 없고 마우스 움직일때 시야가 움직이긴 해야함.
-                //UI에 에임점 찍기
-                //
-
-                //throw_position = my_transform.forward + new Vector3(0, 0, pc.throw_position);
-
-                //float power; //던지는 힘
-                //float m; //질량
-                //float a;//가속도
-                //float v;//속도
-                //Vector3 dir;//방향
-                //power = 10.0f;
-                //m = 0.1f;
-                //dir = new Vector3(mouse_move,)
-                //Vector3 throw_vec = new Vector3(0, 0, pc.throw_position);
-                //my_transform.position = my_transform.forward + throw_vec;
-                //Debug.Log("aim change " + my_transform);
-
-            }
         }
         else
         {
@@ -143,7 +140,6 @@ public class ThirdCamera : MonoBehaviour
             if(Physics.Linecast(GetPlayerController.transform.position,target_point,out hit_info))
             {
                 target_point = hit_info.point;
-
             }
         }
         else

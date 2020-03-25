@@ -18,11 +18,6 @@ public class PlayerController : MonoBehaviour
     private bool in_ground;                 // 땅에 있으면 true.
     private bool is_back;                   // 반대방향을 보고있는지.
 
-    public Vector3 targetVec;
-    public Vector3 upVec;
-    public Vector3 rightVec;
-
-    Vector3 offset;
     public bool throw_mode = false;                 // 던지기 모드 (임시변수)
     public float throw_position;
 
@@ -44,8 +39,6 @@ public class PlayerController : MonoBehaviour
     {
         player_rigidbody = GetComponent<Rigidbody>();
         player_transform = GetComponent<Transform>();
-        offset = new Vector3(0f, 1.5f, 0f);
-        targetVec = player_transform.position + offset;
         is_jumping = false;
         turning = false;
         is_back = false;
@@ -53,10 +46,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()                               // 키 입력은 Update에서 받고
     {
-        targetVec = player_transform.localPosition + offset;
-        upVec = player_transform.up;
-        rightVec = player_transform.right;
-
         if (InputManager.instance.click_mod == 0)
         {
             if (Input.GetButtonDown("Jump"))
@@ -91,22 +80,20 @@ public class PlayerController : MonoBehaviour
                 GameSystem.instance.SetMode(0);
             }
 
-           
             input_horizontal = Input.GetAxisRaw("Horizontal");
             input_vertical = Input.GetAxisRaw("Vertical");
 
             Vector3 movement = new Vector3(input_horizontal, 0, input_vertical);
             movement = movement.normalized;
             //키 입력이 들어온 순간 캐릭터의 vec을 카메라 vec에 맞춤. (rotate)
-            //쿼터니언 값 수상함. 0~70도 정도까지만 잘 들어가고 나머지는 꼬임. <<
-            //Quaternion camRotation = new Quaternion(0f, camera_rig_transform.rotation.y, 0f, 1f);
-            //transform.localRotation = Quaternion.Slerp(transform.localRotation, camera_rig_transform.rotation, 1f);
-
-            ////transform.localRotation = new Quat rnion(0f, transform.localRotation.y, 0f,1f);
-            //Debug.Log(camera_rig_transform.rotation.y + " / " + transform.localRotation.y);
-            if (!movement.Equals(Vector3.zero))
-                transform.localRotation = new Quaternion(0f, camera_rig_transform.localRotation.y, 0f, 1f);
-
+            //쿼터니언 값 수상함. 0~70도 정도까지만 잘 들어가고 나머지는 꼬임. <<해결
+            if (!movement.Equals(Vector3.zero) || throw_mode)
+            {
+                Quaternion dir = camera_rig_transform.localRotation;
+                dir.x = 0f; dir.z = 0f;
+                transform.localRotation = Quaternion.Slerp(transform.localRotation, dir, 0.5f);
+            }
+            
             player_transform.Translate(movement * player_speed * Time.deltaTime, Space.Self);
 
             //점프
