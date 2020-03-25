@@ -503,7 +503,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &175924527
 PrefabInstance:
@@ -736,7 +736,7 @@ Transform:
   - {fileID: 991204471}
   - {fileID: 641367668}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &231556202 stripped
 GameObject:
@@ -1176,6 +1176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throw_at: {x: 0, y: 0, z: 0}
   throw_mode: 0
+  aim_tranform: {fileID: 0}
   mode: 0
   circle_sprite: {fileID: 0}
   seed: {fileID: 0}
@@ -2438,8 +2439,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smooth: 2
   camera_rig_transform: {fileID: 0}
+  aim_transform: {fileID: 1394200888}
   rotate_cam: 1
   look_player: 0
+  MouseX: 0
+  MouseY: 0
   GetPlayerController: {fileID: 744515983}
   mouse_move: {x: 0, y: 0, z: 0}
   mouse_sensitivity: 10
@@ -2652,6 +2656,12 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: New Text
+--- !u!4 &1394200888 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9128881574528203851, guid: 60283bddc5264024893416fd49fc70aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 8780300512459813963}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1412743089 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2427080583458681022, guid: 6581b2671477f174a803c8c42e128548,
@@ -4327,7 +4337,7 @@ PrefabInstance:
     - target: {fileID: 8780300512582525261, guid: 60283bddc5264024893416fd49fc70aa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8780300512582525261, guid: 60283bddc5264024893416fd49fc70aa,
         type: 3}
