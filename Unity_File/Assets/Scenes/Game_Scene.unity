@@ -2436,9 +2436,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7497c70675d3f04ab14d6ea1d287544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance_cur: 3
-  height_cur: 0.75
   smooth: 2
+  camera_rig_transform: {fileID: 0}
+  rotate_cam: 1
+  look_player: 0
   GetPlayerController: {fileID: 744515983}
   mouse_move: {x: 0, y: 0, z: 0}
   mouse_sensitivity: 10
@@ -4368,6 +4369,11 @@ PrefabInstance:
       propertyPath: dialogue
       value: 
       objectReference: {fileID: 166139792}
+    - target: {fileID: 8780300512582525260, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: camera_rig_transform
+      value: 
+      objectReference: {fileID: 1179107958}
     - target: {fileID: 9144438266602420572, guid: 60283bddc5264024893416fd49fc70aa,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

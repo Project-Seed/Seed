@@ -16,6 +16,7 @@ public class ThrowManager : MonoBehaviour
     private bool throw_done;
 
     ThirdCamera tc;
+    public Transform aim_tranform;
     public GameSystem.Mode mode;
     public GameObject circle_sprite;
     public GameObject seed;
@@ -28,6 +29,7 @@ public class ThrowManager : MonoBehaviour
     private void Start()
     {
         tc = GetComponent<ThirdCamera>();
+        aim_tranform = tc.aim_transform;
         gravity = 9.8f;
         throw_at =
         windVec = 
