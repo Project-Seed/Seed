@@ -103,6 +103,7 @@ public class Quest : MonoBehaviour
         data_title.text = GameSystem.instance.quest_list[num - 1]["title"];
         data_area.text = GameSystem.instance.quest_list[num - 1]["area"];
         data_npc.text = GameSystem.instance.quest_list[num - 1]["name"];
-        data_content.text = GameSystem.instance.quest_list[num - 1]["content"];
+        data_content.text = GameSystem.instance.quest_list[num - 1]["content"] + "\n" +
+            Quest_clear_system.instance.num_data(num);
     }
 }

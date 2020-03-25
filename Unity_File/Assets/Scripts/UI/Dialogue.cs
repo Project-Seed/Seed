@@ -89,8 +89,6 @@ public class Dialogue : MonoBehaviour
                 quest_now = GameSystem.instance.quest_state[quest_num];
                 onss = 1;
 
-                Debug.Log(quest_now);
-
                 switch (quest_now)
                 {
                     case 0:

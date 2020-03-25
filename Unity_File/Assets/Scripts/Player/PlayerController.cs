@@ -157,19 +157,19 @@ public class PlayerController : MonoBehaviour
                 inventory.SetActive(true);
         }
 
-        if (Input.GetKeyDown(KeyCode.O) && InputManager.instance.click_mod == 0)
+        if (Input.GetKeyDown(KeyCode.O))
         {
             if (composer.activeSelf == true)
                 composer.SetActive(false);
-            else if(InputManager.instance.click_mod == 0)
+            else
                 composer.SetActive(true);
         }
 
-        if (Input.GetKeyDown(KeyCode.P) && InputManager.instance.click_mod == 0)
+        if (Input.GetKeyDown(KeyCode.P))
         {
             if (note.activeSelf == true)
                 note.SetActive(false);
-            else if (InputManager.instance.click_mod == 0)
+            else
                 note.SetActive(true);
         }
     }
