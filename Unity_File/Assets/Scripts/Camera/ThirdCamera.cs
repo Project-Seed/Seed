@@ -10,9 +10,6 @@ public class ThirdCamera : MonoBehaviour
     public Transform aim_transform;
     private float rotate_speed = 5.0f;
     private Vector3 camera_offset;
-    private Vector3 throw_mode_offset;
-    private Vector3 old_offset;
-
 
     public bool rotate_cam = true;
     public bool look_player = false;
@@ -45,10 +42,7 @@ public class ThirdCamera : MonoBehaviour
         camera_rig_transform = transform;
         //유지할 거리
         camera_offset = camera_rig_transform.localPosition - GetPlayerController.transform.localPosition;
-        old_offset = camera_offset;
-        //throw mode일때 거리
-        throw_mode_offset = GetPlayerController.transform.localPosition + new Vector3(0f, 0.7f, -3f);
-    }
+      }
 
     void LateUpdate()
     {

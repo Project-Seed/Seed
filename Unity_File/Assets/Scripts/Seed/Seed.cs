@@ -58,6 +58,4 @@ class Seed
         float growthRate { get; set; }   //성장속도
         float force { get; }        //자라는 힘
     }
-    
-
 }
