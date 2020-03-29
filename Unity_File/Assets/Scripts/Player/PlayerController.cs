@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
                 transform.localRotation = Quaternion.Slerp(transform.localRotation, dir, 0.5f);
             }
             
-            player_transform.Translate(movement * (is_run? player_speed : player_run_speed) * Time.deltaTime, Space.Self);
+            player_transform.Translate(movement * (is_run? player_run_speed : player_speed) * Time.deltaTime, Space.Self);
 
             //점프
             if (is_jumping && in_ground)
