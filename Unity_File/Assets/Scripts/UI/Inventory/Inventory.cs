@@ -7,6 +7,7 @@ public class Inventory : MonoBehaviour
 {
     public GameObject viewport;
     public GameObject content;
+    public GameObject quick_button;
     public List<GameObject> item_box;
 
     public Text item_names;
@@ -67,12 +68,21 @@ public class Inventory : MonoBehaviour
         string item_name = gameObject.name;
         item_name = item_name.Substring(14, item_name.Length - 14);
         int item_int = System.Convert.ToInt32(item_name);
-        item_choose = GameSystem.instance.item_time[item_int];
+
+        try 
+        { item_choose = GameSystem.instance.item_time[item_int]; }
+        catch 
+        {}
 
         if (item_int < GameSystem.instance.item_time.Count)
         {
             item_explanation.text = GameSystem.instance.item_search(item_choose, "explanation_ko");
             item_names.text = GameSystem.instance.item_search(item_choose, "name_ko");
+
+            if (GameSystem.instance.item_search(item_choose, "category") == "consumable")
+                quick_button.SetActive(true);
+            else
+                quick_button.SetActive(false);
         }
     }
 }
