@@ -15,6 +15,10 @@ public class Inventory : MonoBehaviour
     
     private string item_choose = null; // 어떤 아이템을 눌렀는지
     // private int item_move = 0; // 몇번째 아이템에 커서가 있는지
+
+    public bool quick_mod = false;
+    public string quick_name;
+    public GameObject quick_image;
     
     private void Awake()
     {
@@ -44,6 +48,7 @@ public class Inventory : MonoBehaviour
     private void OnDisable()
     {
         InputManager.instance.click_mod = 0;
+        quick_off();
     }
 
     private void Update()
@@ -84,5 +89,18 @@ public class Inventory : MonoBehaviour
             else
                 quick_button.SetActive(false);
         }
+    }
+
+    public void quick_click() // 단축키 등록 클릭
+    {
+        quick_mod = true;
+        quick_image.SetActive(true);
+        quick_name = item_choose;
+    }
+
+    public void quick_off()
+    {
+        quick_mod = false;
+        quick_image.SetActive(false);
     }
 }
