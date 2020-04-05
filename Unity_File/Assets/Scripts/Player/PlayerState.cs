@@ -13,7 +13,7 @@ public class PlayerState : MonoBehaviour
     }*/
     public Animator animator;
 
-    public float state_move = 0; // 0 정지 1 앞으로 -1 뒤로
+    public int state_move = 0; // 0 정지 1 앞으로 -1 뒤로
     public int state_dash = 0; // 0 안함 1 대쉬
     // public int state_jump = 0; // 0 안함 1 점프
 
@@ -24,8 +24,7 @@ public class PlayerState : MonoBehaviour
 
     void Update()
     {
-        animator.SetFloat("move", state_move);
-        Debug.Log(state_move);
+        animator.SetInteger("move", state_move);
     }
 
     public void dash_on()

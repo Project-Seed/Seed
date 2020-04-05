@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
             }
             
             player_transform.Translate(movement * (is_run? player_run_speed : player_speed) * Time.deltaTime, Space.Self);
-            player_state.state_move = movement.z;
+            player_state.state_move = (int)movement.z;
 
             //점프
             if (is_jumping && in_ground)
