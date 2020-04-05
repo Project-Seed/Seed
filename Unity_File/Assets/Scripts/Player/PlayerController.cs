@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     public bool throw_mode = false;                 // 던지기 모드 (임시변수)
     public float throw_position;
+    private Vector3 lookAt;
 
     [SerializeField]
     private float player_speed = 2.0f;         // 캐릭터 걷는 속도
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
     public GameObject composer; // 합성창
     public GameObject note; // 다이어리
     public Transform camera_rig_transform;
+    private Transform child;
 
     IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 1초간 점프금지
     {
@@ -43,6 +45,7 @@ public class PlayerController : MonoBehaviour
         player_rigidbody = GetComponent<Rigidbody>();
         player_transform = GetComponent<Transform>();
         player_state = GetComponent<PlayerState>();
+        child = transform.GetChild(0);
         is_jumping = false;
         turning = false;
         is_back = false;
@@ -73,8 +76,28 @@ public class PlayerController : MonoBehaviour
                 DegreesLeft = amount;
             }
 
-           
-            if(Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                //현재 캐릭터의 왼쪽 방향을 받아놓고 그쪽을 보도록 함.
+                lookAt = -transform.right;
+            }
+
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                lookAt = transform.right;
+            }
+
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                lookAt = transform.forward;
+            }
+
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                lookAt = -transform.forward;
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 player_state.dash_on();
                 is_run = true;
@@ -102,6 +125,8 @@ public class PlayerController : MonoBehaviour
             
             Vector3 movement = new Vector3(input_horizontal, 0, input_vertical);
             movement = movement.normalized;
+
+
             //키 입력이 들어온 순간 캐릭터의 vec을 카메라 vec에 맞춤. (rotate)
             //쿼터니언 값 수상함. 0~70도 정도까지만 잘 들어가고 나머지는 꼬임. <<해결
             if (!movement.Equals(Vector3.zero) || throw_mode)
@@ -110,9 +135,14 @@ public class PlayerController : MonoBehaviour
                 dir.x = 0f; dir.z = 0f;
                 transform.localRotation = Quaternion.Slerp(transform.localRotation, dir, 0.5f);
             }
-            
+
+            //모델만 돌리기. transform은 돌리지 않음.
+            //child.localRotation = Quaternion.Slerp(child.localRotation, Quaternion.LookRotation(lookAt), 0.5f);
+
+            child.localRotation = Quaternion.LookRotation(lookAt);
+
             player_transform.Translate(movement * (is_run? player_run_speed : player_speed) * Time.deltaTime, Space.Self);
-            player_state.state_move = movement.z;
+            player_state.state_move = (int)movement.z;
 
             //점프
             if (is_jumping && in_ground)
