@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public Transform Player_transform { get => player_transform; }
 
     private Rigidbody player_rigidbody;
+    private PlayerState player_state;
     private float input_horizontal;         // 수직방향 입력 ws
     private float input_vertical;           // 수평방향 입력 ad
     public bool turning;                   // 회전 중
@@ -30,7 +31,6 @@ public class PlayerController : MonoBehaviour
     public GameObject inventory; // 인벤토리
     public GameObject composer; // 합성창
     public GameObject note; // 다이어리
-    public Animator animator;
     public Transform camera_rig_transform;
 
     IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 1초간 점프금지
@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     {
         player_rigidbody = GetComponent<Rigidbody>();
         player_transform = GetComponent<Transform>();
+        player_state = GetComponent<PlayerState>();
         is_jumping = false;
         turning = false;
         is_back = false;
@@ -72,30 +73,15 @@ public class PlayerController : MonoBehaviour
                 DegreesLeft = amount;
             }
 
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                animator.SetBool("front", true);
-            }
-            else if (Input.GetKeyUp(KeyCode.W))
-            {
-                animator.SetBool("front", false);
-            }
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                animator.SetBool("back", true);
-            }
-            else if (Input.GetKeyUp(KeyCode.S))
-            {
-                animator.SetBool("back", false);
-            }
+           
             if(Input.GetKeyDown(KeyCode.LeftShift))
             {
-                animator.SetBool("run", true);
+                player_state.dash_on();
                 is_run = true;
             }
             else if (Input.GetKeyUp(KeyCode.LeftShift))
             {
-                animator.SetBool("run", false);
+                player_state.dash_off();
                 is_run = false;
             }
 
@@ -126,6 +112,7 @@ public class PlayerController : MonoBehaviour
             }
             
             player_transform.Translate(movement * (is_run? player_run_speed : player_speed) * Time.deltaTime, Space.Self);
+            player_state.state_move = movement.z;
 
             //점프
             if (is_jumping && in_ground)
@@ -166,7 +153,7 @@ public class PlayerController : MonoBehaviour
         
         StartCoroutine("StopJumping");
 
-        animator.SetTrigger("jump");
+        player_state.jump();
     }
 
     private void OnCollisionEnter(Collision collision)
