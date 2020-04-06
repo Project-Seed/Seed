@@ -12,12 +12,8 @@ public class PlayerController : MonoBehaviour
     private PlayerState player_state;
     private float input_horizontal;         // 수직방향 입력 ws
     private float input_vertical;           // 수평방향 입력 ad
-    public bool turning;                   // 회전 중
-    private float amount = 180.0f;          // 회전 각도
-    private float DegreesLeft;              // 남은 각 계산
     private bool is_jumping;                // 점프키를 입력하면 true.
     private bool in_ground;                 // 땅에 있으면 true.
-    private bool is_back;                   // 반대방향을 보고있는지.
     private bool is_run;                    // 달리고 있는지.
 
     public bool throw_mode = false;                 // 던지기 모드 (임시변수)
@@ -47,8 +43,6 @@ public class PlayerController : MonoBehaviour
         player_state = GetComponent<PlayerState>();
         child = transform.GetChild(0);
         is_jumping = false;
-        turning = false;
-        is_back = false;
         is_run = false;
     }
 
@@ -60,20 +54,6 @@ public class PlayerController : MonoBehaviour
             {
                 is_jumping = true;
                 Debug.Log("Jump!");
-            }
-
-            if (!is_back && Input.GetKeyDown(KeyCode.S)) //앞인상태에서 S누르면
-            {
-                turning = true;
-                is_back = true;
-                DegreesLeft = amount;
-            }
-
-            if (is_back && Input.GetKeyDown(KeyCode.W)) //뒤인상태에서 w누르면
-            {
-                turning = true;
-                is_back = false;
-                DegreesLeft = amount;
             }
 
             if (Input.GetKeyDown(KeyCode.A))
@@ -127,19 +107,25 @@ public class PlayerController : MonoBehaviour
             movement = movement.normalized;
 
 
-            //키 입력이 들어온 순간 캐릭터의 vec을 카메라 vec에 맞춤. (rotate)
-            //쿼터니언 값 수상함. 0~70도 정도까지만 잘 들어가고 나머지는 꼬임. <<해결
-            if (!movement.Equals(Vector3.zero) || throw_mode)
+            if (!Input.GetKey(KeyCode.None) || throw_mode)
             {
                 Quaternion dir = camera_rig_transform.localRotation;
                 dir.x = 0f; dir.z = 0f;
                 transform.localRotation = Quaternion.Slerp(transform.localRotation, dir, 0.5f);
+                child.rotation = Quaternion.LookRotation(lookAt);
             }
+
+            player_transform.Translate(movement * player_speed * Time.deltaTime, Space.Self);
+            //2. 키 입력없이 카메라만 돌릴때가 문제.
+            //쭉 가는 길에 카메라만 돌리면 그때는 이동중이니까...입력 시에 적용하는게 아니고 입력이 있는 상태에서는 움직여야함.
 
             //모델만 돌리기. transform은 돌리지 않음.
             //child.localRotation = Quaternion.Slerp(child.localRotation, Quaternion.LookRotation(lookAt), 0.5f);
 
-            child.localRotation = Quaternion.LookRotation(lookAt);
+            //마우스로 카메라 회전시켰을 때 두번 눌러야 그 방향이 앞이됨..원래는 앞 만 누르면서 카메라돌리면 바로 그 방향으로 갔었는데...?
+            //child회전은 계속 되고있는데, 카메라에 따른 회전은 movement값이 있을 떄(이동할때)만 적용되기때문.
+            //1. 즉 회전이 두번일어나서 정면 볼 땐 잘되는데 카메라 각이 정면에서 틀어지면 키보드로 회전하는 값이 카메라각 + 키보드값 해서 중첩됨.
+            //transform.forward가 월드 포지션이라 그런듯.
 
             player_transform.Translate(movement * (is_run? player_run_speed : player_speed) * Time.deltaTime, Space.Self);
             player_state.state_move = (int)movement.z;
