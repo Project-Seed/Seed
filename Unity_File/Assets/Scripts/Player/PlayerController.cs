@@ -56,23 +56,23 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Jump!");
             }
 
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKey(KeyCode.A))
             {
                 //현재 캐릭터의 왼쪽 방향을 받아놓고 그쪽을 보도록 함.
                 lookAt = -transform.right;
             }
 
-            if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKey(KeyCode.D))
             {
                 lookAt = transform.right;
             }
 
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKey(KeyCode.W))
             {
                 lookAt = transform.forward;
             }
 
-            if (Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKey(KeyCode.S))
             {
                 lookAt = -transform.forward;
             }
@@ -100,24 +100,27 @@ public class PlayerController : MonoBehaviour
                 GameSystem.instance.SetMode(0);
             }
 
-            input_horizontal = Input.GetAxisRaw("Horizontal");
-            input_vertical = Input.GetAxisRaw("Vertical");
+            input_horizontal = Input.GetAxis("Horizontal");
+            input_vertical = Input.GetAxis("Vertical");
             
             Vector3 movement = new Vector3(input_horizontal, 0, input_vertical);
             movement = movement.normalized;
 
-
-            if (!Input.GetKey(KeyCode.None) || throw_mode)
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||
+                Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || throw_mode)
             {
                 Quaternion dir = camera_rig_transform.localRotation;
                 dir.x = 0f; dir.z = 0f;
                 transform.localRotation = Quaternion.Slerp(transform.localRotation, dir, 0.5f);
-                child.rotation = Quaternion.LookRotation(lookAt);
-            }
+                //child.rotation = Quaternion.LookRotation(lookAt);
+                child.rotation = Quaternion.Slerp(child.rotation, Quaternion.LookRotation(lookAt), 0.2f);
 
-            player_transform.Translate(movement * player_speed * Time.deltaTime, Space.Self);
-            //2. 키 입력없이 카메라만 돌릴때가 문제.
-            //쭉 가는 길에 카메라만 돌리면 그때는 이동중이니까...입력 시에 적용하는게 아니고 입력이 있는 상태에서는 움직여야함.
+            }
+           
+            //문제점. 대각선이동시에는? 방향을 정해주는게 아니라 곱해줘야함. . .
+
+            //2. 키 입력없이 카메라만 돌릴때가 문제. 
+            //쭉 가는 길에 카메라만 돌리면 그때는 이동중이니까...입력 시에 적용하는게 아니고 입력이 있는 상태에서는 움직여야함.>>일단해결
 
             //모델만 돌리기. transform은 돌리지 않음.
             //child.localRotation = Quaternion.Slerp(child.localRotation, Quaternion.LookRotation(lookAt), 0.5f);
