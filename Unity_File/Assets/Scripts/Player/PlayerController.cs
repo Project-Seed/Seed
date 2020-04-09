@@ -91,6 +91,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 throw_mode = true;
+                lookAt = transform.forward;
                 GameSystem.instance.SetMode(1);
             }
 

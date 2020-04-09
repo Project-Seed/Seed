@@ -1627,7 +1627,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throw_at: {x: 0, y: 0, z: 0}
   throw_mode: 0
-  aim_tranform: {fileID: 0}
   mode: 0
   circle_sprite: {fileID: 0}
   seed: {fileID: 0}
@@ -5663,6 +5662,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Target
       objectReference: {fileID: 0}
+    - target: {fileID: 56548156015828408, guid: 6581b2671477f174a803c8c42e128548,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2427080583458681022, guid: 6581b2671477f174a803c8c42e128548,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6397,5 +6401,6 @@ PrefabInstance:
       propertyPath: item_ui
       value: 
       objectReference: {fileID: 2112829198}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7352195994518739567, guid: 60283bddc5264024893416fd49fc70aa, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 60283bddc5264024893416fd49fc70aa, type: 3}

@@ -16,7 +16,7 @@ public class ThrowManager : MonoBehaviour
     private bool throw_done;
 
     ThirdCamera tc;
-    public Transform aim_tranform;
+    Transform aim_tranform;
     public GameSystem.Mode mode;
     public GameObject circle_sprite;
     public GameObject seed;
@@ -32,17 +32,15 @@ public class ThrowManager : MonoBehaviour
         aim_tranform = tc.aim_transform;
         gravity = 9.8f;
         throw_at =
-        windVec = 
+        windVec =
         s = Vector3.zero;
         start_transform = transform.position + new Vector3(0, 1.3f, 0);
     }
 
     public void OnThrowMode()
     {
-        if (!throw_done) return;
         mode = GameSystem.Mode.ThrowMode;
-        throw_done = false;
-        CalcThrow();
+        Throw();
     }
 
     private void CalcThrow()
@@ -77,9 +75,13 @@ public class ThrowManager : MonoBehaviour
     {
         //씨앗 생성
         tmp = Instantiate(seed);
-        
+        Rigidbody tmp_rig = tmp.AddComponent<Rigidbody>();
+        aim_tranform = tc.aim_transform;
+
+        tmp_rig.AddForceAtPosition(aim_tranform.forward, aim_tranform.position);
+
         //궤도를 따라 움직이는 코루틴 시작
-        StartCoroutine(ThrowingSeed());
+        //StartCoroutine(ThrowingSeed());
     }
 
 
@@ -89,14 +91,14 @@ public class ThrowManager : MonoBehaviour
         t += 0.05f;
         float z = throw_speed * Mathf.Cos(throw_angle) * t;
         float y = throw_speed * Mathf.Sin(throw_angle) * t - (0.5f * gravity * Mathf.Pow(t, 2));
-        tmp.transform.localPosition = new Vector3(start_transform.x, start_transform.y + y, start_transform.z + z);
+        tmp.transform.position = new Vector3(start_transform.x, start_transform.y + y, start_transform.z + z);
         
         //아래 조건 착지했을 때(지면 or 오브젝트와 충돌했을 때)로 바꿀 예정
         if (y <= 0)
         {
             t = 0;
             DestroyImmediate(tmp);
-            PlantSeed(tmp.transform.localPosition);
+            PlantSeed(tmp.transform.position);
             throw_done = true;
             yield break;
         }

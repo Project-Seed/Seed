@@ -42,7 +42,8 @@ public class ThirdCamera : MonoBehaviour
         camera_rig_transform = transform;
         //유지할 거리
         camera_offset = camera_rig_transform.localPosition - GetPlayerController.transform.localPosition;
-      }
+        GetThrowManager = GetPlayerController.GetComponent<ThrowManager>();
+    }
 
     void LateUpdate()
     {
@@ -115,6 +116,9 @@ public class ThirdCamera : MonoBehaviour
 
             Vector3 aim;
             aim = GetPlayerController.throw_mode ? aim_transform.position : targetVec;
+
+            if (GetPlayerController.throw_mode)
+                GetThrowManager.OnThrowMode();
 
             Vector3 newPos = targetVec + camera_offset;
             camera_rig_transform.localPosition = Vector3.Slerp(targetVec, newPos, smooth);
