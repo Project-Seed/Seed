@@ -53,7 +53,6 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown("Jump"))
             {
                 is_jumping = true;
-                Debug.Log("Jump!");
             }
 
             if (Input.GetKey(KeyCode.A))
@@ -131,7 +130,11 @@ public class PlayerController : MonoBehaviour
             //transform.forward가 월드 포지션이라 그런듯.
 
             player_transform.Translate(movement * (is_run? player_run_speed : player_speed) * Time.deltaTime, Space.Self);
-            player_state.state_move = (int)movement.z;
+            
+            if ((Mathf.Abs(movement.z) + Mathf.Abs(movement.x)) >= 1)
+                player_state.state_move = 1;
+            else
+                player_state.state_move = 0;
 
             //점프
             if (is_jumping && in_ground)
