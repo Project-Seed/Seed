@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,9 +17,8 @@ public class ThrowManager : MonoBehaviour
     private bool throw_done;
 
     ThirdCamera tc;
-    Transform aim_tranform;
+    Transform aim;
     public GameSystem.Mode mode;
-    public GameObject circle_sprite;
     public GameObject seed;
     private GameObject throw_sprite;    // 임시스프라이트
     private GameObject tmp;  //임시씨앗
@@ -29,12 +29,30 @@ public class ThrowManager : MonoBehaviour
     private void Start()
     {
         tc = GetComponent<ThirdCamera>();
-        aim_tranform = tc.aim_transform;
+        // aim 캐릭터 따라다니도록 했는데,,수정해야될듯. 카메라 위로 올리면 aim도 위로 올라가야해서. 
+        // Ray쏴서 2차원->3차원 좌표로 바꾼걸 Aim으로 써야될듯
+        aim = transform.GetChild(1);
         gravity = 9.8f;
         throw_at =
         windVec =
         s = Vector3.zero;
         start_transform = transform.position + new Vector3(0, 1.3f, 0);
+    }
+
+    private void Update()
+    {
+        if (InputManager.instance.click_mod == 0)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                StopCoroutine("ThrowingSeed");
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                Throw();
+            }
+
+        }
     }
 
     public void OnThrowMode()
@@ -58,9 +76,9 @@ public class ThrowManager : MonoBehaviour
 
         // 해당 지점에 스프라이트 그리기
         // 오브젝트 생성
-        if (throw_sprite)
-            DestroyImmediate(throw_sprite);
-        throw_sprite = Instantiate(circle_sprite, throw_at, Quaternion.AngleAxis(0f, Vector3.right));
+        //if (throw_sprite)
+        //    DestroyImmediate(throw_sprite);
+        //throw_sprite = Instantiate(circle_sprite, throw_at, Quaternion.AngleAxis(0f, Vector3.right));
     }
     public void ExitThrowMode()
     {
@@ -74,41 +92,47 @@ public class ThrowManager : MonoBehaviour
     private void Throw()
     {
         //씨앗 생성
-        tmp = Instantiate(seed);
-        Rigidbody tmp_rig = tmp.AddComponent<Rigidbody>();
-        aim_tranform = tc.aim_transform;
+        tmp = Instantiate(seed, aim);
+        //Bullet tmp_bullet = tmp.GetComponent<Bullet>();
+        Rigidbody bullet_rig = tmp.GetComponent<Rigidbody>();
 
-        tmp_rig.AddForceAtPosition(aim_tranform.forward, aim_tranform.position);
+        //힘 계속 주기.
+        //bullet_rig.AddForce(aim.forward, ForceMode.Impulse);
 
         //궤도를 따라 움직이는 코루틴 시작
-        //StartCoroutine(ThrowingSeed());
+        StartCoroutine(ThrowingSeed(bullet_rig));
     }
 
 
-    IEnumerator ThrowingSeed()
+    IEnumerator ThrowingSeed(Rigidbody bullet_rig)
     {
-        if (!tmp) yield break;
-        t += 0.05f;
-        float z = throw_speed * Mathf.Cos(throw_angle) * t;
-        float y = throw_speed * Mathf.Sin(throw_angle) * t - (0.5f * gravity * Mathf.Pow(t, 2));
-        tmp.transform.position = new Vector3(start_transform.x, start_transform.y + y, start_transform.z + z);
-        
-        //아래 조건 착지했을 때(지면 or 오브젝트와 충돌했을 때)로 바꿀 예정
-        if (y <= 0)
-        {
-            t = 0;
-            DestroyImmediate(tmp);
-            PlantSeed(tmp.transform.position);
-            throw_done = true;
-            yield break;
-        }
-        else
-        {
-            throw_done = false;
-            yield return new WaitForSeconds(0.05f);
-            StartCoroutine(ThrowingSeed());
-        }
-    } 
+        bullet_rig.AddForce(aim.forward, ForceMode.Impulse);
+
+        yield return new WaitForSeconds(0.05f);
+        StartCoroutine(ThrowingSeed(bullet_rig));
+
+        //if (!tmp) yield break;
+        //t += 0.05f;
+        //float z = throw_speed * Mathf.Cos(throw_angle) * t;
+        //float y = throw_speed * Mathf.Sin(throw_angle) * t - (0.5f * gravity * Mathf.Pow(t, 2));
+        //tmp.transform.position = new Vector3(start_transform.x, start_transform.y + y, start_transform.z + z);
+
+        ////아래 조건 착지했을 때(지면 or 오브젝트와 충돌했을 때)로 바꿀 예정
+        //if (y <= 0)
+        //{
+        //    t = 0;
+        //    DestroyImmediate(tmp);
+        //    PlantSeed(tmp.transform.position);
+        //    throw_done = true;
+        //    yield break;
+        //}
+        //else
+        //{
+        //    throw_done = false;
+        //    yield return new WaitForSeconds(0.05f);
+        //    StartCoroutine(ThrowingSeed());
+        //}
+    }
 
     void PlantSeed(Vector3 pos)
     {

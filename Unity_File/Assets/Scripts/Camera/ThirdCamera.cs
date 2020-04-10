@@ -117,9 +117,6 @@ public class ThirdCamera : MonoBehaviour
             Vector3 aim;
             aim = GetPlayerController.throw_mode ? aim_transform.position : targetVec;
 
-            if (GetPlayerController.throw_mode)
-                GetThrowManager.OnThrowMode();
-
             Vector3 newPos = targetVec + camera_offset;
             camera_rig_transform.localPosition = Vector3.Slerp(targetVec, newPos, smooth);
             camera_rig_transform.LookAt(aim);

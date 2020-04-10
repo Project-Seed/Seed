@@ -808,6 +808,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Refinery
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e4d8dfe03882c54380948659f725233, type: 3}
+      propertyPath: m_TagString
+      value: Plantable
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6e4d8dfe03882c54380948659f725233, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.87596714
@@ -1628,7 +1632,6 @@ MonoBehaviour:
   throw_at: {x: 0, y: 0, z: 0}
   throw_mode: 0
   mode: 0
-  circle_sprite: {fileID: 0}
   seed: {fileID: 0}
 --- !u!1 &551856193
 GameObject:
@@ -2803,6 +2806,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dunes01
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 1b0f8caf6ec3ed644bf9751040d84dcb, type: 3}
+      propertyPath: m_TagString
+      value: Plantable
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1b0f8caf6ec3ed644bf9751040d84dcb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.37166464
@@ -3574,6 +3581,22 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8780300512459813963}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1087988915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087988907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da82c5efba22b124fbb7063da7d6f294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throw_at: {x: 0, y: 0, z: 0}
+  throw_mode: 0
+  mode: 0
+  seed: {fileID: 657700206664816255, guid: 137e3686b63b09e419ebcff3c9b14f23, type: 3}
 --- !u!1 &1099885574 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 50912a5d3c9322a46afa5ca162962a5c,
@@ -3610,6 +3633,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: fd0d7091fe3f1d24e81321bc2e4209df, type: 3}
       propertyPath: m_Name
       value: Rocks03
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd0d7091fe3f1d24e81321bc2e4209df, type: 3}
+      propertyPath: m_TagString
+      value: Plantable
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fd0d7091fe3f1d24e81321bc2e4209df, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4020,6 +4047,10 @@ PrefabInstance:
     - target: {fileID: 100002, guid: f698f69d64c51f8438d853e5c274e5fc, type: 3}
       propertyPath: m_Name
       value: Building01
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: f698f69d64c51f8438d853e5c274e5fc, type: 3}
+      propertyPath: m_TagString
+      value: Plantable
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: f698f69d64c51f8438d853e5c274e5fc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4485,6 +4516,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column02
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 74d835b756ff5654f8060c76cbcb4e19, type: 3}
+      propertyPath: m_TagString
+      value: Plantable
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 74d835b756ff5654f8060c76cbcb4e19, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.7234125
@@ -4871,6 +4906,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 38b4fea28f58d3641980a70a5188e750, type: 3}
       propertyPath: m_Name
       value: Dunes02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 38b4fea28f58d3641980a70a5188e750, type: 3}
+      propertyPath: m_TagString
+      value: Plantable
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 38b4fea28f58d3641980a70a5188e750, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5444,6 +5483,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 00b5a8045a3c3914bb0dfdf2d62f05c9, type: 3}
       propertyPath: m_Name
       value: Cactus
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 00b5a8045a3c3914bb0dfdf2d62f05c9, type: 3}
+      propertyPath: m_TagString
+      value: Plantable
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 00b5a8045a3c3914bb0dfdf2d62f05c9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6275,6 +6318,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: circle_sprite
+      value: 
+      objectReference: {fileID: 715930718675461904, guid: 337e2b5b199e13a41a84f75556d97a04,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: seed
+      value: 
+      objectReference: {fileID: 100000, guid: 9ed1e8a25f964bd4298944675e425a0d, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8780300512582525257, guid: 60283bddc5264024893416fd49fc70aa,
         type: 3}
       propertyPath: m_Name
@@ -6375,32 +6435,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d38f8773d424ee44d90ff25ea28f3cd2, type: 2}
-    - target: {fileID: 8780300512582525251, guid: 60283bddc5264024893416fd49fc70aa,
-        type: 3}
-      propertyPath: m_Interpolate
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2979638713187819255, guid: 60283bddc5264024893416fd49fc70aa,
-        type: 3}
-      propertyPath: circle_sprite
-      value: 
-      objectReference: {fileID: 715930718675461904, guid: 337e2b5b199e13a41a84f75556d97a04,
-        type: 3}
-    - target: {fileID: 2979638713187819255, guid: 60283bddc5264024893416fd49fc70aa,
-        type: 3}
-      propertyPath: seed
-      value: 
-      objectReference: {fileID: 100000, guid: 9ed1e8a25f964bd4298944675e425a0d, type: 3}
-    - target: {fileID: 2099339391914708341, guid: 60283bddc5264024893416fd49fc70aa,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 847514019262088476, guid: 60283bddc5264024893416fd49fc70aa,
         type: 3}
       propertyPath: item_ui
       value: 
       objectReference: {fileID: 2112829198}
-    m_RemovedComponents:
-    - {fileID: 7352195994518739567, guid: 60283bddc5264024893416fd49fc70aa, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60283bddc5264024893416fd49fc70aa, type: 3}
