@@ -16,18 +16,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1364762573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 657700206664816255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25027d7e762bf974288d4d49c054e97f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &228503779521179583
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -41,6 +29,31 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.2626306
   m_Center: {x: 0, y: 0.000000007450581, z: 0.19800001}
+--- !u!114 &1364762573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657700206664816255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25027d7e762bf974288d4d49c054e97f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5337048334255352568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657700206664816255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cef9ff0e92b1e3448f0577d5f3391a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plant: {fileID: 0}
 --- !u!1001 &657700206664782047
 PrefabInstance:
   m_ObjectHideFlags: 0
