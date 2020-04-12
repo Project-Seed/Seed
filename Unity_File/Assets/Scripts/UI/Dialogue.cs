@@ -17,6 +17,8 @@ public class Dialogue : MonoBehaviour
     public Sprite quest_ing;
     public Sprite quest_end;
 
+    public GameObject quest_quick; // 퀘스트 퀵슬롯 갱신용
+
     bool quest_bool = false;
 
     bool dialogue_box_bool = false;
@@ -135,6 +137,7 @@ public class Dialogue : MonoBehaviour
 
 
         StartCoroutine(res()); //퀘스트 갱신때매 잠시 딜레이
+        quest_quick.GetComponent<Quest_quick>().quest_re(); // 퀘스트 퀵 갱신
     }
 
     IEnumerator res()

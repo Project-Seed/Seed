@@ -34,7 +34,6 @@ public class Quest_clear_system : MonoBehaviour
                 break;
         }
 
-        Debug.Log(data);
         return data;
     }
 }
