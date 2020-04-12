@@ -42,7 +42,8 @@ public class ThirdCamera : MonoBehaviour
         camera_rig_transform = transform;
         //유지할 거리
         camera_offset = camera_rig_transform.localPosition - GetPlayerController.transform.localPosition;
-      }
+        GetThrowManager = GetPlayerController.GetComponent<ThrowManager>();
+    }
 
     void LateUpdate()
     {

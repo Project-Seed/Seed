@@ -90,13 +90,15 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 throw_mode = true;
-                GameSystem.instance.SetMode(1);
+                lookAt = transform.forward;
+                
+                //GameSystem.instance.SetMode(1);
             }
 
             if (Input.GetMouseButtonUp(0))
             {
                 throw_mode = false;
-                GameSystem.instance.SetMode(0);
+                //GameSystem.instance.SetMode(0);
             }
 
             input_horizontal = Input.GetAxis("Horizontal");
