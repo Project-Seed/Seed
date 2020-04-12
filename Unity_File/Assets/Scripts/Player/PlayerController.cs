@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float player_speed = 2.0f;         // 캐릭터 걷는 속도
     private float player_run_speed = 6.0f;     // 캐릭터 달리는 속도
-    private float player_jump_power = 4.0f;    // 캐릭터 점프력
+    private float player_jump_power = 5.0f;    // 캐릭터 점프력
 
     public GameObject inventory; // 인벤토리
     public GameObject composer; // 합성창
@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 1초간 점프금지
     {
-        is_jumping = false;
         yield return new WaitForSeconds(0.5f);
     }
     void Start()
@@ -140,7 +139,7 @@ public class PlayerController : MonoBehaviour
 
             //점프
             if (is_jumping && in_ground)
-                Jumping();
+                StartCoroutine("Jumping");
         }
 
         if (Input.GetKeyDown(KeyCode.I))
@@ -168,16 +167,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Jumping()
+    IEnumerator Jumping()
     {
-        if (!is_jumping || !in_ground)
-            return;
+        if (is_jumping && in_ground)
+        {
+            StartCoroutine("StopJumping");
 
-        player_rigidbody.AddForce(Vector3.up * player_jump_power, ForceMode.Impulse);   //점프
-        
-        StartCoroutine("StopJumping");
+            player_state.jump();
 
-        player_state.jump();
+            yield return new WaitForSeconds(0.2f);
+
+            player_rigidbody.AddForce(Vector3.up * player_jump_power, ForceMode.Impulse);   //점프
+    
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
