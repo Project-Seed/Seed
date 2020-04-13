@@ -40,7 +40,8 @@
 
 			void surf(Input IN, inout SurfaceOutputStandard o)
 			{
-				fixed4 c = tex2D(_MainTex, IN.uv_MainTex);
+				fixed4 c = tex2D(_MainTex, float2(IN.uv_MaskTex.x, IN.uv_MaskTex.y));
+				//fixed4 c = tex2D(_MainTex, float2(IN.uv_MaskTex.x + _Grow, IN.uv_MaskTex.y));
 				float m = tex2D(_MaskTex, float2(IN.uv_MaskTex.x + _Grow,IN.uv_MaskTex.y )).r;
 				o.Emission = c.rgb;
 				o.Alpha = m;

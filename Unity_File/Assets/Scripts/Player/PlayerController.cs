@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 1초간 점프금지
     {
+        is_jumping = false;
         yield return new WaitForSeconds(0.5f);
     }
     void Start()
