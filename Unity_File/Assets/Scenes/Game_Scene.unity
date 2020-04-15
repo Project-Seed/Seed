@@ -931,6 +931,75 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8403896949087218588}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &258250566
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 37467389ca3294c4ca85756120df54ab,
+        type: 3}
+      propertyPath: m_Name
+      value: House2
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 37467389ca3294c4ca85756120df54ab,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 37467389ca3294c4ca85756120df54ab,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 37467389ca3294c4ca85756120df54ab,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 37467389ca3294c4ca85756120df54ab,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 37467389ca3294c4ca85756120df54ab,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 37467389ca3294c4ca85756120df54ab,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 37467389ca3294c4ca85756120df54ab,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 37467389ca3294c4ca85756120df54ab,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 37467389ca3294c4ca85756120df54ab,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 37467389ca3294c4ca85756120df54ab,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 37467389ca3294c4ca85756120df54ab,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 37467389ca3294c4ca85756120df54ab, type: 3}
 --- !u!1 &267023368
 GameObject:
   m_ObjectHideFlags: 0
@@ -3896,8 +3965,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1179107958}
-  - component: {fileID: 1179107957}
-  - component: {fileID: 1179107959}
   - component: {fileID: 1179107960}
   m_Layer: 0
   m_Name: CameraRig
@@ -3906,23 +3973,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1179107957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179107956}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2480bbe85730d44ba4f52235b3663b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 468817158}
-  distance: 4
-  height: 1.5
-  offset: 2
-  rotate_angle: 2
 --- !u!4 &1179107958
 Transform:
   m_ObjectHideFlags: 0
@@ -3938,22 +3988,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1179107959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179107956}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48d93a305d075264a894d92605ebe776, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1412743089}
-  distance_cur: 15
-  height_cur: 5
-  smooth: 0
 --- !u!114 &1179107960
 MonoBehaviour:
   m_ObjectHideFlags: 0

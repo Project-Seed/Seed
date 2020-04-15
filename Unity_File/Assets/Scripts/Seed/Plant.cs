@@ -28,7 +28,7 @@ class Plant : MonoBehaviour
         //식물 모델 위치에 생성
         obj = Instantiate(plant);
         obj.transform.position = pos;
-        obj.transform.up = normal;
+        obj.transform.forward = -normal;
         
     }
 }

@@ -31,11 +31,6 @@ public class PlayerController : MonoBehaviour
     public Transform camera_rig_transform;
     private Transform child;
 
-    IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 1초간 점프금지
-    {
-        is_jumping = false;
-        yield return new WaitForSeconds(0.5f);
-    }
     void Start()
     {
         player_rigidbody = GetComponent<Rigidbody>();
@@ -50,9 +45,9 @@ public class PlayerController : MonoBehaviour
     {
         if (InputManager.instance.click_mod == 0)
         {
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump")&&!is_jumping)
             {
-                is_jumping = true;
+                StartCoroutine(Jumping());
             }
 
             if (Input.GetKey(KeyCode.A))
@@ -138,9 +133,6 @@ public class PlayerController : MonoBehaviour
             else
                 player_state.state_move = 0;
 
-            //점프
-            if (is_jumping && in_ground)
-                StartCoroutine("Jumping");
         }
 
         if (Input.GetKeyDown(KeyCode.I))
@@ -170,17 +162,16 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Jumping()
     {
-        if (is_jumping && in_ground)
-        {
-            StartCoroutine("StopJumping");
+        if (!in_ground) yield return null;
 
-            player_state.jump();
+        is_jumping = true;
+        player_state.jump();
 
-            yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.2f);
 
-            player_rigidbody.AddForce(Vector3.up * player_jump_power, ForceMode.Impulse);   //점프
+        player_rigidbody.AddForce(Vector3.up * player_jump_power, ForceMode.Impulse);   //점프
     
-        }
+        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -188,6 +179,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             in_ground = true;
+            is_jumping = false;
             Debug.Log("in Ground");
         }
     }
