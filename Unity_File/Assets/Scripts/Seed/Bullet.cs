@@ -16,6 +16,7 @@ public class Bullet : MonoBehaviour
             ContactPoint point = collision.GetContact(0);
             Vector3 pos = point.point;
             Vector3 normal = point.normal;
+            Debug.Log("Nomal : " + normal);
             plant.PlantSeed(pos, normal);
 
             transform.gameObject.SetActive(false);
