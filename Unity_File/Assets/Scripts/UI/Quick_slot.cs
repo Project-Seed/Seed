@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Quick_slot : MonoBehaviour
 {
     bool actives = false;
-    string item_name = null;
+    public string item_name = null;
     int num;
 
     public Text num_text;
