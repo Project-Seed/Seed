@@ -100,6 +100,8 @@ public class PlayerController : MonoBehaviour
                         throw_mode = true;
                         lookAt = transform.forward;
                         gameObject.GetComponent<ThrowManager>().mouse_down();
+
+                        player_state.shoot_ready();
                     }
                 }
                 
@@ -113,6 +115,8 @@ public class PlayerController : MonoBehaviour
                     throw_mode = false;
                     GameSystem.instance.item_num[qick.item_names]--;
                     gameObject.GetComponent<ThrowManager>().mouse_up();
+
+                    player_state.shoot();
                 }
                 //GameSystem.instance.SetMode(0);
             }

@@ -10,9 +10,9 @@ public class RadiationBar : MonoBehaviour
 
     void Awake()
     {
-        radiationbar.maxValue = GameSystem.instance.max_radiation;
-        radiationbar.value = GameSystem.instance.radiation;
-        radiationtext.text = GameSystem.instance.radiation.ToString() + "%(" + GameSystem.instance.radiation.ToString() + "/" + GameSystem.instance.max_radiation.ToString() + ")";
+        radiationbar.maxValue = PlayerState.instance.max_radiation;
+        radiationbar.value = PlayerState.instance.radiation;
+        radiationtext.text = PlayerState.instance.radiation.ToString() + "%(" + PlayerState.instance.radiation.ToString() + "/" + PlayerState.instance.max_radiation.ToString() + ")";
         StartCoroutine(Update_Radiation());
     }
 
@@ -20,26 +20,26 @@ public class RadiationBar : MonoBehaviour
     {
         while (true)
         {
-            switch(GameSystem.instance.radiation_level)
+            switch(PlayerState.instance.radiation_level)
             {
                 case 1:
-                    GameSystem.instance.radiation -= 0.01f;
-                    GameSystem.instance.radiation = Mathf.Round(GameSystem.instance.radiation * 100) * 0.01f;
+                    PlayerState.instance.radiation -= 0.01f;
+                    PlayerState.instance.radiation = Mathf.Round(PlayerState.instance.radiation * 100) * 0.01f;
                     break;
 
                 case 2:
-                    GameSystem.instance.radiation -= 0.05f;
-                    GameSystem.instance.radiation = Mathf.Round(GameSystem.instance.radiation * 100) * 0.01f;
+                    PlayerState.instance.radiation -= 0.05f;
+                    PlayerState.instance.radiation = Mathf.Round(PlayerState.instance.radiation * 100) * 0.01f;
                     break;
 
                 case 3:
-                    GameSystem.instance.radiation -= 0.1f;
-                    GameSystem.instance.radiation = Mathf.Round(GameSystem.instance.radiation * 100) * 0.01f;
+                    PlayerState.instance.radiation -= 0.1f;
+                    PlayerState.instance.radiation = Mathf.Round(PlayerState.instance.radiation * 100) * 0.01f;
                     break;
             }
 
-            radiationbar.value = GameSystem.instance.radiation;
-            radiationtext.text = GameSystem.instance.radiation.ToString() + "%(" + GameSystem.instance.radiation.ToString() + "/" + GameSystem.instance.max_radiation.ToString() + ")";
+            radiationbar.value = PlayerState.instance.radiation;
+            radiationtext.text = PlayerState.instance.radiation.ToString() + "%(" + PlayerState.instance.radiation.ToString() + "/" + PlayerState.instance.max_radiation.ToString() + ")";
 
             yield return new WaitForSeconds(1f);
         }

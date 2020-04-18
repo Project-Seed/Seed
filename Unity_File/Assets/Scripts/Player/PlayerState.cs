@@ -5,6 +5,19 @@ using UnityEngine;
 
 public class PlayerState : MonoBehaviour
 {
+    public static PlayerState instance; // 현재 클레스를 인스턴트화
+
+
+    public float radiation; // 현재 피폭 수치
+    public float max_radiation; // 전체 피폭 수치
+    public int radiation_level; // 현재 피폭 레벨
+
+    public float hp; // 현재 HP
+    public float max_hp; // 전체 HP
+
+    bool die_check = false; // 죽으면 true 
+
+
     public Animator animator;
 
     public int state_move = 0; // 0 정지 1 이동
@@ -16,7 +29,17 @@ public class PlayerState : MonoBehaviour
 
     public float idle_time = 0; // 암것도 안하는 시간
 
+    public static PlayerState Instance
+    {
+        get { return instance; }
+    }
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    /*
     [Flags]
     public enum State
     {
@@ -30,7 +53,6 @@ public class PlayerState : MonoBehaviour
         return (int)state;
     }
 
-    /*
     IEnumerator Start()
     {
         while (true)
@@ -43,6 +65,14 @@ public class PlayerState : MonoBehaviour
 
     void Update()
     {
+        if (hp <= 0 && die_check == false)
+        {
+            die_check = true;
+            animator.SetTrigger("die");
+        }
+
+
+
         animator.SetInteger("move", state_move);
         animator.SetInteger("sky", state_sky);
 
@@ -79,7 +109,7 @@ public class PlayerState : MonoBehaviour
         animator.SetBool("run", true);
         state_dash = 1;
 
-        state = State.move_state;
+        //state = State.move_state;
     }
 
     public void dash_off()
@@ -87,7 +117,7 @@ public class PlayerState : MonoBehaviour
         animator.SetBool("run", false);
         state_dash = 0;
 
-        state = State.dash_state;
+        //state = State.dash_state;
     }
 
     public void jump()
@@ -110,5 +140,15 @@ public class PlayerState : MonoBehaviour
     public void flying()
     {
         state_fly = 1;
+    }
+
+    public void shoot_ready()
+    {
+        animator.SetTrigger("shoot_ready");
+    }
+
+    public void shoot()
+    {
+        animator.SetTrigger("shoot");
     }
 }

@@ -4725,11 +4725,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5607164da3e04614c892dc2d4707e417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radiation: 100
-  max_radiation: 100
-  radiation_level: 0
-  hp: 100
-  max_hp: 100
   item_time: []
   time: 660
 --- !u!4 &1739530163
@@ -6594,5 +6589,25 @@ PrefabInstance:
       propertyPath: item_ui
       value: 
       objectReference: {fileID: 2112829198}
+    - target: {fileID: 7914510643502694924, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: radiation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914510643502694924, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: max_radiation
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914510643502694924, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: hp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914510643502694924, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: max_hp
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60283bddc5264024893416fd49fc70aa, type: 3}
