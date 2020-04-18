@@ -201,6 +201,8 @@ public class PlayerController : MonoBehaviour
             in_ground = true;
             is_jumping = false;
             Debug.Log("in Ground");
+
+            player_state.landing();
         }
     }
 
@@ -210,6 +212,8 @@ public class PlayerController : MonoBehaviour
         {
             in_ground = false;
             Debug.Log("not in Ground");
+
+            player_state.flying();
         }
     }
 
