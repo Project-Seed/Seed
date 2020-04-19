@@ -39,21 +39,16 @@ public class ThrowManager : MonoBehaviour
         start_transform = transform.position + new Vector3(0, 1.3f, 0);
     }
 
-    private void Update()
+    public void mouse_down()
     {
-        if (InputManager.instance.click_mod == 0)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                StopCoroutine("ThrowingSeed");
-            }
-            if (Input.GetMouseButtonUp(0))
-            {
-                Throw();
-            }
-
-        }
+        StopCoroutine("ThrowingSeed");
     }
+
+    public void mouse_up()
+    {
+        Throw();
+    }
+
 
     public void OnThrowMode()
     {
