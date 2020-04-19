@@ -8,6 +8,13 @@ public class GameSystem : MonoBehaviour
 {
     public static GameSystem instance; // 현재 클레스를 인스턴트화
 
+    public float radiation; // 현재 피폭 수치
+    public float max_radiation; // 전체 피폭 수치
+    public int radiation_level; // 현재 피폭 레벨
+
+    public float hp; // 현재 HP
+    public float max_hp; // 전체 HP
+
     public List<Dictionary<string, string>> item_list; // 아이템 DB
     public List<Dictionary<string, string>> combination_list; // 조합 테이블
     public List<Dictionary<string, string>> quest_list; // 퀘스트 DB
