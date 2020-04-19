@@ -31,6 +31,15 @@ public class PlayerController : MonoBehaviour
     public Transform camera_rig_transform;
     private Transform child;
 
+
+    public Qick_slot_sum qick;
+
+    IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 1초간 점프금지
+    {
+        is_jumping = false;
+        yield return new WaitForSeconds(0.5f);
+    }
+
     void Start()
     {
         player_rigidbody = GetComponent<Rigidbody>();
@@ -84,15 +93,31 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                throw_mode = true;
-                lookAt = transform.forward;
+                if (qick.item_names != "")
+                {
+                    if (GameSystem.instance.item_num[qick.item_names] >= 1 && InputManager.instance.click_mod == 0)
+                    {
+                        throw_mode = true;
+                        lookAt = transform.forward;
+                        gameObject.GetComponent<ThrowManager>().mouse_down();
+
+                        player_state.shoot_ready();
+                    }
+                }
                 
                 //GameSystem.instance.SetMode(1);
             }
 
             if (Input.GetMouseButtonUp(0))
             {
-                throw_mode = false;
+                if (throw_mode == true)
+                {
+                    throw_mode = false;
+                    GameSystem.instance.item_num[qick.item_names]--;
+                    gameObject.GetComponent<ThrowManager>().mouse_up();
+
+                    player_state.shoot();
+                }
                 //GameSystem.instance.SetMode(0);
             }
 
@@ -110,7 +135,6 @@ public class PlayerController : MonoBehaviour
                 transform.localRotation = Quaternion.Slerp(transform.localRotation, dir, 0.5f);
                 //child.rotation = Quaternion.LookRotation(lookAt);
                 child.rotation = Quaternion.Slerp(child.rotation, Quaternion.LookRotation(lookAt), 0.2f);
-
             }
            
             //문제점. 대각선이동시에는? 방향을 정해주는게 아니라 곱해줘야함. . .
@@ -181,6 +205,8 @@ public class PlayerController : MonoBehaviour
             in_ground = true;
             is_jumping = false;
             Debug.Log("in Ground");
+
+            player_state.landing();
         }
     }
 
@@ -190,6 +216,8 @@ public class PlayerController : MonoBehaviour
         {
             in_ground = false;
             Debug.Log("not in Ground");
+
+            player_state.flying();
         }
     }
 
