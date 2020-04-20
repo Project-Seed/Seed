@@ -19,7 +19,15 @@ public class Spawner : MonoBehaviour
         range_min = -49.0f;
         range_max = 49.0f;
     }
-    
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            Spawn_Item();
+        }
+    }
+
     private void Spawn_Item()
     {
         if (!spawn_item)
