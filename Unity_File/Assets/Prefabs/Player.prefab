@@ -190,6 +190,7 @@ MonoBehaviour:
   composer: {fileID: 0}
   note: {fileID: 0}
   camera_rig_transform: {fileID: 0}
+  qick: {fileID: 0}
 --- !u!114 &7914510643502694924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,9 +203,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20287ae1a668f354cb1ac143d13626b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radiation: 0
+  max_radiation: 0
+  radiation_level: 0
+  hp: 0
+  max_hp: 0
   animator: {fileID: 8607774754497029865}
   state_move: 0
   state_dash: 0
+  state_sky: 0
+  state_fly: 0
+  fly_time: 0
+  idle_time: 0
 --- !u!54 &8780300512582525251
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -236,12 +246,12 @@ PrefabInstance:
     - target: {fileID: 6014198188234533049, guid: 932d2ee7c2cd65b4c950180e20d67c8b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5
+      value: -0.4
       objectReference: {fileID: 0}
     - target: {fileID: 6014198188234533049, guid: 932d2ee7c2cd65b4c950180e20d67c8b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6014198188234533049, guid: 932d2ee7c2cd65b4c950180e20d67c8b,
         type: 3}
@@ -308,11 +318,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: C_Seed_Ani11
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: 54fe708e8e3c4a44f8fced3c3d6a3532,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 5eda54cb42e68d9469f60e75fc73bdfa, type: 2}
     - target: {fileID: -4216859302048453862, guid: 54fe708e8e3c4a44f8fced3c3d6a3532,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -383,6 +388,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 54fe708e8e3c4a44f8fced3c3d6a3532,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 5eda54cb42e68d9469f60e75fc73bdfa, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54fe708e8e3c4a44f8fced3c3d6a3532, type: 3}
 --- !u!4 &1873205289135262611 stripped
