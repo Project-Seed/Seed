@@ -8,7 +8,6 @@ public class ThirdCamera : MonoBehaviour
     public float smooth = 2.0f;
     public Transform camera_rig_transform;  //카메라 리그 위치
     public Transform aim_transform;
-
     private float rotate_speed = 5.0f;
     private Vector3 camera_offset;
 
@@ -114,7 +113,7 @@ public class ThirdCamera : MonoBehaviour
             if (input_mouse_wheel != 0 && !GetPlayerController.throw_mode)
                 camera_offset = 
                     new Vector3(camera_offset.x, camera_offset.y, camera_offset.z + input_mouse_wheel);
-            
+
             Vector3 aim;
             aim = GetPlayerController.throw_mode ? aim_transform.position : targetVec;
 

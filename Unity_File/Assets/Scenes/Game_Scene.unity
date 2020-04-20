@@ -4009,7 +4009,6 @@ MonoBehaviour:
   smooth: 2
   camera_rig_transform: {fileID: 0}
   aim_transform: {fileID: 1394200888}
-  char_Center: {fileID: 1196531378}
   rotate_cam: 1
   look_player: 0
   MouseX: 0
@@ -4109,12 +4108,6 @@ Transform:
   m_Father: {fileID: 197802224}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1196531378 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 142035680181641956, guid: 60283bddc5264024893416fd49fc70aa,
-    type: 3}
-  m_PrefabInstance: {fileID: 8780300512459813963}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1214277631
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6518,6 +6511,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 625120433399060829, guid: 54ebb2db855956a4dba4f3d260dfc752,
+        type: 3}
+      propertyPath: m_Name
+      value: EX_NPC
+      objectReference: {fileID: 0}
     - target: {fileID: 6218061027291084516, guid: 54ebb2db855956a4dba4f3d260dfc752,
         type: 3}
       propertyPath: m_Radius
@@ -6528,11 +6526,6 @@ PrefabInstance:
       propertyPath: dialogue
       value: 
       objectReference: {fileID: 166139792}
-    - target: {fileID: 625120433399060829, guid: 54ebb2db855956a4dba4f3d260dfc752,
-        type: 3}
-      propertyPath: m_Name
-      value: EX_NPC
-      objectReference: {fileID: 0}
     - target: {fileID: 4537242897296141134, guid: 54ebb2db855956a4dba4f3d260dfc752,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7258,6 +7251,11 @@ PrefabInstance:
       propertyPath: qick
       value: 
       objectReference: {fileID: 2066706814}
+    - target: {fileID: 9128881574528203851, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9144438266602420572, guid: 60283bddc5264024893416fd49fc70aa,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
