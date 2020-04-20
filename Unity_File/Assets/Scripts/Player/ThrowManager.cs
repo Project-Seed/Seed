@@ -26,6 +26,8 @@ public class ThrowManager : MonoBehaviour
     Vector3 start_transform;
     private float t;
 
+    public GameObject aim_sp;
+
     private void Start()
     {
         tc = GetComponent<ThirdCamera>();
@@ -42,11 +44,13 @@ public class ThrowManager : MonoBehaviour
     public void mouse_down()
     {
         StopCoroutine("ThrowingSeed");
+        aim_sp.SetActive(true);
     }
 
     public void mouse_up()
     {
         Throw();
+        aim_sp.SetActive(false);
     }
 
 

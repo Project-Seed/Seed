@@ -81,7 +81,7 @@ public class PlayerState : MonoBehaviour
         else
             fly_time = 0;
 
-        if (fly_time >= 1)
+        if (fly_time >= 0.8)
             state_sky = 1;
 
         if (idle_time >= 10)
