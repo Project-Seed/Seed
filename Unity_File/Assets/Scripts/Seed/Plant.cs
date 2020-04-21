@@ -10,9 +10,11 @@ class Plant : MonoBehaviour
     string type;
     public GameObject plant;
 
+    public string seed_name;
+
     private void Start()
     {
-        plant = Resources.Load("Plant", typeof(GameObject)) as GameObject;
+        plant = Resources.Load(seed_name, typeof(GameObject)) as GameObject;
 
     }
 
@@ -29,6 +31,7 @@ class Plant : MonoBehaviour
         obj = Instantiate(plant);
         obj.transform.position = pos;
         obj.transform.forward = normal;
+
         Debug.Log("Planted");
     }
 }
