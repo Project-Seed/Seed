@@ -93,13 +93,13 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                if (qick.item_names != "")
+                if (GameSystem.instance.item_search(qick.item_names, "category") == "seed") // 씨앗 타입이어야지만 던져짐
                 {
                     if (GameSystem.instance.item_num[qick.item_names] >= 1 && InputManager.instance.click_mod == 0)
                     {
                         throw_mode = true;
                         lookAt = transform.forward;
-                        gameObject.GetComponent<ThrowManager>().mouse_down();
+                        gameObject.GetComponent<ThrowManager>().mouse_down(qick.item_names);
 
                         player_state.shoot_ready();
                     }

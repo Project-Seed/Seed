@@ -84,7 +84,8 @@ public class Inventory : MonoBehaviour
             item_explanation.text = GameSystem.instance.item_search(item_choose, "explanation_ko");
             item_names.text = GameSystem.instance.item_search(item_choose, "name_ko");
 
-            if (GameSystem.instance.item_search(item_choose, "category") == "consumable")
+            if (GameSystem.instance.item_search(item_choose, "category") == "consumable" || 
+                GameSystem.instance.item_search(item_choose, "category") == "seed")
                 quick_button.SetActive(true);
             else
                 quick_button.SetActive(false);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class blue_seed : MonoBehaviour
+public class seed_grow : MonoBehaviour
 {
     float num = 0.5f;
 

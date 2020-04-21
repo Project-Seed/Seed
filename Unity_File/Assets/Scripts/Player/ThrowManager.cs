@@ -28,6 +28,8 @@ public class ThrowManager : MonoBehaviour
 
     public GameObject aim_sp;
 
+    string seed_name;
+
     private void Start()
     {
         tc = GetComponent<ThirdCamera>();
@@ -41,8 +43,10 @@ public class ThrowManager : MonoBehaviour
         start_transform = transform.position + new Vector3(0, 1.3f, 0);
     }
 
-    public void mouse_down()
+    public void mouse_down(string name)
     {
+        seed_name = name;
+
         StopCoroutine("ThrowingSeed");
         aim_sp.SetActive(true);
     }
@@ -97,6 +101,9 @@ public class ThrowManager : MonoBehaviour
 
         //힘 계속 주기.
         //bullet_rig.AddForce(aim.forward, ForceMode.Impulse);
+
+        //씨앗 이름 넘겨주기
+        tmp.GetComponent<Plant>().seed_name = seed_name;
 
         //궤도를 따라 움직이는 코루틴 시작
         StartCoroutine(ThrowingSeed(bullet_rig));
