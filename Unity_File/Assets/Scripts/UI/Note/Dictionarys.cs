@@ -42,7 +42,9 @@ public class Dictionarys : MonoBehaviour
         {
             // 도감에 아이템 이름 등록
             dictionary_time.Add(GameSystem.instance.item_list[i]["name"]);
-            dictionary_num.Add(GameSystem.instance.item_list[i]["name"], false); 
+            dictionary_num.Add(GameSystem.instance.item_list[i]["name"], false);
+
+            Debug.Log(GameSystem.instance.item_list[i]["name"]);
         }
 
 
