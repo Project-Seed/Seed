@@ -112,10 +112,15 @@ public class ThrowManager : MonoBehaviour
 
     IEnumerator ThrowingSeed(Rigidbody bullet_rig)
     {
-        bullet_rig.AddForce(aim.forward, ForceMode.Impulse);
+        if (tmp.activeSelf == true)
+        {
+            bullet_rig.AddForce(aim.forward, ForceMode.Impulse);
 
-        yield return new WaitForSeconds(0.05f);
-        StartCoroutine(ThrowingSeed(bullet_rig));
+            yield return new WaitForSeconds(0.05f);
+            StartCoroutine(ThrowingSeed(bullet_rig));
+        }
+        else
+            Destroy(tmp);
 
         //if (!tmp) yield break;
         //t += 0.05f;
@@ -123,21 +128,21 @@ public class ThrowManager : MonoBehaviour
         //float y = throw_speed * Mathf.Sin(throw_angle) * t - (0.5f * gravity * Mathf.Pow(t, 2));
         //tmp.transform.position = new Vector3(start_transform.x, start_transform.y + y, start_transform.z + z);
 
-        ////아래 조건 착지했을 때(지면 or 오브젝트와 충돌했을 때)로 바꿀 예정
-        //if (y <= 0)
-        //{
-        //    t = 0;
-        //    DestroyImmediate(tmp);
-        //    PlantSeed(tmp.transform.position);
-        //    throw_done = true;
-        //    yield break;
-        //}
-        //else
-        //{
-        //    throw_done = false;
-        //    yield return new WaitForSeconds(0.05f);
-        //    StartCoroutine(ThrowingSeed());
-        //}
+            ////아래 조건 착지했을 때(지면 or 오브젝트와 충돌했을 때)로 바꿀 예정
+            //if (y <= 0)
+            //{
+            //    t = 0;
+            //    DestroyImmediate(tmp);
+            //    PlantSeed(tmp.transform.position);
+            //    throw_done = true;
+            //    yield break;
+            //}
+            //else
+            //{
+            //    throw_done = false;
+            //    yield return new WaitForSeconds(0.05f);
+            //    StartCoroutine(ThrowingSeed());
+            //}
     }
 
     void PlantSeed(Vector3 pos)
