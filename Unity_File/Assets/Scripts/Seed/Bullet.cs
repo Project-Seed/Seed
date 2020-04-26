@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (plant.seed_name == "blue_seed" || plant.seed_name == "brown_seed")
+        if (plant.seed_name == "blue_seed" || plant.seed_name == "brown_seed" || plant.seed_name == "red_seed")
         {
             if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
             {
