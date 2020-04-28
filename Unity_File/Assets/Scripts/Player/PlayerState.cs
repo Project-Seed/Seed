@@ -26,6 +26,7 @@ public class PlayerState : MonoBehaviour
 
     public int state_fly = 0; // 0 안공중 1 공중
     public float fly_time = 0; // 공중시간
+    public bool dont_fly = false; // 메달리는 동안 날지않는 판정
 
     public float idle_time = 0; // 암것도 안하는 시간
 
@@ -76,7 +77,7 @@ public class PlayerState : MonoBehaviour
         animator.SetInteger("move", state_move);
         animator.SetInteger("sky", state_sky);
 
-        if (state_fly == 1)
+        if (state_fly == 1 && dont_fly == false)
             fly_time += Time.deltaTime;
         else
             fly_time = 0;
@@ -150,5 +151,25 @@ public class PlayerState : MonoBehaviour
     public void shoot()
     {
         animator.SetTrigger("shoot");
+    }
+
+    public void space_on()
+    {
+        animator.SetBool("space", true);
+    }
+    public void space_off()
+    {
+        animator.SetBool("space", false);
+    }
+
+    public void climb_on()
+    {
+        animator.SetTrigger("climb_on");
+        dont_fly = true;
+    }
+    public void climb_off()
+    {
+        animator.SetTrigger("climb_off");
+        dont_fly = false;
     }
 }

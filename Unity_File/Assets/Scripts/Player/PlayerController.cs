@@ -56,9 +56,16 @@ public class PlayerController : MonoBehaviour
     {
         if (InputManager.instance.click_mod == 0)
         {
-            if (Input.GetButtonDown("Jump")&&!is_jumping)
+            if (Input.GetButtonDown("Jump"))
             {
-                StartCoroutine(Jumping());
+                player_state.space_on();
+
+                if (!is_jumping)
+                    StartCoroutine(Jumping());
+            }
+            if(Input.GetButtonUp("Jump"))
+            {
+                player_state.space_off();
             }
 
             if (Input.GetKey(KeyCode.A))
@@ -182,6 +189,17 @@ public class PlayerController : MonoBehaviour
             else
                 note.SetActive(true);
         }
+
+
+        if(player_state.dont_fly == true)
+        {
+            gameObject.GetComponent<Rigidbody>().useGravity = false;
+        }
+        else
+        {
+            gameObject.GetComponent<Rigidbody>().useGravity = true;
+        }
+
     }
 
     IEnumerator Jumping()
@@ -208,6 +226,10 @@ public class PlayerController : MonoBehaviour
 
             player_state.landing();
         }
+        else if(collision.gameObject.name == "brown_seed(Clone)")
+        {
+            player_state.climb_on();
+        }
     }
 
     private void OnCollisionExit(Collision collision)
@@ -218,6 +240,10 @@ public class PlayerController : MonoBehaviour
             Debug.Log("not in Ground");
 
             player_state.flying();
+        }
+        else if (collision.gameObject.name == "brown_seed(Clone)")
+        {
+            player_state.climb_off();
         }
     }
 
