@@ -34,7 +34,7 @@
 
 			void vert(inout appdata_full v) {
 				float m = tex2Dlod(_MaskTex, float4(v.texcoord.x + _Grow, v.texcoord.y , 0, 0)).r;
-				float disp = tex2Dlod(_Displacement, float4(v.texcoord.x * _TileOff.x + _TileOff.z, v.texcoord.y * _TileOff.y + _TileOff.w + _Grow, 0, 0)).r * _Dis; //
+				float disp = tex2Dlod(_Displacement, float4(v.texcoord.x * _TileOff.x + _TileOff.z + _Grow, v.texcoord.y * _TileOff.y + _TileOff.w , 0, 0)).r * _Dis; //
 				v.vertex.xyz += v.normal * _Thickness * (1 - m) + (disp * v.normal);
 			}
 
