@@ -299,7 +299,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: space
+    m_ConditionEvent: climb_move
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5927122614834140364}
@@ -530,7 +530,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: space
+  - m_Name: climb_move
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -758,7 +758,7 @@ AnimatorStateMachine:
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 320, y: 180, z: 0}
   m_EntryPosition: {x: 20, y: -120, z: 0}
-  m_ExitPosition: {x: 20, y: 280, z: 0}
+  m_ExitPosition: {x: 620, y: -120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -3293062132196307106}
 --- !u!1101 &2725806661403823928
@@ -845,7 +845,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: space
+    m_ConditionEvent: climb_move
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5657381797779520017}

@@ -153,15 +153,6 @@ public class PlayerState : MonoBehaviour
         animator.SetTrigger("shoot");
     }
 
-    public void space_on()
-    {
-        animator.SetBool("space", true);
-    }
-    public void space_off()
-    {
-        animator.SetBool("space", false);
-    }
-
     public void climb_on()
     {
         animator.SetTrigger("climb_on");
