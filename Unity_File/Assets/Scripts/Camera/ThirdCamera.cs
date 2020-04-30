@@ -115,10 +115,21 @@ public class ThirdCamera : MonoBehaviour
                     new Vector3(camera_offset.x, camera_offset.y, camera_offset.z + input_mouse_wheel);
 
             Vector3 aim;
-            aim = GetPlayerController.throw_mode ? aim_transform.position : targetVec;
+            Vector3 newPos;
 
-            Vector3 newPos = targetVec + camera_offset;
-            camera_rig_transform.localPosition = Vector3.Slerp(targetVec, newPos, smooth);
+            if (GetPlayerController.throw_mode)
+            {
+                aim = aim_transform.position;
+                newPos = aim + camera_offset / 2;
+                smooth = 0.1f;
+
+            }
+            else
+            {
+                aim = targetVec;
+                newPos = targetVec + camera_offset;
+            }
+            camera_rig_transform.localPosition = Vector3.Slerp(camera_rig_transform.localPosition, newPos, smooth);
             camera_rig_transform.LookAt(aim);
             
             //커서 숨기기. **인풋매니저에 넣을것**
