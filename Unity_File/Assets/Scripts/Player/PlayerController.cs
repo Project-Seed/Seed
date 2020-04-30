@@ -35,6 +35,10 @@ public class PlayerController : MonoBehaviour
 
     public Qick_slot_sum qick;
 
+    public bool climb_crash = false; // 갈색 충돌시 true
+    public bool climb_mod = false; // 갈색 충돌시 키 누르면 true
+    public Vector3 climb_po; // 충돌후 갈색 위치, 오르기 제한 범위때매
+
     IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 1초간 점프금지
     {
         is_jumping = false;
@@ -57,16 +61,25 @@ public class PlayerController : MonoBehaviour
     {
         if (InputManager.instance.click_mod == 0)
         {
+
             if (Input.GetButtonDown("Jump"))
             {
-                player_state.space_on();
-
                 if (!is_jumping)
                     StartCoroutine(Jumping());
             }
-            if(Input.GetButtonUp("Jump"))
+
+            if(Input.GetKeyDown(KeyCode.R))
             {
-                player_state.space_off();
+                if(climb_mod == true)
+                {
+                    climb_mod = false;
+                    player_state.climb_off();
+                }
+                else if(climb_crash == true && climb_mod == false)
+                {
+                    climb_mod = true;
+                    player_state.climb_on();
+                }
             }
 
             if (Input.GetKey(KeyCode.A))
@@ -88,6 +101,24 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.S))
             {
                 lookAt = -transform.forward;
+            }
+
+            if (climb_mod == true)
+            {
+                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D))
+                    player_state.animator.SetBool("climb_move", true);
+                else
+                    player_state.animator.SetBool("climb_move", false);
+
+
+                if (Input.GetKey(KeyCode.A) && climb_po.z + 1 > gameObject.transform.position.z)
+                    gameObject.transform.Translate(0,0, Time.deltaTime);
+                if (Input.GetKey(KeyCode.S) && climb_po.y - 0.5f < gameObject.transform.position.y)
+                    gameObject.transform.Translate(0, -Time.deltaTime, 0);
+                if (Input.GetKey(KeyCode.D) && climb_po.z - 1 < gameObject.transform.position.z)
+                    gameObject.transform.Translate(0, 0, -Time.deltaTime);
+                if (Input.GetKey(KeyCode.W) && climb_po.y + 3.2f > gameObject.transform.position.y)
+                    gameObject.transform.Translate(0, Time.deltaTime, 0);
             }
 
             if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -165,18 +196,19 @@ public class PlayerController : MonoBehaviour
 
                 dir.x = 0f; dir.z = 0f;
 
-                transform.localRotation = Quaternion.Slerp(transform.localRotation, dir, 0.5f);
+                if (climb_mod == false)
+                    transform.localRotation = Quaternion.Slerp(transform.localRotation, dir, 0.5f);
                 //child.rotation = Quaternion.LookRotation(lookAt);
 
-                if (!throw_mode)
+                if (!throw_mode && climb_mod == false)
                     child.rotation = Quaternion.Slerp(child.rotation, Quaternion.LookRotation(lookAt), 0.2f);
             }
            
             //문제점. 대각선이동시에는? 방향을 정해주는게 아니라(look at=) 곱해줘야함. . .
-
-            player_transform.Translate(movement * (is_run? player_run_speed : player_speed) * Time.deltaTime, Space.Self);
+            if(climb_mod == false)
+                player_transform.Translate(movement * (is_run? player_run_speed : player_speed) * Time.deltaTime, Space.Self);
             
-            if ((Mathf.Abs(movement.z) + Mathf.Abs(movement.x)) >= 1)
+            if ((Mathf.Abs(movement.z) + Mathf.Abs(movement.x)) >= 1 && climb_mod == false)
                 player_state.state_move = 1;
             else
                 player_state.state_move = 0;
@@ -208,13 +240,15 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if(player_state.dont_fly == true)
+        if(climb_mod == true)
         {
             gameObject.GetComponent<Rigidbody>().useGravity = false;
+            gameObject.GetComponent<Rigidbody>().isKinematic = true;
         }
         else
         {
             gameObject.GetComponent<Rigidbody>().useGravity = true;
+            gameObject.GetComponent<Rigidbody>().isKinematic = false;
         }
 
     }
@@ -244,8 +278,10 @@ public class PlayerController : MonoBehaviour
             player_state.landing();
         }
         else if(collision.gameObject.name == "brown_seed(Clone)")
-        {
-            player_state.climb_on();
+        { 
+            climb_po = collision.transform.position;
+            climb_crash = true;
+            transform.rotation = collision.transform.rotation;
         }
     }
 
@@ -260,7 +296,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (collision.gameObject.name == "brown_seed(Clone)")
         {
-            player_state.climb_off();
+            climb_crash = false;
         }
     }
 
