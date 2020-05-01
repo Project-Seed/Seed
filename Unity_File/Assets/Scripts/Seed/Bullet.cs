@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (plant.seed_name == "blue_seed" || plant.seed_name == "brown_seed" || plant.seed_name == "red_seed")
+        if (plant.seed_name == "blue_seed" || plant.seed_name == "brown_seed")
         {
             if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
             {
@@ -19,7 +19,21 @@ public class Bullet : MonoBehaviour
                 Vector3 pos = point.point;
                 Vector3 normal = point.normal;
                 Debug.Log("Nomal : " + normal);
-                plant.PlantSeed(pos, normal);
+                plant.PlantSeed(pos, normal, false);
+
+                gameObject.SetActive(false);
+            }
+        }
+        else if (plant.seed_name == "red_seed")
+        {
+            if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
+            {
+                Debug.Log("Plant");
+                ContactPoint point = collision.GetContact(0);
+                Vector3 pos = point.point;
+                Vector3 normal = point.normal;
+                Debug.Log("Nomal : " + normal);
+                plant.PlantSeed(pos, normal, true);
 
                 gameObject.SetActive(false);
             }
@@ -42,7 +56,7 @@ public class Bullet : MonoBehaviour
                 Vector3 pos = point.point;
                 Vector3 normal = point.normal;
                 Debug.Log("Nomal : " + normal);
-                plant.PlantSeed(pos, normal);
+                plant.PlantSeed(pos, normal, false);
 
                 gameObject.SetActive(false);
             }

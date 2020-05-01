@@ -125,6 +125,8 @@ public class ThrowManager : MonoBehaviour
         Vector3 aimForward = aim.forward; //발사하는 시점의 aim 받아놓음
         Debug.Log("Throw Aim : " + aimForward);
 
+        tmp.GetComponent<Plant>().red_go = aimForward;
+
         //궤도를 따라 움직이는 코루틴 시작
         StartCoroutine(ThrowingSeed(bullet_rig, aimForward));
     }

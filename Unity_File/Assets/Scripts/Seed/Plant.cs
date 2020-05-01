@@ -11,6 +11,7 @@ class Plant : MonoBehaviour
     public GameObject plant;
 
     public string seed_name;
+    public Vector3 red_go;
 
     private void Start()
     {
@@ -18,7 +19,7 @@ class Plant : MonoBehaviour
 
     }
 
-    public void PlantSeed(Vector3 pos, Vector3 normal)
+    public void PlantSeed(Vector3 pos, Vector3 normal, bool red)
     {
         if (!plant)
         {
@@ -31,6 +32,14 @@ class Plant : MonoBehaviour
         obj = Instantiate(plant);
         obj.transform.position = pos;
         obj.transform.forward = normal;
+
+        //if(red == true)
+
+        Debug.Log(obj.transform.rotation);
+
+        obj.transform.rotation = Quaternion.LookRotation(red_go);
+        obj.transform.rotation = Quaternion.Euler(new Vector3(0, obj.transform.rotation.eulerAngles.y, 0));
+
 
         Debug.Log("Planted");
     }
