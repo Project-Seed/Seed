@@ -149,7 +149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8780300512582525257}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.8, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2462732462754108426}
@@ -463,17 +463,7 @@ PrefabInstance:
     - target: {fileID: -6057140222963153312, guid: 54fe708e8e3c4a44f8fced3c3d6a3532,
         type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed by
-        Humanoid clips.\n\tTransform 'Bip001 R Foot'\n\tTransform 'Bip001 Spine1'\n\tTransform
-        'Bip001 L Finger31'\n\tTransform 'Bip001 R Finger31'\n\tTransform 'Bip001
-        L Finger32'\n\tTransform 'Bip001 R Finger32'\n\tTransform 'Bip001 R Thigh'\n\tTransform
-        'Bip001 L Thigh'\n\tTransform 'Bip001 R Finger12'\n\tTransform 'Bip001 R Clavicle'\n\tand
-        more ...\n\tFrom animation clip 'Walk'\n\tFrom animation clip 'run'\n\tFrom
-        animation clip 'jump'\n\tFrom animation clip 'Fall_Start'\n\tFrom animation
-        clip 'Fall_End'\n\tFrom animation clip 'Idle2'\n\tFrom animation clip 'Die'\n\tFrom
-        animation clip 'Shoot_Start'\n\tFrom animation clip 'Shoot_End'\n\tFrom animation
-        clip 'Climb'\n\tand more ..."
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: -6057140222963153312, guid: 54fe708e8e3c4a44f8fced3c3d6a3532,
         type: 3}
