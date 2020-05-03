@@ -33,13 +33,11 @@ class Plant : MonoBehaviour
         obj.transform.position = pos;
         obj.transform.forward = normal;
 
-        //if(red == true)
-
-        Debug.Log(obj.transform.rotation);
-
-        obj.transform.rotation = Quaternion.LookRotation(red_go);
-        obj.transform.rotation = Quaternion.Euler(new Vector3(0, obj.transform.rotation.eulerAngles.y, 0));
-
+        if(red == true)
+        {
+            obj.transform.rotation = Quaternion.LookRotation(red_go);
+            obj.transform.rotation = Quaternion.Euler(new Vector3(0, obj.transform.rotation.eulerAngles.y, 0));
+        }
 
         Debug.Log("Planted");
     }

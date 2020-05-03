@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     public bool climb_crash = false; // 갈색 충돌시 true
     public bool climb_mod = false; // 갈색 충돌시 키 누르면 true
     public Vector3 climb_po; // 충돌후 갈색 위치, 오르기 제한 범위때매
+    public Quaternion climb_ro; // 충돌후 갈색 각도, r 누를때 정면 바라보기 위해
 
     IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 1초간 점프금지
     {
@@ -79,6 +80,9 @@ public class PlayerController : MonoBehaviour
                 {
                     climb_mod = true;
                     player_state.climb_on();
+
+                    transform.rotation = climb_ro;
+                    transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.eulerAngles.y - 180, transform.rotation.z));
                 }
             }
 
@@ -111,14 +115,18 @@ public class PlayerController : MonoBehaviour
                     player_state.animator.SetBool("climb_move", false);
 
 
-                if (Input.GetKey(KeyCode.A) && climb_po.z + 1 > gameObject.transform.position.z)
-                    gameObject.transform.Translate(0,0, Time.deltaTime);
-                if (Input.GetKey(KeyCode.S) && climb_po.y - 0.5f < gameObject.transform.position.y)
-                    gameObject.transform.Translate(0, -Time.deltaTime, 0);
-                if (Input.GetKey(KeyCode.D) && climb_po.z - 1 < gameObject.transform.position.z)
-                    gameObject.transform.Translate(0, 0, -Time.deltaTime);
                 if (Input.GetKey(KeyCode.W) && climb_po.y + 3.2f > gameObject.transform.position.y)
                     gameObject.transform.Translate(0, Time.deltaTime, 0);
+                if (Input.GetKey(KeyCode.S) && climb_po.y - 0.5f < gameObject.transform.position.y)
+                    gameObject.transform.Translate(0, -Time.deltaTime, 0);
+
+                
+                // 아래 고쳐야됨....
+                if (Input.GetKey(KeyCode.D) && climb_po.z - 1 < gameObject.transform.position.z)
+                    gameObject.transform.Translate(Time.deltaTime, 0, 0);
+                if (Input.GetKey(KeyCode.A) && climb_po.z + 1 > gameObject.transform.position.z)
+                    gameObject.transform.Translate(-Time.deltaTime, 0, 0);
+
             }
 
             if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -278,10 +286,10 @@ public class PlayerController : MonoBehaviour
             player_state.landing();
         }
         else if(collision.gameObject.name == "brown_seed(Clone)")
-        { 
+        {
+            climb_ro = collision.transform.rotation;
             climb_po = collision.transform.position;
             climb_crash = true;
-            transform.rotation = collision.transform.rotation;
         }
     }
 
