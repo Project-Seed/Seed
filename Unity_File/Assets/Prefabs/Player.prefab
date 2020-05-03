@@ -86,10 +86,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8169033210772629528}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.49999994, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
-  m_Father: {fileID: 1873205289135262611}
+  m_Father: {fileID: 2462732462754108426}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &834327554967467739
@@ -152,7 +152,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1873205289135262611}
+  - {fileID: 2462732462754108426}
   - {fileID: 9128881574528203851}
   - {fileID: 2497936160865316228}
   - {fileID: 6819079227759074252}
@@ -257,8 +257,6 @@ MonoBehaviour:
   climb_mod: 0
   climb_po: {x: 0, y: 0, z: 0}
   climb_ro: {x: 0, y: 0, z: 0, w: 0}
-  character_ob: {fileID: 1435207922647793978}
-  climb_ob: {fileID: 6570227968528701798}
 --- !u!114 &7914510643502694924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,7 +274,7 @@ MonoBehaviour:
   radiation_level: 0
   hp: 0
   max_hp: 0
-  animator: {fileID: 8607774754497029865}
+  animator: {fileID: 5523491090702580080}
   state_move: 0
   state_dash: 0
   state_sky: 0
@@ -375,7 +373,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3298592126330787058}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &6666526498885984393
+--- !u!1001 &7446656830644797200
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -464,20 +462,55 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 5eda54cb42e68d9469f60e75fc73bdfa, type: 2}
     - target: {fileID: -6057140222963153312, guid: 54fe708e8e3c4a44f8fced3c3d6a3532,
         type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed by
+        Humanoid clips.\n\tTransform 'Bip001 R Foot'\n\tTransform 'Bip001 Spine1'\n\tTransform
+        'Bip001 L Finger31'\n\tTransform 'Bip001 R Finger31'\n\tTransform 'Bip001
+        L Finger32'\n\tTransform 'Bip001 R Finger32'\n\tTransform 'Bip001 R Thigh'\n\tTransform
+        'Bip001 L Thigh'\n\tTransform 'Bip001 R Finger12'\n\tTransform 'Bip001 R Clavicle'\n\tand
+        more ...\n\tFrom animation clip 'Walk'\n\tFrom animation clip 'run'\n\tFrom
+        animation clip 'jump'\n\tFrom animation clip 'Fall_Start'\n\tFrom animation
+        clip 'Fall_End'\n\tFrom animation clip 'Idle2'\n\tFrom animation clip 'Die'\n\tFrom
+        animation clip 'Shoot_Start'\n\tFrom animation clip 'Shoot_End'\n\tFrom animation
+        clip 'Climb'\n\tand more ..."
+      objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 54fe708e8e3c4a44f8fced3c3d6a3532,
+        type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7557467864537136230, guid: 54fe708e8e3c4a44f8fced3c3d6a3532,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.025199244
+      objectReference: {fileID: 0}
+    - target: {fileID: 7557467864537136230, guid: 54fe708e8e3c4a44f8fced3c3d6a3532,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.04337567
+      objectReference: {fileID: 0}
+    - target: {fileID: -6967051814902541670, guid: 54fe708e8e3c4a44f8fced3c3d6a3532,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.11328584
+      objectReference: {fileID: 0}
+    - target: {fileID: -6967051814902541670, guid: 54fe708e8e3c4a44f8fced3c3d6a3532,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.04637656
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54fe708e8e3c4a44f8fced3c3d6a3532, type: 3}
---- !u!4 &1873205289135262611 stripped
+--- !u!4 &2462732462754108426 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 54fe708e8e3c4a44f8fced3c3d6a3532,
     type: 3}
-  m_PrefabInstance: {fileID: 6666526498885984393}
+  m_PrefabInstance: {fileID: 7446656830644797200}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &8607774754497029865 stripped
+--- !u!95 &5523491090702580080 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: 54fe708e8e3c4a44f8fced3c3d6a3532,
     type: 3}
-  m_PrefabInstance: {fileID: 6666526498885984393}
+  m_PrefabInstance: {fileID: 7446656830644797200}
   m_PrefabAsset: {fileID: 0}
