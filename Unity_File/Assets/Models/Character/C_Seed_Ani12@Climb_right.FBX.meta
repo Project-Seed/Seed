@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: dec8e8adc3c30854295cc711951c76c6
+guid: a011685a42a4d094dae98132e93379cd
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
   - first:
-      74: -5899650854701679063
-    second: Climb
+      74: -5652662986887811125
+    second: Climb_right
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -19,10 +19,7 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
-      copied configuration does not match position in animation file:\n\t'Bip001 L
-      Thigh' : position error = 26.499664 mm\n\t'Bip001 R Thigh' : position error
-      = 25.056721 mm\n"
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -38,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Climb
-      takeName: Climb
+      name: Climb_right
+      takeName: Climb_right
       internalID: 0
-      firstFrame: 186
-      lastFrame: 220
+      firstFrame: 112
+      lastFrame: 175
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

@@ -116,11 +116,18 @@ public class PlayerController : MonoBehaviour
 
 
                 if (Input.GetKey(KeyCode.W) && climb_po.y + 3.2f > gameObject.transform.position.y)
+                {
                     gameObject.transform.Translate(0, Time.deltaTime, 0);
-                if (Input.GetKey(KeyCode.S) && climb_po.y - 0.5f < gameObject.transform.position.y)
+                    player_state.climb_updown_on();
+                }
+                else if (Input.GetKey(KeyCode.S) && climb_po.y - 0.5f < gameObject.transform.position.y)
+                {
                     gameObject.transform.Translate(0, -Time.deltaTime, 0);
+                    player_state.climb_updown_on();
+                }
+                else
+                    player_state.climb_updown_off();
 
-                
                 // 아래 고쳐야됨....
                 if (Input.GetKey(KeyCode.D) && climb_po.z - 1 < gameObject.transform.position.z)
                     gameObject.transform.Translate(Time.deltaTime, 0, 0);
