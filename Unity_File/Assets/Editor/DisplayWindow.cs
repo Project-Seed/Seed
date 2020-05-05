@@ -11,30 +11,38 @@ class DisplayWindow : EditorWindow
     }
 
     Transform mousePos;
-            GameObject obj;
+    GameObject obj;
+    GameObject origin;
+    float density = 10.0f;
+
     private void OnGUI()
     {
-        GUILayout.BeginHorizontal();
-        {
             //배치할 오브젝트 선택
-            obj = (GameObject)EditorGUILayout.ObjectField("Select Object", obj, typeof(GameObject), true);
+        origin = (GameObject)EditorGUILayout.ObjectField("Select Origin", origin, typeof(GameObject), true);
+        obj = (GameObject)EditorGUILayout.ObjectField("Select Object", obj, typeof(GameObject), true);
+        density = GUILayout.HorizontalSlider(density, 1f, 100f);
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                mousePos.position = Input.mousePosition;
-                if (obj != null)
-                    Instantiate(obj, mousePos);
-                else
-                    System.Console.WriteLine("OBJ NULL");
-            }
-
-            if (GUILayout.Button("Clear"))
-            {
-                obj = null;
-            }
+        if (obj != null)
+        {
+            if (GUILayout.Button("Create!"))
+                Create(origin,obj, density);
         }
-        GUILayout.EndHorizontal();
+        else
+            System.Console.WriteLine("OBJ NULL");
+        
+        if (GUILayout.Button("Clear"))
+        {
+            obj = null;
+        }
+    }
+
+    void Create(GameObject origin, GameObject obj, float density)
+    {
+        for (int i = 0; i < density; ++i)
+            Instantiate(obj, origin.transform.position, Quaternion.Euler(0, 0, 0), origin.transform);
+        Debug.Log("Create done");
 
     }
+
 }
 
