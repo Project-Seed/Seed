@@ -118,22 +118,17 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetKey(KeyCode.W) && climb_po.y + 3.2f > gameObject.transform.position.y)
                 {
                     gameObject.transform.Translate(0, Time.deltaTime, 0);
-                    player_state.climb_updown_on();
                 }
                 else if (Input.GetKey(KeyCode.S) && climb_po.y - 0.5f < gameObject.transform.position.y)
                 {
                     gameObject.transform.Translate(0, -Time.deltaTime, 0);
-                    player_state.climb_updown_on();
                 }
-                else
-                    player_state.climb_updown_off();
 
                 // 아래 고쳐야됨....
                 if (Input.GetKey(KeyCode.D) && climb_po.z - 1 < gameObject.transform.position.z)
                     gameObject.transform.Translate(Time.deltaTime, 0, 0);
                 if (Input.GetKey(KeyCode.A) && climb_po.z + 1 > gameObject.transform.position.z)
                     gameObject.transform.Translate(-Time.deltaTime, 0, 0);
-
             }
 
             if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -196,8 +191,28 @@ public class PlayerController : MonoBehaviour
             }
 
             input_horizontal = Input.GetAxis("Horizontal");
+            if (input_horizontal < 0)
+            {
+                player_state.left_check = true;
+                player_state.left_check = false;
+            }
+            else if (input_horizontal > 0)
+            {
+                player_state.left_check = false;
+                player_state.right_check = true;
+            }
+            else
+            {
+                player_state.left_check = false;
+                player_state.left_check = false;
+            }
+
             input_vertical = Input.GetAxis("Vertical");
-            
+            if (input_vertical != 0)
+                player_state.updown_check = true;
+            else
+                player_state.updown_check = false;
+
             Vector3 movement = new Vector3(input_horizontal, 0, input_vertical);
             movement = movement.normalized;
 

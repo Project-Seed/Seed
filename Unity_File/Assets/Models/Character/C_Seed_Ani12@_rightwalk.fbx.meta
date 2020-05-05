@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: a8285ac4266de834ba256570e40a8e75
+guid: 51e908feef5c36047b65e00fee77b8cb
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
   - first:
-      74: 4787742288682755051
-    second: PickUp
+      74: 1907219875429958526
+    second: _rightwalk
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -19,7 +19,10 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: 
+    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
+      copied configuration does not match position in animation file:\n\t'Bip001 L
+      Thigh' : position error = 10.590822 mm\n\t'Bip001 R Thigh' : position error
+      = 7.108442 mm\n"
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -33,7 +36,36 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: _rightwalk
+      takeName: SideStep_Ritght
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 50
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -70,7 +102,23 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips: []
+  referencedClips:
+  - dec8e8adc3c30854295cc711951c76c6
+  - 46f015711114a8d46aa19de7007f48b6
+  - 81fdddc5707b41f4d987ac8b682cd71b
+  - a011685a42a4d094dae98132e93379cd
+  - 24f3cbfdc3fdc8c41b5e74ba82c5de74
+  - b05f17c66d61c9e4aadcadb9517c0160
+  - eae284e4d107a7849957fded4ad2d0b2
+  - 6c812073115a3074a9dc94e645b1b0ea
+  - 4668ecda90773f8429ff4bef27ce2d03
+  - f644ed961a1eee94e85b2bf720664518
+  - a8285ac4266de834ba256570e40a8e75
+  - 051a261d3c28d8545a6eaae19e1ae3c3
+  - 48850125e70863d41986eea9c5d4e81e
+  - 251f6b0325200ac4f92c3ffee85e567c
+  - ef3c27fa35375e842aed50bdb4763942
+  - fb998eb72dec1104ca2f09ce1437aa8b
   importAnimation: 1
   copyAvatar: 1
   humanDescription:
