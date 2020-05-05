@@ -30,7 +30,9 @@ public class PlayerState : MonoBehaviour
 
     public float idle_time = 0; // 암것도 안하는 시간
 
-    bool climb_updown_check = false;
+    public bool updown_check = false;
+    public bool left_check = false;
+    public bool right_check = false;
 
     public static PlayerState Instance
     {
@@ -106,8 +108,16 @@ public class PlayerState : MonoBehaviour
 
         float climb_blend = 0;
 
-        if (climb_updown_check)
-            climb_blend += 0.5f;
+        if (updown_check && !left_check && !right_check)
+            climb_blend = 0.5f;
+        else if (updown_check && left_check && !right_check)
+            climb_blend = 0.25f;
+        else if (updown_check && !left_check && right_check)
+            climb_blend = 0.75f;
+        else if (!updown_check && left_check && !right_check)
+            climb_blend = 0f;
+        else if (!updown_check && !left_check && right_check)
+            climb_blend = 1f;
 
         animator.SetFloat("climb_Blend", climb_blend);
     }
@@ -169,14 +179,5 @@ public class PlayerState : MonoBehaviour
     {
         animator.SetTrigger("climb_off");
         dont_fly = false;
-    }
-
-    public void climb_updown_on()
-    {
-        climb_updown_check = true;
-    }
-    public void climb_updown_off()
-    {
-        climb_updown_check = false;
     }
 }
