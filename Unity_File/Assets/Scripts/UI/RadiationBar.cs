@@ -8,7 +8,7 @@ public class RadiationBar : MonoBehaviour
     public Slider radiationbar;
     public Text radiationtext;
 
-    void Awake()
+    void Start()
     {
         radiationbar.maxValue = PlayerState.instance.max_radiation;
         radiationbar.value = PlayerState.instance.radiation;
