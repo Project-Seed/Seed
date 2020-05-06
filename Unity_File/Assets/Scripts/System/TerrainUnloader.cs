@@ -3,13 +3,11 @@
 class TerrainUnloader : MonoBehaviour
 {
 
-    public GameObject terrain;
-    private string tag;
+    public GameObject[] terrain;
     private MeshRenderer renderer;
 
     private void Start()
     {
-        tag = terrain.tag;
         renderer = GetComponent<MeshRenderer>();
         renderer.enabled = false;
     }
@@ -18,7 +16,8 @@ class TerrainUnloader : MonoBehaviour
     {
         if (other.tag.Equals("Player"))
         {
-            terrain.SetActive(false);
+            for (int i = 0; i < terrain.Length; ++i)
+                terrain[i].SetActive(false);
         }
     }
 }
