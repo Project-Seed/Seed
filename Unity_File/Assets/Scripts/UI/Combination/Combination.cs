@@ -19,6 +19,10 @@ public class Combination : MonoBehaviour
     private string recipe_choose = null; // 어떤 레시피를 눌렀는지
     public int seach_num = 0; // 어떤 레시피(조합 테이블) 몇번째 것인가?
 
+    int type = 0; // 0 Select , 1 Combin
+    public GameObject select;
+    public GameObject combin;
+
     private void Awake()
     {
         for (int i = 0; i < GameSystem.instance.combination_list.Count; i++)
@@ -42,26 +46,29 @@ public class Combination : MonoBehaviour
     {
         for (int i = 0; i < GameSystem.instance.combination_list.Count; i++)
         {
-            recipe_box[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Item2D/" + GameSystem.instance.combination_list[i]["name"]);
+            recipe_box[i].GetComponent<RecipeBoxEvent>().image.sprite = Resources.Load<Sprite>("Item2D/" + GameSystem.instance.combination_list[i]["name"]);
         }
     }
 
     public void recipe_click(GameObject gameObject)
     {
+        recipe_choose = gameObject.name;
+
+        Image new_image = gameObject.GetComponent<RecipeBoxEvent>().image;
+        image.sprite = new_image.sprite;
+    }
+
+    public void select_click()
+    {
         for (int i = 0; i < item_box.Count; i++) // 있던 객체 삭제
         {
-           Destroy(item_box[i]);
+            Destroy(item_box[i]);
         }
         item_box.Clear();
 
-        recipe_choose = gameObject.name;
-
-        Image new_image = gameObject.GetComponent<Image>();    
-        image.sprite = new_image.sprite;
-
         for (int i = 0; i < GameSystem.instance.combination_list.Count; i++)
         {
-            if(GameSystem.instance.combination_list[i]["name"] == recipe_choose)
+            if (GameSystem.instance.combination_list[i]["name"] == recipe_choose)
             {
                 seach_num = i;
                 break;
@@ -72,6 +79,20 @@ public class Combination : MonoBehaviour
             item_content.name = GameSystem.instance.combination_list[seach_num]["name" + (i + 1)];
             GameObject gameObject2 = Instantiate(item_content, new Vector3(0, 0, 0), Quaternion.identity, item_vieport.transform);
             item_box.Add(gameObject2);
+        }
+
+        select.SetActive(false);
+        combin.SetActive(true);
+        type = 1;
+    }
+
+    public void return_click()
+    {
+        if (type == 1)
+        {
+            select.SetActive(true);
+            combin.SetActive(false);
+            type = 0;
         }
     }
 

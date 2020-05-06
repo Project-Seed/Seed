@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RecipeBoxEvent : MonoBehaviour
 {
     public GameObject Combination;
+    public Image image;
 
     private void Start()
     {
