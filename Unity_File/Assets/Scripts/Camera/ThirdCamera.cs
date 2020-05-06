@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ThirdCamera : MonoBehaviour
 {
-    public float smooth = 2.0f;
+    public float smooth = 1.0f;
     public Transform camera_rig_transform;  //카메라 리그 위치
     public Transform aim_transform;
     private float rotate_speed = 5.0f;
@@ -119,7 +119,6 @@ public class ThirdCamera : MonoBehaviour
             {
                 aim = aim_transform.position;
                 newPos = aim + camera_offset / 2;
-                smooth = 0.1f;
 
             }
             else
