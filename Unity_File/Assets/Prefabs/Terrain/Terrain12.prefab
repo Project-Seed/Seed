@@ -931,7 +931,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5846002997870756559}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -948,7 +948,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 160ef686db53cde4482c792ce451fc58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrain: {fileID: 0}
+  terrain:
+  - {fileID: 1256752658206347346}
+  - {fileID: 62235038984831333}
 --- !u!1 &6065973765463937311
 GameObject:
   m_ObjectHideFlags: 0
@@ -1505,7 +1507,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7892395590970280185}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -1522,7 +1524,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f094e14221df3c4eb5af21167bc23b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrain: {fileID: 0}
+  terrain:
+  - {fileID: 1256752658206347346}
+  - {fileID: 62235038984831333}
 --- !u!1 &8543877207281799837
 GameObject:
   m_ObjectHideFlags: 0
