@@ -12,12 +12,12 @@ public class HpBar : MonoBehaviour
     {
         hpbar.maxValue = PlayerState.instance.max_hp;
         hpbar.value = PlayerState.instance.hp;
-        //hptext.text = PlayerState.instance.hp.ToString() + "%(" + PlayerState.instance.hp.ToString() + "/" + PlayerState.instance.max_hp.ToString() + ")";
+        hptext.text = PlayerState.instance.hp.ToString() + "%(" + PlayerState.instance.hp.ToString() + "/" + PlayerState.instance.max_hp.ToString() + ")";
     }
 
     void Update()
     {
         hpbar.value = PlayerState.instance.hp;
-        //hptext.text = PlayerState.instance.hp.ToString() + "%(" + PlayerState.instance.hp.ToString() + "/" + PlayerState.instance.max_hp.ToString() + ")";
+        hptext.text = PlayerState.instance.hp.ToString() + "%(" + PlayerState.instance.hp.ToString() + "/" + PlayerState.instance.max_hp.ToString() + ")";
     }
 }

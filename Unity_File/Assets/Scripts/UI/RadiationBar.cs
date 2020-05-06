@@ -12,7 +12,7 @@ public class RadiationBar : MonoBehaviour
     {
         radiationbar.maxValue = PlayerState.instance.max_radiation;
         radiationbar.value = PlayerState.instance.radiation;
-        //radiationtext.text = PlayerState.instance.radiation.ToString() + "%(" + PlayerState.instance.radiation.ToString() + "/" + PlayerState.instance.max_radiation.ToString() + ")";
+        radiationtext.text = PlayerState.instance.radiation.ToString() + "%(" + PlayerState.instance.radiation.ToString() + "/" + PlayerState.instance.max_radiation.ToString() + ")";
         StartCoroutine(Update_Radiation());
     }
 
@@ -39,7 +39,7 @@ public class RadiationBar : MonoBehaviour
             }
 
             radiationbar.value = PlayerState.instance.radiation;
-            //radiationtext.text = PlayerState.instance.radiation.ToString() + "%(" + PlayerState.instance.radiation.ToString() + "/" + PlayerState.instance.max_radiation.ToString() + ")";
+            radiationtext.text = PlayerState.instance.radiation.ToString() + "%(" + PlayerState.instance.radiation.ToString() + "/" + PlayerState.instance.max_radiation.ToString() + ")";
 
             yield return new WaitForSeconds(1f);
         }
