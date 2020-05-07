@@ -19,6 +19,9 @@ public class CombinationItem : MonoBehaviour
 
     int seach_num_get;
 
+    public GameObject o;
+    public GameObject x;
+
     public void Awake()
     {
         gameObject.name = gameObject.name.Substring(0, gameObject.name.Length - 7);
@@ -58,6 +61,17 @@ public class CombinationItem : MonoBehaviour
             else
                 item_box[j].GetComponent<Image>().color = Color.grey;
         }
+
+        if(have_num>= use_num)
+        {
+            o.SetActive(true);
+            x.SetActive(false);
+        }
+        else
+        {
+            o.SetActive(false);
+            x.SetActive(true);
+        }
     }
 
     public void Update()
@@ -75,6 +89,17 @@ public class CombinationItem : MonoBehaviour
                 item_box[j].GetComponent<Image>().color = Color.white;
             else
                 item_box[j].GetComponent<Image>().color = Color.grey;
+        }
+
+        if (have_num >= use_num)
+        {
+            o.SetActive(true);
+            x.SetActive(false);
+        }
+        else
+        {
+            o.SetActive(false);
+            x.SetActive(true);
         }
     }
 }

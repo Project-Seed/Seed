@@ -23,19 +23,30 @@ public class Combination : MonoBehaviour
     public GameObject select;
     public GameObject combin;
 
+    public Text name;
+    public Text explane;
+
+    public GameObject succses;
+    public GameObject fail;
+
     private void Awake()
     {
         for (int i = 0; i < GameSystem.instance.combination_list.Count; i++)
         {
             GameObject gameObject1 = Instantiate(content, new Vector3(0, 0, 0), Quaternion.identity, viewport.transform); // viewport 밑 자식으로 복제
             gameObject1.name = GameSystem.instance.combination_list[i]["name"];
+            gameObject1.GetComponent<RecipeBoxEvent>().image.sprite = Resources.Load<Sprite>("Item2D/" + GameSystem.instance.combination_list[i]["name"]);
             recipe_box.Add(gameObject1);
         }
+
+        recipe_click(recipe_box[0]);
     }
 
     private void OnEnable()
     {
         InputManager.instance.click_mod = 1;
+        succses.SetActive(false);
+        fail.SetActive(false);
     }
     private void OnDisable()
     {
@@ -44,10 +55,11 @@ public class Combination : MonoBehaviour
 
     private void Update()
     {
+        /*
         for (int i = 0; i < GameSystem.instance.combination_list.Count; i++)
         {
             recipe_box[i].GetComponent<RecipeBoxEvent>().image.sprite = Resources.Load<Sprite>("Item2D/" + GameSystem.instance.combination_list[i]["name"]);
-        }
+        }*/
     }
 
     public void recipe_click(GameObject gameObject)
@@ -56,6 +68,24 @@ public class Combination : MonoBehaviour
 
         Image new_image = gameObject.GetComponent<RecipeBoxEvent>().image;
         image.sprite = new_image.sprite;
+
+        name.text = GameSystem.instance.item_search(gameObject.name, "name_ko");
+        string use = null;
+        for (int i = 0; i < GameSystem.instance.combination_list.Count; i++)
+        {
+            if (GameSystem.instance.combination_list[i]["name"] == recipe_choose)
+            {
+                seach_num = i;
+                break;
+            }
+        }
+        for (int i = 0; i < System.Convert.ToInt32(GameSystem.instance.combination_list[seach_num]["item_num"]); i++)
+        {
+            if (use != null)
+                use += ", ";
+            use += GameSystem.instance.item_search(GameSystem.instance.combination_list[seach_num]["name" + (i + 1)], "name_ko");
+        }
+        explane.text = "아이템 설명 | " + GameSystem.instance.item_search(gameObject.name, "explanation_ko") + "\n필요한 재료 | " + use;
     }
 
     public void select_click()
@@ -84,6 +114,9 @@ public class Combination : MonoBehaviour
         select.SetActive(false);
         combin.SetActive(true);
         type = 1;
+
+        succses.SetActive(false);
+        fail.SetActive(false);
     }
 
     public void return_click()
@@ -121,6 +154,14 @@ public class Combination : MonoBehaviour
                 if (GameSystem.instance.item_num[GameSystem.instance.combination_list[seach_num]["name" + i]] == 0)
                     GameSystem.instance.item_time.Remove(GameSystem.instance.combination_list[seach_num]["name" + i]);
             }
+
+            succses.SetActive(true);
+            fail.SetActive(false);
+        }
+        else
+        {
+            succses.SetActive(false);
+            fail.SetActive(true);
         }
     }
 }
