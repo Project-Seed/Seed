@@ -18,6 +18,6 @@ public class MiniMap : MonoBehaviour
     void Update()
     {
         lookarea.transform.rotation = Quaternion.Euler(0,0,-cameras.transform.rotation.eulerAngles.y + 180 - 45);
-        //character_point.transform.rotation = Quaternion.Euler(0, 0, -character.transform.rotation.eulerAngles.y);
+        character_point.transform.rotation = Quaternion.Euler(0, 0, -character.transform.rotation.eulerAngles.y);
     }
 }

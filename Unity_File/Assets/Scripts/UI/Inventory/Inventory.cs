@@ -18,7 +18,6 @@ public class Inventory : MonoBehaviour
 
     public bool quick_mod = false;
     public string quick_name;
-    public GameObject quick_image;
     
     private void Awake()
     {
@@ -95,13 +94,11 @@ public class Inventory : MonoBehaviour
     public void quick_click() // 단축키 등록 클릭
     {
         quick_mod = true;
-        quick_image.SetActive(true);
         quick_name = item_choose;
     }
 
     public void quick_off()
     {
         quick_mod = false;
-        quick_image.SetActive(false);
     }
 }

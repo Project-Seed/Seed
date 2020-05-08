@@ -10,9 +10,13 @@ public class Quick_slot : MonoBehaviour
     int num;
 
     public Text num_text;
+    public Image me_image;
     public Image item_image;
 
     public Inventory inven;
+
+    public Sprite white_sp;
+    public Sprite yellow_sp;
 
     void Update()
     {
@@ -33,5 +37,15 @@ public class Quick_slot : MonoBehaviour
 
             inven.quick_off();
         }
+    }
+
+    public void choose()
+    {
+        me_image.sprite = yellow_sp;
+    }
+
+    public void choose_no()
+    {
+        me_image.sprite = white_sp;
     }
 }
