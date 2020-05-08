@@ -149,6 +149,7 @@ public class PlayerState : MonoBehaviour
         if(state_sky == 1)
         {
             state_sky = 0;
+            fly_time = 0;
             animator.SetTrigger("lending");
         }
 
@@ -162,12 +163,17 @@ public class PlayerState : MonoBehaviour
 
     public void shoot_ready()
     {
+        animator.ResetTrigger("shoot_stop");
         animator.SetTrigger("shoot_ready");
     }
 
     public void shoot()
     {
         animator.SetTrigger("shoot");
+    }
+    public void shoot_stop()
+    {
+        animator.SetTrigger("shoot_stop");
     }
 
     public void climb_on()

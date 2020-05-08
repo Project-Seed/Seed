@@ -85,7 +85,7 @@ public class Combination : MonoBehaviour
                 use += ", ";
             use += GameSystem.instance.item_search(GameSystem.instance.combination_list[seach_num]["name" + (i + 1)], "name_ko");
         }
-        explane.text = "아이템 설명 | " + GameSystem.instance.item_search(gameObject.name, "explanation_ko") + "\n필요한 재료 | " + use;
+        explane.text = "아이템 설명 | " + GameSystem.instance.item_search(gameObject.name, "explanation_ko") + "\n\n필요한 재료 | " + use;
     }
 
     public void select_click()
