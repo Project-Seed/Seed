@@ -174,6 +174,8 @@ public class PlayerController : MonoBehaviour
                 {
                     throw_mode = false;
                     throwManager.mouse_up(false);
+
+                    player_state.shoot_stop();
                 }
             }
 
