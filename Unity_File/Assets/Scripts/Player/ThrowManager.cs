@@ -11,7 +11,8 @@ public class ThrowManager : MonoBehaviour
     private Vector3 windVec;
     private float wind_power;
     public bool throw_mode;
-    private float throw_power;
+    public float throw_power;
+
     private float gravity;
     private float throw_angle;
     private float throw_speed;
@@ -36,6 +37,7 @@ public class ThrowManager : MonoBehaviour
         // aim 캐릭터 따라다니도록 했는데,,수정해야될듯. 카메라 위로 올리면 aim도 위로 올라가야해서. 
         // Ray쏴서 2차원->3차원 좌표로 바꾼걸 Aim으로 써야될듯
         aim = transform.GetChild(1);
+        throw_power = 2f;
         gravity = 9.8f;
         throw_at =
         windVec =
@@ -137,7 +139,7 @@ public class ThrowManager : MonoBehaviour
         if (tmp.activeSelf == true)
         {
         Debug.Log("Aim : "+aimForward);
-            bullet_rig.AddForce(aimForward, ForceMode.Impulse);
+            bullet_rig.AddForce(aimForward * throw_power, ForceMode.Impulse);
              
             yield return new WaitForSeconds(0.05f);
             StartCoroutine(ThrowingSeed(bullet_rig, aimForward));
