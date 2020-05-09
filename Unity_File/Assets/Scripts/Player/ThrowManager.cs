@@ -19,7 +19,7 @@ public class ThrowManager : MonoBehaviour
     private bool throw_done;
 
     public ThirdCamera tc;
-    Transform aim;
+    public Transform aim;
     public GameSystem.Mode mode;
     public GameObject seed;
     private GameObject throw_sprite;    // 임시스프라이트
@@ -36,7 +36,6 @@ public class ThrowManager : MonoBehaviour
     {
         // aim 캐릭터 따라다니도록 했는데,,수정해야될듯. 카메라 위로 올리면 aim도 위로 올라가야해서. 
         // Ray쏴서 2차원->3차원 좌표로 바꾼걸 Aim으로 써야될듯
-        aim = transform.GetChild(1);
         throw_power = 2f;
         gravity = 9.8f;
         throw_at =

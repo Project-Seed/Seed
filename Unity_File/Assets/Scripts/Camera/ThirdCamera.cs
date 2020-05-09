@@ -121,7 +121,6 @@ public class ThirdCamera : MonoBehaviour
             {
                 aim = aim_transform.position;
                 newPos = aim + camera_offset / 2;
-
             }
             else
             {

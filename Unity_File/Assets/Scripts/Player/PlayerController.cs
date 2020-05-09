@@ -20,10 +20,9 @@ public class PlayerController : MonoBehaviour
     public float throw_position;
     private Vector3 lookAt;
 
-    [SerializeField]
-    private float player_speed = 2.0f;         // 캐릭터 걷는 속도
-    private float player_run_speed = 6.0f;     // 캐릭터 달리는 속도
-    private float player_jump_power = 5.0f;    // 캐릭터 점프력
+    public float player_speed = 2.0f;         // 캐릭터 걷는 속도
+    public float player_run_speed = 6.0f;     // 캐릭터 달리는 속도
+    public float player_jump_power = 10.0f;    // 캐릭터 점프력
 
     public GameObject inventory; // 인벤토리
     public GameObject composer; // 합성창
@@ -215,8 +214,6 @@ public class PlayerController : MonoBehaviour
             else
                 player_state.updown_check = false;
 
-            Vector3 movement = new Vector3(input_horizontal, 0, input_vertical);
-            movement = movement.normalized;
 
             //카메라 움직임과 연동
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||
@@ -235,15 +232,6 @@ public class PlayerController : MonoBehaviour
                 if (!throw_mode && climb_mod == false)
                     child.rotation = Quaternion.Slerp(child.rotation, Quaternion.LookRotation(lookAt), 0.2f);
             }
-           
-            //문제점. 대각선이동시에는? 방향을 정해주는게 아니라(look at=) 곱해줘야함. . .
-            if(climb_mod == false)
-                player_transform.Translate(movement * (is_run? player_run_speed : player_speed) * Time.deltaTime, Space.Self);
-            
-            if ((Mathf.Abs(movement.z) + Mathf.Abs(movement.x)) >= 1 && climb_mod == false)
-                player_state.state_move = 1;
-            else
-                player_state.state_move = 0;
 
         }
 
@@ -283,6 +271,36 @@ public class PlayerController : MonoBehaviour
             gameObject.GetComponent<Rigidbody>().isKinematic = false;
         }
 
+    }
+
+    private void FixedUpdate()
+    {
+        Moving();
+    }
+
+    private void Moving()
+    {
+        Vector3 movement = new Vector3(input_horizontal, 0, input_vertical);
+        movement = movement.normalized;
+
+        //문제점. 대각선이동시에는? 방향을 정해주는게 아니라(look at=) 곱해줘야함. . .
+        if (climb_mod == false)
+        {
+
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 1.0f))
+            {
+                Debug.DrawRay(transform.position, transform.forward * 0.5f, Color.blue, 1.0f);
+
+                if (!hit.transform.CompareTag("Player") && Vector3.Distance(hit.point,transform.position) < 0.1f)
+                    Debug.Log("STOP" + hit.distance);
+            }
+
+           player_transform.Translate(movement * (is_run ? player_run_speed : player_speed) * Time.deltaTime, Space.Self);
+        }
+        if ((Mathf.Abs(movement.z) + Mathf.Abs(movement.x)) >= 1 && climb_mod == false)
+            player_state.state_move = 1;
+        else
+            player_state.state_move = 0;
     }
 
     IEnumerator Jumping()
