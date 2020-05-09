@@ -58,7 +58,6 @@ public class ThirdCamera : MonoBehaviour
             //나중에 제한 두기.
             //연산은 아래에서.
             input_mouse_wheel = Input.GetAxisRaw("Mouse ScrollWheel");
-            scroll += input_mouse_wheel;
 
                 //camera_rig_transform.Translate(-camera_rig_transform.forward * input_mouse_wheel, Space.Self);
 
@@ -109,8 +108,11 @@ public class ThirdCamera : MonoBehaviour
 
             //클로즈업
             if (input_mouse_wheel != 0 && !GetPlayerController.throw_mode)
-                camera_offset = 
-                    new Vector3(camera_offset.x, camera_offset.y, camera_offset.z + input_mouse_wheel);
+                if (input_mouse_wheel > 0)
+                    camera_offset /= 1.1f;
+                else
+                    camera_offset *= 1.1f;
+            
 
             Vector3 aim;
             Vector3 newPos;
@@ -140,6 +142,13 @@ public class ThirdCamera : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("Ground"))
+            Debug.Log("Collder");
+    }
+
 
     private IEnumerator SubCam()
     {
@@ -185,6 +194,7 @@ public class ThirdCamera : MonoBehaviour
         }
         Debug.Log("End Arc");
     }
+  
 }
 
 
