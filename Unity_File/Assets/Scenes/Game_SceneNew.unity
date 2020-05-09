@@ -2189,7 +2189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smooth: 1
   camera_rig_transform: {fileID: 0}
-  aim_transform: {fileID: 1661217147}
+  aim_transform: {fileID: 1035919856}
   rotate_cam: 1
   look_player: 0
   MouseX: 0
@@ -2452,6 +2452,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 901657560}
   m_CullTransparentMesh: 0
+--- !u!4 &1035919856 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5571486284773315837, guid: 60283bddc5264024893416fd49fc70aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 1661217145}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1046269641
 GameObject:
   m_ObjectHideFlags: 0
@@ -48812,6 +48818,21 @@ PrefabInstance:
       propertyPath: qick
       value: 
       objectReference: {fileID: 2066706814}
+    - target: {fileID: 8780300512582525260, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: player_speed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780300512582525260, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780300512582525260, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: player_jump_power
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8780300512582525261, guid: 60283bddc5264024893416fd49fc70aa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -48882,10 +48903,40 @@ PrefabInstance:
       propertyPath: item_ui
       value: 
       objectReference: {fileID: 2112829198}
+    - target: {fileID: 7914510643502694924, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: radiation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914510643502694924, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: max_radiation
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914510643502694924, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: hp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914510643502694924, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: max_hp
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6209848564450890629, guid: 60283bddc5264024893416fd49fc70aa,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780300512582525251, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 261552043670608016, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8926044362460682346, guid: 60283bddc5264024893416fd49fc70aa,
         type: 3}
@@ -48906,12 +48957,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e73d6f35a5d16e44b322240a5526cb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1661217147 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9128881574528203851, guid: 60283bddc5264024893416fd49fc70aa,
-    type: 3}
-  m_PrefabInstance: {fileID: 1661217145}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1661217148 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8780300512582525257, guid: 60283bddc5264024893416fd49fc70aa,
@@ -48934,6 +48979,7 @@ MonoBehaviour:
   throw_mode: 0
   throw_power: 0
   tc: {fileID: 872437018}
+  aim: {fileID: 1035919856}
   mode: 0
   seed: {fileID: 557861872891006086, guid: e35fcb392d006a7428d0158702ca9b39, type: 3}
   aim_sp: {fileID: 763443846}
