@@ -34,6 +34,8 @@ public class PlayerState : MonoBehaviour
     public bool left_check = false;
     public bool right_check = false;
 
+    public bool lending_time = false; // true면 0.5초간 착지후 발이 아파 못움직임
+
     public static PlayerState Instance
     {
         get { return instance; }
@@ -151,9 +153,18 @@ public class PlayerState : MonoBehaviour
             state_sky = 0;
             fly_time = 0;
             animator.SetTrigger("lending");
+            lending_time = true;
+            StartCoroutine("lending_coroutine");
         }
 
         state_fly = 0;
+    }
+
+    IEnumerator lending_coroutine()
+    {
+        yield return new WaitForSeconds(0.7f);
+        animator.ResetTrigger("lending");
+        lending_time = false;
     }
 
     public void flying()
