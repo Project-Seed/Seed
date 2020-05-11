@@ -319,7 +319,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground")||collision.gameObject.CompareTag("Plantable"))
         {
             in_ground = true;
             is_jumping = false;
@@ -337,7 +337,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
         {
             in_ground = false;
             Debug.Log("not in Ground");
