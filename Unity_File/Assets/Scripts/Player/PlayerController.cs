@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
                     player_state.climb_on();
 
                     transform.rotation = climb_ro;
-                    transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.eulerAngles.y - 180, transform.rotation.z));
+                    transform.rotation = Quaternion.Euler(new Vector3(-transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y - 180, transform.rotation.eulerAngles.z));
                 }
             }
 
@@ -114,20 +114,20 @@ public class PlayerController : MonoBehaviour
                     player_state.animator.SetBool("climb_move", false);
 
 
-                if (Input.GetKey(KeyCode.W) && climb_po.y + 3.2f > gameObject.transform.position.y)
-                {
+                if (Input.GetKey(KeyCode.W))
                     gameObject.transform.Translate(0, Time.deltaTime, 0);
-                }
-                else if (Input.GetKey(KeyCode.S) && climb_po.y - 0.5f < gameObject.transform.position.y)
-                {
+                if (Input.GetKey(KeyCode.S))
                     gameObject.transform.Translate(0, -Time.deltaTime, 0);
-                }
-
-                // 아래 고쳐야됨....
-                if (Input.GetKey(KeyCode.D) && climb_po.z - 1 < gameObject.transform.position.z)
+                if (Input.GetKey(KeyCode.D))
                     gameObject.transform.Translate(Time.deltaTime, 0, 0);
-                if (Input.GetKey(KeyCode.A) && climb_po.z + 1 > gameObject.transform.position.z)
+                if (Input.GetKey(KeyCode.A))
                     gameObject.transform.Translate(-Time.deltaTime, 0, 0);
+
+                if(climb_crash == false) // 떨어진다!
+                {
+                    climb_mod = false;
+                    player_state.climb_off();
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -326,12 +326,6 @@ public class PlayerController : MonoBehaviour
 
             player_state.landing();
         }
-        else if(collision.gameObject.name == "brown_seed(Clone)")
-        {
-            climb_ro = collision.transform.rotation;
-            climb_po = collision.transform.position;
-            climb_crash = true;
-        }
     }
 
     private void OnCollisionExit(Collision collision)
@@ -343,27 +337,40 @@ public class PlayerController : MonoBehaviour
 
             player_state.flying();
         }
-        else if (collision.gameObject.name == "brown_seed(Clone)")
-        {
-            climb_crash = false;
-        }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider collision)
     {
-        IItem item = other.GetComponent<IItem>(); //IItem을 상속받는 모든 아이템들
+        IItem item = collision.GetComponent<IItem>(); //IItem을 상속받는 모든 아이템들
         if (item != null)                         //아이템과 부딪혔다면 함수를 호출하고 지움.
         {
             item.Collided();
 
-            if (GameSystem.instance.item_num[other.name] == 0) // 못먹었던 아이템이면
-                GameSystem.instance.item_time.Add(other.name);
-            GameSystem.instance.item_num[other.name] += 1;
+            if (GameSystem.instance.item_num[collision.name] == 0) // 못먹었던 아이템이면
+                GameSystem.instance.item_time.Add(collision.name);
+            GameSystem.instance.item_num[collision.name] += 1;
 
-            if (Dictionarys.instance.dictionary_num[other.name] == false) // '한번도' 못먹었던 아이템이면 (도감용)
-                Dictionarys.instance.dictionary_num[other.name] = true;
+            if (Dictionarys.instance.dictionary_num[collision.name] == false) // '한번도' 못먹었던 아이템이면 (도감용)
+                Dictionarys.instance.dictionary_num[collision.name] = true;
 
-            Destroy(other.gameObject);
+            Destroy(collision.gameObject);
+        }
+
+
+
+        if (collision.gameObject.name == "brown_trigger")
+        {
+            climb_ro = collision.transform.rotation;
+            climb_po = collision.transform.position;
+            climb_crash = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider collision)
+    {
+        if (collision.gameObject.name == "brown_trigger")
+        {
+            climb_crash = false;
         }
     }
 }
