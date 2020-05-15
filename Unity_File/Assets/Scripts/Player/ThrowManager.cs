@@ -11,6 +11,9 @@ public class ThrowManager : MonoBehaviour
     public GameObject aim_sp; // 조준선 스프라이트
     private GameObject throw_sprite;    // 임시스프라이트
     private GameObject tmp;  //임시씨앗
+    private Camera[] cams;
+    private Camera main_cam;
+    private Camera sub_cam;
 
     string seed_name;
 
@@ -18,6 +21,11 @@ public class ThrowManager : MonoBehaviour
     {
         // aim 캐릭터 따라다니도록 했는데,,수정해야될듯. 카메라 위로 올리면 aim도 위로 올라가야해서. 
         // Ray쏴서 2차원->3차원 좌표로 바꾼걸 Aim으로 써야될듯
+        cams = FindObjectsOfType<Camera>();
+        //Debug.Log(cams[0]+ " " +cams[1]);
+        main_cam = cams[1];
+        sub_cam = cams[0];
+        sub_cam.enabled = false;
     }
 
     public void mouse_down(string name)
@@ -30,6 +38,7 @@ public class ThrowManager : MonoBehaviour
     public void mouse_up(bool option)
     {
         aim_sp.SetActive(false);
+        SwitchCam(main_cam, sub_cam);
 
         if (option && Targeting())//조준하고 option true이면 발사. option false는 발사 취소한 경우.
             Throw();
@@ -38,7 +47,8 @@ public class ThrowManager : MonoBehaviour
 
     public bool Targeting()
     {
-        //switchCam();
+        SwitchCam(main_cam, sub_cam);
+        
         //마우스를 누르고 있는 상태.
         if (isPlantable())
         {
@@ -53,9 +63,10 @@ public class ThrowManager : MonoBehaviour
 
     }
 
-    private void switchCam(Camera camA, Camera camB)
+    private void SwitchCam(Camera camA, Camera camB)
     {
-       
+        camB.enabled = true;
+        camA.enabled = false;
     }
 
     private bool isPlantable()

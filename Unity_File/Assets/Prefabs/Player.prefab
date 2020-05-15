@@ -405,17 +405,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e73d6f35a5d16e44b322240a5526cb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throw_mode: 0
-  throw_position: 0
-  player_speed: 4
-  player_run_speed: 6
-  player_jump_power: 5
   inventory: {fileID: 7004180022932413123, guid: a03d3010387de8b439e5c54b25227d5a,
     type: 3}
   composer: {fileID: 0}
   note: {fileID: 0}
-  camera_rig_transform: {fileID: 0}
   qick: {fileID: 0}
+  player_speed: 4
+  player_run_speed: 6
+  player_jump_power: 5
+  throw_mode: 0
   climb_crash: 0
   climb_mod: 0
   climb_po: {x: 0, y: 0, z: 0}
@@ -483,12 +481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da82c5efba22b124fbb7063da7d6f294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throw_at: {x: 0, y: 0, z: 0}
-  throw_mode: 0
-  throw_power: 0
-  tc: {fileID: 0}
   aim: {fileID: 5571486284773315837}
-  mode: 0
   seed: {fileID: 557861872891006086, guid: e35fcb392d006a7428d0158702ca9b39, type: 3}
   aim_sp: {fileID: 0}
 --- !u!1001 &2172806650360740932

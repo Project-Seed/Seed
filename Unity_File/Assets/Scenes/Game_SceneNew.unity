@@ -48448,7 +48448,7 @@ PrefabInstance:
         type: 3}
       propertyPath: cameras
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1600733811}
     - target: {fileID: 8542915066571881023, guid: e0e559afbcc121e45aef52b70e3cc579,
         type: 3}
       propertyPath: character
@@ -48569,6 +48569,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1532249776}
   m_CullTransparentMesh: 0
+--- !u!1 &1600733811 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1425331414821829588, guid: 60283bddc5264024893416fd49fc70aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 1661217145}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1623659262
 GameObject:
   m_ObjectHideFlags: 0
@@ -48849,6 +48855,11 @@ PrefabInstance:
     - target: {fileID: 6145414088686516159, guid: 60283bddc5264024893416fd49fc70aa,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504538276529178986, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
