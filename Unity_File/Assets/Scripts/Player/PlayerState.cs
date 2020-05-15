@@ -33,8 +33,15 @@ public class PlayerState : MonoBehaviour
     public bool updown_check = false;
     public bool left_check = false;
     public bool right_check = false;
+    public bool shoot_check = false; // 사격 모드시 트루
 
     public bool lending_time = false; // true면 0.5초간 착지후 발이 아파 못움직임
+
+
+    public Transform spine; // 상체
+    public Transform target; // 조준시 상체 바라볼곳
+    public Vector3 ress;
+
 
     public static PlayerState Instance
     {
@@ -122,6 +129,12 @@ public class PlayerState : MonoBehaviour
             climb_blend = 1f;
 
         animator.SetFloat("climb_Blend", climb_blend);
+
+        if(shoot_check)
+        {
+            spine.LookAt(target.position); //플레이어의 상체부분이 타겟 위치 보기
+            spine.rotation = Quaternion.Euler(ress);
+        }
     }
 
     public void dash_on()
@@ -174,27 +187,50 @@ public class PlayerState : MonoBehaviour
 
     public void shoot_ready()
     {
+        shoot_check = true;
         animator.ResetTrigger("shoot_stop");
         animator.SetTrigger("shoot_ready");
     }
 
     public void shoot()
     {
+        shoot_check = false;
         animator.SetTrigger("shoot");
     }
     public void shoot_stop()
     {
+        shoot_check = false;
         animator.SetTrigger("shoot_stop");
     }
 
     public void climb_on()
     {
+        animator.ResetTrigger("climb_off");
         animator.SetTrigger("climb_on");
         dont_fly = true;
+        state_sky = 0;
     }
     public void climb_off()
     {
         animator.SetTrigger("climb_off");
         dont_fly = false;
+    }
+
+    public void hang_on()
+    {
+        animator.ResetTrigger("hang_off");
+        animator.SetTrigger("hang_on");
+        dont_fly = true;
+        state_sky = 0;
+    }
+    public void hang_off()
+    {
+        animator.SetTrigger("hang_off");
+        dont_fly = false;
+    }
+
+    public void hang_up()
+    {
+        animator.SetTrigger("hang_up");
     }
 }
