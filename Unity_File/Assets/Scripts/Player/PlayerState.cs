@@ -189,6 +189,7 @@ public class PlayerState : MonoBehaviour
 
     public void climb_on()
     {
+        animator.ResetTrigger("climb_off");
         animator.SetTrigger("climb_on");
         dont_fly = true;
     }
@@ -196,5 +197,22 @@ public class PlayerState : MonoBehaviour
     {
         animator.SetTrigger("climb_off");
         dont_fly = false;
+    }
+
+    public void hang_on()
+    {
+        animator.ResetTrigger("hang_off");
+        animator.SetTrigger("hang_on");
+        dont_fly = true;
+    }
+    public void hang_off()
+    {
+        animator.SetTrigger("hang_off");
+        dont_fly = false;
+    }
+
+    public void hang_up()
+    {
+        animator.SetTrigger("hang_up");
     }
 }

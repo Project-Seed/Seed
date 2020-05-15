@@ -1,14 +1,12 @@
 fileFormatVersion: 2
-guid: b9051e635f5626e4c9fc59d6c4dea1f8
+guid: eafbe523cb4f02d4b8f1802012c8ea59
 ModelImporter:
   serializedVersion: 26
-  internalIDToNameTable: []
-  externalObjects:
+  internalIDToNameTable:
   - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: 'Material #3'
-    second: {fileID: 2100000, guid: 469109f8924b1da45b2d99a9f3c87ba1, type: 2}
+      74: 1827226128182048838
+    second: Hang_Ing
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
@@ -21,7 +19,10 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: 
+    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
+      copied configuration does not match position in animation file:\n\t'Bip001 L
+      Thigh' : position error = 13.401345 mm\n\t'Bip001 R Thigh' : position error
+      = 10.053394 mm\n"
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -35,7 +36,36 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Hang_Ing
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 65
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -72,28 +102,9 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - dec8e8adc3c30854295cc711951c76c6
-  - 46f015711114a8d46aa19de7007f48b6
-  - 81fdddc5707b41f4d987ac8b682cd71b
-  - a011685a42a4d094dae98132e93379cd
-  - 24f3cbfdc3fdc8c41b5e74ba82c5de74
-  - 45ef129a0f26a2148a29678c411947d2
-  - 94a191d7727ba264fbff18aca2ababe7
-  - eafbe523cb4f02d4b8f1802012c8ea59
-  - 153c14f58f3bb244e8df2ece3019d492
-  - b5755b8be4435a24aad3f96a12c70a92
-  - 4668ecda90773f8429ff4bef27ce2d03
-  - f644ed961a1eee94e85b2bf720664518
-  - a8285ac4266de834ba256570e40a8e75
-  - 051a261d3c28d8545a6eaae19e1ae3c3
-  - 48850125e70863d41986eea9c5d4e81e
-  - 251f6b0325200ac4f92c3ffee85e567c
-  - ef3c27fa35375e842aed50bdb4763942
-  - a65fd471f587fd44d995a40ceb911529
-  - fb998eb72dec1104ca2f09ce1437aa8b
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
+  copyAvatar: 1
   humanDescription:
     serializedVersion: 3
     human:
@@ -868,7 +879,8 @@ ModelImporter:
     hasTranslationDoF: 1
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: b9051e635f5626e4c9fc59d6c4dea1f8,
+    type: 3}
   animationType: 3
   humanoidOversampling: 1
   additionalBone: 0

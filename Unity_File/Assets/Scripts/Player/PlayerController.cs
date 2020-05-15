@@ -34,15 +34,43 @@ public class PlayerController : MonoBehaviour
 
     public Qick_slot_sum qick;
 
+
     public bool climb_crash = false; // 갈색 충돌시 true
     public bool climb_mod = false; // 갈색 충돌시 키 누르면 true
     public Vector3 climb_po; // 충돌후 갈색 위치, 오르기 제한 범위때매
     public Quaternion climb_ro; // 충돌후 갈색 각도, r 누를때 정면 바라보기 위해
 
+    public bool hang_crash = false; // 파랑 충돌시 true
+    public bool hang_mod = false; // 파랑 충돌시 키 누르면 true
+
+
     IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 1초간 점프금지
     {
         is_jumping = false;
         yield return new WaitForSeconds(0.5f);
+    }
+
+    IEnumerator hang_up()                  // 이단 점프를 막기 위해 점프시 1초간 점프금지
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        for (int i = 0; i < 45; i++)
+        {
+            gameObject.transform.Translate(0, 0.025f, 0);
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        yield return new WaitForSeconds(1.4f);
+
+        for (int i = 0; i < 20; i++)
+        {
+            gameObject.transform.Translate(0, 0.05f, 0);
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        yield return new WaitForSeconds(0.2f);
+
+        hang_mod = false;
     }
 
     void Start()
@@ -82,6 +110,26 @@ public class PlayerController : MonoBehaviour
 
                     transform.rotation = climb_ro;
                     transform.rotation = Quaternion.Euler(new Vector3(-transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y - 180, transform.rotation.eulerAngles.z));
+                }
+
+                if (hang_mod == true)
+                {
+                    hang_mod = false;
+                    player_state.hang_off();
+                }
+                else if (hang_crash == true && hang_mod == false)
+                {
+                    hang_mod = true;
+                    player_state.hang_on();
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.T))
+            { 
+                if(hang_mod == true)
+                {
+                    StartCoroutine(hang_up());
+                    player_state.hang_up();
                 }
             }
 
@@ -225,11 +273,11 @@ public class PlayerController : MonoBehaviour
 
                 dir.x = 0f; dir.z = 0f;
 
-                if (climb_mod == false)
+                if (climb_mod == false && hang_mod == false)
                     transform.localRotation = Quaternion.Slerp(transform.localRotation, dir, 0.5f);
                 //child.rotation = Quaternion.LookRotation(lookAt);
 
-                if (!throw_mode && climb_mod == false)
+                if (!throw_mode && climb_mod == false && hang_mod == false)
                     child.rotation = Quaternion.Slerp(child.rotation, Quaternion.LookRotation(lookAt), 0.2f);
             }
 
@@ -260,7 +308,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if(climb_mod == true)
+        if(climb_mod == true || hang_mod == true)
         {
             gameObject.GetComponent<Rigidbody>().useGravity = false;
             gameObject.GetComponent<Rigidbody>().isKinematic = true;
@@ -284,7 +332,7 @@ public class PlayerController : MonoBehaviour
         movement = movement.normalized;
 
         //문제점. 대각선이동시에는? 방향을 정해주는게 아니라(look at=) 곱해줘야함. . .
-        if (climb_mod == false && player_state.lending_time == false)
+        if (climb_mod == false && hang_mod == false && player_state.lending_time == false)
         {
             if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 1.0f))
             {
@@ -296,7 +344,7 @@ public class PlayerController : MonoBehaviour
 
            player_transform.Translate(movement * (is_run ? player_run_speed : player_speed) * Time.deltaTime, Space.Self);
         }
-        if ((Mathf.Abs(movement.z) + Mathf.Abs(movement.x)) >= 1 && climb_mod == false)
+        if ((Mathf.Abs(movement.z) + Mathf.Abs(movement.x)) >= 1 && climb_mod == false && hang_mod == false)
             player_state.state_move = 1;
         else
             player_state.state_move = 0;
@@ -370,6 +418,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.name == "brown_trigger")
         {
+            Debug.Log("떨어짐");
             climb_crash = false;
         }
     }
