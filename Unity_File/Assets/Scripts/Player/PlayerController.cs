@@ -110,6 +110,7 @@ public class PlayerController : MonoBehaviour
 
                     transform.rotation = climb_ro;
                     transform.rotation = Quaternion.Euler(new Vector3(-transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y - 180, transform.rotation.eulerAngles.z));
+                    transform.Translate(0, 0, 0.8f);
                 }
 
                 if (hang_mod == true)
@@ -405,9 +406,9 @@ public class PlayerController : MonoBehaviour
         }
 
 
-
         if (collision.gameObject.name == "brown_trigger")
         {
+            Debug.Log("갈색 충돌");
             climb_ro = collision.transform.rotation;
             climb_po = collision.transform.position;
             climb_crash = true;
@@ -418,7 +419,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.name == "brown_trigger")
         {
-            Debug.Log("떨어짐");
+            Debug.Log("갈색 떨어짐");
             climb_crash = false;
         }
     }

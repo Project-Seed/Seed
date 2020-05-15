@@ -5,6 +5,13 @@ using UnityEngine;
 public class ItemCollier : MonoBehaviour
 {
     public GameObject item_ui;
+    public GameObject character;
+
+    private void Update()
+    {
+        transform.position = character.transform.position;
+        transform.rotation = character.transform.rotation;
+    }
 
     private void OnTriggerEnter(Collider collision)
     {
