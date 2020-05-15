@@ -6,29 +6,11 @@ using UnityEngine.UI;
 
 public class ThrowManager : MonoBehaviour
 {
-    public Vector3 throw_at;
-    private Vector3 s;
-    private Vector3 windVec;
-    private float wind_power;
-    public bool throw_mode;
-    public float throw_power;
-
-    private float gravity;
-    private float throw_angle;
-    private float throw_speed;
-    private bool throw_done;
-
-    public ThirdCamera tc;
-    public Transform aim;
-    public GameSystem.Mode mode;
-    public GameObject seed;
+    public Transform aim; // 실제 씨앗이 나가는 총구.
+    public GameObject seed; // 씨앗 모델
+    public GameObject aim_sp; // 조준선 스프라이트
     private GameObject throw_sprite;    // 임시스프라이트
     private GameObject tmp;  //임시씨앗
-
-    Vector3 start_transform;
-    private float t;
-
-    public GameObject aim_sp;
 
     string seed_name;
 
@@ -36,12 +18,6 @@ public class ThrowManager : MonoBehaviour
     {
         // aim 캐릭터 따라다니도록 했는데,,수정해야될듯. 카메라 위로 올리면 aim도 위로 올라가야해서. 
         // Ray쏴서 2차원->3차원 좌표로 바꾼걸 Aim으로 써야될듯
-        throw_power = 2f;
-        gravity = 9.8f;
-        throw_at =
-        windVec =
-        s = Vector3.zero;
-        start_transform = transform.position + new Vector3(0, 1.3f, 0);
     }
 
     public void mouse_down(string name)
@@ -53,14 +29,16 @@ public class ThrowManager : MonoBehaviour
 
     public void mouse_up(bool option)
     {
-        if (option && Targeting())
+        aim_sp.SetActive(false);
+
+        if (option && Targeting())//조준하고 option true이면 발사. option false는 발사 취소한 경우.
             Throw();
         
-        aim_sp.SetActive(false);
     }
 
     public bool Targeting()
     {
+        //switchCam();
         //마우스를 누르고 있는 상태.
         if (isPlantable())
         {
@@ -73,6 +51,11 @@ public class ThrowManager : MonoBehaviour
             return false;
         }
 
+    }
+
+    private void switchCam(Camera camA, Camera camB)
+    {
+       
     }
 
     private bool isPlantable()
@@ -117,7 +100,7 @@ public class ThrowManager : MonoBehaviour
         if (tmp.activeSelf == true)
         {
         Debug.Log("Aim : "+aimForward);
-            bullet_rig.AddForce(aimForward * throw_power, ForceMode.Impulse);
+            bullet_rig.AddForce(aimForward, ForceMode.Impulse);
              
             yield return new WaitForSeconds(0.05f);
             StartCoroutine(ThrowingSeed(bullet_rig, aimForward));
