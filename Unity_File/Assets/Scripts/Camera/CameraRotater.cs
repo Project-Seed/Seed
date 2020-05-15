@@ -4,62 +4,53 @@ using UnityEngine;
 
 public class CameraRotater : MonoBehaviour
 {
-    // 캐릭터 주위를 회전
-    public Transform target;                                    // 카메라가 따라갈 대상
-    private Transform camera_transform;                         // 부모인 CameraRig의 transform == 카메라의 transform
-    private bool press_Rkey;
-    private bool press_Tkey;
+    // 캐릭터 주위를 회전. 카메라만 별도로 움직임.
+    public Transform target;      
     [SerializeField] private float rotate_angle = 2.0f;        // 카메라 회전각도 (1초에 2도)
     public Vector3 offset;
+    float rotate_speed = 2.0f;
+    public float minY = -2f;
+    public float maxY = 60f;
+    float MouseX;
+    float MouseY;
+    float input_mouse_wheel;
+    Vector3 camera_offset;
 
     private void Start()
     {
-        camera_transform = GetComponent<Transform>();
-        press_Rkey = false;
-        press_Tkey = false;
-        offset.Set(3, 0, 0);
-    }
-    private void Update() // 키 입력
-    {
-        if (Input.GetKey(KeyCode.R))
-        {
-            press_Rkey = true;
-            Debug.Log("GetKey : R");
-            RotateCW();
-
-        }
-        else
-        {
-            press_Rkey = false;
-        }
-
-        if (Input.GetKey(KeyCode.T))
-        {
-            press_Tkey = true;
-            Debug.Log("GetKey : T");
-            RotateCCW();
-        }
-        else
-        {
-            press_Tkey = false;
-        }
+        MouseX = transform.eulerAngles.y;
+        MouseY = transform.eulerAngles.x;
+        camera_offset = transform.localPosition - target.transform.localPosition;
     }
 
-    private void RotateCW()
+    private void LateUpdate()
     {
-        if (press_Rkey == false) return;
-        camera_transform.RotateAround(target.position, target.transform.up, rotate_angle * Time.deltaTime); // 타겟을 중심으로, y축 회전(공전), 회전각도
+        MouseX += Input.GetAxis("Mouse X") * rotate_speed;
+        MouseY -= Input.GetAxis("Mouse Y") * rotate_speed;
+        //MouseY = Mathf.Clamp(MouseY, minY, maxY);
+        MouseY = ClampAngle(MouseY, minY, maxY);
+        Quaternion ro = Quaternion.Euler(MouseY, MouseX, 0f);
+        Vector3 po = ro * camera_offset;
+
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, ro, 0.5f);
+        transform.localPosition = Vector3.Slerp(transform.localPosition, po, 0.5f); ;
+        transform.LookAt(target);
+        //transform.RotateAround(target.position, target.right, MouseY);
        
-        // 쿼터니언 회전이 아니라서 z축이 와리가리함 0으로 고정하는 코드<<안먹힘 ㅠ 왤까
-        //Quaternion q = transform.rotation;
-        //q.eulerAngles = new Vector3(q.eulerAngles.x, q.eulerAngles.y, 0);
-        //transform.rotation = q;
+        input_mouse_wheel = Input.GetAxisRaw("Mouse ScrollWheel");
+        if (input_mouse_wheel > 0)
+            camera_offset /= 1.1f;
+        else if (input_mouse_wheel < 0)
+            camera_offset *= 1.1f;
+
     }
 
-    private void RotateCCW()
+    float ClampAngle(float angle, float min, float max)
     {
-        if (press_Tkey == false) return;
-        camera_transform.RotateAround(target.position, target.transform.up, -rotate_angle * Time.deltaTime); // 타겟을 중심으로, y축 회전(공전), 회전각도
-       
+        if (angle < -360)
+            angle += 360;
+        if (angle > 360)
+            angle -= 360;
+        return Mathf.Clamp(angle, min, max);
     }
 }
