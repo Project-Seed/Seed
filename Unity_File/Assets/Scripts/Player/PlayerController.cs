@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     private Transform child;
     private Transform aim;
     ThrowManager throwManager;
-
+    Camera main_cam;
     public Qick_slot_sum qick;
 
 
@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour
         aim = transform.GetChild(1);
         is_jumping = false;
         is_run = false;
+        main_cam = Camera.main;
     }
 
     private void Update()                               // 키 입력은 Update에서 받고
@@ -263,23 +264,18 @@ public class PlayerController : MonoBehaviour
             else
                 player_state.updown_check = false;
 
-
             //카메라 움직임과 연동
+            Quaternion dir = main_cam.transform.localRotation;
+            dir.x = 0f; dir.z = 0f;
+
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, dir, 0.5f);
+
+            //이동할때만 모델도 연동
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||
                 Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || throw_mode)
             {
-                Quaternion dir = camera_rig_transform.localRotation;
-
-                aim.localRotation = Quaternion.AngleAxis(dir.eulerAngles.x, aim.right);
-
-                dir.x = 0f; dir.z = 0f;
-
-                if (climb_mod == false && hang_mod == false)
-                    transform.localRotation = Quaternion.Slerp(transform.localRotation, dir, 0.5f);
-                //child.rotation = Quaternion.LookRotation(lookAt);
-
                 if (!throw_mode && climb_mod == false && hang_mod == false)
-                    child.rotation = Quaternion.Slerp(child.rotation, Quaternion.LookRotation(lookAt), 0.2f);
+                    child.localRotation = Quaternion.Slerp(child.localRotation, Quaternion.LookRotation(lookAt), 0.2f);
             }
 
         }
@@ -329,7 +325,7 @@ public class PlayerController : MonoBehaviour
 
     private void Moving()
     {
-        Vector3 movement = new Vector3(input_horizontal, 0, input_vertical);
+        Vector3 movement = transform.forward * input_vertical + transform.right * input_horizontal;
         movement = movement.normalized;
 
         //문제점. 대각선이동시에는? 방향을 정해주는게 아니라(look at=) 곱해줘야함. . .

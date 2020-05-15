@@ -90,26 +90,6 @@ public class ThrowManager : MonoBehaviour
         else return false;
     }
 
-    private void CalcThrow()
-    {
-        // 낙하지점 계산
-        float horizonDist;  //수평 도달 거리
-        throw_angle = tc.mouse_move.x;
-        throw_speed = 10.0f;
-        horizonDist = (Mathf.Pow(throw_speed, 2) * Mathf.Sin(2 * throw_angle)) / gravity;
-        s = new Vector3(windVec.x * wind_power, 0, horizonDist + windVec.z * wind_power);
-        throw_at = transform.forward + s;
-        Debug.Log("forward : " + transform.forward);
-
-        Debug.Log("throw at : " + throw_angle + " " + throw_at+"d "+horizonDist);
-
-        // 해당 지점에 스프라이트 그리기
-        // 오브젝트 생성
-        //if (throw_sprite)
-        //    DestroyImmediate(throw_sprite);
-        //throw_sprite = Instantiate(circle_sprite, throw_at, Quaternion.AngleAxis(0f, Vector3.right));
-    }
-
     private void Throw()
     {
         //aim이 캐릭터 자식으로 있어서 캐릭터 움직이면 별수없이 움직임.
@@ -132,7 +112,6 @@ public class ThrowManager : MonoBehaviour
         StartCoroutine(ThrowingSeed(bullet_rig, aimForward));
     }
 
-
     IEnumerator ThrowingSeed(Rigidbody bullet_rig, Vector3 aimForward)
     {
         if (tmp.activeSelf == true)
@@ -145,28 +124,6 @@ public class ThrowManager : MonoBehaviour
         }
         else
             Destroy(tmp);
-
-        //if (!tmp) yield break;
-        //t += 0.05f;
-        //float z = throw_speed * Mathf.Cos(throw_angle) * t;
-        //float y = throw_speed * Mathf.Sin(throw_angle) * t - (0.5f * gravity * Mathf.Pow(t, 2));
-        //tmp.transform.position = new Vector3(start_transform.x, start_transform.y + y, start_transform.z + z);
-
-            ////아래 조건 착지했을 때(지면 or 오브젝트와 충돌했을 때)로 바꿀 예정
-            //if (y <= 0)
-            //{
-            //    t = 0;
-            //    DestroyImmediate(tmp);
-            //    PlantSeed(tmp.transform.position);
-            //    throw_done = true;
-            //    yield break;
-            //}
-            //else
-            //{
-            //    throw_done = false;
-            //    yield return new WaitForSeconds(0.05f);
-            //    StartCoroutine(ThrowingSeed());
-            //}
     }
 
 }

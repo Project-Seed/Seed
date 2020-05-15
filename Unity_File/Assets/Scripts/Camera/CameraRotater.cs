@@ -25,6 +25,8 @@ public class CameraRotater : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (InputManager.instance.click_mod != 0) return;
+
         MouseX += Input.GetAxis("Mouse X") * rotate_speed;
         MouseY -= Input.GetAxis("Mouse Y") * rotate_speed;
         //MouseY = Mathf.Clamp(MouseY, minY, maxY);
@@ -33,7 +35,7 @@ public class CameraRotater : MonoBehaviour
         Vector3 po = ro * camera_offset;
 
         transform.localRotation = Quaternion.Slerp(transform.localRotation, ro, 0.5f);
-        transform.localPosition = Vector3.Slerp(transform.localPosition, po, 0.5f); ;
+        transform.localPosition = Vector3.Lerp(transform.localPosition, po, 0.5f); ;
         transform.LookAt(target);
         //transform.RotateAround(target.position, target.right, MouseY);
        
