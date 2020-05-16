@@ -51,6 +51,8 @@ public class PlayerState : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        spine = animator.GetBoneTransform(HumanBodyBones.Chest); // 상체값 가져오기
     }
 
     /*
@@ -129,8 +131,11 @@ public class PlayerState : MonoBehaviour
             climb_blend = 1f;
 
         animator.SetFloat("climb_Blend", climb_blend);
+    }
 
-        if(shoot_check)
+    private void LateUpdate()
+    {
+        if (shoot_check)
         {
             spine.LookAt(target.position); //플레이어의 상체부분이 타겟 위치 보기
             spine.rotation = Quaternion.Euler(ress);
