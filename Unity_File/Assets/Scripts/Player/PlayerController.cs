@@ -7,33 +7,29 @@ public class PlayerController : MonoBehaviour
     private Transform player_transform;
     // 플레이어의 위치정보를 가져옴   
     public Transform Player_transform { get => player_transform; }
-
-    private Rigidbody player_rigidbody;
-    private PlayerState player_state;
-    private float input_horizontal;         // 수직방향 입력 ws
-    private float input_vertical;           // 수평방향 입력 ad
-    private bool is_jumping;                // 점프키를 입력하면 true.
-    private bool in_ground;                 // 땅에 있으면 true.
-    private bool is_run;                    // 달리고 있는지.
-
-    public bool throw_mode = false;                 // 던지기 모드 (임시변수)
-    public float throw_position;
-    private Vector3 lookAt;
+    public GameObject inventory; // 인벤토리
+    public GameObject composer; // 합성창
+    public GameObject note; // 다이어리
+    private Transform child; // 모델 Transform.
+    ThrowManager throwManager;
+    Camera main_cam;
+    public Qick_slot_sum qick;
 
     public float player_speed = 2.0f;         // 캐릭터 걷는 속도
     public float player_run_speed = 6.0f;     // 캐릭터 달리는 속도
     public float player_jump_power = 10.0f;    // 캐릭터 점프력
 
-    public GameObject inventory; // 인벤토리
-    public GameObject composer; // 합성창
-    public GameObject note; // 다이어리
-    public Transform camera_rig_transform;
-    private Transform child;
-    private Transform aim;
-    ThrowManager throwManager;
+    private Rigidbody player_rigidbody;
+    private PlayerState player_state;
+    private float input_horizontal;         // 수직방향 입력 ws
+    private float input_vertical;           // 수평방향 입력 ad
 
-    public Qick_slot_sum qick;
+    private bool is_jumping;                // 점프키를 입력하면 true.
+    private bool in_ground;                 // 땅에 있으면 true.
+    private bool is_run;                    // 달리고 있는지.
 
+    public bool throw_mode = false;                 // 던지기 모드 (임시변수)
+    private Vector3 lookAt;
 
     public bool climb_crash = false; // 갈색 충돌시 true
     public bool climb_mod = false; // 갈색 충돌시 키 누르면 true
@@ -76,11 +72,12 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         player_rigidbody = GetComponent<Rigidbody>();
-        player_transform = GetComponent<Transform>();
+        player_transform = GetComponent<Transform>(); //나중에 제거. 그냥 transform으로 쓰기
         player_state = GetComponent<PlayerState>();
         throwManager = GetComponent<ThrowManager>();
+        main_cam = Camera.main;
         child = transform.GetChild(0);
-        aim = transform.GetChild(1);
+
         is_jumping = false;
         is_run = false;
     }
@@ -263,23 +260,18 @@ public class PlayerController : MonoBehaviour
             else
                 player_state.updown_check = false;
 
-
             //카메라 움직임과 연동
+            Quaternion dir = main_cam.transform.localRotation;
+            dir.x = 0f; dir.z = 0f;
+
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, dir, 0.5f);
+
+            //이동할때만 모델도 연동
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||
                 Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || throw_mode)
             {
-                Quaternion dir = camera_rig_transform.localRotation;
-
-                aim.localRotation = Quaternion.AngleAxis(dir.eulerAngles.x, aim.right);
-
-                dir.x = 0f; dir.z = 0f;
-
-                if (climb_mod == false && hang_mod == false)
-                    transform.localRotation = Quaternion.Slerp(transform.localRotation, dir, 0.5f);
-                //child.rotation = Quaternion.LookRotation(lookAt);
-
                 if (!throw_mode && climb_mod == false && hang_mod == false)
-                    child.rotation = Quaternion.Slerp(child.rotation, Quaternion.LookRotation(lookAt), 0.2f);
+                    child.localRotation = Quaternion.Slerp(child.localRotation, Quaternion.LookRotation(lookAt), 0.2f);
             }
 
         }
@@ -329,7 +321,7 @@ public class PlayerController : MonoBehaviour
 
     private void Moving()
     {
-        Vector3 movement = new Vector3(input_horizontal, 0, input_vertical);
+        Vector3 movement = transform.forward * input_vertical + transform.right * input_horizontal;
         movement = movement.normalized;
 
         //문제점. 대각선이동시에는? 방향을 정해주는게 아니라(look at=) 곱해줘야함. . .
@@ -343,7 +335,7 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("STOP" + hit.distance);
             }
 
-           player_transform.Translate(movement * (is_run ? player_run_speed : player_speed) * Time.deltaTime, Space.Self);
+           transform.Translate(movement * (is_run ? player_run_speed : player_speed) * Time.deltaTime, Space.Self);
         }
         if ((Mathf.Abs(movement.z) + Mathf.Abs(movement.x)) >= 1 && climb_mod == false && hang_mod == false)
             player_state.state_move = 1;

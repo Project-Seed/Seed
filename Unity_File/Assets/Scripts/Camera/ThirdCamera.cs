@@ -5,27 +5,29 @@ public class ThirdCamera : MonoBehaviour
 {
     public float smooth = 1.0f;
     public Transform camera_rig_transform;  //카메라 리그 위치
-    public Transform aim_transform;
+    public Transform aim;
     private float rotate_speed = 5.0f;
     private Vector3 camera_offset;
 
     public bool rotate_cam = true;
     public bool look_player = false;
 
-    [SerializeField]
-    float MouseX;
-    [SerializeField]
-    float MouseY;
+    //[SerializeField] float MouseX;
+    //[SerializeField] float MouseY;
+    public float minY = -30f;
+    public float maxY = 30f;
+    public Quaternion camera_rotate_X;
+    Quaternion camera_rotate_Y;
 
     public PlayerController GetPlayerController;
     ThrowManager GetThrowManager;
-  
+
     public Vector3 mouse_move;
     Vector3 throw_position;
     Vector3 move;
     Vector3 center;
     Vector3 arc;
-    LineRenderer  line_renderer;
+    LineRenderer line_renderer;
     bool switch_mode;
     float scroll;
     float input_mouse_wheel;
@@ -37,18 +39,20 @@ public class ThirdCamera : MonoBehaviour
 
     private void Start()
     {
-        camera_rig_transform = transform;
+        //camera_rig_transform = transform;
         //유지할 거리
-        camera_offset = camera_rig_transform.localPosition - GetPlayerController.transform.localPosition;
-        GetThrowManager = GetPlayerController.GetComponent<ThrowManager>();
+        //camera_offset = camera_rig_transform.localPosition - GetPlayerController.transform.localPosition;
+        //GetThrowManager = GetPlayerController.GetComponent<ThrowManager>();
+        camera_rotate_X = GetPlayerController.transform.localRotation;
+        camera_rotate_Y = transform.localRotation;
     }
 
     void LateUpdate()
     {
         if (InputManager.instance.click_mod == 0)
         {
-            Vector3 targetVec = GetPlayerController.transform.localPosition;
-            Quaternion camera_angle;
+            //Vector3 targetVec = GetPlayerController.transform.localPosition;
+            //Quaternion camera_angle;
             if (GameSystem.switch_mode)
             {
                 //lerp주기.
@@ -59,7 +63,7 @@ public class ThirdCamera : MonoBehaviour
             //연산은 아래에서.
             input_mouse_wheel = Input.GetAxisRaw("Mouse ScrollWheel");
 
-                //camera_rig_transform.Translate(-camera_rig_transform.forward * input_mouse_wheel, Space.Self);
+            //camera_rig_transform.Translate(-camera_rig_transform.forward * input_mouse_wheel, Space.Self);
 
             //    Vector3.MoveTowards(camera_rig_transform.localPosition, -camera_rig_transform.forward, 0.5f);
 
@@ -67,15 +71,15 @@ public class ThirdCamera : MonoBehaviour
             //마우스로 시야 전환 throwmode 일땐 rotate speed 줄이기.
             //각도제한은 camera_rig_transform의 rotation값을 제한.
             //쿼터니언 클램프 어캐함; ; ;
-            MouseX = Input.GetAxis("Mouse X") * rotate_speed;
-            MouseY = Input.GetAxis("Mouse Y") * rotate_speed / 2;
+            float MouseX = Input.GetAxis("Mouse X") * rotate_speed;
+            float MouseY = Input.GetAxis("Mouse Y") * rotate_speed;
             //MouseY = Mathf.Clamp(MouseY, -5f, 70f); --> 인풋은 -1,1 이라 소용없다. 입력값제한은 아님.
 
-            Quaternion camera_angle_X;
-            camera_angle_X = Quaternion.AngleAxis(MouseX, Vector3.up);
+            //camera_angle_X = Quaternion.AngleAxis(MouseX, Vector3.up); //이러면 월드 축에 맞는 곳에서만 됨.
+            camera_rotate_X *= Quaternion.Euler(0f, MouseX, 0f);
 
-            Quaternion camera_angle_Y;
-            camera_angle_Y = Quaternion.AngleAxis(MouseY, -Vector3.right);
+            camera_rotate_Y *= Quaternion.Euler(-MouseY, 0f, 0f);
+            //camera_rotate_Y = ClampRotation(camera_rotate_Y);
 
             ///쿼터니언 클램프 시행착오들...일단 최종 쿼터니언 회전값은 camera_angle이다.
 
@@ -84,9 +88,10 @@ public class ThirdCamera : MonoBehaviour
             //    camera_angle_Y = initY;
 
             //Quaternion camera_angle = camera_angle_X * camera_angle_Y;
-            camera_angle = Quaternion.Slerp(camera_angle_X, camera_angle_Y, 0.5f);
+            //camera_angle = Quaternion.Slerp(camera_angle_X, camera_angle_Y, 0.5f);
 
-
+            //transform.localRotation = Quaternion.Slerp(transform.localRotation, camera_rotate_Y, smooth);
+            transform.RotateAround(aim.position, aim.right, ClampRotation(camera_rotate_Y)*Time.deltaTime);
             //각도 제한을 위해 쿼터니언 x값을 float로 변환하고 clamp 한 다음 다시 변환해서 넣어줌.
             //float angleY = 2.0f * Mathf.Rad2Deg * Mathf.Atan(camera_angle.x);
             //angleY = Mathf.Clamp(angleY, -5f, 30f);
@@ -102,7 +107,9 @@ public class ThirdCamera : MonoBehaviour
 
             ///
 
-            camera_offset = camera_angle * camera_offset;
+            //camera_offset = camera_angle * camera_offset;
+
+            transform.LookAt(aim.position);
 
             //여기에 throwmode 일때 클로즈업 하는 거 추가하기.
 
@@ -112,24 +119,20 @@ public class ThirdCamera : MonoBehaviour
                     camera_offset /= 1.1f;
                 else
                     camera_offset *= 1.1f;
-            
 
-            Vector3 aim;
-            Vector3 newPos;
+            //if (GetPlayerController.throw_mode)
+            //{
+            //    aim = aim_transform.position;
+            //    newPos = aim + camera_offset / 2;
+            //}
+            //else
+            //{
+            //    aim = targetVec;
+            //    newPos = targetVec + camera_offset;
+            //}
+            //camera_rig_transform.localPosition = Vector3.Slerp(camera_rig_transform.localPosition, newPos, smooth);
+            //camera_rig_transform.LookAt(targetVec);
 
-            if (GetPlayerController.throw_mode)
-            {
-                aim = aim_transform.position;
-                newPos = aim + camera_offset / 2;
-            }
-            else
-            {
-                aim = targetVec;
-                newPos = targetVec + camera_offset;
-            }
-            camera_rig_transform.localPosition = Vector3.Slerp(camera_rig_transform.localPosition, newPos, smooth);
-            camera_rig_transform.LookAt(aim);
-            
             //커서 숨기기. **인풋매니저에 넣을것**
             //Ctrl+Shift+c 하면 다시 생김
             Cursor.visible = false;
@@ -140,6 +143,19 @@ public class ThirdCamera : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
+    }
+    private float ClampRotation(Quaternion quaternion)
+    {
+        quaternion.x /= quaternion.w;
+        quaternion.y /= quaternion.w;
+        quaternion.z /= quaternion.w;
+        quaternion.w = 1.0f;
+
+        float angleY = 2.0f * Mathf.Rad2Deg * Mathf.Atan(quaternion.x);
+        angleY = Mathf.Clamp(angleY, minY, minY);
+        //quaternion.x = Mathf.Tan(0.5f * Mathf.Deg2Rad * angleY);
+
+        return angleY;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -165,7 +181,7 @@ public class ThirdCamera : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(GetPlayerController.transform.position);
         float hitdist = 0.0f;
         Vector3 target_point = GetPlayerController.transform.position;
-        if (player_plane.Raycast(ray,out hitdist))
+        if (player_plane.Raycast(ray, out hitdist))
         {
             center = (GetPlayerController.transform.position + target_point) * 0.5f;
             center.y -= 2.0f;
@@ -173,7 +189,7 @@ public class ThirdCamera : MonoBehaviour
             GetPlayerController.transform.rotation = Quaternion.Slerp(GetPlayerController.transform.rotation, target_rotation, 1.0f * Time.deltaTime);
             RaycastHit hit_info;
 
-            if(Physics.Linecast(GetPlayerController.transform.position,target_point,out hit_info))
+            if (Physics.Linecast(GetPlayerController.transform.position, target_point, out hit_info))
             {
                 target_point = hit_info.point;
             }
@@ -185,7 +201,7 @@ public class ThirdCamera : MonoBehaviour
         Vector3 rel_center = GetPlayerController.transform.position - center;
         Vector3 aim_rel_center = target_point - center;
 
-        for(float index = 0.0f,interval = -0.0417f; interval < 1.0f;)
+        for (float index = 0.0f, interval = -0.0417f; interval < 1.0f;)
         {
             arc = Vector3.Slerp(rel_center, aim_rel_center, interval += 0.0417f);
             line_renderer.SetPosition((int)index++, arc + center);
@@ -193,7 +209,7 @@ public class ThirdCamera : MonoBehaviour
         }
         Debug.Log("End Arc");
     }
-  
+
 }
 
 
