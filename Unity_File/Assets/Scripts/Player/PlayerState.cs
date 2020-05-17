@@ -133,6 +133,7 @@ public class PlayerState : MonoBehaviour
         animator.SetFloat("climb_Blend", climb_blend);
     }
 
+    /*
     private void LateUpdate()
     {
         if (shoot_check)
@@ -140,7 +141,7 @@ public class PlayerState : MonoBehaviour
             spine.LookAt(target.position); //플레이어의 상체부분이 타겟 위치 보기
             spine.rotation = Quaternion.Euler(ress);
         }
-    }
+    }*/
 
     public void dash_on()
     {
