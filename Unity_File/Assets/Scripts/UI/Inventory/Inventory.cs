@@ -8,6 +8,10 @@ public class Inventory : MonoBehaviour
     public GameObject viewport;
     public GameObject content;
     public GameObject quick_button;
+    public bool quick_bool = false;
+    public Image quick_bg;
+    public Sprite quick_image_off;
+    public Sprite quick_image_on;
     public List<GameObject> item_box;
 
     public Text item_names;
@@ -21,6 +25,8 @@ public class Inventory : MonoBehaviour
     public string quick_name;
 
     public Sprite alpha;
+
+    public Inven_quick in_qu;
 
     
     private void Awake()
@@ -55,7 +61,6 @@ public class Inventory : MonoBehaviour
     private void OnDisable()
     {
         InputManager.instance.click_mod = 0;
-        quick_off();
     }
 
     private void Update()
@@ -72,6 +77,55 @@ public class Inventory : MonoBehaviour
                 item_box[i].GetComponent<Inventory_box>().image.sprite = alpha;
                 item_box[i].GetComponentInChildren<Text>().text = "";
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        { 
+            if(quick_bool == true)
+            {
+                if(quick_mod == false)
+                {
+                    quick_mod = true;
+                    quick_name = item_choose;
+                    quick_bg.sprite = quick_image_on;
+                }
+                else
+                {
+                    quick_mod = false;
+                    quick_bg.sprite = quick_image_off;
+                }
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1) && quick_mod == true)
+        {
+            in_qu.item_set(0, quick_name);
+            quick_mod = false;
+            quick_bg.sprite = quick_image_off;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && quick_mod == true)
+        {
+            in_qu.item_set(1, quick_name);
+            quick_mod = false;
+            quick_bg.sprite = quick_image_off;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && quick_mod == true)
+        {
+            in_qu.item_set(2, quick_name);
+            quick_mod = false;
+            quick_bg.sprite = quick_image_off;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4) && quick_mod == true)
+        {
+            in_qu.item_set(3, quick_name);
+            quick_mod = false;
+            quick_bg.sprite = quick_image_off;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5) && quick_mod == true)
+        {
+            in_qu.item_set(4, quick_name);
+            quick_mod = false;
+            quick_bg.sprite = quick_image_off;
         }
     }
 
@@ -92,22 +146,17 @@ public class Inventory : MonoBehaviour
             item_names.text = GameSystem.instance.item_search(item_choose, "name_ko");
             item_image.sprite = gameObject.GetComponent<Inventory_box>().image.sprite;
 
-            if (GameSystem.instance.item_search(item_choose, "category") == "consumable" || 
+            if (GameSystem.instance.item_search(item_choose, "category") == "consumable" ||
                 GameSystem.instance.item_search(item_choose, "category") == "seed")
+            {
                 quick_button.SetActive(true);
+                quick_bool = true;
+            }
             else
+            {
                 quick_button.SetActive(false);
+                quick_bool = false;
+            }
         }
-    }
-
-    public void quick_click() // 단축키 등록 클릭
-    {
-        quick_mod = true;
-        quick_name = item_choose;
-    }
-
-    public void quick_off()
-    {
-        quick_mod = false;
     }
 }

@@ -14,11 +14,11 @@ public class Bullet : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
             {
-                Debug.Log("Plant");
                 ContactPoint point = collision.GetContact(0);
                 Vector3 pos = point.point;
                 Vector3 normal = point.normal;
-                Debug.Log("Nomal : " + normal);
+
+                //pos는 Ray 쏜 곳.
                 plant.PlantSeed(pos, normal, false);
 
                 gameObject.SetActive(false);
@@ -28,11 +28,9 @@ public class Bullet : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
             {
-                Debug.Log("Plant");
                 ContactPoint point = collision.GetContact(0);
                 Vector3 pos = point.point;
                 Vector3 normal = point.normal;
-                Debug.Log("Nomal : " + normal);
                 plant.PlantSeed(pos, normal, true);
 
                 gameObject.SetActive(false);

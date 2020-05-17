@@ -11,7 +11,7 @@ class Plant : MonoBehaviour
     public GameObject plant;
 
     public string seed_name;
-    public Vector3 red_go;
+    public Vector3 red_go; // 빨간 씨앗이 자라는 방향
 
     private void Start()
     {

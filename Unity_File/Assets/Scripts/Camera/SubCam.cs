@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class SubCam : MonoBehaviour
 {
+    public Transform target;
 
-    public void SwitchCam(Camera camA, Camera camB)
+    private void LateUpdate()
     {
-        //smooth주기
-        camA.enabled = false;
-        camB.enabled = true;
-        
+        transform.localRotation.SetLookRotation(target.forward);
     }
+
 }
