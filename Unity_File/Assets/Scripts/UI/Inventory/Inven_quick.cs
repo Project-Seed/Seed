@@ -19,6 +19,7 @@ public class Inven_quick : MonoBehaviour
     public List<Image> inven_slot_image; // 인벤쪽 이미지
     public List<Text> inven_slot_text; // 인벤쪽 텍스트
 
+
     private void Awake()
     {
         num = 0;
@@ -41,7 +42,6 @@ public class Inven_quick : MonoBehaviour
                 inven_slot_text[i].text = GameSystem.instance.item_num[item_names[i]].ToString();
             }
         }
-
 
         if(Input.GetKeyDown(KeyCode.Alpha1) && InputManager.instance.click_mod == 0)
         {
