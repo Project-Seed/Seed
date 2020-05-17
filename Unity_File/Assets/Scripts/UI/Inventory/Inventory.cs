@@ -8,6 +8,10 @@ public class Inventory : MonoBehaviour
     public GameObject viewport;
     public GameObject content;
     public GameObject quick_button;
+    public bool quick_bool = false;
+    public Image quick_bg;
+    public Sprite quick_image_off;
+    public Sprite quick_image_on;
     public List<GameObject> item_box;
 
     public Text item_names;
@@ -73,6 +77,24 @@ public class Inventory : MonoBehaviour
                 item_box[i].GetComponentInChildren<Text>().text = "";
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        { 
+            if(quick_bool == true)
+            {
+                if(quick_mod == false)
+                {
+                    quick_mod = true;
+                    quick_name = item_choose;
+                    quick_bg.sprite = quick_image_on;
+                }
+                else
+                {
+                    quick_mod = false;
+                    quick_bg.sprite = quick_image_off;
+                }
+            }
+        }
     }
 
     public void Inventory_click(GameObject gameObject) // 인벤토리 내용물 클릭
@@ -92,19 +114,22 @@ public class Inventory : MonoBehaviour
             item_names.text = GameSystem.instance.item_search(item_choose, "name_ko");
             item_image.sprite = gameObject.GetComponent<Inventory_box>().image.sprite;
 
-            if (GameSystem.instance.item_search(item_choose, "category") == "consumable" || 
+            if (GameSystem.instance.item_search(item_choose, "category") == "consumable" ||
                 GameSystem.instance.item_search(item_choose, "category") == "seed")
+            {
                 quick_button.SetActive(true);
+                quick_bool = true;
+            }
             else
+            {
                 quick_button.SetActive(false);
+                quick_bool = false;
+            }
         }
     }
 
-    public void quick_click() // 단축키 등록 클릭
-    {
-        quick_mod = true;
-        quick_name = item_choose;
-    }
+
+
 
     public void quick_off()
     {
