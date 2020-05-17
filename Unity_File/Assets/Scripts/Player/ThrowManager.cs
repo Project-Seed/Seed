@@ -16,6 +16,7 @@ public class ThrowManager : MonoBehaviour
     private Camera sub_cam;
     private Vector3 dest;
     string seed_name;
+    public CameraRotater cameraRotater;
 
     private void Start()
     {
@@ -67,6 +68,10 @@ public class ThrowManager : MonoBehaviour
     {
         camB.enabled = true;
         camA.enabled = false;
+        if (camB == main_cam)
+            cameraRotater.minY = -5f;
+        else
+            cameraRotater.minY = -20f;
     }
 
     private bool isPlantable()
