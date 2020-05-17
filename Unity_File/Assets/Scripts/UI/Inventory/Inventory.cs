@@ -26,6 +26,8 @@ public class Inventory : MonoBehaviour
 
     public Sprite alpha;
 
+    public Inven_quick in_qu;
+
     
     private void Awake()
     {
@@ -59,7 +61,6 @@ public class Inventory : MonoBehaviour
     private void OnDisable()
     {
         InputManager.instance.click_mod = 0;
-        quick_off();
     }
 
     private void Update()
@@ -95,6 +96,37 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1) && quick_mod == true)
+        {
+            in_qu.item_set(0, quick_name);
+            quick_mod = false;
+            quick_bg.sprite = quick_image_off;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && quick_mod == true)
+        {
+            in_qu.item_set(1, quick_name);
+            quick_mod = false;
+            quick_bg.sprite = quick_image_off;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && quick_mod == true)
+        {
+            in_qu.item_set(2, quick_name);
+            quick_mod = false;
+            quick_bg.sprite = quick_image_off;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4) && quick_mod == true)
+        {
+            in_qu.item_set(3, quick_name);
+            quick_mod = false;
+            quick_bg.sprite = quick_image_off;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5) && quick_mod == true)
+        {
+            in_qu.item_set(4, quick_name);
+            quick_mod = false;
+            quick_bg.sprite = quick_image_off;
+        }
     }
 
     public void Inventory_click(GameObject gameObject) // 인벤토리 내용물 클릭
@@ -126,13 +158,5 @@ public class Inventory : MonoBehaviour
                 quick_bool = false;
             }
         }
-    }
-
-
-
-
-    public void quick_off()
-    {
-        quick_mod = false;
     }
 }
