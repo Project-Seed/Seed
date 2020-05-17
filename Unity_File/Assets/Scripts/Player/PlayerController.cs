@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private Transform child; // 모델 Transform.
     ThrowManager throwManager;
     Transform main_cam;
-    public Qick_slot_sum qick;
+    public Inven_quick qick;
 
     public float player_speed = 2.0f;         // 캐릭터 걷는 속도
     public float player_run_speed = 6.0f;     // 캐릭터 달리는 속도
@@ -190,15 +190,15 @@ public class PlayerController : MonoBehaviour
             //좌클릭 타겟팅 시작.
             if (Input.GetMouseButtonDown(0))
             {
-                if (GameSystem.instance.item_search(qick.item_names, "category") == "seed") // 씨앗 타입이어야지만 던져짐
+                if (GameSystem.instance.item_search(qick.item_name, "category") == "seed") // 씨앗 타입이어야지만 던져짐
                 {
-                    if (GameSystem.instance.item_num[qick.item_names] >= 1 && InputManager.instance.click_mod == 0)
+                    if (GameSystem.instance.item_num[qick.item_name] >= 1 && InputManager.instance.click_mod == 0)
                     {
                         throw_mode = true;
                         lookAt = transform.forward;
                         child.rotation = Quaternion.Slerp(child.rotation, Quaternion.LookRotation(lookAt), 0.5f);
 
-                        throwManager.mouse_down(qick.item_names);
+                        throwManager.mouse_down(qick.item_name);
 
                         player_state.shoot_ready();
                     }
@@ -230,7 +230,7 @@ public class PlayerController : MonoBehaviour
                 if (throw_mode) //취소를 안했을 경우에만 발사
                 {
                     throw_mode = false;
-                    GameSystem.instance.item_num[qick.item_names]--;
+                    GameSystem.instance.item_num[qick.item_name]--;
                     throwManager.mouse_up(true);
 
                     player_state.shoot();
