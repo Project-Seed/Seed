@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public GameObject note; // 다이어리
     private Transform child; // 모델 Transform.
     ThrowManager throwManager;
-    Camera main_cam;
+    Transform main_cam;
     public Qick_slot_sum qick;
 
     public float player_speed = 2.0f;         // 캐릭터 걷는 속도
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
         player_transform = GetComponent<Transform>(); //나중에 제거. 그냥 transform으로 쓰기
         player_state = GetComponent<PlayerState>();
         throwManager = GetComponent<ThrowManager>();
-        main_cam = Camera.main;
+        main_cam = Camera.main.transform;
         child = transform.GetChild(0);
 
         is_jumping = false;
@@ -261,7 +261,7 @@ public class PlayerController : MonoBehaviour
                 player_state.updown_check = false;
 
             //카메라 움직임과 연동
-            Quaternion dir = main_cam.transform.localRotation;
+            Quaternion dir = main_cam.localRotation;
             dir.x = 0f; dir.z = 0f;
 
             transform.localRotation = Quaternion.Slerp(transform.localRotation, dir, 0.5f);

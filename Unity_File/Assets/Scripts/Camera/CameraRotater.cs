@@ -25,7 +25,14 @@ public class CameraRotater : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (InputManager.instance.click_mod != 0) return;
+        if (InputManager.instance.click_mod != 0)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            return;
+        }
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
 
         MouseX += Input.GetAxis("Mouse X") * rotate_speed;
         MouseY -= Input.GetAxis("Mouse Y") * rotate_speed;
