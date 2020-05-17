@@ -45,8 +45,8 @@ public class Dialogue : MonoBehaviour
             Vector3 guide_pos = cameras.WorldToScreenPoint(npc_ob.transform.position);
             Vector3 name_pos = cameras.WorldToScreenPoint(name_position.transform.position);
 
-            npc_name.transform.position = new Vector3(name_pos.x, name_pos.y, npc_name.transform.position.z);
-            talk_guide.transform.position = new Vector3(guide_pos.x, guide_pos.y, talk_guide.transform.position.z);
+            npc_name.transform.position = new Vector3(name_pos.x, name_pos.y + 20, npc_name.transform.position.z);
+            talk_guide.transform.position = new Vector3(guide_pos.x + 120, guide_pos.y, talk_guide.transform.position.z);
 
             if (Input.GetKeyDown(KeyCode.H) && InputManager.instance.click_mod == 0 && onss == 1)
             {
