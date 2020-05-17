@@ -12,12 +12,16 @@ public class Inventory : MonoBehaviour
 
     public Text item_names;
     public Text item_explanation;
+    public Image item_image;
     
     private string item_choose = null; // 어떤 아이템을 눌렀는지
     // private int item_move = 0; // 몇번째 아이템에 커서가 있는지
 
     public bool quick_mod = false;
     public string quick_name;
+
+    public Sprite alpha;
+
     
     private void Awake()
     {
@@ -29,15 +33,19 @@ public class Inventory : MonoBehaviour
 
             if (i < GameSystem.instance.item_time.Count)
             {
-                item_box[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Item2D/" + GameSystem.instance.item_time[i]);
-                item_box[i].GetComponentInChildren<Text>().text = GameSystem.instance.item_num[GameSystem.instance.item_time[i]].ToString();
+                item_box[i].GetComponent<Inventory_box>().image.sprite = Resources.Load<Sprite>("Item2D/" + GameSystem.instance.item_time[i]);
+                item_box[i].GetComponentInChildren<Text>().text = "x " + GameSystem.instance.item_num[GameSystem.instance.item_time[i]].ToString();
             }
             else
             {
-                item_box[i].GetComponent<Image>().sprite = null;
+                item_box[i].GetComponent<Inventory_box>().image.sprite = alpha;
                 item_box[i].GetComponentInChildren<Text>().text = "";
             }
         }
+
+        item_explanation.text = "";
+        item_names.text = "";
+        item_image.sprite = alpha;
     }
 
     private void OnEnable()
@@ -56,12 +64,12 @@ public class Inventory : MonoBehaviour
         {
             if (i < GameSystem.instance.item_time.Count)
             {
-                item_box[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Item2D/" + GameSystem.instance.item_time[i]);
-                item_box[i].GetComponentInChildren<Text>().text = GameSystem.instance.item_num[GameSystem.instance.item_time[i]].ToString();
+                item_box[i].GetComponent<Inventory_box>().image.sprite = Resources.Load<Sprite>("Item2D/" + GameSystem.instance.item_time[i]);
+                item_box[i].GetComponentInChildren<Text>().text = "x " + GameSystem.instance.item_num[GameSystem.instance.item_time[i]].ToString();
             }
             else
             {
-                item_box[i].GetComponent<Image>().sprite = null;
+                item_box[i].GetComponent<Inventory_box>().image.sprite = alpha;
                 item_box[i].GetComponentInChildren<Text>().text = "";
             }
         }
@@ -82,6 +90,7 @@ public class Inventory : MonoBehaviour
         {
             item_explanation.text = GameSystem.instance.item_search(item_choose, "explanation_ko");
             item_names.text = GameSystem.instance.item_search(item_choose, "name_ko");
+            item_image.sprite = gameObject.GetComponent<Inventory_box>().image.sprite;
 
             if (GameSystem.instance.item_search(item_choose, "category") == "consumable" || 
                 GameSystem.instance.item_search(item_choose, "category") == "seed")
