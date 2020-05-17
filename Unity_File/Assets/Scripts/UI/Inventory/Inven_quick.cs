@@ -19,8 +19,33 @@ public class Inven_quick : MonoBehaviour
     public List<Image> inven_slot_image; // 인벤쪽 이미지
     public List<Text> inven_slot_text; // 인벤쪽 텍스트
 
+<<<<<<< HEAD
     void Update()
     {
+=======
+    private void Awake()
+    {
+        num = 0;
+        slot[0].GetComponent<Image>().sprite = slot_on_sp[0];
+        slot[1].GetComponent<Image>().sprite = slot_off_sp[1];
+        slot[2].GetComponent<Image>().sprite = slot_off_sp[2];
+        slot[3].GetComponent<Image>().sprite = slot_off_sp[3];
+        slot[4].GetComponent<Image>().sprite = slot_off_sp[4];
+
+        item_name = item_names[num];
+    }
+
+    void Update()
+    {
+        for (int i = 0; i <= 4; i++)
+        {
+            if (item_active[i] == 1)
+            {
+                slot_text[i].text = GameSystem.instance.item_num[item_names[i]].ToString();
+                inven_slot_text[i].text = GameSystem.instance.item_num[item_names[i]].ToString();
+            }
+        }
+>>>>>>> 83c4f9dbb54b6074358e73bf1ba2b18c52c80cb3
 
 
         if(Input.GetKeyDown(KeyCode.Alpha1) && InputManager.instance.click_mod == 0)
@@ -86,5 +111,10 @@ public class Inven_quick : MonoBehaviour
         item_active[num] = 1;
         slot_image[num].sprite = Resources.Load<Sprite>("Item2D/" + item_names[num]);
         inven_slot_image[num].sprite = Resources.Load<Sprite>("Item2D/" + item_names[num]);
+<<<<<<< HEAD
+=======
+
+        item_name = item_names[num];
+>>>>>>> 83c4f9dbb54b6074358e73bf1ba2b18c52c80cb3
     }
 }

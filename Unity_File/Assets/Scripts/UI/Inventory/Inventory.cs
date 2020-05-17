@@ -31,7 +31,7 @@ public class Inventory : MonoBehaviour
     
     private void Awake()
     {
-        for(int i=0; i<50; i++)
+        for(int i=0; i<40; i++)
         {
             GameObject gameObject = Instantiate(content, new Vector3(0, 0, 0), Quaternion.identity, viewport.transform); // viewport 밑 자식으로 복제
             gameObject.name = "Inventory_box_" + i;
@@ -65,7 +65,7 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 40; i++)
         {
             if (i < GameSystem.instance.item_time.Count)
             {
