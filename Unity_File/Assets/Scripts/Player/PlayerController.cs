@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
 
-        yield return new WaitForSeconds(1.4f);
+        yield return new WaitForSeconds(1.6f);
 
         for (int i = 0; i < 20; i++)
         {
@@ -279,9 +279,15 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             if (inventory.activeSelf == true)
+            {
                 inventory.SetActive(false);
-            else if (InputManager.instance.click_mod == 0)
+            }
+            else
+            {
                 inventory.SetActive(true);
+                composer.SetActive(false);
+                note.SetActive(false);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.O))
@@ -289,7 +295,11 @@ public class PlayerController : MonoBehaviour
             if (composer.activeSelf == true)
                 composer.SetActive(false);
             else
+            {
+                inventory.SetActive(false);
                 composer.SetActive(true);
+                note.SetActive(false);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.P))
@@ -297,7 +307,11 @@ public class PlayerController : MonoBehaviour
             if (note.activeSelf == true)
                 note.SetActive(false);
             else
+            {
+                inventory.SetActive(false);
+                composer.SetActive(false);
                 note.SetActive(true);
+            }
         }
 
 
