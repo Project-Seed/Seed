@@ -272,7 +272,7 @@ public class PlayerController : MonoBehaviour
             {
                 transform.localRotation = dir;
 
-                if ( climb_mod == false && hang_mod == false)
+                if (climb_mod == false && hang_mod == false)
                     child.localRotation = Quaternion.Slerp(child.localRotation, transform.localRotation, 0.2f);
             }
 
