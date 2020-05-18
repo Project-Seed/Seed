@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private Transform child; // 모델 Transform.
     ThrowManager throwManager;
     Transform main_cam;
+    public Camera cameras;
     public Inven_quick qick;
 
     public float player_speed = 2.0f;         // 캐릭터 걷는 속도
@@ -38,6 +39,10 @@ public class PlayerController : MonoBehaviour
 
     public bool hang_crash = false; // 파랑 충돌시 true
     public bool hang_mod = false; // 파랑 충돌시 키 누르면 true
+
+    bool eat_bool = false; // 먹기면 true
+    string eat_item;
+    GameObject eat_object;
 
 
     IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 1초간 점프금지
@@ -279,6 +284,25 @@ public class PlayerController : MonoBehaviour
                 if (climb_mod == false && hang_mod == false)
                     child.localRotation = Quaternion.Slerp(child.localRotation, Quaternion.LookRotation(lookAt), 0.2f);
             }
+
+
+
+            // 아이템 먹기
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (GameSystem.instance.item_num[eat_item] == 0) // 못먹었던 아이템이면
+                    GameSystem.instance.item_time.Add(eat_item);
+                GameSystem.instance.item_num[eat_item] += 1;
+
+                if (Dictionarys.instance.dictionary_num[eat_item] == false) // '한번도' 못먹었던 아이템이면 (도감용)
+                    Dictionarys.instance.dictionary_num[eat_item] = true;
+
+                Destroy(eat_object);
+
+                eat_bool = false;
+                Key_guide.instance.item_off();
+                Key_guide.instance.item_name_off();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.I))
@@ -404,22 +428,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        IItem item = collision.GetComponent<IItem>(); //IItem을 상속받는 모든 아이템들
-        if (item != null)                         //아이템과 부딪혔다면 함수를 호출하고 지움.
-        {
-            item.Collided();
-
-            if (GameSystem.instance.item_num[collision.name] == 0) // 못먹었던 아이템이면
-                GameSystem.instance.item_time.Add(collision.name);
-            GameSystem.instance.item_num[collision.name] += 1;
-
-            if (Dictionarys.instance.dictionary_num[collision.name] == false) // '한번도' 못먹었던 아이템이면 (도감용)
-                Dictionarys.instance.dictionary_num[collision.name] = true;
-
-            Destroy(collision.gameObject);
-        }
-
-
         if (collision.gameObject.name == "brown_trigger")
         {
             Debug.Log("갈색 충돌");
@@ -431,10 +439,33 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit(Collider collision)
     {
+        IItem item = collision.GetComponent<IItem>(); //IItem을 상속받는 모든 아이템들
+        if (item != null)                         //아이템과 부딪혔다면 함수를 호출하고 지움.
+        {
+            Key_guide.instance.item_off();
+            Key_guide.instance.item_name_off();
+        }
+
         if (collision.gameObject.name == "brown_trigger")
         {
             Debug.Log("갈색 떨어짐");
             climb_crash = false;
+        }
+    }
+
+
+    private void OnTriggerStay(Collider collision)
+    {
+        IItem item = collision.GetComponent<IItem>(); //IItem을 상속받는 모든 아이템들
+        if (item != null)                         //아이템과 부딪혔다면 함수를 호출하고 지움.
+        {
+            eat_bool = true;
+            eat_item = collision.name;
+            eat_object = collision.gameObject;
+            Key_guide.instance.item_on();
+            Vector3 eat_pos = cameras.WorldToScreenPoint(eat_object.transform.position);
+            string eat_item2 = GameSystem.instance.item_search(eat_item, "name_ko");
+            Key_guide.instance.item_name_on(eat_item2, eat_pos);
         }
     }
 }
