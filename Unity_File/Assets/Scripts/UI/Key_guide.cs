@@ -31,4 +31,13 @@ public class Key_guide : MonoBehaviour
     {
         talk.SetActive(false);
     }
+
+    public void item_on()
+    {
+        item.SetActive(true);
+    }
+    public void item_off()
+    {
+        item.SetActive(false);
+    }
 }
