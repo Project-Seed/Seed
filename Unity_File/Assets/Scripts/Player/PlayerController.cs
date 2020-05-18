@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private Transform child; // 모델 Transform.
     ThrowManager throwManager;
     Transform main_cam;
+    public Camera cameras;
     public Inven_quick qick;
 
     public float player_speed = 2.0f;         // 캐릭터 걷는 속도
@@ -300,6 +301,7 @@ public class PlayerController : MonoBehaviour
 
                 eat_bool = false;
                 Key_guide.instance.item_off();
+                Key_guide.instance.item_name_off();
             }
         }
 
@@ -441,6 +443,7 @@ public class PlayerController : MonoBehaviour
         if (item != null)                         //아이템과 부딪혔다면 함수를 호출하고 지움.
         {
             Key_guide.instance.item_off();
+            Key_guide.instance.item_name_off();
         }
 
         if (collision.gameObject.name == "brown_trigger")
@@ -460,6 +463,9 @@ public class PlayerController : MonoBehaviour
             eat_item = collision.name;
             eat_object = collision.gameObject;
             Key_guide.instance.item_on();
+            Vector3 eat_pos = cameras.WorldToScreenPoint(eat_object.transform.position);
+            string eat_item2 = GameSystem.instance.item_search(eat_item, "name_ko");
+            Key_guide.instance.item_name_on(eat_item2, eat_pos);
         }
     }
 }
