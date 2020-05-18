@@ -181,7 +181,7 @@ public class PlayerState : MonoBehaviour
 
     IEnumerator lending_coroutine()
     {
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(1f);
         animator.ResetTrigger("lending");
         lending_time = false;
     }

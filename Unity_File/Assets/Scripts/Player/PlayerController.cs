@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetButtonDown("Jump"))
             {
-                if (!is_jumping)
+                if (!is_jumping && player_state.lending_time == false)
                     StartCoroutine(Jumping());
             }
 
