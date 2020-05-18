@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class Dialogue : MonoBehaviour
 {
     public GameObject npc_name;
-    public GameObject talk_guide;
     public GameObject dialogue_box;
 
     public Text name_text;
@@ -31,12 +30,7 @@ public class Dialogue : MonoBehaviour
 
     int quest_num; // 충돌 npc의 퀘스트 번호
     int quest_now; // 충돌 npc의 퀘스트 진행상태
-
-
-    void Start()
-    {
-
-    }
+    
 
     void Update()
     {
@@ -46,7 +40,6 @@ public class Dialogue : MonoBehaviour
             Vector3 name_pos = cameras.WorldToScreenPoint(name_position.transform.position);
 
             npc_name.transform.position = new Vector3(name_pos.x, name_pos.y + 20, npc_name.transform.position.z);
-            talk_guide.transform.position = new Vector3(guide_pos.x + 120, guide_pos.y, talk_guide.transform.position.z);
 
             if (Input.GetKeyDown(KeyCode.H) && InputManager.instance.click_mod == 0 && onss == 1)
             {
@@ -73,7 +66,7 @@ public class Dialogue : MonoBehaviour
         onss = 0;
 
         npc_name.SetActive(true);
-        talk_guide.SetActive(true);
+        Key_guide.instance.talk_on();
 
         npc_ob = npc_obs;
         name_position = name_positions;
@@ -111,7 +104,7 @@ public class Dialogue : MonoBehaviour
 
         if(onss != 1)
         {
-            talk_guide.SetActive(false);
+            Key_guide.instance.talk_off();
             quest_image.color = new Color(0, 0, 0, 0);
         }
         else
@@ -123,7 +116,7 @@ public class Dialogue : MonoBehaviour
     public void quest_off()
     {
         npc_name.SetActive(false);
-        talk_guide.SetActive(false);
+        Key_guide.instance.talk_off();
 
         quest_bool = false;
     }

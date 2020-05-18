@@ -337,6 +337,8 @@ public class PlayerController : MonoBehaviour
     {
         if (InputManager.instance.click_mod == 0)
             Moving();
+        else
+            player_state.state_move = 0;
     }
 
     private void Moving()
