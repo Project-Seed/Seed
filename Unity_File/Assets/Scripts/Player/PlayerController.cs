@@ -263,19 +263,22 @@ public class PlayerController : MonoBehaviour
             Quaternion dir = main_cam.localRotation;
             dir.x = 0f; dir.z = 0f;
 
-            if(hang_mod == false)
+            if (hang_mod == false)
                 transform.localRotation = Quaternion.Slerp(transform.localRotation, dir, 0.5f);
 
-            //이동할때만 모델도 연동
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||
-                Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || throw_mode)
+            //발사모드에서는 캐릭터 회전 안함. 앞만봄
+            if (throw_mode)
+                child.localRotation = Quaternion.Slerp(child.localRotation, transform.localRotation, 0.2f);
+
+            //이동할때만 모델회전
+            else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||
+                     Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
             {
                 transform.localRotation = dir;
 
                 if (climb_mod == false && hang_mod == false)
-                    child.localRotation = Quaternion.Slerp(child.localRotation, transform.localRotation, 0.2f);
+                    child.localRotation = Quaternion.Slerp(child.localRotation, Quaternion.LookRotation(lookAt), 0.2f);
             }
-
         }
 
         if (Input.GetKeyDown(KeyCode.I))
@@ -332,7 +335,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Moving();
+        if (InputManager.instance.click_mod == 0)
+            Moving();
     }
 
     private void Moving()
