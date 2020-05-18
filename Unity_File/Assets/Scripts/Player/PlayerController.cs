@@ -195,8 +195,7 @@ public class PlayerController : MonoBehaviour
                     if (GameSystem.instance.item_num[qick.item_name] >= 1 && InputManager.instance.click_mod == 0)
                     {
                         throw_mode = true;
-                        lookAt = transform.forward;
-                        child.rotation = Quaternion.Slerp(child.rotation, Quaternion.LookRotation(lookAt), 0.5f);
+                        //child.localRotation = Quaternion.Slerp(child.localRotation, transform.localRotation, 0.5f);
 
                         throwManager.mouse_down(qick.item_name);
 
@@ -270,8 +269,10 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||
                 Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || throw_mode)
             {
-                if (!throw_mode && climb_mod == false && hang_mod == false)
-                    child.localRotation = Quaternion.Slerp(child.localRotation, Quaternion.LookRotation(lookAt), 0.2f);
+                transform.localRotation = dir;
+
+                if ( climb_mod == false && hang_mod == false)
+                    child.localRotation = Quaternion.Slerp(child.localRotation, transform.localRotation, 0.2f);
             }
 
         }
