@@ -46,8 +46,8 @@ public class CameraRotater : MonoBehaviour
         Quaternion ro = Quaternion.Euler(MouseY, MouseX, 0f);
         Vector3 po = ro * camera_offset;
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, ro, 0.5f);
-        transform.localPosition = Vector3.Lerp(transform.localPosition, po, 0.5f); ;
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, ro, 0.5f);
+        transform.localPosition = Vector3.Lerp(transform.localPosition, po, 0.5f);
         transform.LookAt(head);
         sub_cam.transform.rotation.SetLookRotation(player.forward);
         //transform.RotateAround(target.position, target.right, MouseY);
