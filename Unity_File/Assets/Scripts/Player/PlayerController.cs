@@ -58,9 +58,9 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(1.6f);
 
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 30; i++)
         {
-            gameObject.transform.Translate(0, 0.035f, 0);
+            gameObject.transform.Translate(0, 0.025f, 0);
             yield return new WaitForSeconds(0.01f);
         }
 
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetButtonDown("Jump"))
             {
-                if (!is_jumping)
+                if (!is_jumping && player_state.lending_time == false)
                     StartCoroutine(Jumping());
             }
 
@@ -263,7 +263,8 @@ public class PlayerController : MonoBehaviour
             Quaternion dir = main_cam.localRotation;
             dir.x = 0f; dir.z = 0f;
 
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, dir, 0.5f);
+            if(hang_mod == false)
+                transform.localRotation = Quaternion.Slerp(transform.localRotation, dir, 0.5f);
 
             //이동할때만 모델도 연동
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||
