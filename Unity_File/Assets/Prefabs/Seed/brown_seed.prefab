@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8565886035153785399}
   - component: {fileID: 845310346517096449}
   - component: {fileID: 6379256665091790072}
-  - component: {fileID: 7356699954132539528}
   - component: {fileID: 1887063111188155254}
+  - component: {fileID: 6195078963760853717}
   m_Layer: 0
   m_Name: brown_seed
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4664456185251160100}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -80,20 +80,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &7356699954132539528
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4664456185251160100}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.040296517
-  m_Height: 0.10491592
-  m_Direction: 1
-  m_Center: {x: -0.000000009313226, y: 0.009516539, z: 0.000000018626451}
 --- !u!114 &1887063111188155254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,3 +92,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52103e7d9c5e76542835598946cccb8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &6195078963760853717
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4664456185251160100}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Key_guide : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class Key_guide : MonoBehaviour
 
     public GameObject talk;
     public GameObject item;
+
+    public GameObject item_name_ob;
+    public Text item_name;
 
     public static Key_guide Instance
     {
@@ -18,9 +22,15 @@ public class Key_guide : MonoBehaviour
         instance = this;
     }
 
-    void Update()
+    public void item_name_on(string name, Vector3 ts)
     {
-        
+        item_name_ob.SetActive(true);
+        item_name_ob.transform.position = new Vector3(ts.x, ts.y + 70, ts.z);
+        item_name.text = name;
+    }
+    public void item_name_off()
+    {
+        item_name_ob.SetActive(false);
     }
 
     public void talk_on()
@@ -30,5 +40,14 @@ public class Key_guide : MonoBehaviour
     public void talk_off()
     {
         talk.SetActive(false);
+    }
+
+    public void item_on()
+    {
+        item.SetActive(true);
+    }
+    public void item_off()
+    {
+        item.SetActive(false);
     }
 }

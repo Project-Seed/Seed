@@ -102,9 +102,11 @@ GameObject:
   - component: {fileID: 5261938674893573147}
   - component: {fileID: 3773224734609962541}
   - component: {fileID: 7449418382378470100}
+  - component: {fileID: 8565677685532755023}
+  - component: {fileID: 7300586524121569017}
   m_Layer: 0
   m_Name: M_Lamp (2)
-  m_TagString: Untagged
+  m_TagString: Plantable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -170,3 +172,29 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &8565677685532755023
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9177615312411770376}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.5942652, y: 46.571514, z: 4.1455836}
+  m_Center: {x: -0.9158464, y: 23.285757, z: -0.050194837}
+--- !u!65 &7300586524121569017
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9177615312411770376}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.221065, y: 12.110986, z: 4.5874605}
+  m_Center: {x: -10.386587, y: 37.64305, z: -0.012754375}
