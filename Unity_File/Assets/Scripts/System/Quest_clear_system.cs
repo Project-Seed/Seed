@@ -43,4 +43,19 @@ public class Quest_clear_system : MonoBehaviour
 
         return data;
     }
+
+    public void clear_reward(int num)
+    {
+        switch (num)
+        {
+            case 1:
+                if (GameSystem.instance.item_num["aliquot_part"] == 0) // 못먹었던 아이템이면
+                    GameSystem.instance.item_time.Add("aliquot_part");
+                GameSystem.instance.item_num["aliquot_part"] += 1;
+
+                if (Dictionarys.instance.dictionary_num["aliquot_part"] == false) // '한번도' 못먹었던 아이템이면 (도감용)
+                    Dictionarys.instance.dictionary_num["aliquot_part"] = true;
+                break;
+        }
+    }
 }

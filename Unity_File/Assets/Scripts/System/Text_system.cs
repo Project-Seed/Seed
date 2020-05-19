@@ -65,6 +65,9 @@ public class Text_system : MonoBehaviour
             if (TextList[now_text_num]["quest_num"] != "")
             {
                 GameSystem.instance.quest_state[System.Convert.ToInt32(TextList[now_text_num]["quest_num"])]++;
+
+                if (GameSystem.instance.quest_state[System.Convert.ToInt32(TextList[now_text_num]["quest_num"])] == 3)
+                    Quest_clear_system.instance.clear_reward(System.Convert.ToInt32(TextList[now_text_num]["quest_num"]));
             }
             gameObject.GetComponent<Dialogue>().talk_end();
         }

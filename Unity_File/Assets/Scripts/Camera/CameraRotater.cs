@@ -19,6 +19,10 @@ public class CameraRotater : MonoBehaviour
     Camera main_cam;
     Camera sub_cam;
 
+    bool ok = true;
+    float ok_time = 0;
+    float far;
+
     private void Start()
     {
         MouseX = transform.eulerAngles.y;
@@ -26,6 +30,8 @@ public class CameraRotater : MonoBehaviour
         camera_offset = transform.localPosition - head.transform.localPosition;
         main_cam = GetComponent<Camera>();
         sub_cam = gameObject.GetComponentInChildren<Camera>();
+
+        far = camera_offset.magnitude;
     }
 
     private void LateUpdate()
@@ -57,6 +63,14 @@ public class CameraRotater : MonoBehaviour
             camera_offset /= 1.1f;
         else if (input_mouse_wheel < 0)
             camera_offset *= 1.1f;
+
+
+
+        if (camera_offset.magnitude < far && ok_time >= 0.5f)
+            camera_offset *= 1.05f;
+
+        if (ok)
+            ok_time += Time.deltaTime;
     }
 
     float ClampAngle(float angle, float min, float max)
@@ -86,12 +100,19 @@ public class CameraRotater : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        ok = false;
+        ok_time = 0;
+
         if (other.CompareTag("Player"))
         {
             camera_offset *= 1.2f;
         }
         else if (camera_offset.magnitude > 2.0f)
             camera_offset /= 1.05f;
+    }
 
+    private void OnTriggerExit(Collider other)
+    {
+        ok = true;
     }
 }
