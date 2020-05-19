@@ -290,12 +290,7 @@ public class PlayerController : MonoBehaviour
             // 아이템 먹기
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (GameSystem.instance.item_num[eat_item] == 0) // 못먹었던 아이템이면
-                    GameSystem.instance.item_time.Add(eat_item);
-                GameSystem.instance.item_num[eat_item] += 1;
-
-                if (Dictionarys.instance.dictionary_num[eat_item] == false) // '한번도' 못먹었던 아이템이면 (도감용)
-                    Dictionarys.instance.dictionary_num[eat_item] = true;
+                Eat_system.instance.eat_item(eat_item);
 
                 eat_object.GetComponent<ExampleItem>().eat();
 
