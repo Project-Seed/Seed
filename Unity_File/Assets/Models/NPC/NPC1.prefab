@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4537242897296141134}
   m_Layer: 0
-  m_Name: EX_NPC
+  m_Name: NPC1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue: {fileID: 0}
   name_position: {fileID: 886066526093899591}
-  npc_name: "\uCF54\uB09C"
+  npc_name: "\uD06C\uB9AC\uC2A4"
 --- !u!135 &6218061027291084516
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -122,7 +122,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6449174153164652007
 GameObject:
