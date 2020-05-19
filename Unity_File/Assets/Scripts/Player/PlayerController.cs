@@ -373,13 +373,13 @@ public class PlayerController : MonoBehaviour
         //문제점. 대각선이동시에는? 방향을 정해주는게 아니라(look at=) 곱해줘야함. . .
         if (climb_mod == false && hang_mod == false && player_state.lending_time == false)
         {
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 1.0f))
-            {
-                Debug.DrawRay(transform.position, transform.forward * 0.5f, Color.blue, 1.0f);
+            //if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 1.0f))
+            //{
+            //    Debug.DrawRay(transform.position, transform.forward * 0.5f, Color.blue, 1.0f);
 
-                if (!hit.transform.CompareTag("Player") && Vector3.Distance(hit.point,transform.position) < 0.1f)
-                    Debug.Log("STOP" + hit.distance);
-            }
+            //    if (!hit.transform.CompareTag("Player") && Vector3.Distance(hit.point,transform.position) < 0.1f)
+            //        Debug.Log("STOP" + hit.distance);
+            //}
 
            transform.Translate(movement * (is_run ? player_run_speed : player_speed) * Time.deltaTime, Space.Self);
         }

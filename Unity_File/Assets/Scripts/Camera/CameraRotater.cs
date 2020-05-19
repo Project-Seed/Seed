@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraRotater : MonoBehaviour
 {
     // 캐릭터 주위를 회전. 카메라만 별도로 움직임.
-    public Transform head;     
+    public Transform head;
     public Transform player;
     [SerializeField] private float rotate_angle = 2.0f;        // 카메라 회전각도 (1초에 2도)
     public Vector3 offset;
@@ -51,7 +51,7 @@ public class CameraRotater : MonoBehaviour
         transform.LookAt(head);
         sub_cam.transform.rotation.SetLookRotation(player.forward);
         //transform.RotateAround(target.position, target.right, MouseY);
-       
+
         input_mouse_wheel = Input.GetAxisRaw("Mouse ScrollWheel");
         if (input_mouse_wheel > 0)
             camera_offset /= 1.1f;
@@ -82,5 +82,16 @@ public class CameraRotater : MonoBehaviour
         minY = -5f;
         main_cam.enabled = true;
         sub_cam.enabled = false;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            camera_offset *= 1.2f;
+        }
+        else if (camera_offset.magnitude > 2.0f)
+            camera_offset /= 1.05f;
+
     }
 }
