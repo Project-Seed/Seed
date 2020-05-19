@@ -21,6 +21,7 @@ public class Dictionarys : MonoBehaviour
 
     public List<string> category;
     int now_category = 0; // 현재 카테고리
+    public List<GameObject> category_on_ob;
 
     private string item_choose = null; // 어떤 아이템을 눌렀는지
 
@@ -54,12 +55,12 @@ public class Dictionarys : MonoBehaviour
             GameObject gameObject = Instantiate(content, new Vector3(0, 0, 0), Quaternion.identity, viewport.transform); // viewport 밑 자식으로 복제
             gameObject.name = "Illustrate_box_" + i;
             item_box.Add(gameObject);
-            item_box[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Item2D/" + dictionary_time[i]);
+            item_box[i].GetComponent<Dictionary_box>().image.sprite = Resources.Load<Sprite>("Item2D/" + dictionary_time[i]);
 
             if (dictionary_num[dictionary_time[i]] == true)
-                item_box[i].GetComponent<Image>().color = new Color(1, 1, 1, 1);
+                item_box[i].GetComponent<Dictionary_box>().image.color = new Color(1, 1, 1, 1);
             else
-                item_box[i].GetComponent<Image>().color = new Color(1, 1, 1, 0.2f);
+                item_box[i].GetComponent<Dictionary_box>().image.color = new Color(1, 1, 1, 0.1f);
         }
 
         reset_dictionary();
@@ -70,9 +71,9 @@ public class Dictionarys : MonoBehaviour
         for (int i = 0; i < item_box.Count; i++)
         {
             if (dictionary_num[dictionary_time[i]] == true)
-                item_box[i].GetComponent<Image>().color = new Color(1, 1, 1, 1);
+                item_box[i].GetComponent<Dictionary_box>().image.color = new Color(1, 1, 1, 1);
             else
-                item_box[i].GetComponent<Image>().color = new Color(1, 1, 1, 0.2f);
+                item_box[i].GetComponent<Dictionary_box>().image.color = new Color(1, 1, 1, 0.1f);
         }
     }
 
@@ -104,6 +105,12 @@ public class Dictionarys : MonoBehaviour
     public void category_click(int num)
     {
         now_category = num;
+
+        for(int i=0; i<category_on_ob.Count; i++)
+        {
+            category_on_ob[i].SetActive(false);
+        }
+        category_on_ob[num].SetActive(true);
 
         reset_dictionary();
     }

@@ -10,6 +10,10 @@ public class Note : MonoBehaviour
     public GameObject map;
     public GameObject quest;
 
+    public List<Image> icon_image;
+    public List<Sprite> icon_on_sp;
+    public List<Sprite> icon_off_sp;
+
 
     private void Awake()
     {
@@ -31,6 +35,11 @@ public class Note : MonoBehaviour
         diary.SetActive(false);
         map.SetActive(false);
         quest.SetActive(false);
+
+        icon_image[0].sprite = icon_on_sp[0];
+        icon_image[1].sprite = icon_off_sp[1];
+        icon_image[2].sprite = icon_off_sp[2];
+        icon_image[3].sprite = icon_off_sp[3];
     }
 
     public void On_diary()
@@ -39,6 +48,11 @@ public class Note : MonoBehaviour
         diary.SetActive(true);
         map.SetActive(false);
         quest.SetActive(false);
+
+        icon_image[0].sprite = icon_off_sp[0];
+        icon_image[1].sprite = icon_on_sp[1];
+        icon_image[2].sprite = icon_off_sp[2];
+        icon_image[3].sprite = icon_off_sp[3];
     }
 
     public void On_map()
@@ -47,6 +61,11 @@ public class Note : MonoBehaviour
         diary.SetActive(false);
         map.SetActive(true);
         quest.SetActive(false);
+
+        icon_image[0].sprite = icon_off_sp[0];
+        icon_image[1].sprite = icon_off_sp[1];
+        icon_image[2].sprite = icon_on_sp[2];
+        icon_image[3].sprite = icon_off_sp[3];
     }
 
     public void On_quest()
@@ -55,6 +74,11 @@ public class Note : MonoBehaviour
         diary.SetActive(false);
         map.SetActive(false);
         quest.SetActive(true);
+
+        icon_image[0].sprite = icon_off_sp[0];
+        icon_image[1].sprite = icon_off_sp[1];
+        icon_image[2].sprite = icon_off_sp[2];
+        icon_image[3].sprite = icon_on_sp[3];
     }
 
     public void close_note()

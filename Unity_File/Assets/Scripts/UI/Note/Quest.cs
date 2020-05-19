@@ -17,6 +17,9 @@ public class Quest : MonoBehaviour
     public Text data_npc;
     public Text data_content;
 
+    public List<GameObject> category_ob;
+    public List<Sprite> ox_sp;
+
     private void OnEnable()
     {
         data_title.text = null;
@@ -44,7 +47,7 @@ public class Quest : MonoBehaviour
                     GameObject add_data = Instantiate(quest_data, view_main.transform); 
                     add_data.GetComponent<Quest_Data>().quest_num = i + 1;
                     add_data.GetComponent<Quest_Data>().quest_ob = gameObject;
-                    add_data.GetComponent<Quest_Data>().image.color = new Color(1, 0.9994238f, 0.5801887f, 1);
+                    add_data.GetComponent<Quest_Data>().ox.sprite = ox_sp[1];
                     add_data.GetComponent<Quest_Data>().title.text = GameSystem.instance.quest_list[i]["title"];
                     add_data.GetComponent<Quest_Data>().area.text = GameSystem.instance.quest_list[i]["area"];
                     quest_data_main.Add(add_data);
@@ -54,7 +57,7 @@ public class Quest : MonoBehaviour
                     GameObject add_data = Instantiate(quest_data, view_main.transform);
                     add_data.GetComponent<Quest_Data>().quest_num = i + 1;
                     add_data.GetComponent<Quest_Data>().quest_ob = gameObject;
-                    add_data.GetComponent<Quest_Data>().image.color = new Color(1, 0.9994238f, 0.5801887f, 1);
+                    add_data.GetComponent<Quest_Data>().ox.sprite = ox_sp[1];
                     add_data.GetComponent<Quest_Data>().title.text = GameSystem.instance.quest_list[i]["title"];
                     add_data.GetComponent<Quest_Data>().area.text = GameSystem.instance.quest_list[i]["area"];
                     quest_data_main.Add(add_data);
@@ -67,7 +70,7 @@ public class Quest : MonoBehaviour
                     GameObject add_data = Instantiate(quest_data, view_sub.transform);
                     add_data.GetComponent<Quest_Data>().quest_num = i + 1;
                     add_data.GetComponent<Quest_Data>().quest_ob = gameObject;
-                    add_data.GetComponent<Quest_Data>().image.color = new Color(0.8396226f, 0.8396226f, 0.8396226f, 1);
+                    add_data.GetComponent<Quest_Data>().ox.sprite = ox_sp[0];
                     add_data.GetComponent<Quest_Data>().title.text = GameSystem.instance.quest_list[i]["title"];
                     add_data.GetComponent<Quest_Data>().area.text = GameSystem.instance.quest_list[i]["area"];
                     quest_data_main.Add(add_data);
@@ -77,7 +80,7 @@ public class Quest : MonoBehaviour
                     GameObject add_data = Instantiate(quest_data, view_sub.transform);
                     add_data.GetComponent<Quest_Data>().quest_num = i + 1;
                     add_data.GetComponent<Quest_Data>().quest_ob = gameObject;
-                    add_data.GetComponent<Quest_Data>().image.color = new Color(0.8396226f, 0.8396226f, 0.8396226f, 1);
+                    add_data.GetComponent<Quest_Data>().ox.sprite = ox_sp[0];
                     add_data.GetComponent<Quest_Data>().title.text = GameSystem.instance.quest_list[i]["title"];
                     add_data.GetComponent<Quest_Data>().area.text = GameSystem.instance.quest_list[i]["area"];
                     quest_data_main.Add(add_data);
@@ -88,12 +91,18 @@ public class Quest : MonoBehaviour
 
     public void main_button()
     {
+        category_ob[0].SetActive(true);
+        category_ob[1].SetActive(false);
+
         view_main.SetActive(true);
         view_sub.SetActive(false);
     }
 
     public void sub_button()
     {
+        category_ob[0].SetActive(false);
+        category_ob[1].SetActive(true);
+
         view_main.SetActive(false);
         view_sub.SetActive(true);
     }

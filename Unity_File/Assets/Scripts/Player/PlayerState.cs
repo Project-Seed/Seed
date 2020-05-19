@@ -87,16 +87,15 @@ public class PlayerState : MonoBehaviour
             animator.SetTrigger("die");
         }
 
-        animator.SetInteger("move", state_move);
-        animator.SetInteger("sky", state_sky);
-
         if (state_fly == 1 && dont_fly == false)
             fly_time += Time.deltaTime;
         else
             fly_time = 0;
 
-        if (fly_time >= 1)
+        if (fly_time >= 1.2f)
             state_sky = 1;
+        else
+            state_sky = 0;
 
         if (idle_time >= 10)
         {
@@ -131,6 +130,8 @@ public class PlayerState : MonoBehaviour
             climb_blend = 1f;
 
         animator.SetFloat("climb_Blend", climb_blend);
+        animator.SetInteger("move", state_move);
+        animator.SetInteger("sky", state_sky);
     }
 
     /*
