@@ -297,7 +297,7 @@ public class PlayerController : MonoBehaviour
                 if (Dictionarys.instance.dictionary_num[eat_item] == false) // '한번도' 못먹었던 아이템이면 (도감용)
                     Dictionarys.instance.dictionary_num[eat_item] = true;
 
-                Destroy(eat_object);
+                eat_object.GetComponent<ExampleItem>().eat();
 
                 eat_bool = false;
                 Key_guide.instance.item_off();
