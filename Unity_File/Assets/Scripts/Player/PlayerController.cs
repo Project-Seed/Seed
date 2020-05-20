@@ -309,9 +309,9 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                inventory.SetActive(true);
                 composer.SetActive(false);
                 note.SetActive(false);
+                inventory.SetActive(true);
             }
         }
 
@@ -322,8 +322,8 @@ public class PlayerController : MonoBehaviour
             else
             {
                 inventory.SetActive(false);
-                composer.SetActive(true);
                 note.SetActive(false);
+                composer.SetActive(true);
             }
         }
 
@@ -430,6 +430,8 @@ public class PlayerController : MonoBehaviour
             climb_ro = collision.transform.rotation;
             climb_po = collision.transform.position;
             climb_crash = true;
+
+            Key_guide.instance.climb_on();
         }
     }
 
@@ -446,6 +448,8 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("갈색 떨어짐");
             climb_crash = false;
+
+            Key_guide.instance.climb_off();
         }
     }
 
