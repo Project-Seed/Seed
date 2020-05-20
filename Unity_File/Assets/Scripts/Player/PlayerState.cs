@@ -171,6 +171,7 @@ public class PlayerState : MonoBehaviour
         if(state_sky == 1)
         {
             state_sky = 0;
+            animator.SetInteger("sky", state_sky);
             fly_time = 0;
             animator.SetTrigger("lending");
             lending_time = true;
