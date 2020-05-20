@@ -69,9 +69,9 @@ public class ThrowManager : MonoBehaviour
         camB.enabled = true;
         camA.enabled = false;
         if (camB == main_cam)
-            cameraRotater.minY = -5f;
+            cameraRotater.minY = -40f;
         else
-            cameraRotater.minY = -20f;
+            cameraRotater.minY = -60f;
     }
 
     private bool isPlantable()
