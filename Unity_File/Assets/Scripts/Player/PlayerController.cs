@@ -424,15 +424,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
-        {
-            in_ground = true;
-            is_jumping = false;
-            Debug.Log("in Ground");
-
-            player_state.landing();
-        }
-
         if (collision.gameObject.name == "brown_trigger")
         {
             Debug.Log("갈색 충돌");
@@ -473,6 +464,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay(Collider collision)
     {
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
+        {
+            in_ground = true;
+            is_jumping = false;
+            Debug.Log("in Ground");
+
+            player_state.landing();
+        }
         IItem item = collision.GetComponent<IItem>(); //IItem을 상속받는 모든 아이템들
         if (item != null)                         //아이템과 부딪혔다면 함수를 호출하고 지움.
         {

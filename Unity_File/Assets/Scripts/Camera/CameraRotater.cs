@@ -23,7 +23,10 @@ public class CameraRotater : MonoBehaviour
     bool ok = true;
     float ok_time = 0;
     float far;
-
+    public void ToOriginOffset()
+    {
+        camera_offset = origin_camera_offset;
+    }
     private void Start()
     {
         MouseX = transform.eulerAngles.y;
@@ -61,7 +64,7 @@ public class CameraRotater : MonoBehaviour
         //transform.RotateAround(target.position, target.right, MouseY);
 
         input_mouse_wheel = Input.GetAxisRaw("Mouse ScrollWheel");
-        if (input_mouse_wheel > 0 && camera_offset.magnitude >= 2.0f)
+        if (input_mouse_wheel > 0 && camera_offset.magnitude >= 3.0f)
             camera_offset /= 1.1f;
         else if (input_mouse_wheel < 0 && camera_offset.magnitude <= 10.0f)
             camera_offset *= 1.1f;
@@ -107,7 +110,7 @@ public class CameraRotater : MonoBehaviour
         {
             camera_offset = origin_camera_offset;
         }
-        else if (camera_offset.magnitude > 2.0f)
+        else if (camera_offset.magnitude > 3.0f)
             camera_offset /= 1.05f;
     }
 

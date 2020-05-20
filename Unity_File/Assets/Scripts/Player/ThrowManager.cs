@@ -71,7 +71,10 @@ public class ThrowManager : MonoBehaviour
         if (camB == main_cam)
             cameraRotater.minY = -40f;
         else
+        {
             cameraRotater.minY = -60f;
+            cameraRotater.ToOriginOffset();
+        }
     }
 
     private bool isPlantable()
