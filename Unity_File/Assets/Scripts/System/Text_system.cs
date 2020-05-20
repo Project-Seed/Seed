@@ -122,7 +122,10 @@ public class Text_system : MonoBehaviour
         Messge_Text.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
-            Messge_Text.text += letter;
+            if(letter == '$')
+                Messge_Text.text += "\n";
+            else
+                Messge_Text.text += letter;
             yield return null;
         }
     }

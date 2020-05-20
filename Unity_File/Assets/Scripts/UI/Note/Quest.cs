@@ -38,7 +38,7 @@ public class Quest : MonoBehaviour
         }
         quest_data_sub.Clear();
 
-        for(int i=0; i<GameSystem.instance.quest_list.Count; i++)
+        for(int i= GameSystem.instance.quest_list.Count-1; i>=0; i--)
         {
             if(GameSystem.instance.quest_state[i+1] != 0 && GameSystem.instance.quest_state[i + 1] != 3)
             {
@@ -54,7 +54,7 @@ public class Quest : MonoBehaviour
                 }
                 else
                 {
-                    GameObject add_data = Instantiate(quest_data, view_main.transform);
+                    GameObject add_data = Instantiate(quest_data, view_sub.transform);
                     add_data.GetComponent<Quest_Data>().quest_num = i + 1;
                     add_data.GetComponent<Quest_Data>().quest_ob = gameObject;
                     add_data.GetComponent<Quest_Data>().ox.sprite = ox_sp[1];
@@ -67,7 +67,7 @@ public class Quest : MonoBehaviour
             {
                 if (GameSystem.instance.quest_list[i]["category"] == "main")
                 {
-                    GameObject add_data = Instantiate(quest_data, view_sub.transform);
+                    GameObject add_data = Instantiate(quest_data, view_main.transform);
                     add_data.GetComponent<Quest_Data>().quest_num = i + 1;
                     add_data.GetComponent<Quest_Data>().quest_ob = gameObject;
                     add_data.GetComponent<Quest_Data>().ox.sprite = ox_sp[0];

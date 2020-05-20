@@ -288,9 +288,10 @@ public class PlayerController : MonoBehaviour
 
 
             // 아이템 먹기
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && eat_item != "")
             {
                 Eat_system.instance.eat_item(eat_item);
+                eat_item = "";
 
                 eat_object.GetComponent<ExampleItem>().eat();
 

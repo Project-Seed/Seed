@@ -10,6 +10,11 @@ public class Dialogue_choose : MonoBehaviour
     public Sprite basic;
     public Sprite on;
 
+    void OnEnable()
+    {
+        image.sprite = basic;
+    }
+
     public void on_mouse()
     {
         image.sprite = on;
