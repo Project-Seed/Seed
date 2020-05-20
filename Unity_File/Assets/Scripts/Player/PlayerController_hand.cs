@@ -13,6 +13,8 @@ public class PlayerController_hand : MonoBehaviour
         {
             pc.hang_crash = true;
             Debug.Log("ddd");
+
+            Key_guide.instance.climb_on();
         }
     }
 
@@ -21,6 +23,8 @@ public class PlayerController_hand : MonoBehaviour
         if (collision.gameObject.name == "blue_trigger")
         {
             pc.hang_crash = false;
+
+            Key_guide.instance.climb_off();
         }
     }
 }

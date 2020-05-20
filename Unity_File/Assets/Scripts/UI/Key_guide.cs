@@ -9,6 +9,7 @@ public class Key_guide : MonoBehaviour
 
     public GameObject talk;
     public GameObject item;
+    public GameObject climb;
 
     public GameObject item_name_ob;
     public Text item_name;
@@ -49,5 +50,14 @@ public class Key_guide : MonoBehaviour
     public void item_off()
     {
         item.SetActive(false);
+    }
+
+    public void climb_on()
+    {
+        climb.SetActive(true);
+    }
+    public void climb_off()
+    {
+        climb.SetActive(false);
     }
 }

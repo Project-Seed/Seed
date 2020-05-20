@@ -32,7 +32,7 @@ public class Quest_clear_system : MonoBehaviour
             GameSystem.instance.quest_state[4] = 2;
 
         if (GameSystem.instance.quest_state[5] == 1 &&
-            GameSystem.instance.item_num["coal"] >= 1)
+            GameSystem.instance.item_num["sticky_moss"] >= 1)
             GameSystem.instance.quest_state[5] = 2;
     }
 
@@ -67,8 +67,11 @@ public class Quest_clear_system : MonoBehaviour
             case 2:
             case 3:
             case 4:
+                Eat_system.instance.eat_item("aliquot_part");
+                break;
             case 5:
                 Eat_system.instance.eat_item("aliquot_part");
+                GameObject.Find("Map_Decoration").transform.Find("M_Brige").gameObject.SetActive(true);
                 break;
         }
     }
