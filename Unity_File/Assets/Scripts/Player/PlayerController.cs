@@ -288,14 +288,10 @@ public class PlayerController : MonoBehaviour
 
 
             // 아이템 먹기
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && eat_item != "")
             {
-                if (GameSystem.instance.item_num[eat_item] == 0) // 못먹었던 아이템이면
-                    GameSystem.instance.item_time.Add(eat_item);
-                GameSystem.instance.item_num[eat_item] += 1;
-
-                if (Dictionarys.instance.dictionary_num[eat_item] == false) // '한번도' 못먹었던 아이템이면 (도감용)
-                    Dictionarys.instance.dictionary_num[eat_item] = true;
+                Eat_system.instance.eat_item(eat_item);
+                eat_item = "";
 
                 eat_object.GetComponent<ExampleItem>().eat();
 
@@ -313,9 +309,9 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                inventory.SetActive(true);
                 composer.SetActive(false);
                 note.SetActive(false);
+                inventory.SetActive(true);
             }
         }
 
@@ -326,8 +322,8 @@ public class PlayerController : MonoBehaviour
             else
             {
                 inventory.SetActive(false);
-                composer.SetActive(true);
                 note.SetActive(false);
+                composer.SetActive(true);
             }
         }
 
@@ -403,9 +399,32 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Ground")||collision.gameObject.CompareTag("Plantable"))
+    //    {
+    //        in_ground = true;
+    //        is_jumping = false;
+    //        Debug.Log("in Ground");
+
+    //        player_state.landing();
+    //    }
+    //}
+
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
+    //    {
+    //        in_ground = false;
+    //        Debug.Log("not in Ground");
+
+    //        player_state.flying();
+    //    }
+    //}
+
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Ground")||collision.gameObject.CompareTag("Plantable"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
         {
             in_ground = true;
             is_jumping = false;
@@ -413,9 +432,19 @@ public class PlayerController : MonoBehaviour
 
             player_state.landing();
         }
+
+        if (collision.gameObject.name == "brown_trigger")
+        {
+            Debug.Log("갈색 충돌");
+            climb_ro = collision.transform.rotation;
+            climb_po = collision.transform.position;
+            climb_crash = true;
+
+            Key_guide.instance.climb_on();
+        }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider collision)
     {
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
         {
@@ -424,21 +453,7 @@ public class PlayerController : MonoBehaviour
 
             player_state.flying();
         }
-    }
 
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (collision.gameObject.name == "brown_trigger")
-        {
-            Debug.Log("갈색 충돌");
-            climb_ro = collision.transform.rotation;
-            climb_po = collision.transform.position;
-            climb_crash = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider collision)
-    {
         IItem item = collision.GetComponent<IItem>(); //IItem을 상속받는 모든 아이템들
         if (item != null)                         //아이템과 부딪혔다면 함수를 호출하고 지움.
         {
@@ -450,6 +465,8 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("갈색 떨어짐");
             climb_crash = false;
+
+            Key_guide.instance.climb_off();
         }
     }
 

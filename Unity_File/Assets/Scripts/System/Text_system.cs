@@ -65,6 +65,9 @@ public class Text_system : MonoBehaviour
             if (TextList[now_text_num]["quest_num"] != "")
             {
                 GameSystem.instance.quest_state[System.Convert.ToInt32(TextList[now_text_num]["quest_num"])]++;
+
+                if (GameSystem.instance.quest_state[System.Convert.ToInt32(TextList[now_text_num]["quest_num"])] == 3)
+                    Quest_clear_system.instance.clear_reward(System.Convert.ToInt32(TextList[now_text_num]["quest_num"]));
             }
             gameObject.GetComponent<Dialogue>().talk_end();
         }
@@ -119,7 +122,10 @@ public class Text_system : MonoBehaviour
         Messge_Text.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
-            Messge_Text.text += letter;
+            if(letter == '$')
+                Messge_Text.text += "\n";
+            else
+                Messge_Text.text += letter;
             yield return null;
         }
     }

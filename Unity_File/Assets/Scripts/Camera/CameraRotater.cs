@@ -10,22 +10,30 @@ public class CameraRotater : MonoBehaviour
     [SerializeField] private float rotate_angle = 2.0f;        // 카메라 회전각도 (1초에 2도)
     public Vector3 offset;
     float rotate_speed = 2.0f;
-    public float minY = -5f;
-    public float maxY = 60f;
+    public float minY = -40f;
+    public float maxY = 40f;
     float MouseX;
     float MouseY;
     float input_mouse_wheel;
     Vector3 camera_offset;
+    Vector3 origin_camera_offset;
     Camera main_cam;
     Camera sub_cam;
+
+    bool ok = true;
+    float ok_time = 0;
+    float far;
 
     private void Start()
     {
         MouseX = transform.eulerAngles.y;
         MouseY = transform.eulerAngles.x;
         camera_offset = transform.localPosition - head.transform.localPosition;
+        origin_camera_offset = camera_offset;
         main_cam = GetComponent<Camera>();
         sub_cam = gameObject.GetComponentInChildren<Camera>();
+
+        far = camera_offset.magnitude;
     }
 
     private void LateUpdate()
@@ -53,10 +61,16 @@ public class CameraRotater : MonoBehaviour
         //transform.RotateAround(target.position, target.right, MouseY);
 
         input_mouse_wheel = Input.GetAxisRaw("Mouse ScrollWheel");
-        if (input_mouse_wheel > 0)
+        if (input_mouse_wheel > 0 && camera_offset.magnitude >= 2.0f)
             camera_offset /= 1.1f;
-        else if (input_mouse_wheel < 0)
+        else if (input_mouse_wheel < 0 && camera_offset.magnitude <= 10.0f)
             camera_offset *= 1.1f;
+
+        if (camera_offset.magnitude < 3.0f && ok_time >= 0.5f)
+            camera_offset *= 1.1f;
+
+        if (ok)
+            ok_time += Time.deltaTime;
     }
 
     float ClampAngle(float angle, float min, float max)
@@ -86,12 +100,19 @@ public class CameraRotater : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        ok = false;
+        ok_time = 0;
+
         if (other.CompareTag("Player"))
         {
-            camera_offset *= 1.2f;
+            camera_offset = origin_camera_offset;
         }
         else if (camera_offset.magnitude > 2.0f)
             camera_offset /= 1.05f;
+    }
 
+    private void OnTriggerExit(Collider other)
+    {
+        ok = true;
     }
 }
