@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class GameSystem : MonoBehaviour
 {
@@ -20,6 +21,69 @@ public class GameSystem : MonoBehaviour
     public float time = 660; // 현재 시간
 
     public static bool switch_mode;
+
+
+    public GameObject dialogue;
+    public GameObject dialogue_box;
+
+
+    public string game_data_name = ".json"; // 저장용 통합 데이터 파일
+    public GameData _game_data;
+    public GameData game_data
+    {
+        get
+        {
+            if(_game_data == null)
+            {
+                load_game();
+                save_gema();
+            }
+            return _game_data;
+        }
+    }
+
+
+    [Serializable]
+    public class GameData
+    {
+        public List<string> D_item_time;
+        public Dictionary<string, int> D_item_num;
+        public Dictionary<int, int> D_quest_state;
+        public float D_time;
+    }
+
+    public void load_game()
+    {
+        string file_path = Application.persistentDataPath + game_data_name;
+
+        if(File.Exists(file_path))
+        {
+            string json_data = File.ReadAllText(file_path);
+            _game_data = JsonUtility.FromJson<GameData>(json_data);
+
+            item_time = game_data.D_item_time;
+            item_num = game_data.D_item_num;
+            quest_state = game_data.D_quest_state;
+            time = game_data.D_time;
+        }
+        else
+        {
+            _game_data = new GameData();
+        }
+    }
+
+    public void save_gema()
+    {
+        game_data.D_item_time = item_time;
+        game_data.D_item_num = item_num;
+        game_data.D_quest_state = quest_state;
+        game_data.D_time = time;
+
+        string json_data = JsonUtility.ToJson(game_data);
+        string file_path = Application.persistentDataPath + game_data_name;
+        File.WriteAllText(file_path, json_data);
+    }
+
 
     [Flags]
     public enum Mode
@@ -86,6 +150,22 @@ public class GameSystem : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.J))
+        {
+            save_gema();
+        }
+
+        if (Input.GetKey(KeyCode.K))
+        {
+            load_game();
+        }
+
+        if (Input.GetKey(KeyCode.Z))
+            talk_start(1);
+    }
+
     public void Gamestart()
     {
         SceneManager.LoadScene("Game_Scene");
@@ -102,5 +182,15 @@ public class GameSystem : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void talk_start(int num) // 혼잣말 등 대화 시작
+    {
+        if (InputManager.instance.click_mod == 0 && dialogue_box.activeSelf == false)
+        {
+            dialogue_box.SetActive(true);
+            InputManager.instance.click_mod = 1;
+            dialogue.GetComponent<Text_system>().StartDialogue(num);
+        }
     }
 }

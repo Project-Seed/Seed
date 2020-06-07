@@ -30,6 +30,8 @@ public class Dialogue : MonoBehaviour
 
     int quest_num; // 충돌 npc의 퀘스트 번호
     int quest_now; // 충돌 npc의 퀘스트 진행상태
+
+    public bool open_on = false; // 외부에서 대화 불러서 했으면 변화 없어서 에러 해결
     
 
     void Update()
@@ -65,16 +67,19 @@ public class Dialogue : MonoBehaviour
     {
         onss = 0;
 
-        npc_name.SetActive(true);
-        Key_guide.instance.talk_on();
+        if (open_on == true)
+        {
+            npc_name.SetActive(true);
+            Key_guide.instance.talk_on();
 
-        npc_ob = npc_obs;
-        name_position = name_positions;
-        name_text.text = name;
+            npc_ob = npc_obs;
+            name_position = name_positions;
+            name_text.text = name;
+        
+            quest_bool = true;
+        }
 
-        quest_bool = true;
-
-        for(int i=0; i<GameSystem.instance.quest_list.Count; i++)
+        for (int i=0; i<GameSystem.instance.quest_list.Count; i++)
         {
             if(GameSystem.instance.quest_list[i]["name"] == name && // npc이름이 같고
                 GameSystem.instance.quest_state[i+1] != 3 && // 클리어 안된 퀘스트 이고

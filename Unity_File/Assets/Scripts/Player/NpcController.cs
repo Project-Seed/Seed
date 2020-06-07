@@ -25,6 +25,7 @@ public class NpcController : MonoBehaviour
         if (collision.name == "Player")
         {
             dialogue.GetComponent<Dialogue>().quest_on(gameObject, name_position, npc_name);
+            dialogue.GetComponent<Dialogue>().open_on = true;
         }
     }
     private void OnTriggerExit(Collider collision)
@@ -32,6 +33,7 @@ public class NpcController : MonoBehaviour
         if (collision.name == "Player")
         {
             dialogue.GetComponent<Dialogue>().quest_off();
+            dialogue.GetComponent<Dialogue>().open_on = false;
         }
     }
 }
