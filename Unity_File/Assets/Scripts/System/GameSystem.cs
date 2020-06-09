@@ -34,6 +34,7 @@ public class GameSystem : MonoBehaviour
     public GameObject dialogue_box;
 
 
+    /*
     [Serializable]
     public class GameData
     {
@@ -42,6 +43,7 @@ public class GameSystem : MonoBehaviour
         public Dictionary<int, int> D_quest_state = new Dictionary<int, int>();
         public float D_time;
     }
+    */
 
     public void load_game()
     {
@@ -57,12 +59,9 @@ public class GameSystem : MonoBehaviour
 
         XDocument rootElement = XDocument.Load("./Assets/Character2.xml");
 
-        XElement aa = rootElement.Element("root");
-        XElement a = aa.Element("a1");
-        Debug.Log(aa.ToString());
-        Debug.Log(a.ToString());
+        XElement aa = rootElement.Element("root").Element("a1");
         item_num = new Dictionary<string, int>();
-        foreach (var el in a.Elements())
+        foreach (var el in aa.Elements())
         {
             item_num.Add(el.Name.LocalName, Convert.ToInt32(el.Value));
         }
