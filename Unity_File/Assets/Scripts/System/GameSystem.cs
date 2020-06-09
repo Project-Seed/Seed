@@ -5,6 +5,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 
+using System.Linq;
+using System.Xml.Serialization;
+using System.Runtime.Serialization;
+using System.Xml.Linq;
+using System.Xml;
+
+
 public class GameSystem : MonoBehaviour
 {
     public static GameSystem instance; // 현재 클레스를 인스턴트화
@@ -27,62 +34,74 @@ public class GameSystem : MonoBehaviour
     public GameObject dialogue_box;
 
 
-    public string game_data_name = ".json"; // 저장용 통합 데이터 파일
-    public GameData _game_data;
-    public GameData game_data
-    {
-        get
-        {
-            if(_game_data == null)
-            {
-                load_game();
-                save_gema();
-            }
-            return _game_data;
-        }
-    }
-
-
     [Serializable]
     public class GameData
     {
         public List<string> D_item_time;
-        public Dictionary<string, int> D_item_num;
-        public Dictionary<int, int> D_quest_state;
+        public Dictionary<string, int> D_item_num = new Dictionary<string, int>();
+        public Dictionary<int, int> D_quest_state = new Dictionary<int, int>();
         public float D_time;
     }
 
     public void load_game()
     {
-        string file_path = Application.persistentDataPath + game_data_name;
-
-        if(File.Exists(file_path))
+        /*
+        XElement rootElement = XElement.Load("./Assets/Character.xml");
+        item_num = new Dictionary<string, int>();
+        foreach (var el in rootElement.Elements())
         {
-            string json_data = File.ReadAllText(file_path);
-            _game_data = JsonUtility.FromJson<GameData>(json_data);
-
-            item_time = game_data.D_item_time;
-            item_num = game_data.D_item_num;
-            quest_state = game_data.D_quest_state;
-            time = game_data.D_time;
+            item_num.Add(el.Name.LocalName, Convert.ToInt32(el.Value));
         }
-        else
+        */
+
+
+        XDocument rootElement = XDocument.Load("./Assets/Character2.xml");
+
+        XElement aa = rootElement.Element("root");
+        XElement a = aa.Element("a1");
+        Debug.Log(aa.ToString());
+        Debug.Log(a.ToString());
+        item_num = new Dictionary<string, int>();
+        foreach (var el in a.Elements())
         {
-            _game_data = new GameData();
+            item_num.Add(el.Name.LocalName, Convert.ToInt32(el.Value));
         }
     }
 
     public void save_gema()
     {
-        game_data.D_item_time = item_time;
-        game_data.D_item_num = item_num;
-        game_data.D_quest_state = quest_state;
-        game_data.D_time = time;
+        XElement e = new XElement("root", 
+            new XElement("a1", item_num.Select(kv => new XElement(kv.Key, kv.Value))));
 
-        string json_data = JsonUtility.ToJson(game_data);
-        string file_path = Application.persistentDataPath + game_data_name;
-        File.WriteAllText(file_path, json_data);
+        /*
+        XElement e1 = new XElement("root", item_num.Select(kv => new XElement(kv.Key, kv.Value)));
+        XElement e2 = new XElement("root2", item_num.Select(kv => new XElement(kv.Key, kv.Value)));
+        */
+
+        //el.Save("./Assets/Character.xml");
+
+        /*
+        XmlDocument document = new XmlDocument();
+
+        //document.Load(el.CreateReader());
+        XmlElement a = ToXmlElement(el);
+        document.AppendChild(a);
+        */
+
+        XDocument document = new XDocument();
+        document.Add(e);
+
+        document.Save("./Assets/Character2.xml");
     }
+
+    /*
+    public XmlElement ToXmlElement(XElement el)
+    {
+        var doc = new XmlDocument();
+        doc.Load(el.CreateReader());
+        return doc.DocumentElement;
+    }
+    */
 
 
     [Flags]
