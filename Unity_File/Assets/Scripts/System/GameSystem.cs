@@ -29,78 +29,70 @@ public class GameSystem : MonoBehaviour
 
     public static bool switch_mode;
 
+    public Quest_quick quest_quick;
+    public Dictionarys dictionarys;
 
+    public GameObject character;
     public GameObject dialogue;
     public GameObject dialogue_box;
 
 
-    /*
-    [Serializable]
-    public class GameData
-    {
-        public List<string> D_item_time;
-        public Dictionary<string, int> D_item_num = new Dictionary<string, int>();
-        public Dictionary<int, int> D_quest_state = new Dictionary<int, int>();
-        public float D_time;
-    }
-    */
-
     public void load_game()
     {
-        /*
-        XElement rootElement = XElement.Load("./Assets/Character.xml");
+        XDocument save_data = XDocument.Load("./Assets/save_data.xml");
+
+        time = Convert.ToInt32(save_data.Element("root").Element("ints").Element("time").Value);
+        character.transform.position = new Vector3(
+            float.Parse(save_data.Element("root").Element("ints").Element("ch_po_x").Value),
+            float.Parse(save_data.Element("root").Element("ints").Element("ch_po_y").Value),
+            float.Parse(save_data.Element("root").Element("ints").Element("ch_po_z").Value));
+        character.transform.rotation = new Quaternion(
+            float.Parse(save_data.Element("root").Element("ints").Element("ch_ro_x").Value),
+            float.Parse(save_data.Element("root").Element("ints").Element("ch_ro_y").Value),
+            float.Parse(save_data.Element("root").Element("ints").Element("ch_ro_z").Value),0);
+
         item_num = new Dictionary<string, int>();
-        foreach (var el in rootElement.Elements())
-        {
-            item_num.Add(el.Name.LocalName, Convert.ToInt32(el.Value));
-        }
-        */
+        foreach (var load in save_data.Element("root").Element("item_num").Elements())
+            item_num.Add(load.Name.LocalName, Convert.ToInt32(load.Value)); // dictionary 정석
+
+        quest_state = new Dictionary<int, int>();
+        foreach (var load in save_data.Element("root").Element("quest_state").Elements())
+            quest_state.Add(Convert.ToInt32(load.Name.LocalName.Substring(4)), Convert.ToInt32(load.Value)); // key가 int
+
+        dictionarys.dictionary_num = new Dictionary<string, bool>();
+        foreach (var load in save_data.Element("root").Element("dictionary_num").Elements())
+            dictionarys.dictionary_num.Add(load.Name.LocalName, bool.Parse(load.Value));
+
+        item_time = new List<string>();
+        foreach (var load in save_data.Element("root").Element("item_time").Elements())
+            item_time.Add(load.Name.LocalName); // list 정석
 
 
-        XDocument rootElement = XDocument.Load("./Assets/Character2.xml");
-
-        XElement aa = rootElement.Element("root").Element("a1");
-        item_num = new Dictionary<string, int>();
-        foreach (var el in aa.Elements())
-        {
-            item_num.Add(el.Name.LocalName, Convert.ToInt32(el.Value));
-        }
+        quest_quick.quest_re();
     }
 
     public void save_gema()
     {
-        XElement e = new XElement("root", 
-            new XElement("a1", item_num.Select(kv => new XElement(kv.Key, kv.Value))));
-
-        /*
-        XElement e1 = new XElement("root", item_num.Select(kv => new XElement(kv.Key, kv.Value)));
-        XElement e2 = new XElement("root2", item_num.Select(kv => new XElement(kv.Key, kv.Value)));
-        */
-
-        //el.Save("./Assets/Character.xml");
-
-        /*
-        XmlDocument document = new XmlDocument();
-
-        //document.Load(el.CreateReader());
-        XmlElement a = ToXmlElement(el);
-        document.AppendChild(a);
-        */
+        XElement save_data = new XElement("root",
+            new XElement("ints", 
+                new XElement("time", time), 
+                new XElement("ch_po_x", character.transform.position.x),
+                new XElement("ch_po_y", character.transform.position.y),
+                new XElement("ch_po_z", character.transform.position.z),
+                new XElement("ch_ro_x", character.transform.rotation.x),
+                new XElement("ch_ro_y", character.transform.rotation.y),
+                new XElement("ch_ro_z", character.transform.rotation.z)),
+            new XElement("item_num", item_num.Select(kv => new XElement(kv.Key, kv.Value))), // dictionary 정석
+            new XElement("quest_state", quest_state.Select(kv => new XElement("char" + kv.Key.ToString(), kv.Value))), // key가 int
+            new XElement("dictionary_num", dictionarys.dictionary_num.Select(kv => new XElement(kv.Key, kv.Value))),
+            new XElement("item_time", item_time.Select(kv => new XElement(kv))) // list 정석
+            ); 
 
         XDocument document = new XDocument();
-        document.Add(e);
+        document.Add(save_data);
 
-        document.Save("./Assets/Character2.xml");
+        document.Save("./Assets/save_data.xml");
     }
-
-    /*
-    public XmlElement ToXmlElement(XElement el)
-    {
-        var doc = new XmlDocument();
-        doc.Load(el.CreateReader());
-        return doc.DocumentElement;
-    }
-    */
 
 
     [Flags]
