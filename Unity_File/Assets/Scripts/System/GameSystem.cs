@@ -31,25 +31,28 @@ public class GameSystem : MonoBehaviour
 
     public Quest_quick quest_quick;
     public Dictionarys dictionarys;
+    public PlayerState playerstate;
 
     public GameObject character;
     public GameObject dialogue;
     public GameObject dialogue_box;
 
 
-    public void load_game()
+    public void load_game(int num)
     {
-        XDocument save_data = XDocument.Load("./Assets/save_data.xml");
+        XDocument save_data = XDocument.Load("./Assets/save_data" + num.ToString() + ".xml");
 
-        time = Convert.ToInt32(save_data.Element("root").Element("ints").Element("time").Value);
+        time = Convert.ToInt32(save_data.Element("root").Element("solo").Element("time").Value);
         character.transform.position = new Vector3(
-            float.Parse(save_data.Element("root").Element("ints").Element("ch_po_x").Value),
-            float.Parse(save_data.Element("root").Element("ints").Element("ch_po_y").Value),
-            float.Parse(save_data.Element("root").Element("ints").Element("ch_po_z").Value));
+            float.Parse(save_data.Element("root").Element("solo").Element("ch_po_x").Value),
+            float.Parse(save_data.Element("root").Element("solo").Element("ch_po_y").Value),
+            float.Parse(save_data.Element("root").Element("solo").Element("ch_po_z").Value));
         character.transform.rotation = new Quaternion(
-            float.Parse(save_data.Element("root").Element("ints").Element("ch_ro_x").Value),
-            float.Parse(save_data.Element("root").Element("ints").Element("ch_ro_y").Value),
-            float.Parse(save_data.Element("root").Element("ints").Element("ch_ro_z").Value),0);
+            float.Parse(save_data.Element("root").Element("solo").Element("ch_ro_x").Value),
+            float.Parse(save_data.Element("root").Element("solo").Element("ch_ro_y").Value),
+            float.Parse(save_data.Element("root").Element("solo").Element("ch_ro_z").Value),0);
+        playerstate.hp = float.Parse(save_data.Element("root").Element("solo").Element("hp").Value);
+        playerstate.radiation = float.Parse(save_data.Element("root").Element("solo").Element("radiation").Value);
 
         item_num = new Dictionary<string, int>();
         foreach (var load in save_data.Element("root").Element("item_num").Elements())
@@ -71,17 +74,20 @@ public class GameSystem : MonoBehaviour
         quest_quick.quest_re();
     }
 
-    public void save_gema()
+    public void save_gema(int num)
     {
         XElement save_data = new XElement("root",
-            new XElement("ints", 
+            new XElement("solo", 
                 new XElement("time", time), 
                 new XElement("ch_po_x", character.transform.position.x),
                 new XElement("ch_po_y", character.transform.position.y),
                 new XElement("ch_po_z", character.transform.position.z),
                 new XElement("ch_ro_x", character.transform.rotation.x),
                 new XElement("ch_ro_y", character.transform.rotation.y),
-                new XElement("ch_ro_z", character.transform.rotation.z)),
+                new XElement("ch_ro_z", character.transform.rotation.z),
+                new XElement("hp", playerstate.hp),
+                new XElement("radiation", playerstate.radiation),
+                new XElement("save_time", DateTime.Now.ToString(("yyyy-MM-dd HH:mm:ss tt")))),
             new XElement("item_num", item_num.Select(kv => new XElement(kv.Key, kv.Value))), // dictionary 정석
             new XElement("quest_state", quest_state.Select(kv => new XElement("char" + kv.Key.ToString(), kv.Value))), // key가 int
             new XElement("dictionary_num", dictionarys.dictionary_num.Select(kv => new XElement(kv.Key, kv.Value))),
@@ -91,7 +97,7 @@ public class GameSystem : MonoBehaviour
         XDocument document = new XDocument();
         document.Add(save_data);
 
-        document.Save("./Assets/save_data.xml");
+        document.Save("./Assets/save_data" + num.ToString() + ".xml");
     }
 
 
@@ -162,18 +168,7 @@ public class GameSystem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.J))
-        {
-            save_gema();
-        }
 
-        if (Input.GetKey(KeyCode.K))
-        {
-            load_game();
-        }
-
-        if (Input.GetKey(KeyCode.Z))
-            talk_start(1);
     }
 
     public void Gamestart()

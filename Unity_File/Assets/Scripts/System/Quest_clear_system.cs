@@ -6,6 +6,8 @@ public class Quest_clear_system : MonoBehaviour
 {
     public static Quest_clear_system instance;
 
+    public Dictionary<int, bool> clear_trigger = new Dictionary<int, bool>();
+
     public static Quest_clear_system Instance
     {
         get { return instance; }
@@ -14,6 +16,9 @@ public class Quest_clear_system : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        for (int i = 0; i <= 5; i++) // 퀘스트 갯수 많큼 늘려주세요
+            clear_trigger.Add(i+1, false);
     }
 
     void Update()
