@@ -60,7 +60,7 @@ public class CameraRotater : MonoBehaviour
         transform.localRotation = Quaternion.Slerp(transform.localRotation, ro, 0.5f);
         transform.localPosition = Vector3.Lerp(transform.localPosition, po, 0.5f);
         transform.LookAt(head);
-        sub_cam.transform.rotation.SetLookRotation(player.forward);
+        //sub_cam.transform.rotation.SetLookRotation(player.forward);
         //transform.RotateAround(target.position, target.right, MouseY);
 
         input_mouse_wheel = Input.GetAxisRaw("Mouse ScrollWheel");

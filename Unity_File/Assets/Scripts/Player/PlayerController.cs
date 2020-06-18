@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
         player_transform = GetComponent<Transform>(); //나중에 제거. 그냥 transform으로 쓰기
         player_state = GetComponent<PlayerState>();
         throwManager = GetComponent<ThrowManager>();
-        main_cam = Camera.main.transform;
+        main_cam = GameObject.Find("Main Camera").transform;
         child = transform.GetChild(0);
 
         is_jumping = false;
@@ -468,7 +468,7 @@ public class PlayerController : MonoBehaviour
         {
             in_ground = true;
             is_jumping = false;
-            Debug.Log("in Ground");
+            //Debug.Log("in Ground");
 
             player_state.landing();
         }
