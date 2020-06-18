@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraRotater : MonoBehaviour
 {
@@ -17,8 +18,11 @@ public class CameraRotater : MonoBehaviour
     float input_mouse_wheel;
     Vector3 camera_offset;
     Vector3 origin_camera_offset;
-    Camera main_cam;
-    Camera sub_cam;
+    //Camera main_cam;
+    //Camera sub_cam;
+    CinemachineVirtualCamera main_cam;
+    CinemachineVirtualCamera sub_cam;
+
 
     bool ok = true;
     float ok_time = 0;
@@ -33,8 +37,8 @@ public class CameraRotater : MonoBehaviour
         MouseY = transform.eulerAngles.x;
         camera_offset = transform.localPosition - head.transform.localPosition;
         origin_camera_offset = camera_offset;
-        main_cam = GetComponent<Camera>();
-        sub_cam = gameObject.GetComponentInChildren<Camera>();
+        main_cam = GetComponent<CinemachineVirtualCamera>();
+        sub_cam = gameObject.GetComponentInChildren<CinemachineVirtualCamera>();
 
         far = camera_offset.magnitude;
     }
