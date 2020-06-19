@@ -37,8 +37,6 @@ public class GameSystem : MonoBehaviour
     public GameObject dialogue;
     public GameObject dialogue_box;
 
-    public GameObject sun;
-
 
     public void load_game(int num)
     {
@@ -168,10 +166,6 @@ public class GameSystem : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        sun.transform.Rotate(Vector3.right, 10f * Time.deltaTime);
-    }
 
     public void Gamestart()
     {
