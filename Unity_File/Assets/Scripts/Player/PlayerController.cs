@@ -96,7 +96,10 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown("Jump"))
             {
                 if (!is_jumping && player_state.lending_time == false)
+                {
+                    is_jumping = true;
                     StartCoroutine(Jumping());
+                }
             }
 
             if(Input.GetKeyDown(KeyCode.R))
@@ -388,6 +391,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Jumping()
     {
+        is_jumping = false;
         if (!in_ground) yield return null;
 
         is_jumping = true;
