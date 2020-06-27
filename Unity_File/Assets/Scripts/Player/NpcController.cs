@@ -10,30 +10,21 @@ public class NpcController : MonoBehaviour
     public GameObject name_position;
     public string npc_name;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-
-    }
 
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.name == "Player")
         {
-            dialogue.GetComponent<Dialogue>().quest_on(gameObject, name_position, npc_name);
             dialogue.GetComponent<Dialogue>().open_on = true;
+            dialogue.GetComponent<Dialogue>().quest_on(gameObject, name_position, npc_name);
         }
     }
     private void OnTriggerExit(Collider collision)
     {
         if (collision.name == "Player")
         {
-            dialogue.GetComponent<Dialogue>().quest_off();
             dialogue.GetComponent<Dialogue>().open_on = false;
+            dialogue.GetComponent<Dialogue>().quest_off();       
         }
     }
 }

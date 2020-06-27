@@ -61,6 +61,11 @@ public class Dialogue : MonoBehaviour
                 }
             }
         }
+
+        if (dialogue_box.activeSelf)
+            GameSystem.instance.talk_trigger = true;
+        else
+            GameSystem.instance.talk_trigger = false;
     }
 
     public void quest_on(GameObject npc_obs, GameObject name_positions, string name)

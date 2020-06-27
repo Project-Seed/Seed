@@ -37,6 +37,8 @@ public class GameSystem : MonoBehaviour
     public GameObject dialogue;
     public GameObject dialogue_box;
 
+    public bool talk_trigger = false; // 주문하신 대화하는중인지 체크
+
 
     public void load_game(int num)
     {
