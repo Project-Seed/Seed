@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [ExecuteAlways]
 public class Light_system : MonoBehaviour
@@ -8,6 +9,8 @@ public class Light_system : MonoBehaviour
     [SerializeField] private Light DirectionalLight;
     [SerializeField] private Light_preset Preset;
     [SerializeField, Range(0, 24)] private float time;
+
+    public Text text;
 
     private void Update()
     {
@@ -20,6 +23,14 @@ public class Light_system : MonoBehaviour
             time %= 24;
             updatelighting(time / 24f);
         }
+
+        int itime = (int)time;
+        int mtime = (int)(time % 1 * 60);
+
+        if(mtime < 10)
+            text.text = itime.ToString() + ":0" + mtime;
+        else
+            text.text = itime.ToString() + ":" + mtime;
     }
 
     private void updatelighting(float timeprecent)
