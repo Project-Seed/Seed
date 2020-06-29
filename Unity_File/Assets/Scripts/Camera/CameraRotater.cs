@@ -89,21 +89,21 @@ public class CameraRotater : MonoBehaviour
         return Mathf.Clamp(angle, min, max);
     }
 
-    public void MainToSub()
-    {
-        //smooth주기
+    //public void MainToSub()
+    //{
+    //    //smooth주기
 
-        minY = -20f;
-        sub_cam.enabled = true;
-        main_cam.enabled = false;
-    }
+    //    minY = -20f;
+    //    sub_cam.enabled = true;
+    //    main_cam.enabled = false;
+    //}
 
-    public void SubToMain()
-    {
-        minY = -5f;
-        main_cam.enabled = true;
-        sub_cam.enabled = false;
-    }
+    //public void SubToMain()
+    //{
+    //    minY = -5f;
+    //    main_cam.enabled = true;
+    //    sub_cam.enabled = false;
+    //}
 
     private void OnTriggerStay(Collider other)
     {

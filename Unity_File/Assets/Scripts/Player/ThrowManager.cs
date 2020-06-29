@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class ThrowManager : MonoBehaviour
 {
@@ -11,9 +12,8 @@ public class ThrowManager : MonoBehaviour
     public GameObject aim_sp; // 조준선 스프라이트
     private GameObject throw_sprite;    // 임시스프라이트
     private GameObject tmp;  //임시씨앗
-    private Camera[] cams;
-    private Camera main_cam;
-    private Camera sub_cam;
+
+    public CinemachineVirtualCamera sub_cam;
     private Vector3 dest;
     string seed_name;
     public CameraRotater cameraRotater;
@@ -23,11 +23,6 @@ public class ThrowManager : MonoBehaviour
         // aim 캐릭터 따라다니도록 했는데,,수정해야될듯. 카메라 위로 올리면 aim도 위로 올라가야해서. 
         // Ray쏴서 2차원->3차원 좌표로 바꾼걸 Aim으로 써야될듯
         //카메라에서 Ray를 쏘고 그 닿은 곳에 씨앗이 가도록. 출발점은 캐릭터 손. 도착지는 카메라 기준 에임점이 닿은곳.
-        cams = FindObjectsOfType<Camera>();
-        //Debug.Log(cams[0]+ " " +cams[1]);
-        main_cam = cams[1];
-        sub_cam = cams[0];
-        sub_cam.enabled = false;
     }
 
     public void mouse_down(string name)
@@ -35,6 +30,7 @@ public class ThrowManager : MonoBehaviour
         seed_name = name;
         //StopCoroutine("ThrowingSeed");
         aim_sp.SetActive(true);
+        
     }
 
     public void mouse_up(bool option)
@@ -42,14 +38,11 @@ public class ThrowManager : MonoBehaviour
         if (option && Targeting())//조준하고 option true이면 발사. option false는 발사 취소한 경우.
             Throw();
 
-        SwitchCam(sub_cam, main_cam);
         aim_sp.SetActive(false);
     }
 
     public bool Targeting()
     {
-        SwitchCam(main_cam, sub_cam);
-        
         //마우스를 누르고 있는 상태.
         if (isPlantable())
         {
@@ -62,19 +55,6 @@ public class ThrowManager : MonoBehaviour
             return false;
         }
 
-    }
-
-    private void SwitchCam(Camera camA, Camera camB)
-    {
-        camB.enabled = true;
-        camA.enabled = false;
-        if (camB == main_cam)
-            cameraRotater.minY = -40f;
-        else
-        {
-            cameraRotater.minY = -60f;
-            cameraRotater.ToOriginOffset();
-        }
     }
 
     private bool isPlantable()
