@@ -23,7 +23,7 @@ public class Dialogue : MonoBehaviour
     bool dialogue_box_bool = false;
 
     public Camera cameras;
-    GameObject npc_ob;
+    public GameObject npc_ob;
     GameObject name_position;
 
     int onss = 0; // 1이면 퀘스트 있음
@@ -80,7 +80,9 @@ public class Dialogue : MonoBehaviour
             npc_ob = npc_obs;
             name_position = name_positions;
             name_text.text = name;
-        
+
+            GameSystem.instance.talk_npc_ob = npc_ob;
+
             quest_bool = true;
         }
 
