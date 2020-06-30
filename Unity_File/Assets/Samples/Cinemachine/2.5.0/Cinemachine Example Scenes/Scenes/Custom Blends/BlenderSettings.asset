@@ -4,7 +4,8 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -12,11 +13,11 @@ MonoBehaviour:
   m_Name: BlenderSettings
   m_EditorClassIdentifier: 
   m_CustomBlends:
-  - m_From: '**ANY CAMERA**'
-    m_To: TURN ME ON CM_1
+  - m_From: TargetGroupCam
+    m_To: CM StateDrivenCamera1
     m_Blend:
-      m_Style: 1
-      m_Time: 0.5
+      m_Style: 3
+      m_Time: 0.3
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []

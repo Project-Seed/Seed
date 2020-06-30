@@ -7,9 +7,8 @@ using UnityEngine.Events;
 public class TargetGroup : MonoBehaviour
 {
     public CinemachineTargetGroup targetGroup;
-    public NpcController npc;
-    CinemachineTargetGroup.Target target;
     public CinemachineVirtualCamera vcam;
+
     private void FixedUpdate()
     {
         if (GameSystem.instance.talk_trigger)
@@ -19,7 +18,7 @@ public class TargetGroup : MonoBehaviour
         }
         else
         {
-            targetGroup.RemoveMember(npc.transform);
+            targetGroup.RemoveMember(GameSystem.instance.talk_npc_ob.transform);
             vcam.gameObject.SetActive(false);
         }
     }
@@ -27,7 +26,7 @@ public class TargetGroup : MonoBehaviour
     public void AddTarget()
     {
         if (targetGroup.m_Targets.Length < 2)
-            targetGroup.AddMember(npc.transform, 2, 0.5f);
+            targetGroup.AddMember(GameSystem.instance.talk_npc_ob.transform, 2, 0.5f);
 
         if (targetGroup.m_Targets.Length == 2)
         {
