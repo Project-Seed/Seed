@@ -11,6 +11,7 @@ public class PlayerController_hand : MonoBehaviour
     {
         if (collision.gameObject.name == "blue_trigger")
         {
+            pc.hang_ob = collision.gameObject;
             pc.hang_crash = true;
             Debug.Log("ddd");
 

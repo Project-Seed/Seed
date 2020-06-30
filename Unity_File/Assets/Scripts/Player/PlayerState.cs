@@ -218,6 +218,7 @@ public class PlayerState : MonoBehaviour
         dont_fly = true;
         state_sky = 0;
     }
+    
     public void climb_off()
     {
         animator.SetTrigger("climb_off");
@@ -231,14 +232,13 @@ public class PlayerState : MonoBehaviour
         dont_fly = true;
         state_sky = 0;
     }
-    public void hang_off()
+    public void hang_ing()
     {
-        animator.SetTrigger("hang_off");
-        dont_fly = false;
+        animator.SetTrigger("hang_ing");
     }
-
-    public void hang_up()
+    public void hang_land()
     {
-        animator.SetTrigger("hang_up");
+        animator.SetTrigger("hang_land");
+        dont_fly = false;
     }
 }

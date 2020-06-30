@@ -39,7 +39,11 @@ public class PlayerController : MonoBehaviour
     public Quaternion climb_ro; // 충돌후 갈색 각도, r 누를때 정면 바라보기 위해
 
     public bool hang_crash = false; // 파랑 충돌시 true
-    public bool hang_mod = false; // 파랑 충돌시 키 누르면 true
+    public int hang_mod = 0; // 기본 0 매달리기 1 떨어지기 2
+    public GameObject hang_ob; // 매달리는 파랑이
+    public float hang_x;
+    public float hang_y;
+    public float hang_z;
 
     bool eat_bool = false; // 먹기면 true
     string eat_item;
@@ -52,7 +56,8 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
     }
 
-    IEnumerator hang_up()                  // 이단 점프를 막기 위해 점프시 1초간 점프금지
+    /*
+    IEnumerator hang_up()                  
     {
         yield return new WaitForSeconds(0.2f);
 
@@ -72,7 +77,38 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
 
-        hang_mod = false;
+        hang_mod = 0;
+    }*/
+
+    IEnumerator hang_jump()       
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        hang_x = (hang_ob.transform.position.x - gameObject.transform.position.x) / 20f;
+        hang_y = (hang_ob.transform.position.y - gameObject.transform.position.y - 1f) / 20f;
+        hang_z = (hang_ob.transform.position.z - gameObject.transform.position.z) / 20f;
+
+        for (int i = 0; i < 20; i++)
+        {
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x + hang_x, gameObject.transform.position.y + hang_y, gameObject.transform.position.z + hang_z);
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        player_state.hang_ing();
+        hang_mod = 1;
+    }
+
+    IEnumerator hang_land()
+    {
+        player_state.hang_land();
+
+        for (int i = 0; i < 20; i++)
+        {
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x + hang_x, gameObject.transform.position.y - hang_y, gameObject.transform.position.z + hang_z);
+            yield return new WaitForSeconds(0.01f);
+        }
+        
+        hang_mod = 0;
     }
 
     void Start()
@@ -119,24 +155,17 @@ public class PlayerController : MonoBehaviour
                     transform.Translate(0, 0, 0.8f);
                 }
 
-                if (hang_mod == true)
+                if (hang_mod == 1)
                 {
-                    hang_mod = false;
-                    player_state.hang_off();
+                    StartCoroutine(hang_land());
+                    hang_mod = 2;
                 }
-                else if (hang_crash == true && hang_mod == false)
+                else if (hang_crash == true && hang_mod == 0)
                 {
-                    hang_mod = true;
-                    player_state.hang_on();
-                }
-            }
+                    StartCoroutine(hang_jump());
 
-            if (Input.GetKeyDown(KeyCode.T))
-            { 
-                if(hang_mod == true)
-                {
-                    StartCoroutine(hang_up());
-                    player_state.hang_up();
+                    hang_mod = 1;
+                    player_state.hang_on();
                 }
             }
 
@@ -272,7 +301,7 @@ public class PlayerController : MonoBehaviour
             Quaternion dir = main_cam.localRotation;
             dir.x = 0f; dir.z = 0f;
 
-            if (hang_mod == false)
+            if (hang_mod == 0)
                 transform.localRotation = Quaternion.Slerp(transform.localRotation, dir, 0.5f);
 
             //발사모드에서는 캐릭터 회전 안함. 앞만봄
@@ -285,7 +314,7 @@ public class PlayerController : MonoBehaviour
             {
                 transform.localRotation = dir;
 
-                if (climb_mod == false && hang_mod == false)
+                if (climb_mod == false && hang_mod == 0)
                     child.localRotation = Quaternion.Slerp(child.localRotation, Quaternion.LookRotation(lookAt), 0.2f);
             }
 
@@ -344,7 +373,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if(climb_mod == true || hang_mod == true)
+        if(climb_mod == true || hang_mod != 0)
         {
             gameObject.GetComponent<Rigidbody>().useGravity = false;
             gameObject.GetComponent<Rigidbody>().isKinematic = true;
@@ -371,7 +400,7 @@ public class PlayerController : MonoBehaviour
         movement = movement.normalized;
 
         //문제점. 대각선이동시에는? 방향을 정해주는게 아니라(look at=) 곱해줘야함. . .
-        if (climb_mod == false && hang_mod == false && player_state.lending_time == false)
+        if (climb_mod == false && hang_mod == 0 && player_state.lending_time == false)
         {
             //if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 1.0f))
             //{
@@ -383,7 +412,7 @@ public class PlayerController : MonoBehaviour
 
            transform.Translate(movement * (is_run ? player_run_speed : player_speed) * Time.deltaTime, Space.Self);
         }
-        if ((Mathf.Abs(movement.z) + Mathf.Abs(movement.x)) >= 1 && climb_mod == false && hang_mod == false)
+        if ((Mathf.Abs(movement.z) + Mathf.Abs(movement.x)) >= 1 && climb_mod == false && hang_mod == 0)
             player_state.state_move = 1;
         else
             player_state.state_move = 0;
