@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     Transform main_cam;
     public Camera cameras;
     public Inven_quick qick;
+    public GameObject rotate_ob; // 회전하는 오브젝트
 
     public float player_speed = 2.0f;         // 캐릭터 걷는 속도
     public float player_run_speed = 6.0f;     // 캐릭터 달리는 속도
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour
     public float hang_x;
     public float hang_y;
     public float hang_z;
+    public int hang_vecter = 0; // 캐릭터가 어느방향 바라보게 해야하는지
 
     bool eat_bool = false; // 먹기면 true
     string eat_item;
@@ -80,8 +82,17 @@ public class PlayerController : MonoBehaviour
         hang_mod = 0;
     }*/
 
-    IEnumerator hang_jump()       
+    IEnumerator hang_jump()
     {
+        hang_mod = 1;
+
+        if (hang_vecter == 0)
+            rotate_ob.transform.eulerAngles = new Vector3(hang_ob.transform.eulerAngles.x, hang_ob.transform.eulerAngles.y + 90, hang_ob.transform.eulerAngles.z);
+        else
+            rotate_ob.transform.eulerAngles = new Vector3(hang_ob.transform.eulerAngles.x, hang_ob.transform.eulerAngles.y - 90, hang_ob.transform.eulerAngles.z);
+
+        //rotate_ob.transform.localEulerAngles = new Vector3(0,0,0);
+
         yield return new WaitForSeconds(0.2f);
 
         hang_x = (hang_ob.transform.position.x - gameObject.transform.position.x) / 20f;
@@ -95,7 +106,6 @@ public class PlayerController : MonoBehaviour
         }
 
         player_state.hang_ing();
-        hang_mod = 1;
     }
 
     IEnumerator hang_land()
@@ -467,6 +477,10 @@ public class PlayerController : MonoBehaviour
 
             Key_guide.instance.climb_on();
         }
+        else if (collision.gameObject.name == "left")
+            hang_vecter = 0;
+        else if (collision.gameObject.name == "right")
+            hang_vecter = 1;
     }
 
     private void OnTriggerExit(Collider collision)

@@ -13,7 +13,6 @@ public class PlayerController_hand : MonoBehaviour
         {
             pc.hang_ob = collision.gameObject;
             pc.hang_crash = true;
-            Debug.Log("ddd");
 
             Key_guide.instance.climb_on();
         }

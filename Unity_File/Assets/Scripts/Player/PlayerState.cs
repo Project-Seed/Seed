@@ -228,7 +228,9 @@ public class PlayerState : MonoBehaviour
     public void hang_on()
     {
         animator.ResetTrigger("hang_off");
+        animator.ResetTrigger("hang_ing");
         animator.SetTrigger("hang_on");
+        animator.SetTrigger("hang_on2");
         dont_fly = true;
         state_sky = 0;
     }
@@ -239,6 +241,7 @@ public class PlayerState : MonoBehaviour
     public void hang_land()
     {
         animator.SetTrigger("hang_land");
+        animator.SetTrigger("hang_land2");
         dont_fly = false;
     }
 }
