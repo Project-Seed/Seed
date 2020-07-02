@@ -8,17 +8,24 @@ public class TargetGroup : MonoBehaviour
 {
     public CinemachineTargetGroup targetGroup;
     public CinemachineVirtualCamera vcam;
+    GameObject npc;
 
     private void FixedUpdate()
     {
         if (GameSystem.instance.talk_trigger)
         {
+            npc = GameSystem.instance.talk_npc_ob;
             AddTarget();
             
         }
         else
         {
-            targetGroup.RemoveMember(GameSystem.instance.talk_npc_ob.transform);
+            if (npc != null)
+            {
+                targetGroup.RemoveMember(npc.transform);
+                npc = null;
+            }
+
             vcam.gameObject.SetActive(false);
         }
     }
@@ -26,9 +33,9 @@ public class TargetGroup : MonoBehaviour
     public void AddTarget()
     {
         if (targetGroup.m_Targets.Length < 2)
-            targetGroup.AddMember(GameSystem.instance.talk_npc_ob.transform, 2, 0.5f);
+            targetGroup.AddMember(npc.transform, 2, 0.5f);
 
-        if (targetGroup.m_Targets.Length == 2)
+        if (npc!=null)
         {
             vcam.gameObject.SetActive(true);
         }
