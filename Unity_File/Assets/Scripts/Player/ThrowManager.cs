@@ -104,7 +104,7 @@ public class ThrowManager : MonoBehaviour
         {
             //bullet_rig.AddForce(aimForward, ForceMode.Impulse);
             //bullet_rig.position = Vector3.MoveTowards(bullet_rig.position, dest, 0.5f);
-            bullet_rig.AddForce(dest*10, ForceMode.Acceleration);
+            bullet_rig.AddForce(dest*20, ForceMode.Impulse);
             yield return new WaitForSeconds(0.1f);
             StartCoroutine(ThrowingSeed(bullet_rig, dest));
         }

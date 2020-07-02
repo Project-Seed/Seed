@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     private float input_vertical;           // 수평방향 입력 ad
 
     private bool is_jumping;                // 점프키를 입력하면 true.
-    private bool in_ground;                 // 땅에 있으면 true.
+    private bool stop_jumping;                // 점프금지 시간
     private bool is_run;                    // 달리고 있는지.
 
     public bool throw_mode = false;                 // 던지기 모드 (임시변수)
@@ -51,11 +51,11 @@ public class PlayerController : MonoBehaviour
     string eat_item;
     GameObject eat_object;
 
-
-    IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 1초간 점프금지
+    IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 0.3초간 점프금지
     {
-        is_jumping = false;
-        yield return new WaitForSeconds(0.5f);
+        stop_jumping = true;
+        yield return new WaitForSeconds(0.3f);
+        stop_jumping = false;
     }
 
     /*
@@ -141,9 +141,8 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetButtonDown("Jump"))
             {
-                if (!is_jumping && player_state.lending_time == false)
+                if (!stop_jumping &&!is_jumping && player_state.lending_time == false)
                 {
-                    is_jumping = true;
                     StartCoroutine(Jumping());
                 }
             }
@@ -328,8 +327,6 @@ public class PlayerController : MonoBehaviour
                     child.localRotation = Quaternion.Slerp(child.localRotation, Quaternion.LookRotation(lookAt), 0.2f);
             }
 
-
-
             // 아이템 먹기
             if (Input.GetKeyDown(KeyCode.E) && eat_item != "")
             {
@@ -382,7 +379,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
         if(climb_mod == true || hang_mod != 0)
         {
             gameObject.GetComponent<Rigidbody>().useGravity = false;
@@ -430,17 +426,15 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Jumping()
     {
-        is_jumping = false;
-        if (!in_ground) yield return null;
-
         is_jumping = true;
+        //Debug.Log("jump 시작");
+
         player_state.jump();
 
         yield return new WaitForSeconds(0.2f);
 
         player_rigidbody.AddForce(Vector3.up * player_jump_power, ForceMode.Impulse);   //점프
-    
-        
+        StartCoroutine(StopJumping());
     }
 
     //private void OnCollisionEnter(Collision collision)
@@ -468,6 +462,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
+        {
+            is_jumping = false;
+            //Debug.Log("jump 끝");
+        }
+
         if (collision.gameObject.name == "brown_trigger")
         {
             Debug.Log("갈색 충돌");
@@ -487,9 +487,6 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
         {
-            in_ground = false;
-            Debug.Log("not in Ground");
-
             player_state.flying();
         }
 
@@ -514,10 +511,6 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
         {
-            in_ground = true;
-            is_jumping = false;
-            //Debug.Log("in Ground");
-
             player_state.landing();
         }
         IItem item = collision.GetComponent<IItem>(); //IItem을 상속받는 모든 아이템들
