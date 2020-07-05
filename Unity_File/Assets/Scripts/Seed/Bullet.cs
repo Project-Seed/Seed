@@ -45,17 +45,35 @@ public class Bullet : MonoBehaviour
                 gameObject.SetActive(false);
             }
         }
+        else if (plant.seed_name == "lime_seed")
+        {
+            if (collision.gameObject.CompareTag("Plant"))
+            {
+                collision.transform.localScale = new Vector3(collision.transform.localScale.x / 2, collision.transform.localScale.y / 2, collision.transform.localScale.z / 2);
+
+                gameObject.SetActive(false);
+            }
+        }
         else if (plant.seed_name == "yellow_seed")
         {
             if (collision.gameObject.CompareTag("Plant"))
             {
+                /* 전 노랑씨앗
                 Debug.Log("Plant");
                 ContactPoint point = collision.GetContact(0);
                 Vector3 pos = point.point;
                 Vector3 normal = point.normal;
                 Debug.Log("Nomal : " + normal);
                 plant.PlantSeed(pos, normal, false);
+                */
 
+                gameObject.SetActive(false);
+            }
+        }
+        else if (plant.seed_name == "purple_seed")
+        {
+            if (collision.gameObject.CompareTag("Plant"))
+            {
                 gameObject.SetActive(false);
             }
         }

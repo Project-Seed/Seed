@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8513197099569416124}
   - component: {fileID: 2673021358701771589}
   - component: {fileID: 4394489611369811084}
-  - component: {fileID: 7715924223816391798}
+  - component: {fileID: 7879525808194276046}
   m_Layer: 0
   m_Name: lime_seed
   m_TagString: Untagged
@@ -93,7 +93,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7715924223816391798
+--- !u!114 &7879525808194276046
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,8 +102,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4405836343886827417}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 075a571f551ad69448931e6871b0dc21, type: 3}
+  m_Script: {fileID: 11500000, guid: 52103e7d9c5e76542835598946cccb8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item_ui: {fileID: 0}
-  character: {fileID: 0}
+  render: {fileID: 0}
+  collider: {fileID: 0}
