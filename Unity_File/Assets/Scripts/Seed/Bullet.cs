@@ -72,7 +72,7 @@ public class Bullet : MonoBehaviour
         }
         else if (plant.seed_name == "purple_seed")
         {
-            if (collision.gameObject.CompareTag("Plant"))
+            if (collision.gameObject.CompareTag("Ground"))
             {
                 gameObject.SetActive(false);
             }

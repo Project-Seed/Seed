@@ -20,7 +20,7 @@ public class White_grow : MonoBehaviour
     {
         if (grow_num < 1f)
         {
-            grow_num += Time.deltaTime / 5f;
+            grow_num += Time.deltaTime / 2f;
             down.transform.localScale = new Vector3(grow_num, grow_num, grow_num);
         }
         else if (grow_num2 < 1f)

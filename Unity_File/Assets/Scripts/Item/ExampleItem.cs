@@ -27,7 +27,7 @@ public class ExampleItem : MonoBehaviour, IItem
         collider.enabled = true;
     }
 
-    IEnumerator making()                  // 이단 점프를 막기 위해 점프시 1초간 점프금지
+    IEnumerator making()
     {
         yield return new WaitForSeconds(30f);
         make();
