@@ -477,7 +477,8 @@ public class PlayerController : MonoBehaviour
 
             Key_guide.instance.climb_on();
         }
-        else if (collision.gameObject.name == "left")
+
+        if (collision.gameObject.name == "left")
             hang_vecter = 0;
         else if (collision.gameObject.name == "right")
             hang_vecter = 1;

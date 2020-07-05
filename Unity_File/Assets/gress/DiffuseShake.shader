@@ -1,6 +1,4 @@
-﻿// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
-
-Shader "Transparent/Cutout/Diffuse Shake" {
+﻿Shader "Transparent/Cutout/Diffuse Shake" {
  
 Properties {
     _Color ("Main Color", Color) = (1,1,1,1)
