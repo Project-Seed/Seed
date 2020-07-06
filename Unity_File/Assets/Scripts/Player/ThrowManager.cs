@@ -12,8 +12,9 @@ public class ThrowManager : MonoBehaviour
     public GameObject aim_sp; // 조준선 스프라이트
     private GameObject throw_sprite;    // 임시스프라이트
     private GameObject tmp;  //임시씨앗
+    private bool target_on;
 
-    public CinemachineVirtualCamera sub_cam;
+    public Transform sub_cam;
     private Vector3 dest;
     string seed_name;
     public CameraRotater cameraRotater;
@@ -28,50 +29,51 @@ public class ThrowManager : MonoBehaviour
     public void mouse_down(string name)
     {
         seed_name = name;
-        //StopCoroutine("ThrowingSeed");
         aim_sp.SetActive(true);
         
     }
 
     public void mouse_up(bool option)
     {
-        if (option && Targeting())//조준하고 option true이면 발사. option false는 발사 취소한 경우.
+        if (option && target_on)//조준하고 option true이면 발사. option false는 발사 취소한 경우.
             Throw();
 
         aim_sp.SetActive(false);
+        target_on = false;
     }
 
-    public bool Targeting()
+    public void Targeting()
     {
         //마우스를 누르고 있는 상태.
         if (isPlantable())
         {
             aim_sp.GetComponent<Image>().color = Color.cyan;
-            return true;
+            target_on = true;
+            Debug.Log("Target on");
         }
         else
         {
             aim_sp.GetComponent<Image>().color = Color.magenta;
-            return false;
+            target_on = false;
         }
 
     }
 
     private bool isPlantable()
     {
-        float distance = 20.0f;
-        Debug.DrawRay(sub_cam.transform.position, sub_cam.transform.forward * distance, Color.green, 1.0f);
-
-        if (Physics.Raycast(sub_cam.transform.position, sub_cam.transform.forward, out RaycastHit hit, distance))
+        float distance = 100.0f;
+        Debug.DrawRay(sub_cam.position, sub_cam.forward * distance, Color.green, 10.0f);
+        if (Physics.Raycast(sub_cam.position, sub_cam.forward, out RaycastHit hit, distance))
         {
-            if (hit.transform.CompareTag("Plantable") || hit.transform.CompareTag("Ground"))
-            {
+           // if (hit.transform.CompareTag("Plantable") || hit.transform.CompareTag("Ground"))
+           // {
+                Debug.DrawLine(sub_cam.position, hit.point, Color.red, 3.0f) ;
                 dest = hit.point - aim.transform.position;
                 Debug.Log(dest);
                 return true;
-            }
-            else
-                return false;
+           // }
+           // else
+                //return false;
         }
         else return false;
     }
@@ -104,7 +106,7 @@ public class ThrowManager : MonoBehaviour
         {
             //bullet_rig.AddForce(aimForward, ForceMode.Impulse);
             //bullet_rig.position = Vector3.MoveTowards(bullet_rig.position, dest, 0.5f);
-            bullet_rig.AddForce(dest*20, ForceMode.Impulse);
+            bullet_rig.AddForce(dest*10, ForceMode.Impulse);
             yield return new WaitForSeconds(0.1f);
             StartCoroutine(ThrowingSeed(bullet_rig, dest));
         }

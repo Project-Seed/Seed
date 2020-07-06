@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     private bool stop_jumping;                // 점프금지 시간
     private bool is_run;                    // 달리고 있는지.
 
-    public bool throw_mode = false;                 // 던지기 모드 (임시변수)
+    //public bool throw_mode = false;                 // 던지기 모드 (임시변수)
     private Vector3 lookAt;
 
     public bool climb_crash = false; // 갈색 충돌시 true
@@ -242,7 +242,9 @@ public class PlayerController : MonoBehaviour
                 {
                     if (GameSystem.instance.item_num[qick.item_name] >= 1 && InputManager.instance.click_mod == 0)
                     {
-                        throw_mode = true;
+                        //throw_mode = true;
+                        GameSystem.instance.SetMode(1); //발사모드
+                        Debug.Log("발사모드");
                         //child.localRotation = Quaternion.Slerp(child.localRotation, transform.localRotation, 0.5f);
 
                         throwManager.mouse_down(qick.item_name);
@@ -255,33 +257,55 @@ public class PlayerController : MonoBehaviour
             //좌클릭하는 동안 계속 조준하면서 Raycasting.
             if (Input.GetMouseButton(0))
             {
-                if (throw_mode)
+                if (GameSystem.instance.GetModeNum() == 1)
+
                     throwManager.Targeting();
             }
 
             //좌클릭->우클릭 발사 취소.
             if (Input.GetMouseButtonDown(1))
             {
-                if (throw_mode)
+                if (GameSystem.instance.GetModeNum()==1)
                 {
-                    throw_mode = false;
-                    throwManager.mouse_up(false);
+                    //throw_mode = false;
+                    GameSystem.instance.SetMode(0); //기본모드
+                    Debug.Log("기본모드");
+
+                    throwManager.mouse_up(false);//발사 옵션 false. 발사 취소
 
                     player_state.shoot_stop();
                 }
+                //if (throw_mode)
+                //{
+                //    throw_mode = false;
+                //    throwManager.mouse_up(false);
+
+                //    player_state.shoot_stop();
+                //}
             }
 
             //좌클릭 Up 발사.
             if (Input.GetMouseButtonUp(0))
             {
-                if (throw_mode) //취소를 안했을 경우에만 발사
+                if (GameSystem.instance.GetModeNum()==1) //취소를 안했을 경우에만 발사
                 {
-                    throw_mode = false;
+                    GameSystem.instance.SetMode(0); //기본모드
+                    Debug.Log("기본모드");
+
+                    throwManager.mouse_up(true);//발사 허가
+
                     GameSystem.instance.item_num[qick.item_name]--;
-                    throwManager.mouse_up(true);
 
                     player_state.shoot();
                 }
+                //if (throw_mode) //취소를 안했을 경우에만 발사
+                //{
+                //    throw_mode = false;
+                //    GameSystem.instance.item_num[qick.item_name]--;
+                //    throwManager.mouse_up(true);
+
+                //    player_state.shoot();
+                //}
             }
 
             input_horizontal = Input.GetAxis("Horizontal");
@@ -315,7 +339,7 @@ public class PlayerController : MonoBehaviour
                 transform.localRotation = Quaternion.Slerp(transform.localRotation, dir, 0.5f);
 
             //발사모드에서는 캐릭터 회전 안함. 앞만봄
-            if (throw_mode)
+            if (GameSystem.instance.GetModeNum()==1)
                 child.localRotation = Quaternion.Slerp(child.localRotation, transform.localRotation, 0.2f);
 
             //이동할때만 모델회전

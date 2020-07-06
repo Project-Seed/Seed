@@ -10,7 +10,7 @@ public class CameraRotater : MonoBehaviour
     public Transform player;
     [SerializeField] private float rotate_angle = 2.0f;        // 카메라 회전각도 (1초에 2도)
     public Vector3 offset;
-    float rotate_speed = 2.0f;
+    public float rotate_speed = 2.0f;
     public float minY = -40f;
     public float maxY = 40f;
     float MouseX;
