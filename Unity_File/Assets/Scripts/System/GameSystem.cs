@@ -25,8 +25,6 @@ public class GameSystem : MonoBehaviour
 
     public Dictionary<int, int> quest_state = new Dictionary<int, int>(); // 퀘스트 상태  0 시작전, 1 진행중, 2 클리어 대기, 3 완료
 
-    public float time = 660; // 현재 시간
-
     public static bool switch_mode;
 
     public Quest_quick quest_quick;
@@ -45,7 +43,7 @@ public class GameSystem : MonoBehaviour
     {
         XDocument save_data = XDocument.Load("./Assets/save_data" + num.ToString() + ".xml");
 
-        time = Convert.ToInt32(save_data.Element("root").Element("solo").Element("time").Value);
+        Light_system.instance.time = Convert.ToInt32(save_data.Element("root").Element("solo").Element("time").Value);
         character.transform.position = new Vector3(
             float.Parse(save_data.Element("root").Element("solo").Element("ch_po_x").Value),
             float.Parse(save_data.Element("root").Element("solo").Element("ch_po_y").Value),
@@ -81,7 +79,7 @@ public class GameSystem : MonoBehaviour
     {
         XElement save_data = new XElement("root",
             new XElement("solo", 
-                new XElement("time", time), 
+                new XElement("time", Light_system.instance.time), 
                 new XElement("ch_po_x", character.transform.position.x),
                 new XElement("ch_po_y", character.transform.position.y),
                 new XElement("ch_po_z", character.transform.position.z),
@@ -193,7 +191,7 @@ public class GameSystem : MonoBehaviour
         if (InputManager.instance.click_mod == 0 && dialogue_box.activeSelf == false)
         {
             dialogue_box.SetActive(true);
-            InputManager.instance.click_mod = 1;
+            InputManager.instance.game_stop();
             dialogue.GetComponent<Text_system>().StartDialogue(num);
         }
     }

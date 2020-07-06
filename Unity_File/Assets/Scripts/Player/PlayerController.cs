@@ -329,7 +329,7 @@ public class PlayerController : MonoBehaviour
             }
 
             // 아이템 먹기
-            if (Input.GetKeyDown(KeyCode.E) && eat_item != "")
+            if (Input.GetKeyDown(KeyCode.E) && eat_item != "" && Key_guide.instance.item.activeSelf)
             {
                 Eat_system.instance.eat_item(eat_item);
                 eat_item = "";
@@ -515,6 +515,7 @@ public class PlayerController : MonoBehaviour
         {
             player_state.landing();
         }
+
         IItem item = collision.GetComponent<IItem>(); //IItem을 상속받는 모든 아이템들
         if (item != null)                         //아이템과 부딪혔다면 함수를 호출하고 지움.
         {

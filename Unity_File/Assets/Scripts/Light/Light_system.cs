@@ -6,15 +6,27 @@ using UnityEngine.UI;
 [ExecuteAlways]
 public class Light_system : MonoBehaviour
 {
+    public static Light_system instance; // 현재 클레스를 인스턴트화
+
     [SerializeField] private Light DirectionalLight;
     [SerializeField] private Light_preset Preset;
-    [SerializeField, Range(0, 24)] private float time;
+    [SerializeField, Range(0, 24)] public float time;
 
     public Text text;
 
+    public static Light_system Instance
+    {
+        get { return instance; }
+    }
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Update()
     {
-        if (Preset == null)
+        if (Preset == null || InputManager.instance.click_mod == 1)
             return;
 
         if(Application.isPlaying)

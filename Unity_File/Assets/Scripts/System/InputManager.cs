@@ -6,7 +6,7 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager instance; // 현재 클레스를 인스턴트화
 
-    public int click_mod = 0; // 0이면 기본, 1이면 메뉴
+    public int click_mod = 0; // 0이면 기본, 1이면 메뉴 / 따라서 1이면 일시정지다 이말이야~
 
     public static InputManager Instance
     {
@@ -18,13 +18,12 @@ public class InputManager : MonoBehaviour
         instance = this;
     }
 
-    void Start()
+    public void game_stop()
     {
-        
+        click_mod = 1;
     }
-
-    void Update()
+    public void game_start()
     {
-        
+        click_mod = 0;
     }
 }
