@@ -49,6 +49,7 @@ MonoBehaviour:
   player: {fileID: 8780300512582525261}
   rotate_angle: 2
   offset: {x: 0, y: 0, z: 0}
+  rotate_speed: 1
   minY: -40
   maxY: 40
 --- !u!114 &2553144517043599824
@@ -255,6 +256,36 @@ MonoBehaviour:
     m_ParentHash: 756556552
   - m_Hash: 812969995
     m_ParentHash: 756556552
+--- !u!1 &5365539164828044208
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2618298304792725411}
+  m_Layer: 0
+  m_Name: SubCamAim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2618298304792725411
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5365539164828044208}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.3, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8697442069990282836}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5696262360066395177
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,7 +398,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6145414088686516159}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.5, z: -3}
+  m_LocalPosition: {x: 1, y: 2, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6421830205627917536}
@@ -386,12 +417,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ccdf071a75d7974b8c8cd856a93eec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 5571486284773315837}
+  head: {fileID: 2618298304792725411}
   player: {fileID: 8780300512582525261}
   rotate_angle: 2
   offset: {x: 0, y: 0, z: 0}
-  minY: -20
-  maxY: 20
+  rotate_speed: 1
+  minY: -60
+  maxY: 0
 --- !u!114 &4416801790696475369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,7 +442,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 5571486284773315837}
+  m_LookAt: {fileID: 2618298304792725411}
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 40
@@ -487,7 +519,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 8697442069990282836}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1424530897473258672
 BoxCollider:
@@ -638,7 +670,6 @@ MonoBehaviour:
   player_speed: 4
   player_run_speed: 6
   player_jump_power: 5
-  throw_mode: 0
   climb_crash: 0
   climb_mod: 0
   climb_po: {x: 0, y: 0, z: 0}
@@ -649,6 +680,7 @@ MonoBehaviour:
   hang_x: 0
   hang_y: 0
   hang_z: 0
+  hang_vecter: 0
 --- !u!114 &7914510643502694924
 MonoBehaviour:
   m_ObjectHideFlags: 0
