@@ -97,18 +97,18 @@ public class PlayerController : MonoBehaviour
 
         if (hang_vecter == 0)
         {
-            hang_x = (hang_ob.transform.position.x - 0.3f - gameObject.transform.position.x) / 20f;
-            hang_y = (hang_ob.transform.position.y + 0.2f - gameObject.transform.position.y - 1f) / 20f;
-            hang_z = (hang_ob.transform.position.z - gameObject.transform.position.z) / 20f;
+            hang_x = (hang_ob.transform.position.x - 0.3f - gameObject.transform.position.x) / 15f;
+            hang_y = (hang_ob.transform.position.y + 0.2f - gameObject.transform.position.y - 1f) / 15f;
+            hang_z = (hang_ob.transform.position.z - gameObject.transform.position.z) / 15f;
         }
         else
         {
-            hang_x = (hang_ob.transform.position.x + 0.3f - gameObject.transform.position.x) / 20f;
-            hang_y = (hang_ob.transform.position.y + 0.2f - gameObject.transform.position.y - 1f) / 20f;
-            hang_z = (hang_ob.transform.position.z - gameObject.transform.position.z) / 20f;
+            hang_x = (hang_ob.transform.position.x + 0.3f - gameObject.transform.position.x) / 15f;
+            hang_y = (hang_ob.transform.position.y + 0.2f - gameObject.transform.position.y - 1f) / 15f;
+            hang_z = (hang_ob.transform.position.z - gameObject.transform.position.z) / 15f;
         }
 
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 15; i++)
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x + hang_x, gameObject.transform.position.y + hang_y, gameObject.transform.position.z + hang_z);
             yield return new WaitForSeconds(0.01f);

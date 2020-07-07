@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Bullet : MonoBehaviour
 {
+    public GameObject boom;
+    public GameObject scene;
     Plant plant;
+
     private void Start()
     {
         plant = GetComponent<Plant>();
@@ -23,6 +26,10 @@ public class Bullet : MonoBehaviour
 
                 gameObject.SetActive(false);
             }
+            else
+            {
+                gameObject.SetActive(false);
+            }
         }
         else if (plant.seed_name == "red_seed")
         {
@@ -35,13 +42,21 @@ public class Bullet : MonoBehaviour
 
                 gameObject.SetActive(false);
             }
+            else
+            {
+                gameObject.SetActive(false);
+            }
         }
-        else if(plant.seed_name == "green_seed")
+        else if (plant.seed_name == "green_seed")
         {
             if (collision.gameObject.CompareTag("Plant"))
             {
                 collision.transform.localScale = new Vector3(collision.transform.localScale.x * 2, collision.transform.localScale.y * 2, collision.transform.localScale.z * 2);
 
+                gameObject.SetActive(false);
+            }
+            else
+            {
                 gameObject.SetActive(false);
             }
         }
@@ -53,10 +68,14 @@ public class Bullet : MonoBehaviour
 
                 gameObject.SetActive(false);
             }
+            else
+            {
+                gameObject.SetActive(false);
+            }
         }
         else if (plant.seed_name == "yellow_seed")
         {
-            if (collision.gameObject.CompareTag("Plant"))
+            if (collision.gameObject.CompareTag("Yellow"))
             {
                 /* 전 노랑씨앗
                 Debug.Log("Plant");
@@ -66,16 +85,20 @@ public class Bullet : MonoBehaviour
                 Debug.Log("Nomal : " + normal);
                 plant.PlantSeed(pos, normal, false);
                 */
+                collision.gameObject.GetComponent<Rigidbody>().mass = 1;
 
+                gameObject.SetActive(false);
+            }
+            else
+            {
                 gameObject.SetActive(false);
             }
         }
         else if (plant.seed_name == "purple_seed")
         {
-            if (collision.gameObject.CompareTag("Ground"))
-            {
-                gameObject.SetActive(false);
-            }
+            Instantiate(boom, gameObject.transform.position, gameObject.transform.rotation);
+
+            gameObject.SetActive(false);
         }
     }
 }
