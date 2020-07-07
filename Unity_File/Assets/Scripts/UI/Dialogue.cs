@@ -47,7 +47,7 @@ public class Dialogue : MonoBehaviour
             {
                 if (dialogue_box_bool == false)
                 {
-                    InputManager.instance.click_mod = 1;
+                    InputManager.instance.game_stop();
 
                     dialogue_box.SetActive(true);
                     dialogue_box_bool = true;
@@ -135,7 +135,7 @@ public class Dialogue : MonoBehaviour
 
     public void talk_end()
     {
-        InputManager.instance.click_mod = 0;
+        InputManager.instance.game_start();
 
         dialogue_box.SetActive(false);
         dialogue_box_bool = false;

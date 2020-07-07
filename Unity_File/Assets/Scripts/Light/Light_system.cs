@@ -26,10 +26,10 @@ public class Light_system : MonoBehaviour
 
     private void Update()
     {
-        if (Preset == null || InputManager.instance.click_mod == 1)
+        if (Preset == null)
             return;
 
-        if(Application.isPlaying)
+        if(Application.isPlaying && InputManager.instance.click_mod == 0)
         {
             time += Time.deltaTime;
             time %= 24;

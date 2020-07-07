@@ -44,13 +44,13 @@ public class Combination : MonoBehaviour
 
     private void OnEnable()
     {
-        InputManager.instance.click_mod = 1;
+        InputManager.instance.game_stop();
         succses.SetActive(false);
         fail.SetActive(false);
     }
     private void OnDisable()
     {
-        InputManager.instance.click_mod = 0;
+        InputManager.instance.game_start();
     }
 
     private void Update()

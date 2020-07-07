@@ -95,9 +95,18 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
 
-        hang_x = (hang_ob.transform.position.x - gameObject.transform.position.x) / 20f;
-        hang_y = (hang_ob.transform.position.y - gameObject.transform.position.y - 1f) / 20f;
-        hang_z = (hang_ob.transform.position.z - gameObject.transform.position.z) / 20f;
+        if (hang_vecter == 0)
+        {
+            hang_x = (hang_ob.transform.position.x - 0.3f - gameObject.transform.position.x) / 20f;
+            hang_y = (hang_ob.transform.position.y + 0.2f - gameObject.transform.position.y - 1f) / 20f;
+            hang_z = (hang_ob.transform.position.z - gameObject.transform.position.z) / 20f;
+        }
+        else
+        {
+            hang_x = (hang_ob.transform.position.x + 0.3f - gameObject.transform.position.x) / 20f;
+            hang_y = (hang_ob.transform.position.y + 0.2f - gameObject.transform.position.y - 1f) / 20f;
+            hang_z = (hang_ob.transform.position.z - gameObject.transform.position.z) / 20f;
+        }
 
         for (int i = 0; i < 20; i++)
         {
@@ -105,6 +114,7 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
 
+        hang_mod = 2;
         player_state.hang_ing();
     }
 
@@ -114,12 +124,10 @@ public class PlayerController : MonoBehaviour
 
         for (int i = 0; i < 20; i++)
         {
-            gameObject.transform.Translate(rotate_ob.transform.forward * Time.deltaTime * 10,Space.World);
+            gameObject.transform.Translate(rotate_ob.transform.forward * Time.deltaTime * 8,Space.World);
             
             yield return new WaitForSeconds(0.01f);
         }
-        
-        hang_mod = 0;
     }
 
     void Start()
@@ -165,10 +173,10 @@ public class PlayerController : MonoBehaviour
                     transform.Translate(0, 0, 0.8f);
                 }
 
-                if (hang_mod == 1)
+                if (hang_mod == 2)
                 {
                     StartCoroutine(hang_land());
-                    hang_mod = 2;
+                    hang_mod = 0;
                 }
                 else if (hang_crash == true && hang_mod == 0)
                 {

@@ -22,11 +22,11 @@ public class Note : MonoBehaviour
 
     private void OnEnable()
     {
-        InputManager.instance.click_mod = 1;
+        InputManager.instance.game_stop();
     }
     private void OnDisable()
     {
-        InputManager.instance.click_mod = 0;
+        InputManager.instance.game_start();
     }
 
     public void On_illustrated()
