@@ -151,4 +151,25 @@ public class Dialogue : MonoBehaviour
 
         quest_on(npc_ob, name_position, name_text.text);
     }
+
+    public void solo_talk(int num)
+    {
+        quest_num = num;
+        quest_now = GameSystem.instance.quest_state[quest_num];
+        onss = 1;
+
+        
+        InputManager.instance.game_stop();
+
+        dialogue_box.SetActive(true);
+        dialogue_box_bool = true;
+
+        if (quest_now == 0)
+            gameObject.GetComponent<Text_system>().StartDialogue(System.Convert.ToInt32(GameSystem.instance.quest_list[quest_num - 1]["start_talk"]));
+        else if (quest_now == 1)
+            gameObject.GetComponent<Text_system>().StartDialogue(System.Convert.ToInt32(GameSystem.instance.quest_list[quest_num - 1]["ing_talk"]));
+        else if (quest_now == 2)
+            gameObject.GetComponent<Text_system>().StartDialogue(System.Convert.ToInt32(GameSystem.instance.quest_list[quest_num - 1]["end_talk"]));
+
+    }
 }
