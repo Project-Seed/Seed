@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public Camera cameras;
     public Inven_quick qick;
     public GameObject rotate_ob; // 회전하는 오브젝트
+    public Dialogue dialogue;
 
     public float player_speed = 2.0f;         // 캐릭터 걷는 속도
     public float player_run_speed = 6.0f;     // 캐릭터 달리는 속도
@@ -49,7 +50,8 @@ public class PlayerController : MonoBehaviour
 
     bool eat_bool = false; // 먹기면 true
     string eat_item;
-    GameObject eat_object;
+    GameObject eat_object;//아이템
+    GameObject eat_objects;//오브젝트
 
     IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 0.3초간 점프금지
     {
@@ -136,6 +138,7 @@ public class PlayerController : MonoBehaviour
         throwManager = GetComponent<ThrowManager>();
         main_cam = GameObject.Find("Main Camera").transform;
         child = transform.GetChild(0);
+        dialogue = GameObject.Find("Dialogue").GetComponent<Dialogue>();
 
         is_jumping = false;
         is_run = false;
@@ -370,6 +373,35 @@ public class PlayerController : MonoBehaviour
                 Key_guide.instance.item_off();
                 Key_guide.instance.item_name_off();
             }
+
+            if (Input.GetKeyDown(KeyCode.E) && Key_guide.instance.objects.activeSelf)
+            {
+                switch (eat_objects.name)
+                {
+                    case "Radio":
+                        dialogue.solo_talk(17);
+                        Quest_clear_system.instance.clear_trigger[6]++;
+                        break;
+
+                    case "Frame":
+                        dialogue.solo_talk(18);
+                        Quest_clear_system.instance.clear_trigger[6]++;
+                        break;
+
+                    case "Letter":
+                        dialogue.solo_talk(19);
+                        Quest_clear_system.instance.clear_trigger[6]++;
+                        break;
+
+                    case "Book":
+                        dialogue.solo_talk(20);
+                        Quest_clear_system.instance.clear_trigger[6]++;
+                        break;
+                }
+
+                eat_objects.GetComponent<SphereCollider>().enabled = false;
+                Key_guide.instance.object_off();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.I))
@@ -536,6 +568,11 @@ public class PlayerController : MonoBehaviour
 
             Key_guide.instance.climb_off();
         }
+
+        if (collision.gameObject.CompareTag("objects"))
+        {
+            Key_guide.instance.object_off();
+        }
     }
 
 
@@ -556,6 +593,33 @@ public class PlayerController : MonoBehaviour
             Vector3 eat_pos = cameras.WorldToScreenPoint(eat_object.transform.position);
             string eat_item2 = GameSystem.instance.item_search(eat_item, "name_ko");
             Key_guide.instance.item_name_on(eat_item2, eat_pos);
+        }
+
+        if (collision.gameObject.CompareTag("objects"))
+        {
+            string name = null;
+
+            switch (collision.gameObject.name)
+            {
+                case "Radio":
+                    name = "라디오";
+                    break;
+
+                case "Frame":
+                    name = "가족사진";
+                    break;
+
+                case "Letter":
+                    name = "편지";
+                    break;
+
+                case "Book":
+                    name = "다이어리";
+                    break;
+            }
+
+            eat_objects = collision.gameObject;
+            Key_guide.instance.object_on(name, cameras.WorldToScreenPoint(collision.gameObject.transform.position));
         }
     }
 }
