@@ -13,7 +13,7 @@ public class normal_grow : MonoBehaviour
 
     void Update()
     {
-        if (grow_num <= 0.1f && InputManager.instance.click_mod == 0)
+        if (grow_num <= 0.1f)
         {
             grow_num += Time.deltaTime / 20f;
             gameObject.transform.localScale = new Vector3(grow_num, grow_num, grow_num);
