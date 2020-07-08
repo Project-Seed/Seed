@@ -18,15 +18,18 @@ public class White_grow : MonoBehaviour
 
     void Update()
     {
-        if (grow_num < 1f)
+        if (InputManager.instance.click_mod == 0)
         {
-            grow_num += Time.deltaTime / 2f;
-            down.transform.localScale = new Vector3(grow_num, grow_num, grow_num);
-        }
-        else if (grow_num2 < 1f)
-        {
-            grow_num2 += Time.deltaTime / 5f;
-            up.transform.localScale = new Vector3(grow_num2, grow_num2, grow_num2);
+            if (grow_num < 1f)
+            {
+                grow_num += Time.deltaTime / 2f;
+                down.transform.localScale = new Vector3(grow_num, grow_num, grow_num);
+            }
+            else if (grow_num2 < 1f)
+            {
+                grow_num2 += Time.deltaTime / 5f;
+                up.transform.localScale = new Vector3(grow_num2, grow_num2, grow_num2);
+            }
         }
     }
 }
