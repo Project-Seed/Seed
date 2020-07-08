@@ -32,19 +32,12 @@ public class Text_system_movie : MonoBehaviour
 
     public void Next_text()
     {
-        if (num == 4)
-        {
-            tutorial.tutorial(2);
-            gameObject.SetActive(false);
-        }
-        else
-        {
             Messge_q = TextList[num];
             num++;
 
             StopAllCoroutines();
             StartCoroutine(TypeSentence(Messge_q));
-        }
+        
     }
 
     IEnumerator TypeSentence(string sentence) // 한글자씩 출력

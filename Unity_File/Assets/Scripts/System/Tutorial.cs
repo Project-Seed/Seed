@@ -6,17 +6,10 @@ public class Tutorial : MonoBehaviour
 {
     public Dialogue dialogue;
     public Text_system_movie movie;
+    public GameObject movie_obj;
 
     void Start()
     {
-        StartCoroutine(start_tutorial());
-    }
-
-    IEnumerator start_tutorial()
-    {
-        yield return new WaitForSeconds(1f);
-
-        tutorial(1);
     }
 
     public void tutorial(int num)
@@ -24,10 +17,17 @@ public class Tutorial : MonoBehaviour
         switch(num)
         {
             case 1:
+                movie_obj.SetActive(true);
                 movie.StartDialogue(0);  
                 break;
 
             case 2:
+            case 3:
+                movie.Next_text();
+                break;
+
+            case 4:
+                movie_obj.SetActive(false);
                 dialogue.solo_talk(16);
                 break;
         }
