@@ -509,7 +509,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &170076734
 Light:
   m_ObjectHideFlags: 0
@@ -517,7 +517,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 170076733}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 9
   m_Type: 1
   m_Color: {r: 0.9622642, g: 0.7351099, b: 0.49474904, a: 1}
@@ -1889,7 +1889,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &722664982
 Light:
   m_ObjectHideFlags: 0
@@ -4456,61 +4456,6 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7914510643502694924, guid: 60283bddc5264024893416fd49fc70aa,
-        type: 3}
-      propertyPath: radiation
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7914510643502694924, guid: 60283bddc5264024893416fd49fc70aa,
-        type: 3}
-      propertyPath: max_radiation
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7914510643502694924, guid: 60283bddc5264024893416fd49fc70aa,
-        type: 3}
-      propertyPath: hp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7914510643502694924, guid: 60283bddc5264024893416fd49fc70aa,
-        type: 3}
-      propertyPath: max_hp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5686037124941997127, guid: 60283bddc5264024893416fd49fc70aa,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 186781349313635565, guid: 60283bddc5264024893416fd49fc70aa,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 186781349313635565, guid: 60283bddc5264024893416fd49fc70aa,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 186781349313635565, guid: 60283bddc5264024893416fd49fc70aa,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 186781349313635565, guid: 60283bddc5264024893416fd49fc70aa,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1425331414821829588, guid: 60283bddc5264024893416fd49fc70aa,
-        type: 3}
-      propertyPath: m_TagString
-      value: Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 1425331414821829588, guid: 60283bddc5264024893416fd49fc70aa,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8780300512582525261, guid: 60283bddc5264024893416fd49fc70aa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4564,6 +4509,61 @@ PrefabInstance:
     - target: {fileID: 8780300512582525261, guid: 60283bddc5264024893416fd49fc70aa,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914510643502694924, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: radiation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914510643502694924, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: max_radiation
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914510643502694924, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: hp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914510643502694924, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: max_hp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5686037124941997127, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186781349313635565, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186781349313635565, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 186781349313635565, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186781349313635565, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1425331414821829588, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: m_TagString
+      value: Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 1425331414821829588, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4129247577487192685, guid: 60283bddc5264024893416fd49fc70aa,
@@ -7226,6 +7226,7 @@ MonoBehaviour:
   Preset: {fileID: 11400000, guid: 99ae0a48631d3614b92645165ecc2b79, type: 2}
   time: 0
   text: {fileID: 595202941}
+  tuto: 1
 --- !u!114 &1739530168
 MonoBehaviour:
   m_ObjectHideFlags: 0

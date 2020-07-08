@@ -13,6 +13,7 @@ public class Light_system : MonoBehaviour
     [SerializeField, Range(0, 24)] public float time;
 
     public Text text;
+    public bool tuto = false;
 
     public static Light_system Instance
     {
@@ -29,7 +30,7 @@ public class Light_system : MonoBehaviour
         if (Preset == null)
             return;
 
-        if(Application.isPlaying && InputManager.instance.click_mod == 0)
+        if(Application.isPlaying && InputManager.instance.click_mod == 0 && tuto == false)
         {
             time += Time.deltaTime;
             time %= 24;
