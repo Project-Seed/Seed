@@ -435,6 +435,7 @@ public class PlayerController : MonoBehaviour
                         break;
 
                     case "Plant_Book":
+                        Destroy(GameObject.Find("Plant_Book"));
                         Instantiate(Resources.Load<GameObject>("Tutorial/Plant_book"),GameObject.Find("Canvas").transform);
                         Eat_system.instance.eat_item("key");
                         Eat_system.instance.eat_item("mini_latter");
