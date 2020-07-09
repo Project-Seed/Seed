@@ -25,6 +25,7 @@ public class Tutorial : MonoBehaviour
             case 4:
                 movie_obj.SetActive(false);
                 dialogue.solo_talk(16);
+                GameObject.Find("M_Shopa01").GetComponent<BoxCollider>().enabled = true;
                 break;
         }
     }
