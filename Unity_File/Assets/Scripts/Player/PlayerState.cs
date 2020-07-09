@@ -227,7 +227,6 @@ public class PlayerState : MonoBehaviour
 
     public void hang_on()
     {
-        animator.ResetTrigger("hang_off");
         animator.ResetTrigger("hang_ing");
         animator.SetTrigger("hang_on");
         animator.SetTrigger("hang_on2");
