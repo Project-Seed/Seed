@@ -227,7 +227,6 @@ public class PlayerState : MonoBehaviour
 
     public void hang_on()
     {
-        animator.ResetTrigger("hang_off");
         animator.ResetTrigger("hang_ing");
         animator.SetTrigger("hang_on");
         animator.SetTrigger("hang_on2");
@@ -247,11 +246,13 @@ public class PlayerState : MonoBehaviour
 
     public void tutorial_start()
     {
+        InputManager.instance.game_stop();
         animator.SetTrigger("lying_ing");
     }
 
     public void tutorial_up()
     {
+        InputManager.instance.game_start();
         animator.SetTrigger("lying_end");
     }
 }

@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
 
         for (int i = 0; i < 10; i++)
         {
-            gameObject.transform.Translate(rotate_ob.transform.forward * Time.deltaTime * 15,Space.World);
+            gameObject.transform.Translate(rotate_ob.transform.forward * Time.deltaTime * 20,Space.World);
             
             yield return new WaitForSeconds(0.01f);
         }
