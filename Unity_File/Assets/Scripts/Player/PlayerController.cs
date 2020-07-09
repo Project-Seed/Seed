@@ -424,7 +424,7 @@ public class PlayerController : MonoBehaviour
                         Quest_clear_system.instance.clear_trigger[6]++;
                         break;
 
-                    case "Hari_Book":
+                    case "Hari3_Book":
                         dialogue.solo_talk(21);
                         break;
 
@@ -676,7 +676,7 @@ public class PlayerController : MonoBehaviour
                     key_on = true;
                     break;
 
-                case "Hari_Book":
+                case "Hari3_Book":
                     name = "해리포터 3권";
                     if (GameSystem.instance.quest_state[6] == 3)
                         key_on = true;
