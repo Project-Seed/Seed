@@ -403,6 +403,7 @@ public class PlayerController : MonoBehaviour
                         break;
 
                     case "Hari4_Book":
+                        //여기에 타임라인 호출
                         Quest_clear_system.instance.clear_trigger[7]++;
                         break;
 
