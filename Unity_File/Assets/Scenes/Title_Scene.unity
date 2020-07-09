@@ -203,7 +203,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1894678526}
-        m_MethodName: Gamestart
+        m_MethodName: GameStart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -694,10 +694,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5607164da3e04614c892dc2d4707e417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radiation: 100
-  max_radiation: 100
-  radiation_level: 0
   item_time: []
+  quest_quick: {fileID: 0}
+  dictionarys: {fileID: 0}
+  playerstate: {fileID: 0}
+  character: {fileID: 0}
+  dialogue: {fileID: 0}
+  dialogue_box: {fileID: 0}
+  talk_trigger: 0
+  talk_npc_ob: {fileID: 0}
 --- !u!4 &1894678527
 Transform:
   m_ObjectHideFlags: 0
