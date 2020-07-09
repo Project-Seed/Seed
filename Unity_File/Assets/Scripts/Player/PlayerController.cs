@@ -173,7 +173,6 @@ public class PlayerController : MonoBehaviour
                     transform.rotation = Quaternion.Euler(new Vector3(-transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y - 180, transform.rotation.eulerAngles.z));
                     transform.Translate(0, 0, 0.8f);
                 }
-
                 if (hang_mod == 2)
                 {
                     StartCoroutine(hang_land());

@@ -168,9 +168,17 @@ public class GameSystem : MonoBehaviour
     }
 
 
-    public void Gamestart()
+    public void GameStart()
     {
-        SceneManager.LoadScene("Game_Scene");
+        SceneManager.LoadScene("Tutorial_Scene");
+    }
+
+    public IEnumerator TutorialEnd()
+    {
+        yield return new WaitForSeconds(1f);
+
+        Quest_clear_system.instance.clear_trigger[11]++;
+        SceneManager.LoadScene("Game_SceneNew");
     }
 
     public string item_search(string name, string category) // 아이템 서치 알고리즘
