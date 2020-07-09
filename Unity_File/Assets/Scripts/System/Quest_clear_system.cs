@@ -17,7 +17,7 @@ public class Quest_clear_system : MonoBehaviour
     {
         instance = this;
 
-        for (int i = 1; i <= 6; i++) // 퀘스트 갯수 많큼 늘려주세요
+        for (int i = 1; i <= 8; i++) // 퀘스트 갯수 많큼 늘려주세요
             clear_trigger.Add(i, 0);
     }
 
@@ -43,6 +43,14 @@ public class Quest_clear_system : MonoBehaviour
         if (GameSystem.instance.quest_state[6] == 1 &&
             clear_trigger[6] == 4)
             GameSystem.instance.quest_state[6] = 3;
+
+        if (GameSystem.instance.quest_state[7] == 1 &&
+            clear_trigger[7] == 2)
+            GameSystem.instance.quest_state[7] = 3;
+
+        if (GameSystem.instance.quest_state[8] == 1 &&
+            clear_trigger[8] == 2)
+            GameSystem.instance.quest_state[8] = 3;
     }
 
     public string num_data(int num)
@@ -65,6 +73,12 @@ public class Quest_clear_system : MonoBehaviour
             case 6:
                 data = "라디오, 가족사진, 편지, 다이어리 찾기 " + clear_trigger[6] + " / 4";
                 break;
+            case 7:
+                data = "해리포터 4권 찾기";
+                break;
+            case 8:
+                data = "식물 책 조사하기";
+                break;
         }
 
         return data;
@@ -85,6 +99,8 @@ public class Quest_clear_system : MonoBehaviour
                 GameObject.Find("Map_Decoration").transform.Find("M_Brige").gameObject.SetActive(true);
                 break;
             case 6:
+            case 7:
+            case 8:
                 break;
         }
     }

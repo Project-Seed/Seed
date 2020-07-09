@@ -397,6 +397,18 @@ public class PlayerController : MonoBehaviour
                         dialogue.solo_talk(20);
                         Quest_clear_system.instance.clear_trigger[6]++;
                         break;
+
+                    case "Hari_Book":
+                        dialogue.solo_talk(21);
+                        break;
+
+                    case "Hari4_Book":
+                        Quest_clear_system.instance.clear_trigger[7]++;
+                        break;
+
+                    case "Plant_Book":
+                        dialogue.solo_talk(23);
+                        break;
                 }
 
                 eat_objects.GetComponent<SphereCollider>().enabled = false;
@@ -545,6 +557,17 @@ public class PlayerController : MonoBehaviour
             hang_vecter = 0;
         else if (collision.gameObject.name == "right")
             hang_vecter = 1;
+
+        switch(collision.gameObject.name)
+        {
+            case "trigger1":
+                if(Quest_clear_system.instance.clear_trigger[7] == 0 && GameSystem.instance.quest_state[7] == 1)
+                {
+                    dialogue.solo_talk(22);
+                    Quest_clear_system.instance.clear_trigger[7]++;
+                }
+                break;
+        }
     }
 
     private void OnTriggerExit(Collider collision)
@@ -598,28 +621,59 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("objects"))
         {
             string name = null;
+            bool key_on = false;
 
             switch (collision.gameObject.name)
             {
                 case "Radio":
                     name = "라디오";
+                    key_on = true;
                     break;
 
                 case "Frame":
                     name = "가족사진";
+                    key_on = true;
                     break;
 
                 case "Letter":
                     name = "편지";
+                    key_on = true;
                     break;
 
                 case "Book":
                     name = "다이어리";
+                    key_on = true;
+                    break;
+
+                case "Hari_Book":
+                    name = "해리포터 3권";
+                    if (GameSystem.instance.quest_state[6] == 3)
+                        key_on = true;
+                    else
+                        key_on = false;
+                    break;
+
+                case "Hari4_Book":
+                    name = "해리포터 4권";
+                    if (Quest_clear_system.instance.clear_trigger[7] == 1)
+                        key_on = true;
+                    else
+                        key_on = false;
+                    break;
+
+                case "Plant_Book":
+                    name = "식물책";
+                    if (GameSystem.instance.quest_state[7] == 3)
+                        key_on = true;
+                    else
+                        key_on = false;
                     break;
             }
 
             eat_objects = collision.gameObject;
-            Key_guide.instance.object_on(name, cameras.WorldToScreenPoint(collision.gameObject.transform.position));
+
+            if(key_on ==true)
+                Key_guide.instance.object_on(name, cameras.WorldToScreenPoint(collision.gameObject.transform.position));
         }
     }
 }
