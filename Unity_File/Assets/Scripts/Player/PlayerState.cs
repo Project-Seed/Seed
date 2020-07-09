@@ -244,4 +244,14 @@ public class PlayerState : MonoBehaviour
         animator.SetTrigger("hang_land2");
         dont_fly = false;
     }
+
+    public void tutorial_start()
+    {
+        animator.SetTrigger("lying_ing");
+    }
+
+    public void tutorial_up()
+    {
+        animator.SetTrigger("lying_end");
+    }
 }
