@@ -6,8 +6,8 @@ using UnityEngine.Events;
 public class ButtonCollider : MonoBehaviour
 {
     public UnityEvent onEnter;
-    public UnityEvent onSpacebar;
-    public UnityEvent onReturn;
+    public UnityEvent onExit;
+    public UnityEvent onKeyE;
     public bool playOnes;
 
     public void OnTriggerEnter(Collider other)
@@ -20,23 +20,30 @@ public class ButtonCollider : MonoBehaviour
         if (playOnes)
             gameObject.SetActive(false);
     }
+    public void OnTriggerExit(Collider other)
+    {
+        if (!other.CompareTag("Player")) return;
 
-    //public void OnTriggerStay()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        if (onSpacebar != null)
-    //        {
-    //            onSpacebar.Invoke();
-    //        }
-    //    }
+        if (onExit != null)
+            onExit.Invoke();
 
-    //    if (Input.GetKeyDown(KeyCode.Return))
-    //    {
-    //        if (onReturn != null)
-    //        {
-    //            onReturn.Invoke();
-    //        }
-    //    }
-    //}
+        if (playOnes)
+            gameObject.SetActive(false);
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        if (!other.CompareTag("Player")) return;
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (onKeyE != null)
+            {
+                onKeyE.Invoke();
+            }
+        }
+
+        if (playOnes)
+            gameObject.SetActive(false);
+    }
 }
