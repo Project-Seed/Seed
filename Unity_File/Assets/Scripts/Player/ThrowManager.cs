@@ -65,15 +65,15 @@ public class ThrowManager : MonoBehaviour
         Debug.DrawRay(sub_cam.position, sub_cam.forward * distance, Color.green, 10.0f);
         if (Physics.Raycast(sub_cam.position, sub_cam.forward, out RaycastHit hit, distance))
         {
-           // if (hit.transform.CompareTag("Plantable") || hit.transform.CompareTag("Ground"))
-           // {
-                Debug.DrawLine(sub_cam.position, hit.point, Color.red, 3.0f) ;
-                dest = hit.point - aim.transform.position;
-                Debug.Log(dest);
-                return true;
-           // }
-           // else
-                //return false;
+              Debug.DrawLine(sub_cam.position, hit.point, Color.red, 3.0f) ;
+            if (hit.transform.CompareTag("Plantable") || hit.transform.CompareTag("Ground"))
+            {
+              dest = hit.point - aim.transform.position;
+              Debug.Log(dest);
+              return true;
+            }
+            else
+              return false;
         }
         else return false;
     }

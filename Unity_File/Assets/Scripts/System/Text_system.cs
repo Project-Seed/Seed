@@ -124,6 +124,8 @@ public class Text_system : MonoBehaviour
         {
             if(letter == '$')
                 Messge_Text.text += "\n";
+            else if (letter == '@')
+                Messge_Text.text += ",";
             else
                 Messge_Text.text += letter;
             yield return null;

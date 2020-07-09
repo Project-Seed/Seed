@@ -10,9 +10,13 @@ public class Key_guide : MonoBehaviour
     public GameObject talk;
     public GameObject item;
     public GameObject climb;
+    public GameObject objects;
 
     public GameObject item_name_ob;
     public Text item_name;
+
+    public GameObject object_name_ob;
+    public Text object_name;
 
     public static Key_guide Instance
     {
@@ -59,5 +63,19 @@ public class Key_guide : MonoBehaviour
     public void climb_off()
     {
         climb.SetActive(false);
+    }
+
+    public void object_on(string name, Vector3 ts)
+    {
+        object_name_ob.SetActive(true);
+        object_name_ob.transform.position = new Vector3(ts.x, ts.y + 70, ts.z);
+        object_name.text = name;
+
+        objects.SetActive(true);
+    }
+    public void object_off()
+    {
+        object_name_ob.SetActive(false);
+        objects.SetActive(false);
     }
 }
