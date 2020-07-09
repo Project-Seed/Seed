@@ -11,6 +11,7 @@ public class Key_guide : MonoBehaviour
     public GameObject item;
     public GameObject climb;
     public GameObject objects;
+    public GameObject door;
 
     public GameObject item_name_ob;
     public Text item_name;
@@ -63,6 +64,15 @@ public class Key_guide : MonoBehaviour
     public void climb_off()
     {
         climb.SetActive(false);
+    }
+
+    public void door_on()
+    {
+        door.SetActive(true);
+    }
+    public void door_off()
+    {
+        door.SetActive(false);
     }
 
     public void object_on(string name, Vector3 ts)
