@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
 
         for (int i = 0; i < 10; i++)
         {
-            gameObject.transform.Translate(rotate_ob.transform.forward * Time.deltaTime * 20,Space.World);
+            gameObject.transform.Translate(rotate_ob.transform.forward * Time.deltaTime * 15,Space.World);
             
             yield return new WaitForSeconds(0.01f);
         }
@@ -261,6 +261,29 @@ public class PlayerController : MonoBehaviour
                         player_state.shoot_ready();
                     }
                 }
+                else if (GameSystem.instance.item_search(qick.item_name, "category") == "consumable")
+                {
+                    switch(GameSystem.instance.item_search(qick.item_name, "name"))
+                    {
+                        case "portion":
+                            if (PlayerState.instance.hp + 10 < PlayerState.instance.max_hp)
+                                PlayerState.instance.hp += 10;
+                            else
+                                PlayerState.instance.hp = PlayerState.instance.max_hp;
+
+                            GameSystem.instance.item_num[qick.item_name]--;
+
+                            if (GameSystem.instance.item_num[qick.item_name] == 0)
+                                GameSystem.instance.item_time.Remove(qick.item_name);
+                            break;
+
+                        case "mini_latter":
+                            InputManager.instance.click_mod = 1;
+                            Quest_clear_system.instance.clear_trigger[8]++;
+                            Instantiate(Resources.Load<GameObject>("Tutorial/Mini_latter"), GameObject.Find("Canvas").transform);
+                            break;
+                    }
+                }
             }
 
             //좌클릭하는 동안 계속 조준하면서 Raycasting.
@@ -305,6 +328,9 @@ public class PlayerController : MonoBehaviour
 
                     GameSystem.instance.item_num[qick.item_name]--;
 
+                    if (GameSystem.instance.item_num[qick.item_name] == 0)
+                        GameSystem.instance.item_time.Remove(qick.item_name);       
+                   
                     player_state.shoot();
                 }
                 //if (throw_mode) //취소를 안했을 경우에만 발사
@@ -404,11 +430,15 @@ public class PlayerController : MonoBehaviour
 
                     case "Hari4_Book":
                         //여기에 타임라인 호출
+                        dialogue.solo_talk(23);
                         Quest_clear_system.instance.clear_trigger[7]++;
                         break;
 
                     case "Plant_Book":
-                        dialogue.solo_talk(23);
+                        Instantiate(Resources.Load<GameObject>("Tutorial/Plant_book"),GameObject.Find("Canvas").transform);
+                        Eat_system.instance.eat_item("key");
+                        Eat_system.instance.eat_item("mini_latter");
+                        InputManager.instance.click_mod = 1;
                         break;
                 }
 

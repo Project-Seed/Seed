@@ -17,7 +17,7 @@ public class Quest_clear_system : MonoBehaviour
     {
         instance = this;
 
-        for (int i = 1; i <= 8; i++) // 퀘스트 갯수 많큼 늘려주세요
+        for (int i = 1; i <= 9; i++) // 퀘스트 갯수 많큼 늘려주세요
             clear_trigger.Add(i, 0);
     }
 
@@ -49,8 +49,12 @@ public class Quest_clear_system : MonoBehaviour
             GameSystem.instance.quest_state[7] = 3;
 
         if (GameSystem.instance.quest_state[8] == 1 &&
-            clear_trigger[8] == 2)
+            clear_trigger[8] == 1)
             GameSystem.instance.quest_state[8] = 3;
+
+        if (GameSystem.instance.quest_state[9] == 1 &&
+            clear_trigger[9] == 1)
+            GameSystem.instance.quest_state[9] = 3;
     }
 
     public string num_data(int num)
@@ -79,6 +83,9 @@ public class Quest_clear_system : MonoBehaviour
             case 8:
                 data = "식물 책 조사하기";
                 break;
+            case 9:
+                data = "지하실 가보기";
+                break;
         }
 
         return data;
@@ -101,6 +108,7 @@ public class Quest_clear_system : MonoBehaviour
             case 6:
             case 7:
             case 8:
+            case 9:
                 break;
         }
     }

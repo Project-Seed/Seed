@@ -8,10 +8,6 @@ public class Tutorial : MonoBehaviour
     public Text_system_movie movie;
     public GameObject movie_obj;
 
-    void Start()
-    {
-    }
-
     public void tutorial(int num)
     {
         switch(num)

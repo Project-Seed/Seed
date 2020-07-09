@@ -185,14 +185,4 @@ public class GameSystem : MonoBehaviour
 
         return null;
     }
-
-    public void talk_start(int num) // 혼잣말 등 대화 시작
-    {
-        if (InputManager.instance.click_mod == 0 && dialogue_box.activeSelf == false)
-        {
-            dialogue_box.SetActive(true);
-            InputManager.instance.game_stop();
-            dialogue.GetComponent<Text_system>().StartDialogue(num);
-        }
-    }
 }
