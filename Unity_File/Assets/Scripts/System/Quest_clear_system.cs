@@ -17,7 +17,7 @@ public class Quest_clear_system : MonoBehaviour
     {
         instance = this;
 
-        for (int i = 1; i <= 9; i++) // 퀘스트 갯수 많큼 늘려주세요
+        for (int i = 1; i <= 11; i++) // 퀘스트 갯수 많큼 늘려주세요
             clear_trigger.Add(i, 0);
     }
 
