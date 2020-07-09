@@ -441,6 +441,12 @@ public class PlayerController : MonoBehaviour
                         Eat_system.instance.eat_item("mini_latter");
                         InputManager.instance.click_mod = 1;
                         break;
+
+                    case "Paper":
+                        dialogue.solo_talk(26);
+                        Instantiate(Resources.Load<GameObject>("Tutorial/Paper"), GameObject.Find("Canvas").transform);
+                        Quest_clear_system.instance.clear_trigger[10]++;
+                        break;
                 }
 
                 eat_objects.GetComponent<SphereCollider>().enabled = false;
@@ -599,6 +605,14 @@ public class PlayerController : MonoBehaviour
                     Quest_clear_system.instance.clear_trigger[7]++;
                 }
                 break;
+
+            case "trigger2":
+                if (Quest_clear_system.instance.clear_trigger[9] == 0 && GameSystem.instance.quest_state[9] == 1)
+                {
+                    dialogue.solo_talk(25);
+                    Quest_clear_system.instance.clear_trigger[9]++;
+                }
+                break;
         }
     }
 
@@ -696,6 +710,14 @@ public class PlayerController : MonoBehaviour
                 case "Plant_Book":
                     name = "식물책";
                     if (GameSystem.instance.quest_state[7] == 3)
+                        key_on = true;
+                    else
+                        key_on = false;
+                    break;
+
+                case "Paper":
+                    name = "연구자료";
+                    if (GameSystem.instance.quest_state[10] == 1)
                         key_on = true;
                     else
                         key_on = false;

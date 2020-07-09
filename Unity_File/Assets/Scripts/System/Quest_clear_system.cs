@@ -55,6 +55,14 @@ public class Quest_clear_system : MonoBehaviour
         if (GameSystem.instance.quest_state[9] == 1 &&
             clear_trigger[9] == 1)
             GameSystem.instance.quest_state[9] = 3;
+
+        if (GameSystem.instance.quest_state[10] == 1 &&
+            clear_trigger[10] == 1)
+            GameSystem.instance.quest_state[10] = 3;
+
+        if (GameSystem.instance.quest_state[11] == 1 &&
+            clear_trigger[11] == 1)
+            GameSystem.instance.quest_state[11] = 3;
     }
 
     public string num_data(int num)
@@ -86,6 +94,12 @@ public class Quest_clear_system : MonoBehaviour
             case 9:
                 data = "지하실 가보기";
                 break;
+            case 10:
+                data = "지하실 조사하기";
+                break;
+            case 11:
+                data = "집 밖으로 나가기";
+                break;
         }
 
         return data;
@@ -109,6 +123,8 @@ public class Quest_clear_system : MonoBehaviour
             case 7:
             case 8:
             case 9:
+            case 10:
+            case 11:
                 break;
         }
     }
