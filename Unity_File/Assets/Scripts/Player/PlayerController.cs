@@ -429,17 +429,19 @@ public class PlayerController : MonoBehaviour
                         break;
 
                     case "Hari4_Book":
-                        //여기에 타임라인 호출
                         dialogue.solo_talk(23);
                         Quest_clear_system.instance.clear_trigger[7]++;
                         break;
 
                     case "Plant_Book":
-                        Destroy(GameObject.Find("Plant_Book"));
-                        Instantiate(Resources.Load<GameObject>("Tutorial/Plant_book"),GameObject.Find("Canvas").transform);
-                        Eat_system.instance.eat_item("key");
-                        Eat_system.instance.eat_item("mini_latter");
-                        InputManager.instance.click_mod = 1;
+                        if (GameSystem.instance.quest_state[8] != 0)
+                        {
+                            Destroy(GameObject.Find("Plant_Book"));
+                            Instantiate(Resources.Load<GameObject>("Tutorial/Plant_book"), GameObject.Find("Canvas").transform);
+                            Eat_system.instance.eat_item("key");
+                            Eat_system.instance.eat_item("mini_latter");
+                            InputManager.instance.click_mod = 1;
+                        }
                         break;
 
                     case "Paper":
