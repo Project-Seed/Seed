@@ -13,6 +13,7 @@ public class Inventory : MonoBehaviour
     public Sprite quick_image_off;
     public Sprite quick_image_on;
     public List<GameObject> item_box;
+    public GameObject spand_button;
 
     public Text item_names;
     public Text item_explanation;
@@ -146,16 +147,59 @@ public class Inventory : MonoBehaviour
             item_names.text = GameSystem.instance.item_search(item_choose, "name_ko");
             item_image.sprite = gameObject.GetComponent<Inventory_box>().image.sprite;
 
-            if (GameSystem.instance.item_search(item_choose, "category") == "consumable" ||
-                GameSystem.instance.item_search(item_choose, "category") == "seed")
+            if (GameSystem.instance.item_search(item_choose, "category") == "seed")
             {
                 quick_button.SetActive(true);
                 quick_bool = true;
+
+                spand_button.SetActive(false);
+            }
+            else if (GameSystem.instance.item_search(item_choose, "category") == "consumable")
+            {
+                quick_button.SetActive(true);
+                quick_bool = true;
+
+                spand_button.SetActive(true);
             }
             else
             {
                 quick_button.SetActive(false);
                 quick_bool = false;
+
+                spand_button.SetActive(false);
+            }
+        }
+    }
+
+    public void spand()
+    {
+        // 붙여온거에다 gameObject.SetActive(false); 이거만 추가
+
+        if (GameSystem.instance.item_num[item_choose] >= 1)
+        {
+            switch (GameSystem.instance.item_search(item_choose, "name"))
+            {
+                case "portion":
+                    gameObject.SetActive(false);
+
+                    if (PlayerState.instance.hp + 10 < PlayerState.instance.max_hp)
+                        PlayerState.instance.hp += 10;
+                    else
+                        PlayerState.instance.hp = PlayerState.instance.max_hp;
+
+                    GameSystem.instance.item_num[item_choose]--;
+
+                    if (GameSystem.instance.item_num[item_choose] == 0)
+                        GameSystem.instance.item_time.Remove(item_choose); 
+                    break;
+
+                case "mini_latter":
+                    gameObject.SetActive(false);
+
+                    InputManager.instance.click_mod = 1;
+                    Quest_clear_system.instance.clear_trigger[8]++;
+                    Instantiate(Resources.Load<GameObject>("Tutorial/Mini_latter"), GameObject.Find("Canvas").transform);
+                    break;
             }
         }
     }

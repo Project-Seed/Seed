@@ -175,6 +175,7 @@ public class GameSystem : MonoBehaviour
 
     public IEnumerator TutorialEnd()
     {
+        GameObject.Find("Kira").GetComponent<MeshRenderer>().enabled = true;
         yield return new WaitForSeconds(1f);
 
         Quest_clear_system.instance.clear_trigger[11]++;

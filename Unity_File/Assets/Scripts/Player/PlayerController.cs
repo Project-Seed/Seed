@@ -262,25 +262,30 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (GameSystem.instance.item_search(qick.item_name, "category") == "consumable")
                 {
-                    switch(GameSystem.instance.item_search(qick.item_name, "name"))
+                    // 같은 내용 inventory 스크립트에도 적기!!!!!!!
+
+                    if (GameSystem.instance.item_num[qick.item_name] >= 1 && InputManager.instance.click_mod == 0)
                     {
-                        case "portion":
-                            if (PlayerState.instance.hp + 10 < PlayerState.instance.max_hp)
-                                PlayerState.instance.hp += 10;
-                            else
-                                PlayerState.instance.hp = PlayerState.instance.max_hp;
+                        switch (GameSystem.instance.item_search(qick.item_name, "name"))
+                        {
+                            case "portion":
+                                if (PlayerState.instance.hp + 10 < PlayerState.instance.max_hp)
+                                    PlayerState.instance.hp += 10;
+                                else
+                                    PlayerState.instance.hp = PlayerState.instance.max_hp;
 
-                            GameSystem.instance.item_num[qick.item_name]--;
+                                GameSystem.instance.item_num[qick.item_name]--;
 
-                            if (GameSystem.instance.item_num[qick.item_name] == 0)
-                                GameSystem.instance.item_time.Remove(qick.item_name);
-                            break;
+                                if (GameSystem.instance.item_num[qick.item_name] == 0)
+                                    GameSystem.instance.item_time.Remove(qick.item_name);
+                                break;
 
-                        case "mini_latter":
-                            InputManager.instance.click_mod = 1;
-                            Quest_clear_system.instance.clear_trigger[8]++;
-                            Instantiate(Resources.Load<GameObject>("Tutorial/Mini_latter"), GameObject.Find("Canvas").transform);
-                            break;
+                            case "mini_latter":
+                                InputManager.instance.click_mod = 1;
+                                Quest_clear_system.instance.clear_trigger[8]++;
+                                Instantiate(Resources.Load<GameObject>("Tutorial/Mini_latter"), GameObject.Find("Canvas").transform);
+                                break;
+                        }
                     }
                 }
             }
@@ -433,14 +438,11 @@ public class PlayerController : MonoBehaviour
                         break;
 
                     case "Plant_Book":
-                        if (GameSystem.instance.quest_state[8] != 0)
-                        {
                             Destroy(GameObject.Find("Plant_Book"));
                             Instantiate(Resources.Load<GameObject>("Tutorial/Plant_book"), GameObject.Find("Canvas").transform);
                             Eat_system.instance.eat_item("key");
                             Eat_system.instance.eat_item("mini_latter");
                             InputManager.instance.click_mod = 1;
-                        }
                         break;
 
                     case "Paper":
@@ -614,6 +616,10 @@ public class PlayerController : MonoBehaviour
                     Quest_clear_system.instance.clear_trigger[9]++;
                 }
                 break;
+
+            case "trigger_2floar":
+                dialogue.solo_talk(28);
+                break;
         }
     }
 
@@ -710,7 +716,7 @@ public class PlayerController : MonoBehaviour
 
                 case "Plant_Book":
                     name = "식물책";
-                    if (GameSystem.instance.quest_state[7] == 3)
+                    if (GameSystem.instance.quest_state[8] == 1)
                         key_on = true;
                     else
                         key_on = false;
