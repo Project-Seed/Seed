@@ -107,8 +107,18 @@ public class Quest : MonoBehaviour
         view_sub.SetActive(true);
     }
 
-    public void data_button(int num)
+    public void data_button(int num, GameObject a)
     {
+        for (int i = 0; i < quest_data_main.Count; i++)
+        {
+            quest_data_main[i].GetComponent<Quest_Data>().choose.SetActive(false);
+        }
+        for (int i = 0; i < quest_data_sub.Count; i++)
+        {
+            quest_data_sub[i].GetComponent<Quest_Data>().choose.SetActive(false);
+        }
+        a.GetComponent<Quest_Data>().choose.SetActive(true);
+
         data_title.text = GameSystem.instance.quest_list[num - 1]["title"];
         data_area.text = GameSystem.instance.quest_list[num - 1]["area"];
         data_npc.text = GameSystem.instance.quest_list[num - 1]["name"];
