@@ -19,7 +19,10 @@ public class Bullet : MonoBehaviour
         Vector3 normal = point.normal;
 
         //pos는 Ray 쏜 곳.
-        plant.PlantSeed(pos, normal, false);
+        if(plant.seed_name == "red_seed" || plant.seed_name == "white_seed")
+            plant.PlantSeed(pos, normal, true);
+        else
+            plant.PlantSeed(pos, normal, false);
     }
 
     private void OnCollisionEnter(Collision collision)
