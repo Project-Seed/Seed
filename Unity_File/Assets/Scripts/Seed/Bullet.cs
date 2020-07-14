@@ -69,7 +69,6 @@ public class Bullet : MonoBehaviour
                 if (collision.gameObject.CompareTag("Yellow"))
                 {
                     collision.gameObject.GetComponent<Rigidbody>().mass = 1;
-                    collision.gameObject.GetComponent<ParticleSystem>().Play();
                 }
                 break;
 
