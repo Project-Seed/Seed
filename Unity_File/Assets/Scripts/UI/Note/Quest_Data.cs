@@ -16,8 +16,10 @@ public class Quest_Data : MonoBehaviour
 
     public Image ox;
 
+    public GameObject choose;
+
     public void Button()
     {
-        quest_ob.GetComponent<Quest>().data_button(quest_num);
+        quest_ob.GetComponent<Quest>().data_button(quest_num, gameObject);
     }
 }
