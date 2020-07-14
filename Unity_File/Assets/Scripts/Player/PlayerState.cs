@@ -218,11 +218,14 @@ public class PlayerState : MonoBehaviour
         dont_fly = true;
         state_sky = 0;
     }
-    
     public void climb_off()
     {
         animator.SetTrigger("climb_off");
         dont_fly = false;
+    }
+    public void climb_up()
+    {
+        animator.SetTrigger("climb_up");
     }
 
     public void hang_on()
