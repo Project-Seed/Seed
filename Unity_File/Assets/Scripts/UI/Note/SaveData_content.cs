@@ -52,6 +52,14 @@ public class SaveData_content : MonoBehaviour
         key_ok = true;
     }
 
+    public void click()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            saveDatas[i].choose.SetActive(false);
+        }
+    }
+
     private void Update()
     {
         if (key_ok == true)

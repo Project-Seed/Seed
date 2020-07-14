@@ -25,6 +25,8 @@ public class SaveData : MonoBehaviour
 
     public SaveData_content saveData_Content;
 
+    public GameObject choose;
+
 
     private void OnEnable()
     {
@@ -60,6 +62,9 @@ public class SaveData : MonoBehaviour
 
     public void click()
     {
+        saveData_Content.click();
+        choose.SetActive(true);
+
         string strFile = "./Assets/save_data" + num.ToString() + ".xml";
         FileInfo fileInfo = new FileInfo(strFile); // 파일 있는지 체크
 
