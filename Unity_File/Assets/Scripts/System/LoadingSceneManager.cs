@@ -37,21 +37,11 @@ public class LoadingSceneManager : MonoBehaviour
 
             timer += Time.deltaTime;
 
-            if (op.progress >= 0.9f)
-            {
-                slider.value = timer;
 
-                if (slider.value == 1.0f)
-                    op.allowSceneActivation = true;
-            }
-            else
-            {
-                slider.value = timer;
-                if (slider.value >= op.progress)
-                {
-                    timer = 0f;
-                }
-            }
+            slider.value = timer;
+
+            if (slider.value == 1.0f)
+                op.allowSceneActivation = true;
         }
     }
 }
