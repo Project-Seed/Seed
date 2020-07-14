@@ -8,6 +8,7 @@ public class Inventory_box : MonoBehaviour
 {
     public GameObject inventory;
     public Image image;
+    public GameObject choose;
 
     private void Start()
     {

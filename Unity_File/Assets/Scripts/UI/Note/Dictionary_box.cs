@@ -7,6 +7,7 @@ public class Dictionary_box : MonoBehaviour
 {
     public GameObject dictionarys;
     public Image image;
+    public GameObject choose;
 
     private void Start()
     {

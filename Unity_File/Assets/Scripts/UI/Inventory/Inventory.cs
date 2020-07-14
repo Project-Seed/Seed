@@ -28,7 +28,6 @@ public class Inventory : MonoBehaviour
     public Sprite alpha;
 
     public Inven_quick in_qu;
-    public GameObject choose;
 
     
     private void Awake()
@@ -136,8 +135,11 @@ public class Inventory : MonoBehaviour
 
     public void Inventory_click(GameObject gameObject) // 인벤토리 내용물 클릭
     {
-        choose.SetActive(true);
-        choose.transform.position = new Vector3(gameObject.transform.position.x + 134 / 2, gameObject.transform.position.y - 127 / 2);
+        for (int i = 0; i < 40; i++)
+        {
+            item_box[i].GetComponent<Inventory_box>().choose.SetActive(false);
+        }
+        gameObject.GetComponent<Inventory_box>().choose.SetActive(true);
 
         string item_name = gameObject.name;
         item_name = item_name.Substring(14, item_name.Length - 14);
