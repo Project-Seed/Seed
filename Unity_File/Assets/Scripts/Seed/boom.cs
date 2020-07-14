@@ -9,12 +9,11 @@ public class boom : MonoBehaviour
     {
         Destroy(gameObject, 2.5f);
     }
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Purple"))
+        if (other.gameObject.CompareTag("Purple"))
         {
-            Destroy(collision.gameObject);
+            Destroy(other.gameObject);
         }
     }
 }

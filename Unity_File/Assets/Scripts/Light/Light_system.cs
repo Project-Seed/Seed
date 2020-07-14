@@ -32,18 +32,23 @@ public class Light_system : MonoBehaviour
 
         if(Application.isPlaying && InputManager.instance.click_mod == 0 && tuto == false)
         {
-            time += Time.deltaTime;
+            time += Time.deltaTime / 150;
             time %= 24;
             updatelighting(time / 24f);
         }
 
-        int itime = (int)time;
+        string itime = null;
+        if ((int)time <= 12)
+            itime = "AM " + (int)time;
+        else
+            itime = "PM " + (int)time;
+
         int mtime = (int)(time % 1 * 60);
 
         if(mtime < 10)
-            text.text = itime.ToString() + ":0" + mtime;
+            text.text = itime + ":0" + mtime;
         else
-            text.text = itime.ToString() + ":" + mtime;
+            text.text = itime + ":" + mtime;
 
         if (time <= 5.5 || time >= 18.5)
             DirectionalLight.intensity = 0.1f;

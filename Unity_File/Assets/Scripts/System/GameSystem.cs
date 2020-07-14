@@ -170,16 +170,16 @@ public class GameSystem : MonoBehaviour
 
     public void GameStart()
     {
-        SceneManager.LoadScene("Tutorial_Scene");
+        LoadingSceneManager.LoadScene("Tutorial_Scene");
     }
 
     public IEnumerator TutorialEnd()
     {
         GameObject.Find("Kira").GetComponent<MeshRenderer>().enabled = true;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         Quest_clear_system.instance.clear_trigger[11]++;
-        SceneManager.LoadScene("Game_SceneNew");
+        LoadingSceneManager.LoadScene("Game_SceneNew");
     }
 
     public string item_search(string name, string category) // 아이템 서치 알고리즘
