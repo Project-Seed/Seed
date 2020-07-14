@@ -388,7 +388,9 @@ MonoBehaviour:
   m_AnimatedTarget: {fileID: 3283635716051111724}
   m_LayerIndex: 0
   m_ShowDebugText: 0
-  m_ChildCameras: []
+  m_ChildCameras:
+  - {fileID: 2553144517043599824}
+  - {fileID: 4416801790696475369}
   m_Instructions:
   - m_FullHash: -178524345
     m_VirtualCamera: {fileID: 2553144517043599824}
@@ -551,9 +553,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.3
-  m_Height: 0.3
+  m_Height: 1.5
   m_Direction: 1
-  m_Center: {x: 0, y: -0.5, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &520391110730108359
 Rigidbody:
   m_ObjectHideFlags: 0

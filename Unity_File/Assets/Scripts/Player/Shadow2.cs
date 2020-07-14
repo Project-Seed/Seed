@@ -8,7 +8,7 @@ public class Shadow2 : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
             playerController.shadow_out();
         }

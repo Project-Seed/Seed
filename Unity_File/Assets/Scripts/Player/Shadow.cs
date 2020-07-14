@@ -11,11 +11,7 @@ public class Shadow : MonoBehaviour
     {
         if (collision.gameObject.name == "brown_trigger")
         {
-            Debug.Log("갈색 떨어짐");
-            playerController.climb_crash = false;
-
-            playerController.shadow2.SetActive(false);
-            playerController.shadow.SetActive(false);
+            playerController.shadow_out();
         }
     }
 }
