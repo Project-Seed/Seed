@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     public GameObject scene;
     Plant plant;
 
+
     private void Start()
     {
         plant = GetComponent<Plant>();
@@ -32,6 +33,10 @@ public class Bullet : MonoBehaviour
         switch (plant.seed_name)
         {
             case "blue_seed":
+                if (collision.gameObject.CompareTag("BlueZone"))
+                    SetPlantPos(collision);
+                break;
+
             case "brown_seed":
                 if (collision.gameObject.CompareTag("Plantable"))
                     SetPlantPos(collision);

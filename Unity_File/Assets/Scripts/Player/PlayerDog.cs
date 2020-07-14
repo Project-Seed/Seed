@@ -18,7 +18,8 @@ public class PlayerDog : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Plantable"))
+        if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Plantable") ||
+            other.gameObject.CompareTag("Purple") || other.gameObject.CompareTag("Yellow"))
         {
             playerController.is_jumping = false;
             Debug.Log("in Ground");
@@ -29,7 +30,8 @@ public class PlayerDog : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Plantable"))
+        if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Plantable") ||
+            other.gameObject.CompareTag("Purple") || other.gameObject.CompareTag("Yellow"))
         {
             Debug.Log("not in Ground");
 
