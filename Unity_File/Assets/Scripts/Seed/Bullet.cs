@@ -24,15 +24,11 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        gameObject.SetActive(false);
+        Destroy(gameObject);
 
         switch (plant.seed_name)
         {
             case "blue_seed":
-                if (collision.gameObject.CompareTag("Plantable"))
-                    SetPlantPos(collision);
-                break;
-
             case "brown_seed":
                 if (collision.gameObject.CompareTag("Plantable"))
                     SetPlantPos(collision);

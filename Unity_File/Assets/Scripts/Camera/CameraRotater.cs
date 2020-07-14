@@ -72,7 +72,6 @@ public class CameraRotater : MonoBehaviour
         //sub_cam.transform.rotation.SetLookRotation(player.forward);
         //transform.RotateAround(target.position, target.right, MouseY);
 
-       
 
         //if (camera_offset.magnitude < 3.0f && ok_time >= 0.5f)
         //    camera_offset *= 1.1f;

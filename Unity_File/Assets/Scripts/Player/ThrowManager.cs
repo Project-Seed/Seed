@@ -118,12 +118,25 @@ public class ThrowManager : MonoBehaviour
     {
         Gizmos.DrawWireSphere(dest, 0.05f);
     }
+
     private void Throw()
     {
         //aim이 캐릭터 자식으로 있어서 캐릭터 움직이면 별수없이 움직임.
         //씨앗이 처음 발사될때 빼고는 캐릭터와 분리되어야함.
-        //씨앗 생성
-        tmp = Instantiate(seed, aim.position, aim.rotation);
+
+        //씨앗 생성 (찾아봐서 없으면 생성, 있으면 재활용)
+        //try{
+        //    child = throwPool.transform.GetChild(0);
+        //    if (!child.gameObject.activeSelf)
+        //        child.gameObject.SetActive(true);
+        //    child.localPosition = aim.position;
+        //    child.localRotation = aim.rotation;
+        //}
+        //catch (UnityException)
+        //{
+            tmp = Instantiate(seed, aim.position, aim.rotation);
+       // }
+
         //tmp.transform.position = aim.localPosition;
         
         //씨앗 이름 넘겨주기
