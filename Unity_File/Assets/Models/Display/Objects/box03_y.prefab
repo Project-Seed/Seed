@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6016825430449953935}
   - component: {fileID: 3376301582765172409}
   - component: {fileID: 9072361871012878912}
-  - component: {fileID: 4556232951047434249}
+  - component: {fileID: 6149415969508365679}
   m_Layer: 0
   m_Name: box03_y
   m_TagString: Yellow
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7339555680981315228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 77.89, y: 14.870001, z: 63.449997}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,7 +79,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &4556232951047434249
+--- !u!65 &6149415969508365679
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,4 +91,4 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.02, y: 0.02, z: 0.02}
-  m_Center: {x: -0.0000009536743, y: 0, z: -0.00000047683716}
+  m_Center: {x: 0, y: 0, z: 0}
