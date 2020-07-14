@@ -559,7 +559,7 @@ public class PlayerController : MonoBehaviour
     
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "brown_trigger")
+        if (collision.gameObject.name == "brown_trigger" && climb_mod == false)
         {
             Debug.Log("갈색 충돌");
             climb_ro = collision.transform.rotation;
@@ -572,7 +572,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.name == "brown_trigger")
+        if (collision.gameObject.name == "brown_trigger" && climb_mod == false)
         {
             Debug.Log("갈색 떨어짐");
             climb_crash = false;

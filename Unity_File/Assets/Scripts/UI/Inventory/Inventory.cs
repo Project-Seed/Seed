@@ -27,6 +27,8 @@ public class Inventory : MonoBehaviour
 
     public Inven_quick in_qu;
 
+    public string sentence;
+
     
     private void Awake()
     {
@@ -57,8 +59,12 @@ public class Inventory : MonoBehaviour
     {
         InputManager.instance.game_stop();
 
-        if(item_choose != null)
-            StartCoroutine(TypeSentence(GameSystem.instance.item_search(item_choose, "explanation_ko")));
+        if (item_choose != null)
+        {
+            StopCoroutine(TypeSentence());
+            sentence = GameSystem.instance.item_search(item_choose, "explanation_ko");
+            StartCoroutine(TypeSentence());
+        }
     }
     private void OnDisable()
     {
@@ -151,7 +157,11 @@ public class Inventory : MonoBehaviour
         if (item_int < GameSystem.instance.item_time.Count)
         {
             if (item_choose != null)
-                StartCoroutine(TypeSentence(GameSystem.instance.item_search(item_choose, "explanation_ko")));
+            {
+                StopCoroutine(TypeSentence());
+                sentence = GameSystem.instance.item_search(item_choose, "explanation_ko");
+                StartCoroutine(TypeSentence());
+            }
 
             item_names.text = GameSystem.instance.item_search(item_choose, "name_ko");
             item_image.sprite = gameObject.GetComponent<Inventory_box>().image.sprite;
@@ -213,7 +223,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    IEnumerator TypeSentence(string sentence) // 한글자씩 출력
+    IEnumerator TypeSentence() // 한글자씩 출력
     {
         if (sentence != "")
         {
