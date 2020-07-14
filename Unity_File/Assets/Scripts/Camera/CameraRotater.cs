@@ -20,6 +20,7 @@ public class CameraRotater : MonoBehaviour
     Vector3 origin_camera_offset;
     float maxZoomin = 2.0f;
     float maxZoomOut = 8.0f;
+    public bool lockZoom;
 
     bool ok = true;
     float ok_time = 0;
@@ -49,11 +50,14 @@ public class CameraRotater : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        input_mouse_wheel = Input.GetAxisRaw("Mouse ScrollWheel");
-        if (input_mouse_wheel > 0 && camera_offset.magnitude >= maxZoomin)
-            camera_offset /= 1.1f;
-        else if (input_mouse_wheel < 0 && camera_offset.magnitude <= maxZoomOut)
-            camera_offset *= 1.1f;
+        if (!lockZoom)
+        {
+            input_mouse_wheel = Input.GetAxisRaw("Mouse ScrollWheel");
+            if (input_mouse_wheel > 0 && camera_offset.magnitude >= maxZoomin)
+                camera_offset /= 1.1f;
+            else if (input_mouse_wheel < 0 && camera_offset.magnitude <= maxZoomOut)
+                camera_offset *= 1.1f;
+        }
 
         MouseX += Input.GetAxis("Mouse X") * rotate_speed;
         MouseY -= Input.GetAxis("Mouse Y") * rotate_speed;

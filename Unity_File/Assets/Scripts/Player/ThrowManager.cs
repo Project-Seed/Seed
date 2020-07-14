@@ -36,7 +36,7 @@ public class ThrowManager : MonoBehaviour
 
     public void mouse_up(bool option)
     {
-        if (option && target_on)//조준하고 option true이면 발사. option false는 발사 취소한 경우.
+        if (option)//option true이면 발사. option false는 발사 취소한 경우.
             Throw();
 
         aim_sp.SetActive(false);
