@@ -16,7 +16,8 @@ public class kira : MonoBehaviour
     {
         while (true)
         {
-            gameObject.GetComponent<MeshRenderer>().material.color = new Color(r * (i / 50f), g * (i / 50f), b * (i / 50f));
+            Material mat = gameObject.GetComponent<MeshRenderer>().material;
+            mat.SetColor("_EmissionColor", new Color(r * (i / 50f), g * (i / 50f), b * (i / 50f)));
 
             if (ch == false)
                 i++;
@@ -30,10 +31,5 @@ public class kira : MonoBehaviour
 
             yield return new WaitForSeconds(0.01f);
         }
-    }
-
-    void Update()
-    {
-
     }
 }
