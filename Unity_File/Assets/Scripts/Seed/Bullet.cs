@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+
 public class Bullet : MonoBehaviour
 {
     public GameObject boom;
     public GameObject scene;
+    ParticleInvoker particleInvoker;
     Plant plant;
-
-
     private void Start()
     {
         plant = GetComponent<Plant>();
+        particleInvoker = FindObjectOfType<ParticleInvoker>();
     }
 
     private void SetPlantPos(Collision collision)
@@ -66,11 +67,21 @@ public class Bullet : MonoBehaviour
 
             case "yellow_seed":
                 if (collision.gameObject.CompareTag("Yellow"))
+                {
                     collision.gameObject.GetComponent<Rigidbody>().mass = 1;
+                    collision.gameObject.GetComponent<ParticleSystem>().Play();
+                }
                 break;
 
             case "purple_seed":
-                Instantiate(boom, gameObject.transform.position, gameObject.transform.rotation);
+                if (collision.gameObject.CompareTag("Purple"))
+                {
+                    collision.gameObject.SetActive(false);
+                   
+                    particleInvoker.InvokePurple( collision.gameObject.transform);
+                }
+                //Instantiate(boom, gameObject.transform.position, gameObject.transform.rotation);
+                //particleInvoker.InvokePurple();
                 break;
 
             default: break;

@@ -654,7 +654,7 @@ public class PlayerController : MonoBehaviour
             Key_guide.instance.item_name_off();
         }
 
-        if (collision.gameObject.CompareTag("objects"))
+        if (collision.gameObject.CompareTag("Objects"))
         {
             Key_guide.instance.object_off();
         }
@@ -682,7 +682,7 @@ public class PlayerController : MonoBehaviour
             Key_guide.instance.item_name_on(eat_item2, eat_pos);
         }
 
-        if (collision.gameObject.CompareTag("objects"))
+        if (collision.gameObject.CompareTag("Objects"))
         {
             string name = null;
             bool key_on = false;

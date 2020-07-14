@@ -9,8 +9,11 @@ public class boom : MonoBehaviour
     {
         Destroy(gameObject, 2.5f);
     }
-    private void OnTriggerEnter(Collider other)
+
+    private void OnTriggerStay(Collider other)
     {
+        Debug.Log(other.gameObject.tag);
+
         if (other.gameObject.CompareTag("Purple"))
         {
             Destroy(other.gameObject);

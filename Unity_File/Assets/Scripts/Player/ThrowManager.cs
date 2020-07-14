@@ -83,6 +83,10 @@ public class ThrowManager : MonoBehaviour
         switch (seed_name)
         {
             case "blue_seed":
+                if (hit.transform.CompareTag("BlueZone"))
+                    return true;
+                break;
+
             case "brown_seed":
                 if (hit.transform.CompareTag("Plantable"))
                     return true;
