@@ -556,28 +556,31 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(StopJumping());
     }
 
-    /*
+    
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
+        if (collision.gameObject.name == "brown_trigger")
         {
-            is_jumping = false;
-            Debug.Log("in Ground");
+            Debug.Log("갈색 충돌");
+            climb_ro = collision.transform.rotation;
+            climb_po = collision.transform.position;
+            climb_crash = true;
 
-            player_state.landing();
+            Key_guide.instance.climb_on();
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
+        if (collision.gameObject.name == "brown_trigger")
         {
-            Debug.Log("not in Ground");
+            Debug.Log("갈색 떨어짐");
+            climb_crash = false;
 
-            player_state.flying();
+            Key_guide.instance.climb_off();
         }
     }
-    */
+    
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -627,14 +630,6 @@ public class PlayerController : MonoBehaviour
         {
             Key_guide.instance.item_off();
             Key_guide.instance.item_name_off();
-        }
-
-        if (collision.gameObject.name == "brown_trigger")
-        {
-            Debug.Log("갈색 떨어짐");
-            climb_crash = false;
-
-            Key_guide.instance.climb_off();
         }
 
         if (collision.gameObject.CompareTag("objects"))
