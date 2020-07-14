@@ -41,4 +41,13 @@ class Plant : MonoBehaviour
 
         Debug.Log("Planted At"+pos);
     }
+
+    public void PlantFail(Vector3 pos, Vector3 normal,string name)
+    {
+        GameObject obj;
+        //식물 모델 위치에 생성
+        obj = Instantiate(plant);//이거를 파티클로바꾸기.
+        obj.transform.position = pos;
+        obj.transform.forward = normal;
+    }
 }

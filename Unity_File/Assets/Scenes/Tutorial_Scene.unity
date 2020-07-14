@@ -2218,12 +2218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec1caa62cce17e4b8dc97f5c7b45e78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &377825934 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5686037124941997127, guid: 60283bddc5264024893416fd49fc70aa,
-    type: 3}
-  m_PrefabInstance: {fileID: 1661217145}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &401746759
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3191,7 +3185,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772594512}
-  m_LocalRotation: {x: 0.0032158007, y: 0.9731537, z: -0.22973041, w: 0.01362235}
+  m_LocalRotation: {x: 0.003215799, y: 0.9731537, z: -0.2297304, w: 0.0136223445}
   m_LocalPosition: {x: -3.7247138, y: 1.8391749, z: 1.8111004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5720,7 +5714,7 @@ PrefabInstance:
         type: 3}
       propertyPath: character
       value: 
-      objectReference: {fileID: 377825934}
+      objectReference: {fileID: 1661217146}
     - target: {fileID: 714547222328144122, guid: e0e559afbcc121e45aef52b70e3cc579,
         type: 3}
       propertyPath: m_Sprite
@@ -8778,6 +8772,12 @@ PrefabInstance:
     - {fileID: 4477758748478197034, guid: 60283bddc5264024893416fd49fc70aa, type: 3}
     - {fileID: 4129247577487192685, guid: 60283bddc5264024893416fd49fc70aa, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 60283bddc5264024893416fd49fc70aa, type: 3}
+--- !u!1 &1661217146 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8448906076836941893, guid: 60283bddc5264024893416fd49fc70aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 1661217145}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1713631529
 GameObject:
   m_ObjectHideFlags: 0
@@ -11628,16 +11628,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5561241103213202319, guid: 4cc294d605ee56d498e421cfee0f17da,
-        type: 3}
-      propertyPath: cameras
-      value: 
-      objectReference: {fileID: 1252363123}
-    - target: {fileID: 5561241103213202319, guid: 4cc294d605ee56d498e421cfee0f17da,
-        type: 3}
-      propertyPath: quest_quick
-      value: 
-      objectReference: {fileID: 1907865654}
     - target: {fileID: 3480326632139354146, guid: 4cc294d605ee56d498e421cfee0f17da,
         type: 3}
       propertyPath: m_IsActive
@@ -11648,6 +11638,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5561241103213202319, guid: 4cc294d605ee56d498e421cfee0f17da,
+        type: 3}
+      propertyPath: cameras
+      value: 
+      objectReference: {fileID: 1252363123}
+    - target: {fileID: 5561241103213202319, guid: 4cc294d605ee56d498e421cfee0f17da,
+        type: 3}
+      propertyPath: quest_quick
+      value: 
+      objectReference: {fileID: 1907865654}
     - target: {fileID: 4929240584335040341, guid: 4cc294d605ee56d498e421cfee0f17da,
         type: 3}
       propertyPath: m_IsActive

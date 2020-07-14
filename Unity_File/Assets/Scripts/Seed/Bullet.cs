@@ -11,94 +11,67 @@ public class Bullet : MonoBehaviour
     {
         plant = GetComponent<Plant>();
     }
+
+    private void SetPlantPos(Collision collision)
+    {
+        ContactPoint point = collision.GetContact(0);
+        Vector3 pos = point.point;
+        Vector3 normal = point.normal;
+
+        //pos는 Ray 쏜 곳.
+        plant.PlantSeed(pos, normal, false);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (plant.seed_name == "blue_seed" || plant.seed_name == "brown_seed")
-        {
-            if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
-            {
-                ContactPoint point = collision.GetContact(0);
-                Vector3 pos = point.point;
-                Vector3 normal = point.normal;
+        gameObject.SetActive(false);
 
-                //pos는 Ray 쏜 곳.
-                plant.PlantSeed(pos, normal, false);
-                gameObject.SetActive(false);
-            }
-            else
-            {
-                gameObject.SetActive(false);
-            }
-        }
-        else if (plant.seed_name == "red_seed")
+        switch (plant.seed_name)
         {
-            if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
-            {
-                ContactPoint point = collision.GetContact(0);
-                Vector3 pos = point.point;
-                Vector3 normal = point.normal;
-                plant.PlantSeed(pos, normal, true);
+            case "blue_seed":
+                if (collision.gameObject.CompareTag("Plantable"))
+                    SetPlantPos(collision);
+                break;
 
-                gameObject.SetActive(false);
-            }
-            else
-            {
-                gameObject.SetActive(false);
-            }
-        }
-        else if (plant.seed_name == "green_seed")
-        {
-            if (collision.gameObject.CompareTag("Plant"))
-            {
-                collision.transform.localScale = new Vector3(collision.transform.localScale.x * 2, collision.transform.localScale.y * 2, collision.transform.localScale.z * 2);
+            case "brown_seed":
+                if (collision.gameObject.CompareTag("Plantable"))
+                    SetPlantPos(collision);
+                break;
 
-                gameObject.SetActive(false);
-            }
-            else
-            {
-                gameObject.SetActive(false);
-            }
-        }
-        else if (plant.seed_name == "lime_seed")
-        {
-            if (collision.gameObject.CompareTag("Plant"))
-            {
-                collision.transform.localScale = new Vector3(collision.transform.localScale.x / 2, collision.transform.localScale.y / 2, collision.transform.localScale.z / 2);
+            case "red_seed":
+            case "white_seed":
+                if (collision.gameObject.CompareTag("Plantable") || collision.gameObject.CompareTag("Ground"))
+                    SetPlantPos(collision);
+                break;
 
-                gameObject.SetActive(false);
-            }
-            else
-            {
-                gameObject.SetActive(false);
-            }
-        }
-        else if (plant.seed_name == "yellow_seed")
-        {
-            if (collision.gameObject.CompareTag("Yellow"))
-            {
-                /* 전 노랑씨앗
-                Debug.Log("Plant");
-                ContactPoint point = collision.GetContact(0);
-                Vector3 pos = point.point;
-                Vector3 normal = point.normal;
-                Debug.Log("Nomal : " + normal);
-                plant.PlantSeed(pos, normal, false);
-                */
-                collision.gameObject.GetComponent<Rigidbody>().mass = 1;
+            case "green_seed":
+                if (collision.gameObject.CompareTag("Plant"))
+                    collision.transform.localScale =
+                            new Vector3(collision.transform.localScale.x * 2,
+                            collision.transform.localScale.y * 2,
+                            collision.transform.localScale.z * 2);
+                break;
 
-                gameObject.SetActive(false);
-            }
-            else
-            {
-                gameObject.SetActive(false);
-            }
-        }
-        else if (plant.seed_name == "purple_seed")
-        {
-            Instantiate(boom, gameObject.transform.position, gameObject.transform.rotation);
+            case "lime_seed":
+                if (collision.gameObject.CompareTag("Plant"))
+                    collision.transform.localScale =
+                            new Vector3(collision.transform.localScale.x / 2,
+                            collision.transform.localScale.y / 2,
+                            collision.transform.localScale.z / 2);
+                break;
 
-            gameObject.SetActive(false);
+            case "yellow_seed":
+                if (collision.gameObject.CompareTag("Yellow"))
+                    collision.gameObject.GetComponent<Rigidbody>().mass = 1;
+                break;
+
+            case "purple_seed":
+                Instantiate(boom, gameObject.transform.position, gameObject.transform.rotation);
+                break;
+
+            default: break;
+
         }
     }
 }
-
+       

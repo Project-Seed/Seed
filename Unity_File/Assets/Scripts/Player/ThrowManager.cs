@@ -25,12 +25,13 @@ public class ThrowManager : MonoBehaviour
         // Ray쏴서 2차원->3차원 좌표로 바꾼걸 Aim으로 써야될듯
         //카메라에서 Ray를 쏘고 그 닿은 곳에 씨앗이 가도록. 출발점은 캐릭터 손. 도착지는 카메라 기준 에임점이 닿은곳.
     }
-
+    //발사취소는 우클릭 했을 때만.
+    //조준선은 씨앗 조건에 따라 초록/빨강
+    //빨강일때도 쏠 수 있는데 그러면 조건 안 맞아서 먼지만 날림
     public void mouse_down(string name)
     {
         seed_name = name;
         aim_sp.SetActive(true);
-        
     }
 
     public void mouse_up(bool option)
@@ -61,13 +62,13 @@ public class ThrowManager : MonoBehaviour
 
     private bool isPlantable()
     {
-        float distance = 100.0f;
-        Debug.DrawRay(sub_cam.position, sub_cam.forward * distance, Color.green, 10.0f);
+        float distance = 20.0f;
+        Debug.DrawRay(sub_cam.position, sub_cam.forward * distance, Color.green, 3.0f);
         if (Physics.Raycast(sub_cam.position, sub_cam.forward, out RaycastHit hit, distance))
         {
             Debug.Log("Hit At "+hit.collider.gameObject.name);
-            if (hit.transform.CompareTag("Plantable") || hit.transform.CompareTag("Ground"))
-            {
+            if (checkPlantable(hit))
+            { 
               dest = hit.point - aim.transform.position;
               Debug.Log(dest);
               return true;
@@ -77,7 +78,46 @@ public class ThrowManager : MonoBehaviour
         }
         else return false;
     }
+    private bool checkPlantable(RaycastHit hit)
+    {
+        switch (seed_name)
+        {
+            case "blue_seed":
+            case "brown_seed":
+                if (hit.transform.CompareTag("Plantable"))
+                    return true;
+                break;
 
+            case "red_seed":
+            case "white_seed":
+                if (hit.transform.CompareTag("Plantable") || hit.transform.CompareTag("Ground"))
+                    return true;
+                break;
+
+            case "green_seed":
+            case "lime_seed":
+                return true;
+                break;
+
+            case "yellow_seed":
+                if (hit.transform.CompareTag("Yellow"))
+                    return true;
+                break;
+
+            case "purple_seed":
+                //마을에서는 사용 불가
+                return true;
+                break;
+
+            default: return false;
+
+        }
+        return false;
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(dest, 0.05f);
+    }
     private void Throw()
     {
         //aim이 캐릭터 자식으로 있어서 캐릭터 움직이면 별수없이 움직임.
@@ -95,9 +135,10 @@ public class ThrowManager : MonoBehaviour
         //Debug.Log("Throw Aim : " + aimForward);
 
         //tmp.GetComponent<Plant>().red_go = aimForward;
+        bullet_rig.AddForce(dest * 10, ForceMode.Impulse);
 
         //궤도를 따라 움직이는 코루틴 시작
-        StartCoroutine(ThrowingSeed(bullet_rig, dest));
+        //StartCoroutine(ThrowingSeed(bullet_rig, dest));
     }
 
     IEnumerator ThrowingSeed(Rigidbody bullet_rig, Vector3 dest)
