@@ -664,7 +664,8 @@ public class PlayerController : MonoBehaviour
     {
         //Debug.Log(collision.gameObject.name);
 
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable") ||
+            collision.gameObject.CompareTag("Purple") || collision.gameObject.CompareTag("Yellow"))
         {
             player_state.landing();
         }
