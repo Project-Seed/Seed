@@ -245,12 +245,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Idle_1
       objectReference: {fileID: 0}
-    - target: {fileID: -8093525188934232107, guid: 4af1a43973545394393b66d398541017,
+    - target: {fileID: -927199367670048503, guid: 4af1a43973545394393b66d398541017,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: -4773643132821946099, guid: 39158e39ddd8f2745bee61e60fab5d3f,
-        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4af1a43973545394393b66d398541017,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -306,6 +305,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8093525188934232107, guid: 4af1a43973545394393b66d398541017,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -4773643132821946099, guid: 39158e39ddd8f2745bee61e60fab5d3f,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4af1a43973545394393b66d398541017, type: 3}
 --- !u!1 &8168262781765677615 stripped

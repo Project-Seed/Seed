@@ -9,9 +9,7 @@ public class Inventory : MonoBehaviour
     public GameObject content;
     public GameObject quick_button;
     public bool quick_bool = false;
-    public Image quick_bg;
-    public Sprite quick_image_off;
-    public Sprite quick_image_on;
+    public GameObject quick_bg;
     public List<GameObject> item_box;
     public GameObject spand_button;
 
@@ -91,12 +89,12 @@ public class Inventory : MonoBehaviour
                 {
                     quick_mod = true;
                     quick_name = item_choose;
-                    quick_bg.sprite = quick_image_on;
+                    quick_bg.SetActive(true);
                 }
                 else
                 {
                     quick_mod = false;
-                    quick_bg.sprite = quick_image_off;
+                    quick_bg.SetActive(false);
                 }
             }
         }
@@ -105,31 +103,31 @@ public class Inventory : MonoBehaviour
         {
             in_qu.item_set(0, quick_name);
             quick_mod = false;
-            quick_bg.sprite = quick_image_off;
+            quick_bg.SetActive(false);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2) && quick_mod == true)
         {
             in_qu.item_set(1, quick_name);
             quick_mod = false;
-            quick_bg.sprite = quick_image_off;
+            quick_bg.SetActive(false);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3) && quick_mod == true)
         {
             in_qu.item_set(2, quick_name);
             quick_mod = false;
-            quick_bg.sprite = quick_image_off;
+            quick_bg.SetActive(false);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4) && quick_mod == true)
         {
             in_qu.item_set(3, quick_name);
             quick_mod = false;
-            quick_bg.sprite = quick_image_off;
+            quick_bg.SetActive(false);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha5) && quick_mod == true)
         {
             in_qu.item_set(4, quick_name);
             quick_mod = false;
-            quick_bg.sprite = quick_image_off;
+            quick_bg.SetActive(false);
         }
     }
 

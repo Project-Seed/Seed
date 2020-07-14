@@ -102,6 +102,8 @@ public class Dictionarys : MonoBehaviour
             item_names.text = GameSystem.instance.item_search(item_choose, "name_ko");
             item_image.sprite = Resources.Load<Sprite>("Item2D/" + item_choose);
         }
+        else
+            item_choose = null;
     }
 
     public void have_click() // 보유중만 보기 클릭
