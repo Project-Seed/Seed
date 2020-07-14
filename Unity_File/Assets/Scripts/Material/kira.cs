@@ -16,7 +16,7 @@ public class kira : MonoBehaviour
     {
         while (true)
         {
-            gameObject.GetComponent<MeshRenderer>().material.color = new Color(r * (i / 50), g * (i / 50), b * (i / 50));
+            gameObject.GetComponent<MeshRenderer>().material.color = new Color(r * (i / 50f), g * (i / 50f), b * (i / 50f));
 
             if (ch == false)
                 i++;
