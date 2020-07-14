@@ -58,6 +58,9 @@ public class Inventory : MonoBehaviour
     private void OnEnable()
     {
         InputManager.instance.game_stop();
+
+        if(item_choose != null)
+            StartCoroutine(TypeSentence(GameSystem.instance.item_search(item_choose, "explanation_ko")));
     }
     private void OnDisable()
     {
@@ -143,7 +146,9 @@ public class Inventory : MonoBehaviour
 
         if (item_int < GameSystem.instance.item_time.Count)
         {
-            item_explanation.text = GameSystem.instance.item_search(item_choose, "explanation_ko");
+            if (item_choose != null)
+                StartCoroutine(TypeSentence(GameSystem.instance.item_search(item_choose, "explanation_ko")));
+
             item_names.text = GameSystem.instance.item_search(item_choose, "name_ko");
             item_image.sprite = gameObject.GetComponent<Inventory_box>().image.sprite;
 
@@ -200,6 +205,24 @@ public class Inventory : MonoBehaviour
                     Quest_clear_system.instance.clear_trigger[8]++;
                     Instantiate(Resources.Load<GameObject>("Tutorial/Mini_latter"), GameObject.Find("Canvas").transform);
                     break;
+            }
+        }
+    }
+
+    IEnumerator TypeSentence(string sentence) // 한글자씩 출력
+    {
+        if (sentence != "")
+        {
+            item_explanation.text = "";
+            foreach (char letter in sentence.ToCharArray())
+            {
+                if (letter == '$')
+                    item_explanation.text += "\n";
+                else if (letter == '@')
+                    item_explanation.text += ",";
+                else
+                    item_explanation.text += letter;
+                yield return null;
             }
         }
     }

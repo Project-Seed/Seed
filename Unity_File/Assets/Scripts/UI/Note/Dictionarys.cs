@@ -34,6 +34,12 @@ public class Dictionarys : MonoBehaviour
         get { return instance; }
     }
 
+    private void OnEnable()
+    {
+        if (item_choose != null)
+            StartCoroutine(TypeSentence(GameSystem.instance.item_search(item_choose, "explanation_ko")));
+    }
+
 
     void Awake()
     {
@@ -84,7 +90,9 @@ public class Dictionarys : MonoBehaviour
 
         if (dictionary_num[item_choose] == true)
         {
-            item_explanation.text = GameSystem.instance.item_search(item_choose, "explanation_ko");
+            if (item_choose != null)
+                StartCoroutine(TypeSentence(GameSystem.instance.item_search(item_choose, "explanation_ko")));
+
             item_names.text = GameSystem.instance.item_search(item_choose, "name_ko");
             item_image.sprite = Resources.Load<Sprite>("Item2D/" + item_choose);
         }
@@ -128,6 +136,24 @@ public class Dictionarys : MonoBehaviour
                 item_box[i].SetActive(false);
             else
                 item_box[i].SetActive(true);
+        }
+    }
+
+    IEnumerator TypeSentence(string sentence) // 한글자씩 출력
+    {
+        if (sentence != "")
+        {
+            item_explanation.text = "";
+            foreach (char letter in sentence.ToCharArray())
+            {
+                if (letter == '$')
+                    item_explanation.text += "\n";
+                else if (letter == '@')
+                    item_explanation.text += ",";
+                else
+                    item_explanation.text += letter;
+                yield return null;
+            }
         }
     }
 }

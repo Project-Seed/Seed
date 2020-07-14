@@ -40,6 +40,7 @@ public class ButtonCollider : MonoBehaviour
             if (onKeyE != null)
             {
                 onKeyE.Invoke();
+                StartCoroutine(Key_guide.instance.door_ing());
             }
         }
 

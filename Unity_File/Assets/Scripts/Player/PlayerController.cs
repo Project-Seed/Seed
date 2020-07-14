@@ -159,6 +159,9 @@ public class PlayerController : MonoBehaviour
 
             if(Input.GetKeyDown(KeyCode.R))
             {
+                if (Key_guide.instance.climb.activeSelf)
+                    StartCoroutine(Key_guide.instance.climb_ing());
+
                 if(climb_mod == true)
                 {
                     climb_mod = false;
@@ -400,7 +403,7 @@ public class PlayerController : MonoBehaviour
                 eat_object.GetComponent<ExampleItem>().eat();
 
                 eat_bool = false;
-                Key_guide.instance.item_off();
+                StartCoroutine(Key_guide.instance.item_ing());
                 Key_guide.instance.item_name_off();
             }
 
@@ -453,7 +456,7 @@ public class PlayerController : MonoBehaviour
                 }
 
                 eat_objects.GetComponent<SphereCollider>().enabled = false;
-                Key_guide.instance.object_off();
+                StartCoroutine(Key_guide.instance.object_ing());
             }
         }
 

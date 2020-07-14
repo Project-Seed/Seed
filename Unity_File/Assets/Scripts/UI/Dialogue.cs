@@ -47,6 +47,7 @@ public class Dialogue : MonoBehaviour
             {
                 if (dialogue_box_bool == false)
                 {
+                    StartCoroutine(Key_guide.instance.talk_ing());
                     InputManager.instance.game_stop();
 
                     dialogue_box.SetActive(true);
