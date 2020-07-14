@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.Assertions.Must;
 
 public class PlayerController : MonoBehaviour
 {
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour
     public bool climb_mod = false; // 갈색 충돌시 키 누르면 true
     public Vector3 climb_po; // 충돌후 갈색 위치, 오르기 제한 범위때매
     public Quaternion climb_ro; // 충돌후 갈색 각도, r 누를때 정면 바라보기 위해
+    public bool climb_time = false; // 매달리면 0.5초간만트루
 
     public bool hang_crash = false; // 파랑 충돌시 true
     public int hang_mod = 0; // 기본 0 매달리기 1 떨어지기 2
@@ -52,6 +54,9 @@ public class PlayerController : MonoBehaviour
     string eat_item;
     GameObject eat_object;//아이템
     GameObject eat_objects;//오브젝트
+
+    public GameObject shadow; // 매달리기 충돌체크용
+    public GameObject shadow2; // 매달리기 충돌체크용
 
     IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 0.3초간 점프금지
     {
@@ -129,6 +134,11 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
     }
+    IEnumerator climb_05()
+    {
+        yield return new WaitForSeconds(0.5f);
+        climb_time = false;
+    }
 
     void Start()
     {
@@ -166,6 +176,9 @@ public class PlayerController : MonoBehaviour
                 {
                     climb_mod = false;
                     player_state.climb_off();
+
+                    shadow.SetActive(false);
+                    shadow2.SetActive(false);
                 }
                 else if(climb_crash == true && climb_mod == false)
                 {
@@ -174,8 +187,21 @@ public class PlayerController : MonoBehaviour
 
                     transform.rotation = climb_ro;
                     transform.rotation = Quaternion.Euler(new Vector3(-transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y - 180, transform.rotation.eulerAngles.z));
-                    transform.Translate(0, 0, 0.8f);
+                    transform.Translate(0, 0.3f, 0.5f);
+
+                    lookAt = transform.forward;
+                    gameObject.transform.Translate(0, Time.deltaTime, 0);
+                    Quaternion dir2 = main_cam.localRotation;
+                    dir2.x = 0f; dir2.z = 0f;
+                    transform.localRotation = dir2;
+
+                    climb_time = true;
+                    StartCoroutine(climb_05());
+
+                    shadow.SetActive(true);
+                    shadow2.SetActive(true);
                 }
+
                 if (hang_mod == 2)
                 {
                     StartCoroutine(hang_land());
@@ -223,10 +249,12 @@ public class PlayerController : MonoBehaviour
                     gameObject.transform.Translate(0, Time.deltaTime, 0);
                 if (Input.GetKey(KeyCode.S))
                     gameObject.transform.Translate(0, -Time.deltaTime, 0);
+                /*
                 if (Input.GetKey(KeyCode.D))
                     gameObject.transform.Translate(Time.deltaTime, 0, 0);
                 if (Input.GetKey(KeyCode.A))
                     gameObject.transform.Translate(-Time.deltaTime, 0, 0);
+                */
 
                 if(climb_crash == false) // 떨어진다!
                 {
@@ -377,21 +405,21 @@ public class PlayerController : MonoBehaviour
             Quaternion dir = main_cam.localRotation;
             dir.x = 0f; dir.z = 0f;
 
-            if (hang_mod == 0)
+            if (hang_mod == 0 && climb_mod == false)
                 transform.localRotation = Quaternion.Slerp(transform.localRotation, dir, 0.5f);
 
             //발사모드에서는 캐릭터 회전 안함. 앞만봄
             if (GameSystem.instance.GetModeNum()==1)
                 child.localRotation = Quaternion.Slerp(child.localRotation, transform.localRotation, 0.2f);
-
             //이동할때만 모델회전
             else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||
                      Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
             {
-                transform.localRotation = dir;
-
                 if (climb_mod == false && hang_mod == 0)
+                {
+                    transform.localRotation = dir;
                     child.localRotation = Quaternion.Slerp(child.localRotation, Quaternion.LookRotation(lookAt), 0.2f);
+                }
             }
 
             // 아이템 먹기
@@ -556,7 +584,6 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(StopJumping());
     }
 
-    
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "brown_trigger" && climb_mod == false)
@@ -572,7 +599,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.name == "brown_trigger" && climb_mod == false)
+        if (collision.gameObject.name == "brown_trigger" && climb_time == false)
         {
             Debug.Log("갈색 떨어짐");
             climb_crash = false;
@@ -584,16 +611,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.name == "brown_trigger")
-        {
-            Debug.Log("갈색 충돌");
-            climb_ro = collision.transform.rotation;
-            climb_po = collision.transform.position;
-            climb_crash = true;
-
-            Key_guide.instance.climb_on();
-        }
-
         if (collision.gameObject.name == "left")
             hang_vecter = 0;
         else if (collision.gameObject.name == "right")
@@ -640,6 +657,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay(Collider collision)
     {
+        //Debug.Log(collision.gameObject.name);
+
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
         {
             player_state.landing();
@@ -722,5 +741,14 @@ public class PlayerController : MonoBehaviour
             if(key_on ==true)
                 Key_guide.instance.object_on(name, cameras.WorldToScreenPoint(collision.gameObject.transform.position));
         }
+    }
+
+    public void shadow_out()
+    {
+        Debug.Log("갈색 떨어짐");
+        climb_crash = false;
+
+        shadow2.SetActive(false);
+        shadow.SetActive(false);
     }
 }
