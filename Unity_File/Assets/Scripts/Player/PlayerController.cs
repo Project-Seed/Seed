@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject shadow; // 매달리기 충돌체크용
     public GameObject shadow2; // 매달리기 충돌체크용
+    public bool climb_up_bool = false;
 
     IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 0.3초간 점프금지
     {
@@ -65,29 +66,33 @@ public class PlayerController : MonoBehaviour
         stop_jumping = false;
     }
 
-    /*
-    IEnumerator hang_up()                  
+    
+    public IEnumerator climb_up()                  
     {
-        yield return new WaitForSeconds(0.2f);
+        player_state.climb_up();
+        climb_up_bool = true;
 
-        for (int i = 0; i < 45; i++)
+        yield return new WaitForSeconds(0.4f);
+
+        for (int i = 0; i < 20; i++)
         {
-            gameObject.transform.Translate(0, 0.025f, 0);
+            gameObject.transform.Translate(0, 0.02f, 0);
             yield return new WaitForSeconds(0.01f);
         }
 
-        yield return new WaitForSeconds(1.6f);
+        yield return new WaitForSeconds(1.4f);
 
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 35; i++)
         {
-            gameObject.transform.Translate(0, 0.025f, 0);
+            gameObject.transform.Translate(0, 0.03f, 0);
             yield return new WaitForSeconds(0.01f);
         }
 
         yield return new WaitForSeconds(0.2f);
 
-        hang_mod = 0;
-    }*/
+        climb_up_bool = false;
+        shadow_out();
+    }
 
     IEnumerator hang_jump()
     {
@@ -167,7 +172,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if(Input.GetKeyDown(KeyCode.R))
+            if(Input.GetKeyDown(KeyCode.R) && climb_up_bool == false)
             {
                 if (Key_guide.instance.climb.activeSelf)
                     StartCoroutine(Key_guide.instance.climb_ing());
@@ -237,7 +242,7 @@ public class PlayerController : MonoBehaviour
                 lookAt = -transform.forward;
             }
 
-            if (climb_mod == true)
+            if (climb_mod == true && climb_up_bool == false)
             {
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D))
                     player_state.animator.SetBool("climb_move", true);

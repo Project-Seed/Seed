@@ -6,12 +6,19 @@ public class Shadow : MonoBehaviour
 {
     public PlayerController playerController;
 
+    bool a = true;
+
+    private void OnEnable()
+    {
+        a = true;
+    }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.name == "brown_trigger")
+        if (collision.gameObject.name == "brown_trigger" && a)
         {
-            playerController.shadow_out();
+            a = false;
+            StartCoroutine(playerController.climb_up());
         }
     }
 }
