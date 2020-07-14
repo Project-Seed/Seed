@@ -50,7 +50,9 @@ public class Bullet : MonoBehaviour
                 break;
 
             case "green_seed":
-                if (collision.gameObject.CompareTag("Plant"))
+                Debug.Log(collision.gameObject.tag);
+
+                if (collision.gameObject.CompareTag("Plant2"))
                     collision.transform.localScale =
                             new Vector3(collision.transform.localScale.x * 2,
                             collision.transform.localScale.y * 2,
@@ -58,7 +60,7 @@ public class Bullet : MonoBehaviour
                 break;
 
             case "lime_seed":
-                if (collision.gameObject.CompareTag("Plant"))
+                if (collision.gameObject.CompareTag("Plant2"))
                     collision.transform.localScale =
                             new Vector3(collision.transform.localScale.x / 2,
                             collision.transform.localScale.y / 2,
