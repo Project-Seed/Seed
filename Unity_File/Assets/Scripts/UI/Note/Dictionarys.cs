@@ -28,6 +28,7 @@ public class Dictionarys : MonoBehaviour
     bool have_on = false; // false는 일반정렬 true는 있는것만 표기
 
     public InputField search_data;
+    public GameObject choose;
 
     public static Dictionarys Instance
     {
@@ -90,6 +91,9 @@ public class Dictionarys : MonoBehaviour
 
         if (dictionary_num[item_choose] == true)
         {
+            choose.SetActive(true);
+            choose.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y);
+
             if (item_choose != null)
                 StartCoroutine(TypeSentence(GameSystem.instance.item_search(item_choose, "explanation_ko")));
 

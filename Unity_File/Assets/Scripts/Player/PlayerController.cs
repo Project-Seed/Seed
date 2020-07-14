@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     private float input_horizontal;         // 수직방향 입력 ws
     private float input_vertical;           // 수평방향 입력 ad
 
-    private bool is_jumping;                // 점프키를 입력하면 true.
+    public bool is_jumping;                // 점프키를 입력하면 true.
     private bool stop_jumping;                // 점프금지 시간
     private bool is_run;                    // 달리고 있는지.
 
@@ -556,6 +556,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(StopJumping());
     }
 
+    /*
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
@@ -576,6 +577,7 @@ public class PlayerController : MonoBehaviour
             player_state.flying();
         }
     }
+    */
 
     private void OnTriggerEnter(Collider collision)
     {
