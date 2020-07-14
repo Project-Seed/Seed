@@ -18,11 +18,8 @@ public class CameraRotater : MonoBehaviour
     float input_mouse_wheel;
     Vector3 camera_offset;
     Vector3 origin_camera_offset;
-    //Camera main_cam;
-    //Camera sub_cam;
-    CinemachineVirtualCamera main_cam;
-    CinemachineVirtualCamera sub_cam;
-
+    float maxZoomin = 2.0f;
+    float maxZoomOut = 8.0f;
 
     bool ok = true;
     float ok_time = 0;
@@ -37,8 +34,6 @@ public class CameraRotater : MonoBehaviour
         MouseY = transform.eulerAngles.x;
         camera_offset = transform.localPosition - head.transform.localPosition;
         origin_camera_offset = camera_offset;
-        main_cam = GetComponent<CinemachineVirtualCamera>();
-        sub_cam = gameObject.GetComponentInChildren<CinemachineVirtualCamera>();
 
         far = camera_offset.magnitude;
     }
@@ -54,6 +49,12 @@ public class CameraRotater : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
+        input_mouse_wheel = Input.GetAxisRaw("Mouse ScrollWheel");
+        if (input_mouse_wheel > 0 && camera_offset.magnitude >= maxZoomin)
+            camera_offset /= 1.1f;
+        else if (input_mouse_wheel < 0 && camera_offset.magnitude <= maxZoomOut)
+            camera_offset *= 1.1f;
+
         MouseX += Input.GetAxis("Mouse X") * rotate_speed;
         MouseY -= Input.GetAxis("Mouse Y") * rotate_speed;
         //MouseY = Mathf.Clamp(MouseY, minY, maxY);
@@ -67,17 +68,13 @@ public class CameraRotater : MonoBehaviour
         //sub_cam.transform.rotation.SetLookRotation(player.forward);
         //transform.RotateAround(target.position, target.right, MouseY);
 
-        input_mouse_wheel = Input.GetAxisRaw("Mouse ScrollWheel");
-        if (input_mouse_wheel > 0 && camera_offset.magnitude >= 3.0f)
-            camera_offset /= 1.1f;
-        else if (input_mouse_wheel < 0 && camera_offset.magnitude <= 10.0f)
-            camera_offset *= 1.1f;
+       
 
-        if (camera_offset.magnitude < 3.0f && ok_time >= 0.5f)
-            camera_offset *= 1.1f;
+        //if (camera_offset.magnitude < 3.0f && ok_time >= 0.5f)
+        //    camera_offset *= 1.1f;
 
-        if (ok)
-            ok_time += Time.deltaTime;
+        //if (ok)
+        //    ok_time += Time.deltaTime;
     }
 
     float ClampAngle(float angle, float min, float max)
@@ -105,21 +102,32 @@ public class CameraRotater : MonoBehaviour
     //    sub_cam.enabled = false;
     //}
 
+    //카메라가 어디엔가 닿으면
+    // 클로즈업(단, 캐릭터와 일정 거리 이상 가까워지면 안됨)
+    // 뒤에 아무것도 없다면 다시 줌아웃.
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player")) return;
+
+    }
     private void OnTriggerStay(Collider other)
     {
-        ok = false;
-        ok_time = 0;
+        //ok = false;
+        //ok_time = 0;
 
         if (other.CompareTag("Player"))
         {
             camera_offset = origin_camera_offset;
         }
-        else if (camera_offset.magnitude > 3.0f)
-            camera_offset /= 1.05f;
+        else if (camera_offset.magnitude > maxZoomin)
+            camera_offset /= 1.1f;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        ok = true;
+        //ok = true;
+
+        if (other.CompareTag("Player")) return;
     }
 }

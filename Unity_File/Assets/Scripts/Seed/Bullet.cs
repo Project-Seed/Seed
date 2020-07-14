@@ -23,7 +23,6 @@ public class Bullet : MonoBehaviour
 
                 //pos는 Ray 쏜 곳.
                 plant.PlantSeed(pos, normal, false);
-
                 gameObject.SetActive(false);
             }
             else

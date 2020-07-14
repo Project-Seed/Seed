@@ -39,6 +39,6 @@ class Plant : MonoBehaviour
             obj.transform.rotation = Quaternion.Euler(new Vector3(0, obj.transform.rotation.eulerAngles.y, 0));
         }
 
-        Debug.Log("Planted");
+        Debug.Log("Planted At"+pos);
     }
 }

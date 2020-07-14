@@ -65,7 +65,7 @@ public class ThrowManager : MonoBehaviour
         Debug.DrawRay(sub_cam.position, sub_cam.forward * distance, Color.green, 10.0f);
         if (Physics.Raycast(sub_cam.position, sub_cam.forward, out RaycastHit hit, distance))
         {
-              Debug.DrawLine(sub_cam.position, hit.point, Color.red, 3.0f) ;
+            Debug.Log("Hit At "+hit.collider.gameObject.name);
             if (hit.transform.CompareTag("Plantable") || hit.transform.CompareTag("Ground"))
             {
               dest = hit.point - aim.transform.position;
@@ -106,7 +106,7 @@ public class ThrowManager : MonoBehaviour
         {
             //bullet_rig.AddForce(aimForward, ForceMode.Impulse);
             //bullet_rig.position = Vector3.MoveTowards(bullet_rig.position, dest, 0.5f);
-            bullet_rig.AddForce(dest*10, ForceMode.Impulse);
+            bullet_rig.AddForce(dest*5, ForceMode.Impulse);
             yield return new WaitForSeconds(0.1f);
             StartCoroutine(ThrowingSeed(bullet_rig, dest));
         }

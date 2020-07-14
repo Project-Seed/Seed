@@ -556,37 +556,29 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(StopJumping());
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Ground")||collision.gameObject.CompareTag("Plantable"))
-    //    {
-    //        in_ground = true;
-    //        is_jumping = false;
-    //        Debug.Log("in Ground");
-
-    //        player_state.landing();
-    //    }
-    //}
-
-    //private void OnCollisionExit(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
-    //    {
-    //        in_ground = false;
-    //        Debug.Log("not in Ground");
-
-    //        player_state.flying();
-    //    }
-    //}
-
-    private void OnTriggerEnter(Collider collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
         {
             is_jumping = false;
-            //Debug.Log("jump 끝");
-        }
+            Debug.Log("in Ground");
 
+            player_state.landing();
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
+        {
+            Debug.Log("not in Ground");
+
+            player_state.flying();
+        }
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
         if (collision.gameObject.name == "brown_trigger")
         {
             Debug.Log("갈색 충돌");
@@ -628,11 +620,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable"))
-        {
-            player_state.flying();
-        }
-
         IItem item = collision.GetComponent<IItem>(); //IItem을 상속받는 모든 아이템들
         if (item != null)                         //아이템과 부딪혔다면 함수를 호출하고 지움.
         {
@@ -653,7 +640,6 @@ public class PlayerController : MonoBehaviour
             Key_guide.instance.object_off();
         }
     }
-
 
     private void OnTriggerStay(Collider collision)
     {
