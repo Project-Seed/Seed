@@ -42,7 +42,7 @@ public class SaveData : MonoBehaviour
         {
             XDocument save_data = XDocument.Load("./Assets/save_data" + num.ToString() + ".xml");
 
-            save.text = "아직 지역 이름이 없어요";
+            save.text = GameSystem.instance.map_name;
             time.text = save_data.Element("root").Element("solo").Element("save_time").Value;
 
             slider.SetActive(true);
