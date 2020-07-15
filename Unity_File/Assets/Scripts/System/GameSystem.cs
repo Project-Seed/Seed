@@ -38,6 +38,7 @@ public class GameSystem : MonoBehaviour
     public bool talk_trigger = false; // 주문하신 대화하는중인지 체크
     public GameObject talk_npc_ob; // 주문하신 대화하는 npc오브젝트
 
+    public string map_name;
 
     public void load_game(int num)
     {
@@ -100,7 +101,6 @@ public class GameSystem : MonoBehaviour
 
         document.Save("./Assets/save_data" + num.ToString() + ".xml");
     }
-
 
     [Flags]
     public enum Mode
@@ -166,7 +166,6 @@ public class GameSystem : MonoBehaviour
             quest_state.Add(i+1, 0); // 퀘스트 진행상태 등록
         }
     }
-
 
     public void GameStart()
     {
