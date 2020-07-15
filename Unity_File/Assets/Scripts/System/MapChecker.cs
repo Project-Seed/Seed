@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class MapChecker : MonoBehaviour
 {
-    private float distance;
-    // Start is called before the first frame update
     void Start()
     {
-        distance = 5f;
     }
 
-    // Update is called once per frame
     void Update()
+    {
+        MapCheck(5.0f);
+    }
+
+    public bool MapCheck(float distance)
     {
         if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, distance))
         {
-            Debug.Log("Map Name : " + hit.collider.gameObject.name);
+            Debug.DrawRay(transform.position, -transform.up, Color.green, 2f);
+            //Debug.Log("Map Name : " + hit.collider.gameObject.name);
             GameSystem.instance.map_name = hit.collider.gameObject.name;
+            return true;
         }
+        return false;
+
     }
 }

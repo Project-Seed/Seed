@@ -170,8 +170,6 @@ public class ThrowManager : MonoBehaviour
         }
         else
             Destroy(tmp);
-
-
     }
 
 }

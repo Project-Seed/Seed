@@ -12,20 +12,22 @@ public class PlayerController : MonoBehaviour
     public GameObject inventory; // 인벤토리
     public GameObject composer; // 합성창
     public GameObject note; // 다이어리
-    private Transform child; // 모델 Transform.
-    ThrowManager throwManager;
-    Transform main_cam;
-    public Camera cameras;
     public Inven_quick qick;
     public GameObject rotate_ob; // 회전하는 오브젝트
     public Dialogue dialogue;
+    public Camera cameras;
+
+    private ThrowManager throwManager;
+    private MapChecker mapChecker;
+    private Transform main_cam;
+    private Transform child; // 모델 Transform.
+    private Rigidbody player_rigidbody;
+    private PlayerState player_state;
 
     public float player_speed = 2.0f;         // 캐릭터 걷는 속도
     public float player_run_speed = 6.0f;     // 캐릭터 달리는 속도
     public float player_jump_power = 10.0f;    // 캐릭터 점프력
 
-    private Rigidbody player_rigidbody;
-    private PlayerState player_state;
     private float input_horizontal;         // 수직방향 입력 ws
     private float input_vertical;           // 수평방향 입력 ad
 
@@ -65,7 +67,6 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         stop_jumping = false;
     }
-
     
     public IEnumerator climb_up()                  
     {
@@ -151,11 +152,12 @@ public class PlayerController : MonoBehaviour
         player_transform = GetComponent<Transform>(); //나중에 제거. 그냥 transform으로 쓰기
         player_state = GetComponent<PlayerState>();
         throwManager = GetComponent<ThrowManager>();
+        mapChecker = GetComponentInChildren<MapChecker>();
         main_cam = GameObject.Find("Main Camera").transform;
         child = transform.GetChild(0);
         dialogue = GameObject.Find("Dialogue").GetComponent<Dialogue>();
 
-        is_jumping = false;
+        //is_jumping = false;
         is_run = false;
     }
 
@@ -163,6 +165,18 @@ public class PlayerController : MonoBehaviour
     {
         if (InputManager.instance.click_mod == 0)
         {
+            if (mapChecker.MapCheck(0.4f))
+            {
+                is_jumping = false;
+                player_state.landing();
+                Debug.Log("in Ground");
+            }
+            else if (mapChecker.MapCheck(1.0f))
+            {
+                is_jumping = true;
+                player_state.flying();
+                Debug.Log("not in Ground");
+            }
 
             if (Input.GetButtonDown("Jump"))
             {
@@ -578,7 +592,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Jumping()
     {
-        is_jumping = true;
+        //is_jumping = true;
         //Debug.Log("jump 시작");
 
         player_state.jump();
