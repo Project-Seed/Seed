@@ -23,18 +23,17 @@ public class RadiationBar : MonoBehaviour
             switch(PlayerState.instance.radiation_level)
             {
                 case 1:
-                    PlayerState.instance.radiation -= 0.01f;
+                    PlayerState.instance.radiation += 1f;
                     PlayerState.instance.radiation = Mathf.Round(PlayerState.instance.radiation * 100) * 0.01f;
                     break;
 
                 case 2:
-                    PlayerState.instance.radiation -= 0.05f;
+                    PlayerState.instance.radiation += 5f;
                     PlayerState.instance.radiation = Mathf.Round(PlayerState.instance.radiation * 100) * 0.01f;
                     break;
 
                 case 3:
-                    PlayerState.instance.radiation -= 0.1f;
-                    PlayerState.instance.radiation = Mathf.Round(PlayerState.instance.radiation * 100) * 0.01f;
+                    PlayerState.instance.radiation += 10f;                  PlayerState.instance.radiation = Mathf.Round(PlayerState.instance.radiation * 100) * 0.01f;
                     break;
             }
 
