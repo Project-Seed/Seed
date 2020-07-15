@@ -696,7 +696,7 @@ public class PlayerController : MonoBehaviour
             Key_guide.instance.item_name_on(eat_item2, eat_pos);
         }
 
-    if (collision.gameObject.CompareTag("Objects"))
+        if (collision.gameObject.CompareTag("Objects"))
         {
             string name = null;
             bool key_on = false;
@@ -761,7 +761,12 @@ public class PlayerController : MonoBehaviour
             if(key_on ==true)
                 Key_guide.instance.object_on(name, cameras.WorldToScreenPoint(collision.gameObject.transform.position));
         }
-      
+
+        if (collision.gameObject.name == "white_seed_area")
+        {
+            if (player_state.radiation > Time.deltaTime * 5)
+                player_state.radiation -= Time.deltaTime * 5;
+        }
     }
 
     public void shadow_out()
