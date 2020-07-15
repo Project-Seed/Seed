@@ -19,8 +19,11 @@ public class MapChecker : MonoBehaviour
         {
             Debug.DrawRay(transform.position, -transform.up, Color.green, 2f);
             //Debug.Log("Map Name : " + hit.collider.gameObject.name);
-            GameSystem.instance.map_name = hit.collider.gameObject.name;
-            return true;
+            if (hit.collider.gameObject.CompareTag("Ground"))
+            {
+                GameSystem.instance.map_name = hit.collider.gameObject.name;
+                return true;
+            }
         }
         return false;
 
