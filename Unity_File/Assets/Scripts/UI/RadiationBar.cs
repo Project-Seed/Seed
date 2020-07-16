@@ -16,8 +16,9 @@ public class RadiationBar : MonoBehaviour
 
     IEnumerator Update_Radiation()
     {
+        
         while (true)
-        {
+        {/*
             switch(PlayerState.instance.radiation_level)
             {
                 case 1:
@@ -37,8 +38,9 @@ public class RadiationBar : MonoBehaviour
             }
 
             radiationbar.value = PlayerState.instance.radiation;
-
+        */
             yield return new WaitForSeconds(1f);
         }
+        
     }
 }

@@ -770,8 +770,7 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.name == "white_seed_area")
         {
-            if (player_state.radiation > Time.deltaTime * 5)
-                player_state.radiation -= Time.deltaTime * 5;
+            // 추가해줘
         }
     }
 

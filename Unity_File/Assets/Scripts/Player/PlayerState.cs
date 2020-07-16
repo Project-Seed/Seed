@@ -8,8 +8,8 @@ public class PlayerState : MonoBehaviour
     public static PlayerState instance; // 현재 클레스를 인스턴트화
 
 
-    public float radiation; // 현재 피폭 수치
-    public float max_radiation; // 전체 피폭 수치
+    public int radiation; // 현재 피폭 수치
+    public int max_radiation; // 전체 피폭 수치
     public int radiation_level; // 현재 피폭 레벨
 
     public int hp; // 현재 HP
