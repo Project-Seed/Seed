@@ -83,6 +83,7 @@ public class PlayerState : MonoBehaviour
     {
         if (hp <= 0 && die_check == false)
         {
+            InputManager.instance.click_mod = 1;
             die_check = true;
             animator.SetTrigger("die");
         }

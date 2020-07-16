@@ -56,9 +56,19 @@ public class Light_system : MonoBehaviour
         else if (time >= 6.5 && time <= 17.5)
             DirectionalLight.intensity = 1f;
         else if (time > 5.5 && time < 6.5)
-            DirectionalLight.intensity = (time - 5.5f) / 0.9f + 0.1f;
+        {
+            DirectionalLight.shadowStrength = (time - 5.5f);
+            //DirectionalLight.intensity = (time - 5.5f) / 0.9f + 0.1f;
+        }
         else
-            DirectionalLight.intensity = 1f -((time - 17.5f) / 0.9f);
+        {
+            DirectionalLight.intensity = 1f - ((time - 17.5f) / 0.9f);
+            //DirectionalLight.shadowStrength = 1f - (time - 5.5f);
+        }
+
+        /*
+        if(time <= 4 || time >= 20)
+            DirectionalLight.shadowStrength = 1f - (time - 5.5f);*/
     }
 
     private void updatelighting(float timeprecent)

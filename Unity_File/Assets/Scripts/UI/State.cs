@@ -33,7 +33,7 @@ public class State : MonoBehaviour
     {
         while (true)
         {
-            if (PlayerState.instance.max_radiation != PlayerState.instance.radiation)
+            if (PlayerState.instance.max_radiation != PlayerState.instance.radiation && InputManager.instance.click_mod == 0)
             {
                 switch (PlayerState.instance.radiation_level)
                 {
@@ -51,7 +51,7 @@ public class State : MonoBehaviour
                 }
             }
 
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(1f);
         }
     }
 
@@ -59,7 +59,7 @@ public class State : MonoBehaviour
     {
         while (true)
         {
-            if (PlayerState.instance.max_radiation == PlayerState.instance.radiation)
+            if (PlayerState.instance.max_radiation == PlayerState.instance.radiation && InputManager.instance.click_mod == 0)
                 hit(1);
 
             yield return new WaitForSeconds(3f);
