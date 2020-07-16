@@ -53,7 +53,7 @@ public class GameSystem : MonoBehaviour
             float.Parse(save_data.Element("root").Element("solo").Element("ch_ro_x").Value),
             float.Parse(save_data.Element("root").Element("solo").Element("ch_ro_y").Value),
             float.Parse(save_data.Element("root").Element("solo").Element("ch_ro_z").Value),0);
-        playerstate.hp = float.Parse(save_data.Element("root").Element("solo").Element("hp").Value);
+        playerstate.hp = int.Parse(save_data.Element("root").Element("solo").Element("hp").Value);
         playerstate.radiation = float.Parse(save_data.Element("root").Element("solo").Element("radiation").Value);
 
         item_num = new Dictionary<string, int>();

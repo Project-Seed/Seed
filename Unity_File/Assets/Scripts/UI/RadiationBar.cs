@@ -6,13 +6,11 @@ using UnityEngine.UI;
 public class RadiationBar : MonoBehaviour
 {
     public Slider radiationbar;
-    public Text radiationtext;
 
     void Start()
     {
         radiationbar.maxValue = PlayerState.instance.max_radiation;
         radiationbar.value = PlayerState.instance.radiation;
-        //radiationtext.text = PlayerState.instance.radiation.ToString() + "%(" + PlayerState.instance.radiation.ToString() + "/" + PlayerState.instance.max_radiation.ToString() + ")";
         StartCoroutine(Update_Radiation());
     }
 
@@ -33,12 +31,12 @@ public class RadiationBar : MonoBehaviour
                     break;
 
                 case 3:
-                    PlayerState.instance.radiation += 10f;                  PlayerState.instance.radiation = Mathf.Round(PlayerState.instance.radiation * 100) * 0.01f;
+                    PlayerState.instance.radiation += 10f;                  
+                    PlayerState.instance.radiation = Mathf.Round(PlayerState.instance.radiation * 100) * 0.01f;
                     break;
             }
 
             radiationbar.value = PlayerState.instance.radiation;
-            //radiationtext.text = PlayerState.instance.radiation.ToString() + "%(" + PlayerState.instance.radiation.ToString() + "/" + PlayerState.instance.max_radiation.ToString() + ")";
 
             yield return new WaitForSeconds(1f);
         }

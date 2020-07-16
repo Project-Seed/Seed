@@ -78,7 +78,7 @@ public class Inventory : MonoBehaviour
             if (i < GameSystem.instance.item_time.Count)
             {
                 item_box[i].GetComponent<Inventory_box>().image.sprite = Resources.Load<Sprite>("Item2D/" + GameSystem.instance.item_time[i]);
-                item_box[i].GetComponentInChildren<Text>().text = "x " + GameSystem.instance.item_num[GameSystem.instance.item_time[i]].ToString();
+                item_box[i].GetComponentInChildren<Text>().text = "x" + GameSystem.instance.item_num[GameSystem.instance.item_time[i]].ToString();
             }
             else
             {

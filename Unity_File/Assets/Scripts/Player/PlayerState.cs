@@ -12,8 +12,8 @@ public class PlayerState : MonoBehaviour
     public float max_radiation; // 전체 피폭 수치
     public int radiation_level; // 현재 피폭 레벨
 
-    public float hp; // 현재 HP
-    public float max_hp; // 전체 HP
+    public int hp; // 현재 HP
+    public int max_hp; // 전체 HP
 
     bool die_check = false; // 죽으면 true 
 
