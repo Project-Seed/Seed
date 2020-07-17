@@ -325,10 +325,10 @@ public class PlayerController : MonoBehaviour
                         switch (GameSystem.instance.item_search(qick.item_name, "name"))
                         {
                             case "portion":
-                                if (PlayerState.instance.hp + 10 < PlayerState.instance.max_hp)
-                                    PlayerState.instance.hp += 10;
+                                if (PlayerState.instance.hp + 4 < PlayerState.instance.max_hp)
+                                    State.instance.hp_up(4);
                                 else
-                                    PlayerState.instance.hp = PlayerState.instance.max_hp;
+                                    State.instance.hp_up(PlayerState.instance.max_hp - PlayerState.instance.hp);
 
                                 GameSystem.instance.item_num[qick.item_name]--;
 
@@ -663,6 +663,11 @@ public class PlayerController : MonoBehaviour
                 dialogue.solo_talk(28);
                 break;
         }
+
+        if (collision.gameObject.name == "white_seed_area")
+        {
+            State.instance.white_seed = true;
+        }
     }
 
     private void OnTriggerExit(Collider collision)
@@ -677,6 +682,11 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Objects"))
         {
             Key_guide.instance.object_off();
+        }
+
+        if (collision.gameObject.name == "white_seed_area")
+        {
+            State.instance.white_seed = false;
         }
     }
 
@@ -758,11 +768,6 @@ public class PlayerController : MonoBehaviour
 
             if(key_on ==true)
                 Key_guide.instance.object_on(name, cameras.WorldToScreenPoint(collision.gameObject.transform.position));
-        }
-
-        if (collision.gameObject.name == "white_seed_area")
-        {
-            // 추가해줘
         }
     }
 

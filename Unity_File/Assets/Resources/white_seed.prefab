@@ -168,7 +168,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 2.831, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 9050130961240654569}
+  - {fileID: 946169418774470920}
   m_Father: {fileID: 3822053094229743898}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -180,10 +180,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9050130961240654569}
+  - component: {fileID: 946169418774470920}
   - component: {fileID: 4953249454819360730}
   - component: {fileID: 2283798040650215375}
   - component: {fileID: 5676534819627850414}
+  - component: {fileID: 536157302504548793}
   m_Layer: 0
   m_Name: P_White_Up_Cylinder.001_P_White
   m_TagString: Plant2
@@ -191,20 +192,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9050130961240654569
-Transform:
+--- !u!224 &946169418774470920
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3043448736289090393}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.831, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4245791664706671010}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -2.831}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!33 &4953249454819360730
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -265,6 +271,14 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 6389245752198266399, guid: dda6625a5d9df2447b30024611f61bc1, type: 3}
+--- !u!222 &536157302504548793
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3043448736289090393}
+  m_CullTransparentMesh: 0
 --- !u!1 &3377201204681899548
 GameObject:
   m_ObjectHideFlags: 0
