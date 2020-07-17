@@ -90,7 +90,7 @@ public class PlayerState : MonoBehaviour
 
         if (state_fly == 1 && dont_fly == false)
         {
-            if (fly_y - 3f > gameObject.transform.position.y && state_sky == 0)
+            if (fly_y - 4f > gameObject.transform.position.y && state_sky == 0)
             {
                 animator.SetTrigger("sky_ing");
                 state_sky = 1;
