@@ -603,7 +603,7 @@ public class PlayerController : MonoBehaviour
 
         player_state.jump();
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.05f);
 
         player_rigidbody.AddForce(Vector3.up * player_jump_power, ForceMode.Impulse);   //점프
         StartCoroutine(StopJumping());
@@ -682,14 +682,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay(Collider collision)
     {
-        //Debug.Log(collision.gameObject.name);
-
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Plantable") ||
-            collision.gameObject.CompareTag("Purple") || collision.gameObject.CompareTag("Yellow"))
-        {
-            player_state.landing();
-        }
-
         IItem item = collision.GetComponent<IItem>(); //IItem을 상속받는 모든 아이템들
         if (item != null)                         //아이템과 부딪혔다면 함수를 호출하고 지움.
         {
