@@ -22,10 +22,10 @@ public class PlayerState : MonoBehaviour
 
     public int state_move = 0; // 0 정지 1 이동
     public int state_dash = 0; // 0 안함 1 대쉬
-    public int state_sky = 0; // 0 공중 1초이전 1 공중 1초이후
 
+    public int state_sky = 0; // 0 공중 1 높이 차이
     public int state_fly = 0; // 0 안공중 1 공중
-    public float fly_time = 0; // 공중시간
+    public float fly_y; // 공중 y좌표
     public bool dont_fly = false; // 메달리는 동안 날지않는 판정
 
     public float idle_time = 0; // 암것도 안하는 시간
@@ -89,14 +89,16 @@ public class PlayerState : MonoBehaviour
         }
 
         if (state_fly == 1 && dont_fly == false)
-            fly_time += Time.deltaTime;
-        else
-            fly_time = 0;
+        {
+            if (fly_y - 3f > gameObject.transform.position.y && state_sky == 0)
+            {
+                animator.SetTrigger("sky_ing");
+                state_sky = 1;
+            }
+        }
 
-        if (fly_time >= 1.2f)
-            state_sky = 1;
-        else
-            state_sky = 0;
+
+
 
         if (idle_time >= 10)
         {
@@ -109,13 +111,6 @@ public class PlayerState : MonoBehaviour
         else
             idle_time += Time.deltaTime;
 
-        /*
-        int state_set = 0;
-        if (state_move == 1)
-            state_set += 1;
-        if (state_dash == 1)
-            state_set += 2;
-            */
 
         float climb_blend = 0;
 
@@ -132,7 +127,6 @@ public class PlayerState : MonoBehaviour
 
         animator.SetFloat("climb_Blend", climb_blend);
         animator.SetInteger("move", state_move);
-        animator.SetInteger("sky", state_sky);
     }
 
     /*
@@ -169,28 +163,29 @@ public class PlayerState : MonoBehaviour
 
     public void landing()
     {
-        if(state_sky == 1)
+        if(state_sky == 1 && state_fly == 1)
         {
             state_sky = 0;
-            animator.SetInteger("sky", state_sky);
-            fly_time = 0;
             animator.SetTrigger("lending");
             lending_time = true;
             StartCoroutine("lending_coroutine");
-        }
 
-        state_fly = 0;
+            State.instance.hp_down(2);
+        }
+        state_fly = 0; 
     }
 
     IEnumerator lending_coroutine()
     {
         yield return new WaitForSeconds(1f);
         animator.ResetTrigger("lending");
+        animator.ResetTrigger("sky_ing");
         lending_time = false;
     }
 
-    public void flying()
+    public void flying(float y)
     {
+        fly_y = y;
         state_fly = 1;
     }
 

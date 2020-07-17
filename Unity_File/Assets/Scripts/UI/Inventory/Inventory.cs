@@ -201,10 +201,10 @@ public class Inventory : MonoBehaviour
                 case "portion":
                     gameObject.SetActive(false);
 
-                    if (PlayerState.instance.hp + 10 < PlayerState.instance.max_hp)
-                        PlayerState.instance.hp += 10;
+                    if (PlayerState.instance.hp + 4 < PlayerState.instance.max_hp)
+                        State.instance.hp_up(4);
                     else
-                        PlayerState.instance.hp = PlayerState.instance.max_hp;
+                        State.instance.hp_up(PlayerState.instance.max_hp - PlayerState.instance.hp);
 
                     GameSystem.instance.item_num[item_choose]--;
 

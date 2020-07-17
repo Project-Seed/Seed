@@ -23,7 +23,7 @@ public class Radi : MonoBehaviour
 
     IEnumerator radi_up_co(Image image, GameObject ob)
     {
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i <= 20; i++)
         {
             if (i <= 5)
                 image.color = new Color(i / 5f, i / 5f, i / 5f);
@@ -45,7 +45,7 @@ public class Radi : MonoBehaviour
 
     IEnumerator radi_down_co(Image image, GameObject ob)
     {
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i <= 20; i++)
         {
             if (i <= 5)
                 image.color = new Color(0.5f + (i / 10f), i / 5f, 1);

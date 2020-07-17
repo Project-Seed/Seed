@@ -169,13 +169,13 @@ public class PlayerController : MonoBehaviour
             {
                 is_jumping = false;
                 player_state.landing();
-                Debug.Log("in Ground");
+                //Debug.Log("in Ground");
             }
             else if (mapChecker.MapCheck(1.0f))
             {
                 is_jumping = true;
-                player_state.flying();
-                Debug.Log("not in Ground");
+                player_state.flying(gameObject.transform.position.y);
+                //Debug.Log("not in Ground");
             }
 
             if (Input.GetButtonDown("Jump"))
