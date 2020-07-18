@@ -220,15 +220,15 @@ GameObject:
   - component: {fileID: 3093316497362117454}
   - component: {fileID: 5120764947069549008}
   - component: {fileID: 7433056213543558919}
-  - component: {fileID: 4643729934883545762}
   - component: {fileID: 999744889065815490}
+  - component: {fileID: 9051714304622152921}
   m_Layer: 2
   m_Name: Shadow2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &336379175854944308
 Transform:
   m_ObjectHideFlags: 0
@@ -297,28 +297,12 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2240117920719751163}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.3
   m_Height: 0.3
   m_Direction: 1
   m_Center: {x: 0, y: -0.45, z: 0}
---- !u!54 &4643729934883545762
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2240117920719751163}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!114 &999744889065815490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,6 +316,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 8780300512582525260}
+--- !u!54 &9051714304622152921
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2240117920719751163}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &2721840883990535312
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,9 +388,7 @@ MonoBehaviour:
   m_AnimatedTarget: {fileID: 3283635716051111724}
   m_LayerIndex: 0
   m_ShowDebugText: 0
-  m_ChildCameras:
-  - {fileID: 2553144517043599824}
-  - {fileID: 4416801790696475369}
+  m_ChildCameras: []
   m_Instructions:
   - m_FullHash: -178524345
     m_VirtualCamera: {fileID: 2553144517043599824}
@@ -461,6 +459,8 @@ MonoBehaviour:
     m_ParentHash: 756556552
   - m_Hash: 1661675135
     m_ParentHash: 756556552
+  - m_Hash: -557323768
+    m_ParentHash: 756556552
 --- !u!1 &5567448235291450199
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,15 +473,15 @@ GameObject:
   - component: {fileID: 2795297960747693442}
   - component: {fileID: 187328278296156984}
   - component: {fileID: 5893709526025493967}
-  - component: {fileID: 520391110730108359}
   - component: {fileID: 3988820095111946604}
+  - component: {fileID: 3237474754173919889}
   m_Layer: 2
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8805661354498011144
 Transform:
   m_ObjectHideFlags: 0
@@ -490,7 +490,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5567448235291450199}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8780300512582525261}
@@ -550,28 +550,12 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5567448235291450199}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.3
   m_Height: 0.3
   m_Direction: 1
   m_Center: {x: 0, y: 0.95, z: 0}
---- !u!54 &520391110730108359
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5567448235291450199}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!114 &3988820095111946604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,6 +569,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 8780300512582525260}
+--- !u!54 &3237474754173919889
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5567448235291450199}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &5696262360066395177
 GameObject:
   m_ObjectHideFlags: 0
@@ -1026,7 +1026,7 @@ MonoBehaviour:
   state_dash: 0
   state_sky: 0
   state_fly: 0
-  fly_time: 0
+  fly_y: 0
   dont_fly: 0
   idle_time: 0
   updown_check: 0

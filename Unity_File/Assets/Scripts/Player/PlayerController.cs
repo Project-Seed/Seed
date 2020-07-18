@@ -169,13 +169,13 @@ public class PlayerController : MonoBehaviour
             {
                 is_jumping = false;
                 player_state.landing();
-                Debug.Log("in Ground");
+                //Debug.Log("in Ground");
             }
             else if(is_jumping == false)
             {
                 is_jumping = true;
                 player_state.flying(gameObject.transform.position.y);
-                Debug.Log("not in Ground");
+                //Debug.Log("not in Ground");
             }
 
             if (Input.GetButtonDown("Jump"))
@@ -206,7 +206,7 @@ public class PlayerController : MonoBehaviour
 
                     transform.rotation = climb_ro;
                     transform.rotation = Quaternion.Euler(new Vector3(-transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y - 180, transform.rotation.eulerAngles.z));
-                    transform.Translate(0, 0.3f, 0.5f);
+                    transform.Translate(0, 0.3f, 0.2f);
 
                     lookAt = transform.forward;
                     gameObject.transform.Translate(0, Time.deltaTime, 0);
@@ -609,31 +609,6 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(StopJumping());
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.name == "brown_trigger" && climb_mod == false)
-        {
-            Debug.Log("갈색 충돌");
-            climb_ro = collision.transform.rotation;
-            climb_po = collision.transform.position;
-            climb_crash = true;
-
-            Key_guide.instance.climb_on();
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.name == "brown_trigger" && climb_time == false)
-        {
-            Debug.Log("갈색 떨어짐");
-            climb_crash = false;
-
-            Key_guide.instance.climb_off();
-        }
-    }
-    
-
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.name == "left")
@@ -668,6 +643,15 @@ public class PlayerController : MonoBehaviour
         {
             State.instance.white_seed = true;
         }
+
+        if (collision.gameObject.name == "brown_trigger" && climb_mod == false)
+        {
+            climb_ro = collision.transform.rotation;
+            climb_po = collision.transform.position;
+            climb_crash = true;
+
+            Key_guide.instance.climb_on();
+        }
     }
 
     private void OnTriggerExit(Collider collision)
@@ -687,6 +671,13 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.name == "white_seed_area")
         {
             State.instance.white_seed = false;
+        }
+
+        if (collision.gameObject.name == "brown_trigger" && climb_time == false)
+        {
+            climb_crash = false;
+
+            Key_guide.instance.climb_off();
         }
     }
 

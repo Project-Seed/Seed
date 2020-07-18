@@ -13,10 +13,11 @@ public class Shadow : MonoBehaviour
         a = true;
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        if (collision.gameObject.name == "brown_trigger" && a)
+        if (other.gameObject.name == "brown_trigger" && a)
         {
+            Debug.Log("dd");
             a = false;
             StartCoroutine(playerController.climb_up());
         }

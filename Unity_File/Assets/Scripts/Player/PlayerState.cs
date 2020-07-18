@@ -55,30 +55,6 @@ public class PlayerState : MonoBehaviour
         spine = animator.GetBoneTransform(HumanBodyBones.Chest); // 상체값 가져오기
     }
 
-    /*
-    [Flags]
-    public enum State
-    {
-        move_state = 1,
-        dash_state = 2
-    }
-    State state;
-
-    public int Get_State()
-    {
-        return (int)state;
-    }
-
-    IEnumerator Start()
-    {
-        while (true)
-        {
-            
-            yield return new WaitForSeconds(10f);
-        }
-    }
-    */
-
     void Update()
     {
         if (hp <= 0 && die_check == false)
@@ -96,8 +72,6 @@ public class PlayerState : MonoBehaviour
                 state_sky = 1;
             }
         }
-
-
 
 
         if (idle_time >= 10)
