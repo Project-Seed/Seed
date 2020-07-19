@@ -42,7 +42,7 @@ public class GameSystem : MonoBehaviour
 
     public void load_game(int num)
     {
-        XDocument save_data = XDocument.Load("./Assets/save_data" + num.ToString() + ".xml");
+        XDocument save_data = XDocument.Load("./save_data" + num.ToString() + ".xml");
 
         Light_system.instance.time = Convert.ToInt32(save_data.Element("root").Element("solo").Element("time").Value);
         character.transform.position = new Vector3(
@@ -99,7 +99,7 @@ public class GameSystem : MonoBehaviour
         XDocument document = new XDocument();
         document.Add(save_data);
 
-        document.Save("./Assets/save_data" + num.ToString() + ".xml");
+        document.Save("./save_data" + num.ToString() + ".xml");
     }
 
     [Flags]

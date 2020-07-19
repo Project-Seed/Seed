@@ -67,7 +67,15 @@ public class Text_system : MonoBehaviour
                 GameSystem.instance.quest_state[System.Convert.ToInt32(TextList[now_text_num]["quest_num"])]++;
 
                 if (GameSystem.instance.quest_state[System.Convert.ToInt32(TextList[now_text_num]["quest_num"])] == 3)
+                {
                     Quest_clear_system.instance.clear_reward(System.Convert.ToInt32(TextList[now_text_num]["quest_num"]));
+
+                    StartCoroutine(GameObject.Find("Quest_quick").GetComponent<Quest_quick>().
+                        active_on(GameSystem.instance.quest_list[System.Convert.ToInt32(TextList[now_text_num]["quest_num"])]["title"], true));
+                }
+                else if (GameSystem.instance.quest_state[System.Convert.ToInt32(TextList[now_text_num]["quest_num"])] == 1)
+                    StartCoroutine(GameObject.Find("Quest_quick").GetComponent<Quest_quick>().
+                        active_on(GameSystem.instance.quest_list[System.Convert.ToInt32(TextList[now_text_num]["quest_num"])]["title"], false));
             }
             gameObject.GetComponent<Dialogue>().talk_end();
         }

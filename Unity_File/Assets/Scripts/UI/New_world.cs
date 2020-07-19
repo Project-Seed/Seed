@@ -207,19 +207,20 @@ public class New_world : MonoBehaviour
 
     IEnumerator view()
     {
-        for (int i = 0; i < 200; i++)
+        for (int i = 0; i <= 200; i++)
         {
-            if(i <= 20)
+            if (i <= 20)
                 me.color = new Color(1, 1, 1, i / 20f);
-            else if(i <= 70)
-                line.GetComponent<RectTransform>().sizeDelta = new Vector2((i - 20) / 50f * 622f, 3);
-            else if(i <= 90)
-                text.color = new Color(1, 1, 1, (i - 70) / 20f);
-            else if(i == 199)
+            else if (i <= 50)
             {
-                me.color = new Color(1, 1, 1, 0);
-                line.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 3);
-                text.color = new Color(1, 1, 1, 0);
+                line.GetComponent<RectTransform>().sizeDelta = new Vector2((i - 20) / 30f * 622f, 3);
+                text.color = new Color(1, 1, 1, (i - 20) / 30f);
+            }
+            else if (i >= 170)
+            {
+                me.color = new Color(1, 1, 1, (200 - i) / 30f);
+                line.GetComponent<RectTransform>().sizeDelta = new Vector2((200 - i) / 30f * 622f, 3);
+                text.color = new Color(1, 1, 1, (200 - i) / 30f);
             }
 
             yield return new WaitForSeconds(0.01f);

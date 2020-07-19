@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Quest_quick : MonoBehaviour
 {
     public List<GameObject> quest_data; // 프리팹으로 만든 퀘스트 목록
     public GameObject quest_quick_data;
     public GameObject view;
+
+    public GameObject active;
+    public Text quest_text;
+    public Text clear_text;
 
     public void quest_re()
     {
@@ -26,5 +31,41 @@ public class Quest_quick : MonoBehaviour
                 quest_data.Add(add_data);
             }
         }
+    }
+
+    public IEnumerator active_on(string name, bool clear_on)
+    {
+        active.SetActive(true);
+        quest_text.text = name;
+        quest_text.color = new Color(0, 0, 0, 0);
+        clear_text.color = new Color(1, 0.9701258f, 0.7311321f, 0);
+
+        for (int i = 0; i <= 300; i++)
+        {
+            if (i <= 20)
+            {
+                active.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, 250f);
+                active.GetComponent<RectTransform>().pivot = new Vector2(1f, 0.5f);
+
+                active.GetComponent<RectTransform>().sizeDelta = new Vector2(i / 20f * 1920, 120);
+                quest_text.color = new Color(0, 0, 0, i / 20f);
+
+                if(clear_on)
+                    clear_text.color = new Color(1, 0.9701258f, 0.7311321f, i / 20f);
+            }
+            else if(i > 270)
+            {
+                active.GetComponent<RectTransform>().pivot = new Vector2(0f, 0.5f);
+                active.GetComponent<RectTransform>().anchoredPosition = new Vector2(-1920f, 250f);
+
+                active.GetComponent<RectTransform>().sizeDelta = new Vector2((300 - i) / 20f * 1920, 120);
+                quest_text.color = new Color(0, 0, 0, (300 - i) / 20f);
+
+                if (clear_on)
+                    clear_text.color = new Color(1, 0.9701258f, 0.7311321f, (300 - i) / 20f);
+            }
+            yield return new WaitForSeconds(0.01f);
+        }
+        active.SetActive(false);
     }
 }

@@ -42,27 +42,57 @@ public class Quest_clear_system : MonoBehaviour
 
         if (GameSystem.instance.quest_state[6] == 1 &&
             clear_trigger[6] == 4)
+        {
             GameSystem.instance.quest_state[6] = 3;
+
+            StartCoroutine(GameObject.Find("Quest_quick").GetComponent<Quest_quick>().
+                        active_on(GameSystem.instance.quest_list[6]["title"], true));
+        }
 
         if (GameSystem.instance.quest_state[7] == 1 &&
             clear_trigger[7] == 2)
+        {
             GameSystem.instance.quest_state[7] = 3;
+
+            StartCoroutine(GameObject.Find("Quest_quick").GetComponent<Quest_quick>().
+                        active_on(GameSystem.instance.quest_list[7]["title"], true));
+        }
 
         if (GameSystem.instance.quest_state[8] == 1 &&
             clear_trigger[8] == 1)
+        {
             GameSystem.instance.quest_state[8] = 3;
+
+            StartCoroutine(GameObject.Find("Quest_quick").GetComponent<Quest_quick>().
+                        active_on(GameSystem.instance.quest_list[8]["title"], true));
+        }
 
         if (GameSystem.instance.quest_state[9] == 1 &&
             clear_trigger[9] == 1)
+        {
             GameSystem.instance.quest_state[9] = 3;
+
+            StartCoroutine(GameObject.Find("Quest_quick").GetComponent<Quest_quick>().
+                        active_on(GameSystem.instance.quest_list[9]["title"], true));
+        }
 
         if (GameSystem.instance.quest_state[10] == 1 &&
             clear_trigger[10] == 1)
+        {
             GameSystem.instance.quest_state[10] = 3;
+
+            StartCoroutine(GameObject.Find("Quest_quick").GetComponent<Quest_quick>().
+                        active_on(GameSystem.instance.quest_list[10]["title"], true));
+        }
 
         if (GameSystem.instance.quest_state[11] == 1 &&
             clear_trigger[11] == 1)
+        {
             GameSystem.instance.quest_state[11] = 3;
+
+            StartCoroutine(GameObject.Find("Quest_quick").GetComponent<Quest_quick>().
+                        active_on(GameSystem.instance.quest_list[11]["title"], true));
+        }
     }
 
     public string num_data(int num)
