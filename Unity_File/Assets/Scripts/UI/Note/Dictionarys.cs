@@ -43,6 +43,11 @@ public class Dictionarys : MonoBehaviour
 
     void Awake()
     {
+
+    }
+
+    public void before_awake()
+    {
         instance = this;
 
         for (int i = 0; i < GameSystem.instance.item_list.Count; i++)

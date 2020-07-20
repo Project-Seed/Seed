@@ -40,6 +40,8 @@ public class GameSystem : MonoBehaviour
 
     public string map_name;
 
+    public Dictionarys dictionary_sc;
+
     public void load_game(int num)
     {
         XDocument save_data = XDocument.Load("./save_data" + num.ToString() + ".xml");
@@ -165,6 +167,8 @@ public class GameSystem : MonoBehaviour
         {
             quest_state.Add(i+1, 0); // 퀘스트 진행상태 등록
         }
+
+        dictionary_sc.before_awake();
     }
 
     public void GameStart()

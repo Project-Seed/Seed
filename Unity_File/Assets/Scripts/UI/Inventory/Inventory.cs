@@ -32,7 +32,9 @@ public class Inventory : MonoBehaviour
     
     private void Awake()
     {
-        for(int i=0; i<40; i++)
+        in_qu = GameObject.Find("Quick_slot").GetComponent<Inven_quick>();
+
+        for (int i=0; i<40; i++)
         {
             GameObject gameObject = Instantiate(content, new Vector3(0, 0, 0), Quaternion.identity, viewport.transform); // viewport 밑 자식으로 복제
             gameObject.name = "Inventory_box_" + i;
@@ -57,7 +59,7 @@ public class Inventory : MonoBehaviour
 
     private void OnEnable()
     {
-        InputManager.instance.game_stop();
+        //InputManager.instance.game_stop();
 
         if (item_choose != null)
         {
@@ -68,7 +70,7 @@ public class Inventory : MonoBehaviour
     }
     private void OnDisable()
     {
-        InputManager.instance.game_start();
+        //InputManager.instance.game_start();
     }
 
     private void Update()

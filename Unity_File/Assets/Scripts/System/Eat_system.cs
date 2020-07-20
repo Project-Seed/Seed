@@ -21,7 +21,11 @@ public class Eat_system : MonoBehaviour
 
     private void Update()
     {
-
+        if(items.Count > 3)
+        {
+            Destroy(items[0]);
+            items.RemoveAt(0);
+        }
     }
 
     public void eat_item(string name)
@@ -36,7 +40,12 @@ public class Eat_system : MonoBehaviour
         GameObject item = Instantiate(eat_box, new Vector3(0, 0, 0), Quaternion.identity, view.transform);
         item.GetComponent<Eat_box>().image.sprite = Resources.Load<Sprite>("Item2D/" + name);
         item.GetComponent<Eat_box>().text.text = GameSystem.instance.item_search(name, "name_ko");
+        
+        items.Add(item);
+    }
 
-        //items.Add(item);
+    public void eat_remove()
+    {
+        items.RemoveAt(0);
     }
 }

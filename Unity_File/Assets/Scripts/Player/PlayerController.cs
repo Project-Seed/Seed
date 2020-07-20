@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     private Transform player_transform;
     // 플레이어의 위치정보를 가져옴   
     public Transform Player_transform { get => player_transform; }
-    public GameObject inventory; // 인벤토리
     public GameObject composer; // 합성창
     public GameObject note; // 다이어리
     public Inven_quick qick;
@@ -513,39 +512,26 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            if (inventory.activeSelf == true)
-            {
-                inventory.SetActive(false);
-            }
-            else
-            {
-                composer.SetActive(false);
-                note.SetActive(false);
-                inventory.SetActive(true);
-            }
-        }
 
+        // 열려라 도감!
         if (Input.GetKeyDown(KeyCode.O))
         {
             if (composer.activeSelf == true)
                 composer.SetActive(false);
             else
             {
-                inventory.SetActive(false);
                 note.SetActive(false);
                 composer.SetActive(true);
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
+        // 열려라 다이어리!
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (note.activeSelf == true)
                 note.SetActive(false);
             else
             {
-                inventory.SetActive(false);
                 composer.SetActive(false);
                 note.SetActive(true);
             }
