@@ -8,8 +8,6 @@ public class Gress : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(gress[0].transform.eulerAngles.x);
-
         if (other.gameObject.name == "Player")
         {
             for (int i = 0; i < gress.Count; i++)

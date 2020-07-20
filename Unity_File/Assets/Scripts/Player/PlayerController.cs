@@ -691,8 +691,7 @@ public class PlayerController : MonoBehaviour
             eat_object = collision.gameObject;
             Key_guide.instance.item_on();
             Vector3 eat_pos = cameras.WorldToScreenPoint(eat_object.transform.position);
-            string eat_item2 = GameSystem.instance.item_search(eat_item, "name_ko");
-            Key_guide.instance.item_name_on(eat_item2, eat_pos);
+            Key_guide.instance.item_name_on(eat_item, eat_pos);
         }
 
         if (collision.gameObject.CompareTag("Objects"))

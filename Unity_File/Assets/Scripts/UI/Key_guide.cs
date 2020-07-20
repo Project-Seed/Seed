@@ -34,7 +34,11 @@ public class Key_guide : MonoBehaviour
     {
         item_name_ob.SetActive(true);
         item_name_ob.transform.position = new Vector3(ts.x, ts.y + 70, ts.z);
-        item_name.text = name;
+
+        if(Dictionarys.instance.dictionary_num[name] == true)
+            item_name.text = GameSystem.instance.item_search(name, "name_ko");
+        else
+            item_name.text = "???";
     }
     public void item_name_off()
     {
