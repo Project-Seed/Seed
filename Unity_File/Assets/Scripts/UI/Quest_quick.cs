@@ -40,29 +40,29 @@ public class Quest_quick : MonoBehaviour
         quest_text.color = new Color(0, 0, 0, 0);
         clear_text.color = new Color(1, 0.9701258f, 0.7311321f, 0);
 
-        for (int i = 0; i <= 300; i++)
+        for (int i = 0; i <= 200; i++)
         {
-            if (i <= 20)
+            if (i <= 15)
             {
                 active.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, 250f);
                 active.GetComponent<RectTransform>().pivot = new Vector2(1f, 0.5f);
 
-                active.GetComponent<RectTransform>().sizeDelta = new Vector2(i / 20f * 1920, 120);
-                quest_text.color = new Color(0, 0, 0, i / 20f);
+                active.GetComponent<RectTransform>().sizeDelta = new Vector2(i / 15f * 1920, 120);
+                quest_text.color = new Color(0, 0, 0, i / 15f);
 
                 if(clear_on)
-                    clear_text.color = new Color(1, 0.9701258f, 0.7311321f, i / 20f);
+                    clear_text.color = new Color(1, 0.9701258f, 0.7311321f, i / 15f);
             }
-            else if(i > 270)
+            else if(i >= 185)
             {
                 active.GetComponent<RectTransform>().pivot = new Vector2(0f, 0.5f);
                 active.GetComponent<RectTransform>().anchoredPosition = new Vector2(-1920f, 250f);
 
-                active.GetComponent<RectTransform>().sizeDelta = new Vector2((300 - i) / 20f * 1920, 120);
-                quest_text.color = new Color(0, 0, 0, (300 - i) / 20f);
+                active.GetComponent<RectTransform>().sizeDelta = new Vector2((200 - i) / 15f * 1920, 120);
+                quest_text.color = new Color(0, 0, 0, (200 - i) / 15f);
 
                 if (clear_on)
-                    clear_text.color = new Color(1, 0.9701258f, 0.7311321f, (300 - i) / 20f);
+                    clear_text.color = new Color(1, 0.9701258f, 0.7311321f, (200 - i) / 15f);
             }
             yield return new WaitForSeconds(0.01f);
         }

@@ -34,17 +34,17 @@ public class BigItem_get : MonoBehaviour
 
         back_ob.SetActive(true);
 
-        for (int i = 0; i <= 30; i++)
+        for (int i = 0; i <= 40; i++)
         {
             background.color = new Color(0, 0, 0, i / 30f);
             name_text.color = new Color(1, 1, 1, i / 30f);
             explanation_text.color = new Color(1, 1, 1, i / 30f);
             image.color = new Color(1, 1, 1, i / 30f);
 
-            if (i <= 15)
-                background.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, -100f + (i / 15f * 130));
+            if (i <= 20)
+                background.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, -70f + (i / 20f * 100));
             else
-                background.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, 30f + ((i - 15) / 15f * -30));
+                background.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, 30f + ((i - 20) / 20f * -30));
 
             yield return new WaitForSeconds(0.01f);
         }

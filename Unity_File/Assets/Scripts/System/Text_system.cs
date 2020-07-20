@@ -64,18 +64,20 @@ public class Text_system : MonoBehaviour
         {
             if (TextList[now_text_num]["quest_num"] != "")
             {
-                GameSystem.instance.quest_state[System.Convert.ToInt32(TextList[now_text_num]["quest_num"])]++;
+                GameSystem.instance.quest_state[int.Parse(TextList[now_text_num]["quest_num"])]++;
 
-                if (GameSystem.instance.quest_state[System.Convert.ToInt32(TextList[now_text_num]["quest_num"])] == 3)
+                if (GameSystem.instance.quest_state[int.Parse(TextList[now_text_num]["quest_num"])] == 3)
                 {
-                    Quest_clear_system.instance.clear_reward(System.Convert.ToInt32(TextList[now_text_num]["quest_num"]));
+                    Quest_clear_system.instance.clear_reward(int.Parse(TextList[now_text_num]["quest_num"]));
 
                     StartCoroutine(GameObject.Find("Quest_quick").GetComponent<Quest_quick>().
-                        active_on(GameSystem.instance.quest_list[System.Convert.ToInt32(TextList[now_text_num]["quest_num"])]["title"], true));
+                        active_on(GameSystem.instance.quest_list[int.Parse(TextList[now_text_num]["quest_num"]) - 1]["title"], true));
                 }
-                else if (GameSystem.instance.quest_state[System.Convert.ToInt32(TextList[now_text_num]["quest_num"])] == 1)
+                else if (GameSystem.instance.quest_state[int.Parse(TextList[now_text_num]["quest_num"])] == 1)
+                {
                     StartCoroutine(GameObject.Find("Quest_quick").GetComponent<Quest_quick>().
-                        active_on(GameSystem.instance.quest_list[System.Convert.ToInt32(TextList[now_text_num]["quest_num"])]["title"], false));
+                        active_on(GameSystem.instance.quest_list[int.Parse(TextList[now_text_num]["quest_num"]) - 1]["title"], false));
+                }
             }
             gameObject.GetComponent<Dialogue>().talk_end();
         }
@@ -98,13 +100,13 @@ public class Text_system : MonoBehaviour
             if (TextList[now_text_num]["type"] == "end")
                 next_end = true;
             else
-                now_text_num = System.Convert.ToInt32(TextList[now_text_num]["next_num"]) - 1;
+                now_text_num = int.Parse(TextList[now_text_num]["next_num"]) - 1;
         }
         else if(TextList[now_text_num]["type"] == "choice")
         {
             Name_Text.text = Name_q;
 
-            if (System.Convert.ToInt32(TextList[now_text_num]["choice_num"]) == 2)
+            if (int.Parse(TextList[now_text_num]["choice_num"]) == 2)
             {
                 choose1.SetActive(true);
                 choose2.SetActive(true);
@@ -112,7 +114,7 @@ public class Text_system : MonoBehaviour
                 choose1_text.text = TextList[now_text_num]["choice1"];
                 choose2_text.text = TextList[now_text_num]["choice2"];
             }
-            else if (System.Convert.ToInt32(TextList[now_text_num]["choice_num"]) == 3)
+            else if (int.Parse(TextList[now_text_num]["choice_num"]) == 3)
             {
                 choose1.SetActive(true);
                 choose2.SetActive(true);
@@ -143,11 +145,11 @@ public class Text_system : MonoBehaviour
     public void choose_select(int select)
     {
         if(select == 1)
-            now_text_num = System.Convert.ToInt32(TextList[now_text_num]["next_num1"]) - 1;
+            now_text_num = int.Parse(TextList[now_text_num]["next_num1"]) - 1;
         else if (select == 2)
-            now_text_num = System.Convert.ToInt32(TextList[now_text_num]["next_num2"]) - 1;
+            now_text_num = int.Parse(TextList[now_text_num]["next_num2"]) - 1;
         else if (select == 3)
-            now_text_num = System.Convert.ToInt32(TextList[now_text_num]["next_num3"]) - 1;
+            now_text_num = int.Parse(TextList[now_text_num]["next_num3"]) - 1;
 
         choose1.SetActive(false);
         choose2.SetActive(false);
