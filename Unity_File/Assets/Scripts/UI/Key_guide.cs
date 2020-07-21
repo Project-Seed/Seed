@@ -21,6 +21,9 @@ public class Key_guide : MonoBehaviour
 
     public GameObject white;
 
+    public GameObject key_left;
+    public GameObject key_right;
+
     public static Key_guide Instance
     {
         get { return instance; }
@@ -28,6 +31,20 @@ public class Key_guide : MonoBehaviour
     void Start()
     {
         instance = this;
+    }
+
+    private void Update()
+    {
+        if (GameSystem.instance.GetModeNum() == 1)
+        {
+            key_left.SetActive(true);
+            key_right.SetActive(true);
+        }
+        else
+        {
+            key_left.SetActive(false);
+            key_right.SetActive(false);
+        }
     }
 
     public void item_name_on(string name, Vector3 ts)

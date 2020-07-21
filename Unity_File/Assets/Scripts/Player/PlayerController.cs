@@ -60,6 +60,8 @@ public class PlayerController : MonoBehaviour
     public GameObject shadow2; // 매달리기 충돌체크용
     public bool climb_up_bool = false;
 
+    int right_crash = 0; // 우클릭 중복 때매
+
     IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 0.3초간 점프금지
     {
         stop_jumping = true;
@@ -298,85 +300,87 @@ public class PlayerController : MonoBehaviour
                 is_run = false;
             }
 
-            //좌클릭 타겟팅 시작.
-            if (Input.GetMouseButtonDown(0))
+            
+            if (Input.GetMouseButtonDown(1))
             {
-                if (GameSystem.instance.item_search(qick.item_name, "category") == "seed") // 씨앗 타입이어야지만 던져짐
+                //우클릭 타겟팅 시작.
+                if (right_crash == 0)
                 {
-                    if (GameSystem.instance.item_num[qick.item_name] >= 1 && InputManager.instance.click_mod == 0)
+                    if (GameSystem.instance.item_search(qick.item_name, "category") == "seed") // 씨앗 타입이어야지만 던져짐
                     {
-                        //throw_mode = true;
-                        GameSystem.instance.SetMode(1); //발사모드
-                        Debug.Log("발사모드");
-                        //child.localRotation = Quaternion.Slerp(child.localRotation, transform.localRotation, 0.5f);
-
-                        throwManager.mouse_down(qick.item_name);
-
-                        player_state.shoot_ready();
-                    }
-                }
-                else if (GameSystem.instance.item_search(qick.item_name, "category") == "consumable")
-                {
-                    // 같은 내용 inventory 스크립트에도 적기!!!!!!!
-
-                    if (GameSystem.instance.item_num[qick.item_name] >= 1 && InputManager.instance.click_mod == 0)
-                    {
-                        switch (GameSystem.instance.item_search(qick.item_name, "name"))
+                        if (GameSystem.instance.item_num[qick.item_name] >= 1 && InputManager.instance.click_mod == 0)
                         {
-                            case "portion":
-                                if (PlayerState.instance.hp + 4 < PlayerState.instance.max_hp)
-                                    State.instance.hp_up(4);
-                                else
-                                    State.instance.hp_up(PlayerState.instance.max_hp - PlayerState.instance.hp);
+                            //throw_mode = true;
+                            GameSystem.instance.SetMode(1); //발사모드
+                            Debug.Log("발사모드");
+                            //child.localRotation = Quaternion.Slerp(child.localRotation, transform.localRotation, 0.5f);
 
-                                GameSystem.instance.item_num[qick.item_name]--;
+                            throwManager.mouse_down(qick.item_name);
 
-                                if (GameSystem.instance.item_num[qick.item_name] == 0)
-                                    GameSystem.instance.item_time.Remove(qick.item_name);
-                                break;
+                            player_state.shoot_ready();
+                        }
+                    }
+                    else if (GameSystem.instance.item_search(qick.item_name, "category") == "consumable")
+                    {
+                        // 같은 내용 inventory 스크립트에도 적기!!!!!!!ㅈ
 
-                            case "mini_latter":
-                                InputManager.instance.click_mod = 1;
-                                Quest_clear_system.instance.clear_trigger[8]++;
-                                Instantiate(Resources.Load<GameObject>("Tutorial/Mini_latter"), GameObject.Find("Canvas").transform);
-                                break;
+                        if (GameSystem.instance.item_num[qick.item_name] >= 1 && InputManager.instance.click_mod == 0)
+                        {
+                            switch (GameSystem.instance.item_search(qick.item_name, "name"))
+                            {
+                                case "portion":
+                                    if (PlayerState.instance.hp + 4 < PlayerState.instance.max_hp)
+                                        State.instance.hp_up(4);
+                                    else
+                                        State.instance.hp_up(PlayerState.instance.max_hp - PlayerState.instance.hp);
+
+                                    GameSystem.instance.item_num[qick.item_name]--;
+
+                                    if (GameSystem.instance.item_num[qick.item_name] == 0)
+                                        GameSystem.instance.item_time.Remove(qick.item_name);
+                                    break;
+
+                                case "mini_latter":
+                                    InputManager.instance.click_mod = 1;
+                                    Quest_clear_system.instance.clear_trigger[8]++;
+                                    Instantiate(Resources.Load<GameObject>("Tutorial/Mini_latter"), GameObject.Find("Canvas").transform);
+                                    break;
+                            }
                         }
                     }
                 }
-            }
 
-            //좌클릭하는 동안 계속 조준하면서 Raycasting.
-            if (Input.GetMouseButton(0))
-            {
-                if (GameSystem.instance.GetModeNum() == 1)
 
-                    throwManager.Targeting();
-            }
-
-            //좌클릭->우클릭 발사 취소.
-            if (Input.GetMouseButtonDown(1))
-            {
-                if (GameSystem.instance.GetModeNum()==1)
+                //우클릭 발사 취소.
+                if (right_crash == 1)
                 {
-                    //throw_mode = false;
-                    GameSystem.instance.SetMode(0); //기본모드
-                    Debug.Log("기본모드");
+                    if (GameSystem.instance.GetModeNum() == 1)
+                    {
+                        //throw_mode = false;
+                        GameSystem.instance.SetMode(0); //기본모드
+                        Debug.Log("기본모드");
 
-                    throwManager.mouse_up(false);//발사 옵션 false. 발사 취소
+                        throwManager.mouse_up(false);//발사 옵션 false. 발사 취소
 
-                    player_state.shoot_stop();
+                        player_state.shoot_stop();
+                    }
                 }
-                //if (throw_mode)
-                //{
-                //    throw_mode = false;
-                //    throwManager.mouse_up(false);
-
-                //    player_state.shoot_stop();
-                //}
             }
 
-            //좌클릭 Up 발사.
-            if (Input.GetMouseButtonUp(0))
+            if(Input.GetMouseButtonUp(1))
+            {
+                if (right_crash == 1)
+                    right_crash = 0;
+                else
+                    right_crash = 1;
+            }
+
+            //조준모드면 계속 조준하면서 Raycasting.
+            if (GameSystem.instance.GetModeNum() == 1)
+                    throwManager.Targeting();
+
+            //좌클릭 Down 발사.
+            if (Input.GetMouseButtonDown(0))
             {
                 if (GameSystem.instance.GetModeNum()==1) //취소를 안했을 경우에만 발사
                 {
