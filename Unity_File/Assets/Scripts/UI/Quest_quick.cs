@@ -33,6 +33,12 @@ public class Quest_quick : MonoBehaviour
         }
     }
 
+    public void start_co(string name, bool clear_on)
+    {
+        StopAllCoroutines();
+        StartCoroutine(active_on(name, clear_on));
+    }
+
     public IEnumerator active_on(string name, bool clear_on)
     {
         active.SetActive(true);
@@ -52,6 +58,8 @@ public class Quest_quick : MonoBehaviour
 
                 if(clear_on)
                     clear_text.color = new Color(1, 0.9701258f, 0.7311321f, i / 15f);
+                else
+                    clear_text.color = new Color(1, 0.9701258f, 0.7311321f, 0);
             }
             else if(i >= 185)
             {
@@ -63,6 +71,8 @@ public class Quest_quick : MonoBehaviour
 
                 if (clear_on)
                     clear_text.color = new Color(1, 0.9701258f, 0.7311321f, (200 - i) / 15f);
+                else
+                    clear_text.color = new Color(1, 0.9701258f, 0.7311321f, 0);
             }
             yield return new WaitForSeconds(0.01f);
         }

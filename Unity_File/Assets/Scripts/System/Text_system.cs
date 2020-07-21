@@ -70,13 +70,11 @@ public class Text_system : MonoBehaviour
                 {
                     Quest_clear_system.instance.clear_reward(int.Parse(TextList[now_text_num]["quest_num"]));
 
-                    StartCoroutine(GameObject.Find("Quest_quick").GetComponent<Quest_quick>().
-                        active_on(GameSystem.instance.quest_list[int.Parse(TextList[now_text_num]["quest_num"]) - 1]["title"], true));
+                    GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[int.Parse(TextList[now_text_num]["quest_num"]) - 1]["title"], true);
                 }
                 else if (GameSystem.instance.quest_state[int.Parse(TextList[now_text_num]["quest_num"])] == 1)
                 {
-                    StartCoroutine(GameObject.Find("Quest_quick").GetComponent<Quest_quick>().
-                        active_on(GameSystem.instance.quest_list[int.Parse(TextList[now_text_num]["quest_num"]) - 1]["title"], false));
+                    GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[int.Parse(TextList[now_text_num]["quest_num"]) - 1]["title"], false);
                 }
             }
             gameObject.GetComponent<Dialogue>().talk_end();

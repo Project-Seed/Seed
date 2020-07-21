@@ -45,8 +45,7 @@ public class Quest_clear_system : MonoBehaviour
         {
             GameSystem.instance.quest_state[6] = 3;
 
-            StartCoroutine(GameObject.Find("Quest_quick").GetComponent<Quest_quick>().
-                        active_on(GameSystem.instance.quest_list[6-1]["title"], true));
+            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[6 - 1]["title"], true);
         }
 
         if (GameSystem.instance.quest_state[7] == 1 &&
@@ -54,8 +53,7 @@ public class Quest_clear_system : MonoBehaviour
         {
             GameSystem.instance.quest_state[7] = 3;
 
-            StartCoroutine(GameObject.Find("Quest_quick").GetComponent<Quest_quick>().
-                        active_on(GameSystem.instance.quest_list[7-1]["title"], true));
+            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[7 - 1]["title"], true);
         }
 
         if (GameSystem.instance.quest_state[8] == 1 &&
@@ -63,17 +61,14 @@ public class Quest_clear_system : MonoBehaviour
         {
             GameSystem.instance.quest_state[8] = 3;
 
-            StartCoroutine(GameObject.Find("Quest_quick").GetComponent<Quest_quick>().
-                        active_on(GameSystem.instance.quest_list[8-1]["title"], true));
+            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[8 - 1]["title"], true);
         }
 
         if (GameSystem.instance.quest_state[9] == 1 &&
             clear_trigger[9] == 1)
         {
             GameSystem.instance.quest_state[9] = 3;
-
-            StartCoroutine(GameObject.Find("Quest_quick").GetComponent<Quest_quick>().
-                        active_on(GameSystem.instance.quest_list[9-1]["title"], true));
+            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[9 - 1]["title"], true);
         }
 
         if (GameSystem.instance.quest_state[10] == 1 &&
@@ -81,8 +76,7 @@ public class Quest_clear_system : MonoBehaviour
         {
             GameSystem.instance.quest_state[10] = 3;
 
-            StartCoroutine(GameObject.Find("Quest_quick").GetComponent<Quest_quick>().
-                        active_on(GameSystem.instance.quest_list[10-1]["title"], true));
+            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[10 - 1]["title"], true);
         }
 
         if (GameSystem.instance.quest_state[11] == 1 &&
@@ -90,8 +84,7 @@ public class Quest_clear_system : MonoBehaviour
         {
             GameSystem.instance.quest_state[11] = 3;
 
-            StartCoroutine(GameObject.Find("Quest_quick").GetComponent<Quest_quick>().
-                        active_on(GameSystem.instance.quest_list[11-1]["title"], true));
+            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[11 - 1]["title"], true);
         }
     }
 
