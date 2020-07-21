@@ -61,20 +61,30 @@ public class State : MonoBehaviour
             {
                 switch (PlayerState.instance.radiation_level)
                 {
+                    case 0:
+                        yield return new WaitForSeconds(1f);
+                        break;
+
                     case 1:
                         radi_up(1);
+                        yield return new WaitForSeconds(10f);
                         break;
 
                     case 2:
                         radi_up(2);
+                        yield return new WaitForSeconds(10f);
                         break;
 
                     case 3:
                         radi_up(3);
+                        yield return new WaitForSeconds(10f);
+                        break;
+
+                    case 4:
+                        radi_up(5);
+                        yield return new WaitForSeconds(1f);
                         break;
                 }
-
-                yield return new WaitForSeconds(10f);
             }
             else if(PlayerState.instance.radiation > 0 && InputManager.instance.click_mod == 0 && white_seed == true)
             {

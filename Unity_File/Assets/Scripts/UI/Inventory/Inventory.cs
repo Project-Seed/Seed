@@ -59,18 +59,12 @@ public class Inventory : MonoBehaviour
 
     private void OnEnable()
     {
-        //InputManager.instance.game_stop();
-
         if (item_choose != null)
         {
             StopCoroutine(TypeSentence());
             sentence = GameSystem.instance.item_search(item_choose, "explanation_ko");
             StartCoroutine(TypeSentence());
         }
-    }
-    private void OnDisable()
-    {
-        //InputManager.instance.game_start();
     }
 
     private void Update()

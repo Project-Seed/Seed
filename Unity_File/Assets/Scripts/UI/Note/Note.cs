@@ -16,11 +16,6 @@ public class Note : MonoBehaviour
     public List<Sprite> icon_off_sp;
 
 
-    private void Awake()
-    {
-        gameObject.SetActive(false);
-    }
-
     private void OnEnable()
     {
         InputManager.instance.game_stop();
