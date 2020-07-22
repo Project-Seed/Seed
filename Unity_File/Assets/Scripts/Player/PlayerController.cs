@@ -12,10 +12,10 @@ public class PlayerController : MonoBehaviour
     public GameObject rotate_ob; // 회전하는 오브젝트
     public Dialogue dialogue;
     public Camera cameras;
+    public Transform main_cam;
 
     private ThrowManager throwManager;
     private MapChecker mapChecker;
-    private Transform main_cam;
     private Transform child; // 모델 Transform.
     private Rigidbody player_rigidbody;
     private PlayerState player_state;
@@ -152,7 +152,6 @@ public class PlayerController : MonoBehaviour
         mapChecker = GetComponentInChildren<MapChecker>();
         followDust = GetComponentInChildren<ParticleSystem>();
 
-        main_cam = GameObject.Find("Main Camera").transform;
         child = transform.GetChild(0);
         dialogue = GameObject.Find("Dialogue").GetComponent<Dialogue>();
 
@@ -165,8 +164,14 @@ public class PlayerController : MonoBehaviour
         {
             if (mapChecker.MapCheck(0.4f))
             {
-                if (is_jumping)
-                    followDust.Play();
+                if (movement != Vector3.zero)
+                {
+                    if (!followDust.isPlaying)
+                        followDust.Play();
+                }
+                else
+                    followDust.Stop();
+
                 is_jumping = false;
                 player_state.landing();
             }
@@ -175,6 +180,8 @@ public class PlayerController : MonoBehaviour
                 is_jumping = true;
                 player_state.flying(gameObject.transform.position.y);
             }
+            else if (followDust.isPlaying)
+                    followDust.Pause();
 
             if (Input.GetButtonDown("Jump"))
             {
@@ -543,8 +550,11 @@ public class PlayerController : MonoBehaviour
         movement = transform.forward * input_vertical + transform.right * input_horizontal;
         movement = movement.normalized;
         if (movement != Vector3.zero)
+        {
             lookAt = movement;
-
+        }
+        else
+            followDust.Stop();
         //문제점. 대각선이동시에는? 방향을 정해주는게 아니라(look at=) 곱해줘야함. . .
         if (climb_mod == false && hang_mod == 0 && player_state.lending_time == false)
         {
