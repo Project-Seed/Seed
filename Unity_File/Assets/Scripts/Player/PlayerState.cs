@@ -69,6 +69,7 @@ public class PlayerState : MonoBehaviour
             if (fly_y - 4f > gameObject.transform.position.y && state_sky == 0)
             {
                 animator.SetTrigger("sky_ing");
+                Debug.Log("sky_ing");
                 state_sky = 1;
             }
         }
@@ -165,20 +166,23 @@ public class PlayerState : MonoBehaviour
 
     public void shoot_ready()
     {
-        shoot_check = true;
         animator.ResetTrigger("shoot_stop");
         animator.SetTrigger("shoot_ready");
+
+        Debug.Log("ready");
     }
 
     public void shoot()
     {
-        shoot_check = false;
         animator.SetTrigger("shoot");
+
+        Debug.Log("shoot");
     }
     public void shoot_stop()
     {
-        shoot_check = false;
         animator.SetTrigger("shoot_stop");
+
+        Debug.Log("stop");
     }
 
     public void climb_on()

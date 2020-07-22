@@ -50,7 +50,7 @@ public class ThrowManager : MonoBehaviour
         {
             aim_sp.GetComponent<Image>().color = Color.cyan;
             target_on = true;
-            Debug.Log("Target on");
+            //Debug.Log("Target on");
         }
         else
         {
@@ -63,14 +63,14 @@ public class ThrowManager : MonoBehaviour
     private bool isPlantable()
     {
         float distance = 20.0f;
-        Debug.DrawRay(sub_cam.position, sub_cam.forward * distance, Color.green, 3.0f);
+        //Debug.DrawRay(sub_cam.position, sub_cam.forward * distance, Color.green, 3.0f);
         if (Physics.Raycast(sub_cam.position, sub_cam.forward, out RaycastHit hit, distance))
         {
-            Debug.Log("Hit At "+hit.collider.gameObject.name);
+            //Debug.Log("Hit At "+hit.collider.gameObject.name);
             if (checkPlantable(hit))
             { 
               dest = hit.point - aim.transform.position;
-              Debug.Log(dest);
+              //Debug.Log(dest);
               return true;
             }
             else

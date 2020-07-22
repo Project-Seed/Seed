@@ -171,8 +171,10 @@ public class Inventory : MonoBehaviour
             }
             else if (GameSystem.instance.item_search(item_choose, "category") == "consumable")
             {
-                quick_button.SetActive(true);
-                quick_bool = true;
+                //quick_button.SetActive(true);
+                //quick_bool = true;
+                quick_button.SetActive(false);
+                quick_bool = false;
 
                 spand_button.SetActive(true);
             }
