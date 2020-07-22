@@ -157,8 +157,6 @@ public class PlayerController : MonoBehaviour
         main_cam = GameObject.Find("Main Camera").transform;
         child = transform.GetChild(0);
         dialogue = GameObject.Find("Dialogue").GetComponent<Dialogue>();
-
-        //is_jumping = false;
         is_run = false;
     }
 
@@ -181,7 +179,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetButtonDown("Jump"))
             {
-                if (!stop_jumping &&!is_jumping && player_state.lending_time == false)
+                if (!stop_jumping &&!is_jumping && player_state.lending_time == false && GameSystem.instance.GetModeNum() == 0)
                 {
                     StartCoroutine(Jumping());
                 }
@@ -289,7 +287,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.LeftShift) && GameSystem.instance.GetModeNum() == 0)
             {
                 player_state.dash_on();
                 is_run = true;
@@ -301,7 +299,7 @@ public class PlayerController : MonoBehaviour
             }
 
             
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) && !is_jumping)
             {
                 //우클릭 타겟팅 시작.
                 if (right_crash == 0)
@@ -318,10 +316,17 @@ public class PlayerController : MonoBehaviour
                             throwManager.mouse_down(qick.item_name);
 
                             player_state.shoot_ready();
+
+                            right_crash = 1;
+
+                            // 달리기 금지
+                            player_state.dash_off();
+                            is_run = false;
                         }
                     }
+                    
                     else if (GameSystem.instance.item_search(qick.item_name, "category") == "consumable")
-                    {
+                    {/*
                         // 같은 내용 inventory 스크립트에도 적기!!!!!!!ㅈ
 
                         if (GameSystem.instance.item_num[qick.item_name] >= 1 && InputManager.instance.click_mod == 0)
@@ -346,13 +351,11 @@ public class PlayerController : MonoBehaviour
                                     Instantiate(Resources.Load<GameObject>("Tutorial/Mini_latter"), GameObject.Find("Canvas").transform);
                                     break;
                             }
-                        }
+                        }*/
                     }
                 }
-
-
                 //우클릭 발사 취소.
-                if (right_crash == 1)
+                else if (right_crash == 1)
                 {
                     if (GameSystem.instance.GetModeNum() == 1)
                     {
@@ -363,16 +366,10 @@ public class PlayerController : MonoBehaviour
                         throwManager.mouse_up(false);//발사 옵션 false. 발사 취소
 
                         player_state.shoot_stop();
+
+                        right_crash = 0;
                     }
                 }
-            }
-
-            if(Input.GetMouseButtonUp(1))
-            {
-                if (right_crash == 1)
-                    right_crash = 0;
-                else
-                    right_crash = 1;
             }
 
             //조준모드면 계속 조준하면서 Raycasting.
@@ -380,7 +377,7 @@ public class PlayerController : MonoBehaviour
                     throwManager.Targeting();
 
             //좌클릭 Down 발사.
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !is_jumping)
             {
                 if (GameSystem.instance.GetModeNum()==1) //취소를 안했을 경우에만 발사
                 {
@@ -395,6 +392,8 @@ public class PlayerController : MonoBehaviour
                         GameSystem.instance.item_time.Remove(qick.item_name);       
                    
                     player_state.shoot();
+
+                    right_crash = 0;
                 }
                 //if (throw_mode) //취소를 안했을 경우에만 발사
                 //{
@@ -588,9 +587,6 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Jumping()
     {
-        //is_jumping = true;
-        //Debug.Log("jump 시작");
-
         player_state.jump();
 
         yield return new WaitForSeconds(0.05f);
