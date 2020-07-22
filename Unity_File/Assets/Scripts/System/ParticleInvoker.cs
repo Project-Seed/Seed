@@ -16,4 +16,10 @@ public class ParticleInvoker : MonoBehaviour
         purple.transform.position = transform.position;
         purple.Play();
     }
+
+    public void InvokeWalkDust(Transform transform)
+    {
+        purple.transform.position = transform.position;
+        purple.Play();
+    }
 }

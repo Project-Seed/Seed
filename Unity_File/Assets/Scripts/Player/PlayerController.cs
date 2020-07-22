@@ -6,9 +6,6 @@ using UnityEngine.Assertions.Must;
 
 public class PlayerController : MonoBehaviour
 {
-    private Transform player_transform;
-    // 플레이어의 위치정보를 가져옴   
-    public Transform Player_transform { get => player_transform; }
     public GameObject composer; // 합성창
     public GameObject note; // 다이어리
     public Inven_quick qick;
@@ -22,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private Transform child; // 모델 Transform.
     private Rigidbody player_rigidbody;
     private PlayerState player_state;
+    private ParticleSystem followDust;
 
     public float player_speed = 2.0f;         // 캐릭터 걷는 속도
     public float player_run_speed = 6.0f;     // 캐릭터 달리는 속도
@@ -29,13 +27,12 @@ public class PlayerController : MonoBehaviour
 
     private float input_horizontal;         // 수직방향 입력 ws
     private float input_vertical;           // 수평방향 입력 ad
+    private Vector3 lookAt;
+    private Vector3 movement;
 
     public bool is_jumping;                // 점프키를 입력하면 true.
     private bool stop_jumping;                // 점프금지 시간
     private bool is_run;                    // 달리고 있는지.
-
-    //public bool throw_mode = false;                 // 던지기 모드 (임시변수)
-    private Vector3 lookAt;
 
     public bool climb_crash = false; // 갈색 충돌시 true
     public bool climb_mod = false; // 갈색 충돌시 키 누르면 true
@@ -150,13 +147,15 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         player_rigidbody = GetComponent<Rigidbody>();
-        player_transform = GetComponent<Transform>(); //나중에 제거. 그냥 transform으로 쓰기
         player_state = GetComponent<PlayerState>();
         throwManager = GetComponent<ThrowManager>();
         mapChecker = GetComponentInChildren<MapChecker>();
+        followDust = GetComponentInChildren<ParticleSystem>();
+
         main_cam = GameObject.Find("Main Camera").transform;
         child = transform.GetChild(0);
         dialogue = GameObject.Find("Dialogue").GetComponent<Dialogue>();
+
         is_run = false;
     }
 
@@ -166,15 +165,15 @@ public class PlayerController : MonoBehaviour
         {
             if (mapChecker.MapCheck(0.4f))
             {
+                if (is_jumping)
+                    followDust.Play();
                 is_jumping = false;
                 player_state.landing();
-                //Debug.Log("in Ground");
             }
-            else if(is_jumping == false)
+            else if(!is_jumping)
             {
                 is_jumping = true;
                 player_state.flying(gameObject.transform.position.y);
-                //Debug.Log("not in Ground");
             }
 
             if (Input.GetButtonDown("Jump"))
@@ -232,27 +231,6 @@ public class PlayerController : MonoBehaviour
                     hang_mod = 1;
                     player_state.hang_on();
                 }
-            }
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                //현재 캐릭터의 왼쪽 방향을 받아놓고 그쪽을 보도록 함.
-                lookAt = -transform.right;
-            }
-
-            if (Input.GetKey(KeyCode.D))
-            {
-                lookAt = transform.right;
-            }
-
-            if (Input.GetKey(KeyCode.W))
-            {
-                lookAt = transform.forward;
-            }
-
-            if (Input.GetKey(KeyCode.S))
-            {
-                lookAt = -transform.forward;
             }
 
             // 임시, 반드시 삭제요망
@@ -436,8 +414,9 @@ public class PlayerController : MonoBehaviour
                 transform.localRotation = Quaternion.Slerp(transform.localRotation, dir, 0.5f);
 
             //발사모드에서는 캐릭터 회전 안함. 앞만봄
-            if (GameSystem.instance.GetModeNum()==1)
+            if (GameSystem.instance.GetModeNum() == 1)
                 child.localRotation = Quaternion.Slerp(child.localRotation, transform.localRotation, 0.2f);
+
             //이동할때만 모델회전
             else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||
                      Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
@@ -563,20 +542,14 @@ public class PlayerController : MonoBehaviour
 
     private void Moving()
     {
-        Vector3 movement = transform.forward * input_vertical + transform.right * input_horizontal;
+        movement = transform.forward * input_vertical + transform.right * input_horizontal;
         movement = movement.normalized;
+        if (movement != Vector3.zero)
+            lookAt = movement;
 
         //문제점. 대각선이동시에는? 방향을 정해주는게 아니라(look at=) 곱해줘야함. . .
         if (climb_mod == false && hang_mod == 0 && player_state.lending_time == false)
         {
-            //if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 1.0f))
-            //{
-            //    Debug.DrawRay(transform.position, transform.forward * 0.5f, Color.blue, 1.0f);
-
-            //    if (!hit.transform.CompareTag("Player") && Vector3.Distance(hit.point,transform.position) < 0.1f)
-            //        Debug.Log("STOP" + hit.distance);
-            //}
-
            transform.Translate(movement * (is_run ? player_run_speed : player_speed) * Time.deltaTime, Space.Self);
         }
         if ((Mathf.Abs(movement.z) + Mathf.Abs(movement.x)) >= 1 && climb_mod == false && hang_mod == 0)
