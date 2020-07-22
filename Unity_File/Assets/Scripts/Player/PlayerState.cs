@@ -166,8 +166,8 @@ public class PlayerState : MonoBehaviour
 
     public void shoot_ready()
     {
-        animator.ResetTrigger("shoot_stop");
-        animator.SetTrigger("shoot_ready");
+        //animator.SetTrigger("shoot_ready");
+        animator.SetBool("shoot_start", true);
 
         Debug.Log("ready");
     }
@@ -175,12 +175,14 @@ public class PlayerState : MonoBehaviour
     public void shoot()
     {
         animator.SetTrigger("shoot");
+        animator.SetBool("shoot_start", false);
 
         Debug.Log("shoot");
     }
     public void shoot_stop()
     {
         animator.SetTrigger("shoot_stop");
+        animator.SetBool("shoot_start", false);
 
         Debug.Log("stop");
     }
