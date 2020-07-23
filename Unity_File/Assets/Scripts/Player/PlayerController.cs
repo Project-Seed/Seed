@@ -21,8 +21,8 @@ public class PlayerController : MonoBehaviour
     private PlayerState player_state;
     private ParticleSystem followDust;
 
-    public float player_speed = 2.0f;         // 캐릭터 걷는 속도
-    public float player_run_speed = 6.0f;     // 캐릭터 달리는 속도
+    public float player_speed = 1.3f;         // 캐릭터 걷는 속도
+    public float player_run_speed = 1.5f;     // 캐릭터 달리는 속도
     public float player_jump_power = 10.0f;    // 캐릭터 점프력
 
     private float input_horizontal;         // 수직방향 입력 ws
@@ -154,7 +154,7 @@ public class PlayerController : MonoBehaviour
 
         child = transform.GetChild(0);
         dialogue = GameObject.Find("Dialogue").GetComponent<Dialogue>();
-
+        lookAt = transform.forward;
         is_run = false;
     }
 
@@ -413,6 +413,7 @@ public class PlayerController : MonoBehaviour
             else
                 player_state.updown_check = false;
 
+
             //카메라 움직임과 연동
             Quaternion dir = main_cam.localRotation;
             dir.x = 0f; dir.z = 0f;
@@ -431,7 +432,9 @@ public class PlayerController : MonoBehaviour
                 if (climb_mod == false && hang_mod == 0)
                 {
                     transform.localRotation = dir;
-                    child.localRotation = Quaternion.Slerp(child.localRotation, Quaternion.LookRotation(lookAt), 0.2f);
+                    //캐릭터는 나아가는 쪽을 바라봄. lookAt=movement
+                    if (movement != Vector3.zero)
+                        child.localRotation = Quaternion.Slerp(child.localRotation, Quaternion.LookRotation(lookAt), 0.5f);
                 }
             }
 
@@ -501,7 +504,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
         // 열려라 도감!
         if (Input.GetKeyDown(KeyCode.O))
         {
@@ -549,18 +551,38 @@ public class PlayerController : MonoBehaviour
 
     private void Moving()
     {
+        //movement
         movement = transform.forward * input_vertical + transform.right * input_horizontal;
         movement = movement.normalized;
+
         if (movement != Vector3.zero)
         {
             lookAt = movement;
         }
         else
             followDust.Stop();
+
         //문제점. 대각선이동시에는? 방향을 정해주는게 아니라(look at=) 곱해줘야함. . .
         if (climb_mod == false && hang_mod == 0 && player_state.lending_time == false)
         {
-           transform.Translate(movement * (is_run ? player_run_speed : player_speed) * Time.deltaTime, Space.Self);
+            Vector3 newPos = transform.localPosition +
+                    transform.TransformDirection(movement * (is_run ? player_run_speed : player_speed * Time.deltaTime));
+            //player_rigidbody.velocity = -movement * 100.0f * Time.deltaTime;
+            player_rigidbody.MovePosition(newPos);
+
+            //transform.Translate(movement * (is_run ? player_run_speed : player_speed) * Time.deltaTime, Space.Self);
+
+            //RayCasting
+            //Vector3 dir = newPos - transform.localPosition;
+            //Ray ray = new Ray(transform.localPosition, dir);
+            //Debug.DrawLine(transform.localPosition, newPos ,Color.blue,3.0f);
+            //if(!Physics.Raycast(ray ,out RaycastHit hit, movement.magnitude))
+            //{
+            //    //안맞았으면 그대로 감
+            //    player_rigidbody.MovePosition(newPos);
+            //}
+            //else
+            //    player_rigidbody.MovePosition(hit.point);
         }
         if ((Mathf.Abs(movement.z) + Mathf.Abs(movement.x)) >= 1 && climb_mod == false && hang_mod == 0)
             player_state.state_move = 1;
