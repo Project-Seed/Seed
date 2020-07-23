@@ -21,8 +21,8 @@ public class PlayerController : MonoBehaviour
     private PlayerState player_state;
     private ParticleSystem followDust;
 
-    public float player_speed = 1.3f;         // 캐릭터 걷는 속도
-    public float player_run_speed = 1.5f;     // 캐릭터 달리는 속도
+    public float player_speed = 6.0f;         // 캐릭터 걷는 속도
+    public float player_run_speed = 9.0f;     // 캐릭터 달리는 속도
     public float player_jump_power = 10.0f;    // 캐릭터 점프력
 
     private float input_horizontal;         // 수직방향 입력 ws
@@ -565,7 +565,7 @@ public class PlayerController : MonoBehaviour
         if (climb_mod == false && hang_mod == 0 && player_state.lending_time == false)
         {
             Vector3 newPos = transform.localPosition +
-                    transform.TransformDirection(movement * (is_run ? player_run_speed : player_speed * Time.deltaTime));
+                    transform.TransformDirection(movement * (is_run ? player_run_speed : player_speed) * Time.deltaTime);
             //player_rigidbody.velocity = -movement * 100.0f * Time.deltaTime;
             player_rigidbody.MovePosition(newPos);
 
