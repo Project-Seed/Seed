@@ -210,15 +210,13 @@ public class PlayerController : MonoBehaviour
                     climb_mod = true;
                     player_state.climb_on();
 
-                    transform.rotation = climb_ro;
-                    transform.rotation = Quaternion.Euler(new Vector3(-transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y - 180, transform.rotation.eulerAngles.z));
-                    transform.Translate(0, 0.3f, 0.2f);
-
-                    lookAt = transform.forward;
-                    gameObject.transform.Translate(0, Time.deltaTime, 0);
-                    Quaternion dir2 = main_cam.localRotation;
-                    dir2.x = 0f; dir2.z = 0f;
-                    transform.localRotation = dir2;
+                    rotate_ob.transform.rotation = new Quaternion(0, 0, 0, 0);
+                    //transform.Translate(0, 0.3f, 0.2f);
+                    transform.localRotation = Quaternion.Euler(-climb_ro.eulerAngles.x, climb_ro.eulerAngles.y + 180, 0);
+                    //lookAt = transform.forward;
+                    //Quaternion dir2 = main_cam.localRotation;
+                    //dir2.x = 0f; dir2.z = 0f;
+                    //transform.localRotation = dir2;
 
                     climb_time = true;
                     StartCoroutine(climb_05());
