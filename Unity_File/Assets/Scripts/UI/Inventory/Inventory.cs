@@ -32,7 +32,7 @@ public class Inventory : MonoBehaviour
     
     private void Awake()
     {
-        in_qu = GameObject.Find("Quick_slot").GetComponent<Inven_quick>();
+        //in_qu = GameObject.Find("Quick_slot").GetComponent<Inven_quick>();
 
         for (int i=0; i<40; i++)
         {
@@ -101,7 +101,6 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
-        */
 
         if (Input.GetKeyDown(KeyCode.Alpha1) && quick_mod == true)
         {
@@ -133,6 +132,7 @@ public class Inventory : MonoBehaviour
             quick_mod = false;
             quick_bg.SetActive(false);
         }
+        */
     }
 
     public void Inventory_click(GameObject gameObject) // 인벤토리 내용물 클릭

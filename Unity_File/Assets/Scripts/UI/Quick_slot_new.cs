@@ -33,7 +33,7 @@ public class Quick_slot_new : MonoBehaviour
     {
         for(int j=0; j<7; j++)
         {
-            slot[j].transform.Translate(-115.5f * (j + 1), 0, 0);
+            slot[j].transform.Translate(-115.5f, 0, 0);
 
             image_color[j].color = new Color(1, 1, 1, 0);
             image_seed[j].color = new Color(1, 1, 1, 0);
@@ -55,49 +55,49 @@ public class Quick_slot_new : MonoBehaviour
         else
             main_color.sprite = black_main;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) && close_tri == false)
         {
-            if (open == false && close_tri == false)
+            if (open == false)
                 StartCoroutine(open_ani());
 
             open_time = 2;
             choose_num = 1;
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && close_tri == false)
         {
-            if (open == false && close_tri == false)
+            if (open == false)
                 StartCoroutine(open_ani());
 
             open_time = 2;
             choose_num = 2;
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && close_tri == false)
         {
-            if (open == false && close_tri == false)
+            if (open == false)
                 StartCoroutine(open_ani());
 
             open_time = 2;
             choose_num = 3;
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        else if (Input.GetKeyDown(KeyCode.Alpha4) && close_tri == false)
         {
-            if (open == false && close_tri == false)
+            if (open == false)
                 StartCoroutine(open_ani());
 
             open_time = 2;
             choose_num = 4;
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        else if (Input.GetKeyDown(KeyCode.Alpha5) && close_tri == false)
         {
-            if (open == false && close_tri == false)
+            if (open == false)
                 StartCoroutine(open_ani());
 
             open_time = 2;
             choose_num = 5;
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha6))
+        else if (Input.GetKeyDown(KeyCode.Alpha6) && close_tri == false)
         {
-            if (open == false && close_tri == false)
+            if (open == false)
                 StartCoroutine(open_ani());
 
             open_time = 2;
@@ -142,40 +142,88 @@ public class Quick_slot_new : MonoBehaviour
     IEnumerator open_ani() 
     {
         open = true;
-        for (int i = 0; i <= 20; i++)
+        
+        int j = 0;
+
+        for (int i = 0; i < 35; i++)
         {
-            for (int j = 0; j < 7; j++)
+            switch (i)
             {
-                slot[j].transform.Translate(5.5f * (j + 1), 0, 0);
-
-                image_color[j].color = new Color(1, 1, 1, i / 20f);
-                image_seed[j].color = new Color(1, 1, 1, i / 20f);
-
-                item_num[j].color = new Color(1, 1, 1, i / 20f);
-                key[j].color = new Color(1, 1, 1, i / 20f);
+                case 5:
+                    j = 1;
+                    break;
+                case 10:
+                    j = 2;
+                    break;
+                case 15:
+                    j = 3;
+                    break;
+                case 20:
+                    j = 4;
+                    break;
+                case 25:
+                    j = 5;
+                    break;
+                case 30:
+                    j = 6;
+                    break;
             }
 
-            yield return new WaitForSeconds(0.01f);
+            int k = i - (j * 5) + 1;
+
+            slot[j].transform.Translate(22f, 0, 0);
+
+            image_color[j].color = new Color(1, 1, 1, k / 5f);
+            image_seed[j].color = new Color(1, 1, 1, k / 5f);
+
+            item_num[j].color = new Color(1, 1, 1, k / 5f);
+            key[j].color = new Color(1, 1, 1, k / 5f);
+
+            yield return new WaitForSeconds(0.0003f);
         }
     }
 
     IEnumerator close_ani()
     {
         close_tri = true;
-        for (int i = 0; i <= 20; i++)
+
+        int j = 6;
+
+        for (int i = 35; i >= 1; i--)
         {
-            for (int j = 0; j < 7; j++)
+            switch (i)
             {
-                slot[j].transform.Translate(-5.5f * (j + 1), 0, 0);
-
-                image_color[j].color = new Color(1, 1, 1, (20 - i) / 20f);
-                image_seed[j].color = new Color(1, 1, 1, (20 - i) / 20f);
-
-                item_num[j].color = new Color(1, 1, 1, (20 - i) / 20f);
-                key[j].color = new Color(1, 1, 1, (20 - i) / 20f);
+                case 5:
+                    j = 0;
+                    break;
+                case 10:
+                    j = 1;
+                    break;
+                case 15:
+                    j = 2;
+                    break;
+                case 20:
+                    j = 3;
+                    break;
+                case 25:
+                    j = 4;
+                    break;
+                case 30:
+                    j = 5;
+                    break;
             }
 
-            yield return new WaitForSeconds(0.01f);
+            int k = i - (j * 5) - 1;
+
+            slot[j].transform.Translate(-22f, 0, 0);
+
+            image_color[j].color = new Color(1, 1, 1, k / 5f);
+            image_seed[j].color = new Color(1, 1, 1, k / 5f);
+
+            item_num[j].color = new Color(1, 1, 1, k / 5f);
+            key[j].color = new Color(1, 1, 1, k / 5f);
+
+            yield return new WaitForSeconds(0.001f);
         }
         open = false;
         close_tri = false;
