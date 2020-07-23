@@ -503,7 +503,7 @@ public class PlayerController : MonoBehaviour
 
 
         // 열려라 도감!
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             if (composer.activeSelf == true)
                 composer.SetActive(false);
