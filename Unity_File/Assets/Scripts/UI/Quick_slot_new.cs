@@ -27,7 +27,8 @@ public class Quick_slot_new : MonoBehaviour
     bool close_tri = false; // 닫기중 트루
     float open_time = 0; // 열리고 닫치기 까지 남은 시간
 
-    int choose_num = 1;
+    public int choose_num = 1;
+    public string choose_item;
 
     void Start()
     {
@@ -55,61 +56,64 @@ public class Quick_slot_new : MonoBehaviour
         else
             main_color.sprite = black_main;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) && close_tri == false)
+        if (GameSystem.instance.GetModeNum() == 0)
         {
-            if (open == false)
-                StartCoroutine(open_ani());
+            if (Input.GetKeyDown(KeyCode.Alpha1) && close_tri == false)
+            {
+                if (open == false)
+                    StartCoroutine(open_ani());
 
-            open_time = 2;
-            choose_num = 1;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && close_tri == false)
-        {
-            if (open == false)
-                StartCoroutine(open_ani());
+                open_time = 2;
+                choose_num = 1;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && close_tri == false)
+            {
+                if (open == false)
+                    StartCoroutine(open_ani());
 
-            open_time = 2;
-            choose_num = 2;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && close_tri == false)
-        {
-            if (open == false)
-                StartCoroutine(open_ani());
+                open_time = 2;
+                choose_num = 2;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3) && close_tri == false)
+            {
+                if (open == false)
+                    StartCoroutine(open_ani());
 
-            open_time = 2;
-            choose_num = 3;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4) && close_tri == false)
-        {
-            if (open == false)
-                StartCoroutine(open_ani());
+                open_time = 2;
+                choose_num = 3;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha4) && close_tri == false)
+            {
+                if (open == false)
+                    StartCoroutine(open_ani());
 
-            open_time = 2;
-            choose_num = 4;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha5) && close_tri == false)
-        {
-            if (open == false)
-                StartCoroutine(open_ani());
+                open_time = 2;
+                choose_num = 4;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha5) && close_tri == false)
+            {
+                if (open == false)
+                    StartCoroutine(open_ani());
 
-            open_time = 2;
-            choose_num = 5;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha6) && close_tri == false)
-        {
-            if (open == false)
-                StartCoroutine(open_ani());
+                open_time = 2;
+                choose_num = 5;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha6) && close_tri == false)
+            {
+                if (open == false)
+                    StartCoroutine(open_ani());
 
-            open_time = 2;
-            choose_num = 6;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha7))
-        {
-            if (open == false && close_tri == false)
-                StartCoroutine(open_ani());
+                open_time = 2;
+                choose_num = 6;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha7))
+            {
+                if (open == false && close_tri == false)
+                    StartCoroutine(open_ani());
 
-            open_time = 2;
-            choose_num = 7;
+                open_time = 2;
+                choose_num = 7;
+            }
         }
 
         item_num[0].text = GameSystem.instance.item_num["blue_seed"].ToString();
@@ -119,6 +123,17 @@ public class Quick_slot_new : MonoBehaviour
         item_num[4].text = GameSystem.instance.item_num["yellow_seed"].ToString();
         item_num[5].text = GameSystem.instance.item_num["white_seed"].ToString();
         item_num[6].text = GameSystem.instance.item_num["purple_seed"].ToString();
+
+        switch(choose_num)
+        {
+            case 1: choose_item = "blue_seed"; break;
+            case 2: choose_item = "brown_seed"; break;
+            case 3: choose_item = "green_seed"; break;
+            case 4: choose_item = "red_seed"; break;
+            case 5: choose_item = "yellow_seed"; break;
+            case 6: choose_item = "white_seed"; break;
+            case 7: choose_item = "purple_seed"; break;
+        }
 
         for (int i=0; i<7; i++)
         {
