@@ -83,6 +83,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
+        /*
         if (Input.GetKeyDown(KeyCode.Q))
         { 
             if(quick_bool == true)
@@ -100,6 +101,7 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
+        */
 
         if (Input.GetKeyDown(KeyCode.Alpha1) && quick_mod == true)
         {
@@ -161,7 +163,7 @@ public class Inventory : MonoBehaviour
 
             item_names.text = GameSystem.instance.item_search(item_choose, "name_ko");
             item_image.sprite = gameObject.GetComponent<Inventory_box>().image.sprite;
-
+            /*
             if (GameSystem.instance.item_search(item_choose, "category") == "seed")
             {
                 quick_button.SetActive(true);
@@ -169,7 +171,7 @@ public class Inventory : MonoBehaviour
 
                 spand_button.SetActive(false);
             }
-            else if (GameSystem.instance.item_search(item_choose, "category") == "consumable")
+            else */if (GameSystem.instance.item_search(item_choose, "category") == "consumable")
             {
                 //quick_button.SetActive(true);
                 //quick_bool = true;
