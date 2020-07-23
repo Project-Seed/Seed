@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     public GameObject composer; // 합성창
     public GameObject note; // 다이어리
-    public Inven_quick qick;
+    public Quick_slot_new qick;
     public GameObject rotate_ob; // 회전하는 오브젝트
     public Dialogue dialogue;
     public Camera cameras;
@@ -151,6 +151,7 @@ public class PlayerController : MonoBehaviour
         throwManager = GetComponent<ThrowManager>();
         mapChecker = GetComponentInChildren<MapChecker>();
         followDust = GetComponentInChildren<ParticleSystem>();
+        qick = GameObject.Find("Quick_slot_new").GetComponent<Quick_slot_new>();
 
         child = transform.GetChild(0);
         dialogue = GameObject.Find("Dialogue").GetComponent<Dialogue>();
@@ -209,15 +210,13 @@ public class PlayerController : MonoBehaviour
                     climb_mod = true;
                     player_state.climb_on();
 
-                    transform.rotation = climb_ro;
-                    transform.rotation = Quaternion.Euler(new Vector3(-transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y - 180, transform.rotation.eulerAngles.z));
-                    transform.Translate(0, 0.3f, 0.2f);
-
-                    lookAt = transform.forward;
-                    gameObject.transform.Translate(0, Time.deltaTime, 0);
-                    Quaternion dir2 = main_cam.localRotation;
-                    dir2.x = 0f; dir2.z = 0f;
-                    transform.localRotation = dir2;
+                    rotate_ob.transform.rotation = new Quaternion(0, 0, 0, 0);
+                    //transform.Translate(0, 0.3f, 0.2f);
+                    transform.localRotation = Quaternion.Euler(-climb_ro.eulerAngles.x, climb_ro.eulerAngles.y + 180, 0);
+                    //lookAt = transform.forward;
+                    //Quaternion dir2 = main_cam.localRotation;
+                    //dir2.x = 0f; dir2.z = 0f;
+                    //transform.localRotation = dir2;
 
                     climb_time = true;
                     StartCoroutine(climb_05());
@@ -289,16 +288,16 @@ public class PlayerController : MonoBehaviour
                 //우클릭 타겟팅 시작.
                 if (right_crash == 0)
                 {
-                    if (GameSystem.instance.item_search(qick.item_name, "category") == "seed") // 씨앗 타입이어야지만 던져짐
+                    if (GameSystem.instance.item_search(qick.choose_item, "category") == "seed") // 씨앗 타입이어야지만 던져짐
                     {
-                        if (GameSystem.instance.item_num[qick.item_name] >= 1 && InputManager.instance.click_mod == 0)
+                        if (GameSystem.instance.item_num[qick.choose_item] >= 1 && InputManager.instance.click_mod == 0)
                         {
                             //throw_mode = true;
                             GameSystem.instance.SetMode(1); //발사모드
                             Debug.Log("발사모드");
                             //child.localRotation = Quaternion.Slerp(child.localRotation, transform.localRotation, 0.5f);
 
-                            throwManager.mouse_down(qick.item_name);
+                            throwManager.mouse_down(qick.choose_item);
 
                             player_state.shoot_ready();
 
@@ -310,7 +309,7 @@ public class PlayerController : MonoBehaviour
                         }
                     }
                     
-                    else if (GameSystem.instance.item_search(qick.item_name, "category") == "consumable")
+                    else if (GameSystem.instance.item_search(qick.choose_item, "category") == "consumable")
                     {/*
                         // 같은 내용 inventory 스크립트에도 적기!!!!!!!ㅈ
 
@@ -371,10 +370,10 @@ public class PlayerController : MonoBehaviour
 
                     throwManager.mouse_up(true);//발사 허가
 
-                    GameSystem.instance.item_num[qick.item_name]--;
+                    GameSystem.instance.item_num[qick.choose_item]--;
 
-                    if (GameSystem.instance.item_num[qick.item_name] == 0)
-                        GameSystem.instance.item_time.Remove(qick.item_name);       
+                    if (GameSystem.instance.item_num[qick.choose_item] == 0)
+                        GameSystem.instance.item_time.Remove(qick.choose_item);       
                    
                     player_state.shoot();
 
@@ -505,7 +504,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // 열려라 도감!
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             if (composer.activeSelf == true)
                 composer.SetActive(false);

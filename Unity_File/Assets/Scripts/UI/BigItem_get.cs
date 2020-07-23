@@ -10,6 +10,8 @@ public class BigItem_get : MonoBehaviour
     public Text name_text;
     public Text explanation_text;
     public Image image;
+    public GameObject kira1;
+    public GameObject kira2;
 
     private void Awake()
     {
@@ -19,6 +21,12 @@ public class BigItem_get : MonoBehaviour
         name_text.color = new Color(1, 1, 1, 0);
         explanation_text.color = new Color(1, 1, 1, 0);
         image.color = new Color(1, 1, 1, 0);
+    }
+
+    private void Update()
+    {
+        kira1.transform.Rotate(0, 0, 150 * Time.deltaTime);
+        kira2.transform.Rotate(0, 0, -150 * Time.deltaTime);
     }
 
     public IEnumerator active_on(string names)
@@ -34,9 +42,9 @@ public class BigItem_get : MonoBehaviour
 
         back_ob.SetActive(true);
 
-        for (int i = 0; i <= 40; i++)
+        for (int i = 0; i <= 30; i++)
         {
-            background.color = new Color(0, 0, 0, i / 30f);
+            background.color = new Color(1, 1, 1, i / 30f);
             name_text.color = new Color(1, 1, 1, i / 30f);
             explanation_text.color = new Color(1, 1, 1, i / 30f);
             image.color = new Color(1, 1, 1, i / 30f);
@@ -63,7 +71,7 @@ public class BigItem_get : MonoBehaviour
     {
         for (int i = 0; i <= 20; i++)
         {
-            background.color = new Color(0, 0, 0, (20 - i) / 20f);
+            background.color = new Color(1, 1, 1, (20 - i) / 20f);
             name_text.color = new Color(1, 1, 1, (20 - i) / 20f);
             explanation_text.color = new Color(1, 1, 1, (20 - i) / 20f);
             image.color = new Color(1, 1, 1, (20 - i) / 20f);

@@ -19,7 +19,7 @@ class Plant : MonoBehaviour
 
     }
 
-    public void PlantSeed(Vector3 pos, Vector3 normal, bool red)
+    public void PlantSeed(Vector3 pos, Vector3 normal, bool red, bool blue)
     {
         if (!plant)
         {
@@ -38,6 +38,11 @@ class Plant : MonoBehaviour
             obj.transform.rotation = Quaternion.LookRotation(red_go);
             obj.transform.rotation = Quaternion.Euler(new Vector3(0, obj.transform.rotation.eulerAngles.y, 0));
         }
+        else if(blue == true)
+        {
+            obj.transform.rotation = Quaternion.Euler(new Vector3(0, obj.transform.rotation.eulerAngles.y, obj.transform.rotation.eulerAngles.z));
+        }
+
 
         Debug.Log("Planted At"+pos);
     }

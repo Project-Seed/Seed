@@ -32,7 +32,7 @@ public class Inventory : MonoBehaviour
     
     private void Awake()
     {
-        in_qu = GameObject.Find("Quick_slot").GetComponent<Inven_quick>();
+        //in_qu = GameObject.Find("Quick_slot").GetComponent<Inven_quick>();
 
         for (int i=0; i<40; i++)
         {
@@ -83,6 +83,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
+        /*
         if (Input.GetKeyDown(KeyCode.Q))
         { 
             if(quick_bool == true)
@@ -131,6 +132,7 @@ public class Inventory : MonoBehaviour
             quick_mod = false;
             quick_bg.SetActive(false);
         }
+        */
     }
 
     public void Inventory_click(GameObject gameObject) // 인벤토리 내용물 클릭
@@ -161,7 +163,7 @@ public class Inventory : MonoBehaviour
 
             item_names.text = GameSystem.instance.item_search(item_choose, "name_ko");
             item_image.sprite = gameObject.GetComponent<Inventory_box>().image.sprite;
-
+            /*
             if (GameSystem.instance.item_search(item_choose, "category") == "seed")
             {
                 quick_button.SetActive(true);
@@ -169,7 +171,7 @@ public class Inventory : MonoBehaviour
 
                 spand_button.SetActive(false);
             }
-            else if (GameSystem.instance.item_search(item_choose, "category") == "consumable")
+            else */if (GameSystem.instance.item_search(item_choose, "category") == "consumable")
             {
                 //quick_button.SetActive(true);
                 //quick_bool = true;
