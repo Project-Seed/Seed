@@ -29,41 +29,48 @@ public class Bullet : MonoBehaviour
             plant.PlantSeed(pos, normal, false, false);
     }
 
-    private static bool checkWall(ref Collision hit)
+    private static bool checkWall(ref Collision hit,string type)
     {
-
         float angle = Vector3.Angle(hit.GetContact(0).normal, Vector3.up);
+        Debug.Log("hit " + hit.transform.gameObject.name + "Angle " + angle);
         bool isWall;
-
-        if (50.0f <= angle && angle < 180.0f)
-            isWall = true;
+        if (type == "blue_seed")
+        {
+            if (70.0f <= angle && angle < 130.0f)
+                isWall = true;
+            else
+                isWall = false;
+        }
+        else if (type == "brown_seed")
+        {
+            if (60.0f <= angle && angle < 90.0f)
+                isWall = true;
+            else
+                isWall = false;
+        }
         else if (0.0f <= angle && angle < 50.0f)
             isWall = false;
-        else
-            isWall = false;
+        else //blue, brown 아닌데 50도 이상이면 벽으로 인식
+            isWall = true;
         return isWall;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         Destroy(gameObject);
+        bool isWall = checkWall(ref collision, plant.seed_name);
 
         switch (plant.seed_name)
         {
             case "blue_seed":
-                if(checkWall(ref collision))
-                //if (collision.gameObject.CompareTag("BlueZone"))
-                    SetPlantPos(collision);
-                break;
-
             case "brown_seed":
-                if (collision.gameObject.CompareTag("Plantable"))
+                if (isWall)
                     SetPlantPos(collision);
                 break;
 
             case "red_seed":
             case "white_seed":
-                if (collision.gameObject.CompareTag("Plantable") || collision.gameObject.CompareTag("Ground"))
+                if (!isWall)
                     SetPlantPos(collision);
                 break;
 
