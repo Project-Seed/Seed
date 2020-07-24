@@ -92,6 +92,8 @@ public class CameraRotater : MonoBehaviour
 
         //if (ok)
         //    ok_time += Time.deltaTime;
+        //레이캐스팅
+
     }
 
     float ClampAngle(float angle, float min, float max)
@@ -122,7 +124,14 @@ public class CameraRotater : MonoBehaviour
     //카메라가 어디엔가 닿으면
     // 클로즈업(단, 캐릭터와 일정 거리 이상 가까워지면 안됨)
     // 뒤에 아무것도 없다면 다시 줌아웃.
-
+    IEnumerator SmoothBackCam()
+    {
+        while (camera_offset.magnitude < maxZoomOut)
+        {
+            camera_offset /= 1.1f;
+            yield return null;
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) return;
@@ -143,7 +152,14 @@ public class CameraRotater : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        //ok = true;
+        Ray ray = new Ray(transform.localPosition, -transform.forward);
+        //카메라 뒷 공간이 origin offset으로 갈 만큼 있어야함.
+        //origin이랑 지금 클로즈업 된 카메라 사이의 거리만큼 레이를 쏘고 그만큼 여유 있으면 뒤로감
+        float backDistance = origin_camera_offset.magnitude - camera_offset.magnitude;
+        if (!Physics.Raycast(ray, out RaycastHit hit, backDistance))
+        {
+            StartCoroutine(SmoothBackCam());
+        }
 
         if (other.CompareTag("Player")) return;
     }

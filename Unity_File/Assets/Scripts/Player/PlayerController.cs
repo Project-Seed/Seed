@@ -154,11 +154,16 @@ public class PlayerController : MonoBehaviour
         mapChecker = GetComponentInChildren<MapChecker>();
         followDust = GetComponentInChildren<ParticleSystem>();
         qick = GameObject.Find("Quick_slot_new").GetComponent<Quick_slot_new>();
-
         child = transform.GetChild(0);
         dialogue = GameObject.Find("Dialogue").GetComponent<Dialogue>();
         lookAt = transform.forward;
         is_run = false;
+
+        for (int i = 0; i < 5; ++i)
+        {
+            Eat_system.instance.eat_item("blue_seed");
+            Eat_system.instance.eat_item("brown_seed");
+        }
     }
 
     private void Update()                               // 키 입력은 Update에서 받고
