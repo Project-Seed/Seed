@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6958336353894601037}
   - component: {fileID: 2461049837040750275}
   - component: {fileID: 5923847815728534174}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: blue_seed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,6 +92,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52103e7d9c5e76542835598946cccb8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  render: {fileID: 0}
+  collider: {fileID: 0}
 --- !u!135 &5923847815728534174
 SphereCollider:
   m_ObjectHideFlags: 0

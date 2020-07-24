@@ -29,6 +29,21 @@ public class Bullet : MonoBehaviour
             plant.PlantSeed(pos, normal, false, false);
     }
 
+    private static bool checkWall(ref Collision hit)
+    {
+
+        float angle = Vector3.Angle(hit.GetContact(0).normal, Vector3.up);
+        bool isWall;
+
+        if (50.0f <= angle && angle < 180.0f)
+            isWall = true;
+        else if (0.0f <= angle && angle < 50.0f)
+            isWall = false;
+        else
+            isWall = false;
+        return isWall;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         Destroy(gameObject);
@@ -36,7 +51,8 @@ public class Bullet : MonoBehaviour
         switch (plant.seed_name)
         {
             case "blue_seed":
-                if (collision.gameObject.CompareTag("BlueZone"))
+                if(checkWall(ref collision))
+                //if (collision.gameObject.CompareTag("BlueZone"))
                     SetPlantPos(collision);
                 break;
 

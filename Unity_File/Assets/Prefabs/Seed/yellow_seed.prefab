@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1777666142003488086}
   - component: {fileID: 6493086983270742744}
   - component: {fileID: 766135423450529808}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: yellow_seed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,6 +92,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52103e7d9c5e76542835598946cccb8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  render: {fileID: 0}
+  collider: {fileID: 0}
 --- !u!135 &766135423450529808
 SphereCollider:
   m_ObjectHideFlags: 0
