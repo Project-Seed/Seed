@@ -172,7 +172,7 @@ public class ThrowManager : MonoBehaviour
         //tmp.GetComponent<Plant>().red_go = aimForward;
         bullet_rig.AddForce(dest * 10, ForceMode.Impulse);
 
-        StartCoroutine(cameraShaker.CameraShake(0.15f, 0.1f));
+        //StartCoroutine(cameraShaker.CameraShake(0.15f, 0.1f));
         //궤도를 따라 움직이는 코루틴 시작
         //StartCoroutine(ThrowingSeed(bullet_rig, dest));
     }
