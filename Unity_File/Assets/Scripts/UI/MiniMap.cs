@@ -15,6 +15,9 @@ public class MiniMap : MonoBehaviour
     public GameObject player;
     public GameObject map;
 
+    public List<GameObject> marks;
+    public GameObject mark_pre;
+
     void Start()
     {
         player = GameObject.Find("Player");
