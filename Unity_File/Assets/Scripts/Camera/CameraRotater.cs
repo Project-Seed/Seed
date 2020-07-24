@@ -21,6 +21,7 @@ public class CameraRotater : MonoBehaviour
     float maxZoomin = 2.0f;
     float maxZoomOut = 8.0f;
     public bool lockZoom;
+    private bool isCollided;
 
     bool ok = true;
     float ok_time = 0;
@@ -128,7 +129,8 @@ public class CameraRotater : MonoBehaviour
     {
         while (camera_offset.magnitude < origin_camera_offset.magnitude)
         {
-            camera_offset *= 1.1f;
+            if (!isCollided)
+                camera_offset *= 1.1f;
             yield return null;
         }
     }
@@ -136,12 +138,14 @@ public class CameraRotater : MonoBehaviour
     {
         if (other.CompareTag("Player")) return;
         StopCoroutine(SmoothBackCam());
+        isCollided = true;
 
     }
     private void OnTriggerStay(Collider other)
     {
         //ok = false;
         //ok_time = 0;
+        isCollided = true;
         StopCoroutine(SmoothBackCam());
 
         if (other.CompareTag("Player"))
@@ -154,6 +158,7 @@ public class CameraRotater : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        isCollided = false;
         Ray ray = new Ray(transform.localPosition, camera_offset);
         //카메라 뒷 공간이 origin offset으로 갈 만큼 있어야함.
         //origin이랑 지금 클로즈업 된 카메라 사이의 거리만큼 레이를 쏘고 그만큼 여유 있으면 뒤로감
