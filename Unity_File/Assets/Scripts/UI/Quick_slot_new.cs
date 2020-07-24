@@ -160,41 +160,41 @@ public class Quick_slot_new : MonoBehaviour
         
         int j = 0;
 
-        for (int i = 0; i < 35; i++)
+        for (int i = 0; i < 28; i++)
         {
             switch (i)
             {
-                case 5:
+                case 4:
                     j = 1;
                     break;
-                case 10:
+                case 8:
                     j = 2;
                     break;
-                case 15:
+                case 12:
                     j = 3;
                     break;
-                case 20:
+                case 16:
                     j = 4;
                     break;
-                case 25:
+                case 20:
                     j = 5;
                     break;
-                case 30:
+                case 24:
                     j = 6;
                     break;
             }
 
-            int k = i - (j * 5) + 1;
+            int k = i - (j * 4) + 1;
 
-            slot[j].transform.Translate(22f, 0, 0);
+            slot[j].transform.Translate(110f / 4f, 0, 0);
 
-            image_color[j].color = new Color(1, 1, 1, k / 5f);
-            image_seed[j].color = new Color(1, 1, 1, k / 5f);
+            image_color[j].color = new Color(1, 1, 1, k / 4f);
+            image_seed[j].color = new Color(1, 1, 1, k / 4f);
 
-            item_num[j].color = new Color(1, 1, 1, k / 5f);
-            key[j].color = new Color(1, 1, 1, k / 5f);
+            item_num[j].color = new Color(1, 1, 1, k / 4f);
+            key[j].color = new Color(1, 1, 1, k / 4f);
 
-            yield return new WaitForSeconds(0.0003f);
+            yield return new WaitForSeconds(0.0002f);
         }
     }
 
@@ -204,41 +204,41 @@ public class Quick_slot_new : MonoBehaviour
 
         int j = 6;
 
-        for (int i = 35; i >= 1; i--)
+        for (int i = 28; i >= 1; i--)
         {
             switch (i)
             {
-                case 5:
+                case 4:
                     j = 0;
                     break;
-                case 10:
+                case 8:
                     j = 1;
                     break;
-                case 15:
+                case 12:
                     j = 2;
                     break;
-                case 20:
+                case 16:
                     j = 3;
                     break;
-                case 25:
+                case 20:
                     j = 4;
                     break;
-                case 30:
+                case 24:
                     j = 5;
                     break;
             }
 
-            int k = i - (j * 5) - 1;
+            int k = i - (j * 4) - 1;
 
-            slot[j].transform.Translate(-22f, 0, 0);
+            slot[j].transform.Translate(-110f / 4f, 0, 0);
 
-            image_color[j].color = new Color(1, 1, 1, k / 5f);
-            image_seed[j].color = new Color(1, 1, 1, k / 5f);
+            image_color[j].color = new Color(1, 1, 1, k / 4f);
+            image_seed[j].color = new Color(1, 1, 1, k / 4f);
 
-            item_num[j].color = new Color(1, 1, 1, k / 5f);
-            key[j].color = new Color(1, 1, 1, k / 5f);
+            item_num[j].color = new Color(1, 1, 1, k / 4f);
+            key[j].color = new Color(1, 1, 1, k / 4f);
 
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSeconds(0.0002f);
         }
         open = false;
         close_tri = false;

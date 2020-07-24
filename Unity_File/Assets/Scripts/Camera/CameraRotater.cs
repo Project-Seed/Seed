@@ -72,9 +72,6 @@ public class CameraRotater : MonoBehaviour
             else if (input_mouse_wheel < 0 && camera_offset.magnitude <= maxZoomOut)
                 camera_offset *= 1.1f;
         }
-        else
-            if (camera_offset.magnitude >= maxZoomin)
-            camera_offset /= 1.1f;
 
         MouseX += Input.GetAxis("Mouse X") * rotate_speed;
         MouseY -= Input.GetAxis("Mouse Y") * rotate_speed;

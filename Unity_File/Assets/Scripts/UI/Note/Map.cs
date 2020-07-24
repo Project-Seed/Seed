@@ -83,41 +83,41 @@ public class Map : MonoBehaviour
             }
         }
 
-
+        
         // 지도 확대 축소
-        float wheelInput = Input.GetAxis("Mouse ScrollWheel");
-        if (wheelInput > 0)
-        {
-            if (map_scale <= 12)
-            {
-                map_scale++;
-                map_bg.transform.localScale = new Vector3(map_bg.transform.localScale.x + 0.1f, map_bg.transform.localScale.y + 0.1f, 1);
+        //float wheelInput = Input.GetAxis("Mouse ScrollWheel");
+        //if (wheelInput > 0)
+        //{
+        //    if (map_scale <= 12)
+        //    {
+        //        map_scale++;
+        //        map_bg.transform.localScale = new Vector3(map_bg.transform.localScale.x + 0.1f, map_bg.transform.localScale.y + 0.1f, 1);
 
 
-                /*
-                Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize- wheelInput, 3, 5);
-                wheelInput *= Vector3.Distance(map_bg.transform.position, map_bg.transform.position + (Camera.main.ScreenToViewportPoint(Input.mousePosition) - map_bg.transform.position)) * 0.0005f;
-                map_bg.transform.position += (Camera.main.ScreenToViewportPoint(Input.mousePosition) - map_bg.transform.position) * wheelInput;
-                */
-                //map_bg.transform.Translate((960 - Input.mousePosition.x) * map_scale / 20, (540 - Input.mousePosition.y) * map_scale / 20, 0);
-            }
-        }
-        else if (wheelInput < 0)
-        {
-            if (map_scale >= 4)
-            {
-                map_scale--;
-                map_bg.transform.localScale = new Vector3(map_bg.transform.localScale.x - 0.1f, map_bg.transform.localScale.y - 0.1f, 1);
+        //        /*
+        //        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize- wheelInput, 3, 5);
+        //        wheelInput *= Vector3.Distance(map_bg.transform.position, map_bg.transform.position + (Camera.main.ScreenToViewportPoint(Input.mousePosition) - map_bg.transform.position)) * 0.0005f;
+        //        map_bg.transform.position += (Camera.main.ScreenToViewportPoint(Input.mousePosition) - map_bg.transform.position) * wheelInput;
+        //        */
+        //        //map_bg.transform.Translate((960 - Input.mousePosition.x) * map_scale / 20, (540 - Input.mousePosition.y) * map_scale / 20, 0);
+        //    }
+        //}
+        //else if (wheelInput < 0)
+        //{
+        //    if (map_scale >= 4)
+        //    {
+        //        map_scale--;
+        //        map_bg.transform.localScale = new Vector3(map_bg.transform.localScale.x - 0.1f, map_bg.transform.localScale.y - 0.1f, 1);
 
 
-                /*
-                Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - wheelInput, 3, 5);
-                wheelInput *= Vector3.Distance(map_bg.transform.position, map_bg.transform.position + (Camera.main.ScreenToViewportPoint(Input.mousePosition) - map_bg.transform.position)) * 0.0005f;
-                map_bg.transform.position += (Camera.main.ScreenToViewportPoint(Input.mousePosition) - map_bg.transform.position) * wheelInput;
-                */
-                //map_bg.transform.Translate((960 - Input.mousePosition.x) * map_scale / 20, (540 - Input.mousePosition.y) * map_scale / 20, 0);
-            }
-        }
+        //        /*
+        //        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - wheelInput, 3, 5);
+        //        wheelInput *= Vector3.Distance(map_bg.transform.position, map_bg.transform.position + (Camera.main.ScreenToViewportPoint(Input.mousePosition) - map_bg.transform.position)) * 0.0005f;
+        //        map_bg.transform.position += (Camera.main.ScreenToViewportPoint(Input.mousePosition) - map_bg.transform.position) * wheelInput;
+        //        */
+        //        //map_bg.transform.Translate((960 - Input.mousePosition.x) * map_scale / 20, (540 - Input.mousePosition.y) * map_scale / 20, 0);
+        //    }
+        //}
 
 
 
