@@ -106,13 +106,13 @@ public class PlayerController : MonoBehaviour
 
         if (hang_vecter == 0)
         {
-            hang_x = (hang_ob.transform.position.x - 0.3f - gameObject.transform.position.x) / 10f;
+            hang_x = (hang_ob.transform.position.x - 0.0f - gameObject.transform.position.x) / 10f;
             hang_y = (hang_ob.transform.position.y + 0.2f - gameObject.transform.position.y - 1f) / 10f;
             hang_z = (hang_ob.transform.position.z - gameObject.transform.position.z) / 10f;
         }
         else
         {
-            hang_x = (hang_ob.transform.position.x + 0.3f - gameObject.transform.position.x) / 10f;
+            hang_x = (hang_ob.transform.position.x + 0.0f - gameObject.transform.position.x) / 10f;
             hang_y = (hang_ob.transform.position.y + 0.2f - gameObject.transform.position.y - 1f) / 10f;
             hang_z = (hang_ob.transform.position.z - gameObject.transform.position.z) / 10f;
         }

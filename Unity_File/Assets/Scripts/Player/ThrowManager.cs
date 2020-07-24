@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,8 +16,7 @@ public class ThrowManager : MonoBehaviour
     public Transform sub_cam;
     private Vector3 dest;
     string seed_name;
-    public CameraRotater cameraRotater;
-
+    public CameraRotater cameraShaker;
     private void Start()
     {
         // aim 캐릭터 따라다니도록 했는데,,수정해야될듯. 카메라 위로 올리면 aim도 위로 올라가야해서. 
@@ -28,13 +26,13 @@ public class ThrowManager : MonoBehaviour
     //발사취소는 우클릭 했을 때만.
     //조준선은 씨앗 조건에 따라 초록/빨강
     //빨강일때도 쏠 수 있는데 그러면 조건 안 맞아서 먼지만 날림
-    public void mouse_down(string name)
+    public void mouse_down(string name)//우클 조준
     {
         seed_name = name;
         aim_sp.SetActive(true);
     }
 
-    public void mouse_up(bool option)
+    public void mouse_up(bool option)//우클 조준 취소
     {
         if (option)//option true이면 발사. option false는 발사 취소한 경우.
             Throw();
@@ -80,7 +78,7 @@ public class ThrowManager : MonoBehaviour
     }
     private bool checkPlantable(RaycastHit hit)
     {
-        bool isWall = checkWall(ref hit);
+        bool isWall = checkWall(ref hit,seed_name);
 
         switch (seed_name)
         {
@@ -117,18 +115,29 @@ public class ThrowManager : MonoBehaviour
         return false;
     }
 
-    private static bool checkWall(ref RaycastHit hit)
+    private static bool checkWall(ref RaycastHit hit, string type)
     {
         float angle = Vector3.Angle(hit.normal, Vector3.up);
         Debug.Log("hit " + hit.transform.gameObject.name + "Angle " + angle);
         bool isWall;
-
-        if (50.0f <= angle && angle < 180.0f)
-            isWall = true;
+        if (type == "blue_seed")
+        {
+            if (70.0f <= angle && angle < 130.0f)
+                isWall = true;
+            else
+                isWall = false;
+        }
+        else if (type == "brown_seed")
+        {
+            if (60.0f <= angle && angle < 90.0f)
+                isWall = true;
+            else
+                isWall = false;
+        }
         else if (0.0f <= angle && angle < 50.0f)
             isWall = false;
-        else
-            isWall = false;
+        else //blue, brown 아닌데 50도 이상이면 벽으로 인식
+            isWall = true;
         return isWall;
     }
 
@@ -163,22 +172,26 @@ public class ThrowManager : MonoBehaviour
         //tmp.GetComponent<Plant>().red_go = aimForward;
         bullet_rig.AddForce(dest * 10, ForceMode.Impulse);
 
+        StartCoroutine(cameraShaker.CameraShake(0.15f, 0.1f));
         //궤도를 따라 움직이는 코루틴 시작
         //StartCoroutine(ThrowingSeed(bullet_rig, dest));
     }
 
-    IEnumerator ThrowingSeed(Rigidbody bullet_rig, Vector3 dest)
-    {
-        if (tmp.activeSelf == true)
-        {
-            //bullet_rig.AddForce(aimForward, ForceMode.Impulse);
-            //bullet_rig.position = Vector3.MoveTowards(bullet_rig.position, dest, 0.5f);
-            bullet_rig.AddForce(dest*5, ForceMode.Impulse);
-            yield return new WaitForSeconds(0.1f);
-            StartCoroutine(ThrowingSeed(bullet_rig, dest));
-        }
-        else
-            Destroy(tmp);
-    }
+
+    //IEnumerator ThrowingSeed(Rigidbody bullet_rig, Vector3 dest)
+    //{
+    //    if (tmp.activeSelf == true)
+    //    {
+    //        //bullet_rig.AddForce(aimForward, ForceMode.Impulse);
+    //        //bullet_rig.position = Vector3.MoveTowards(bullet_rig.position, dest, 0.5f);
+    //        bullet_rig.AddForce(dest*5, ForceMode.Impulse);
+    //        yield return new WaitForSeconds(0.1f);
+    //        StartCoroutine(ThrowingSeed(bullet_rig, dest));
+    //    }
+    //    else
+    //        Destroy(tmp);
+    //}
+
+
 
 }
