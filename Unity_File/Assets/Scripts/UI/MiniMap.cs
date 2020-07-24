@@ -12,15 +12,18 @@ public class MiniMap : MonoBehaviour
 
     public GameObject point;
 
+    public GameObject player;
+    public GameObject map;
+
     void Start()
     {
-        
+        player = GameObject.Find("Player");
     }
 
     void Update()
     {
-        lookarea.transform.rotation = Quaternion.Euler(0,0,-cameras.transform.rotation.eulerAngles.y + 180 - 45 + 135);
-        character_point.transform.rotation = Quaternion.Euler(0, 0, -character.transform.rotation.eulerAngles.y - 90);
+        lookarea.transform.rotation = Quaternion.Euler(0,0,-cameras.transform.rotation.eulerAngles.y - 45 + 135);
+        character_point.transform.rotation = Quaternion.Euler(0, 0, -character.transform.rotation.eulerAngles.y + 90);
 
 
         switch (PlayerState.instance.radiation_level)
@@ -45,5 +48,7 @@ public class MiniMap : MonoBehaviour
                 point.transform.rotation = Quaternion.Euler(0, 0, -90);
                 break;
         }
+
+        map.transform.localPosition = new Vector2(player.transform.position.x + 500, player.transform.position.z - 1500);
     }
 }
