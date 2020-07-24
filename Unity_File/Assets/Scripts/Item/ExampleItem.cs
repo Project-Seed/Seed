@@ -6,18 +6,21 @@ public class ExampleItem : MonoBehaviour, IItem
 {
     public MeshRenderer render;
     public SphereCollider collider;
+    private ParticleSystem twinkle;
 
     private void Awake()
     {
         render = GetComponent<MeshRenderer>();
         collider = GetComponent<SphereCollider>();
+        twinkle = GetComponentInChildren<ParticleSystem>();
     }
 
     public void eat()
     {
         render.enabled = false;
         collider.enabled = false;
-
+        if (twinkle)
+            twinkle.Stop();
         StartCoroutine(making());
     }
 
@@ -25,6 +28,8 @@ public class ExampleItem : MonoBehaviour, IItem
     {
         render.enabled = true;
         collider.enabled = true;
+        if (twinkle)
+            twinkle.Play();
     }
 
     IEnumerator making()

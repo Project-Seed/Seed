@@ -27,9 +27,14 @@ public class Map : MonoBehaviour
     public Text mark_dis_text;
     int mark_click_mod = 0; // 지도클릭 0, 마크클릭 1
 
+    public GameObject player;
+    public GameObject player_pick;
+
     private void Awake()
     {
         Camera.main.orthographicSize = 5;
+
+        player = GameObject.Find("Player");
     }
 
     void Update()
@@ -52,7 +57,7 @@ public class Map : MonoBehaviour
         }
         */
 
-        TimePosition.text = "시간 " + time_switch + " " + time_hour.ToString() + ":" + time_minute.ToString() + "\n위치 (" + ((int)pos.x).ToString() + ", " + ((int)pos.y).ToString() + ")";
+        //TimePosition.text = "시간 " + time_switch + " " + time_hour.ToString() + ":" + time_minute.ToString() + "\n위치 (" + ((int)pos.x).ToString() + ", " + ((int)pos.y).ToString() + ")";
 
 
         // 지도 이동
@@ -64,8 +69,9 @@ public class Map : MonoBehaviour
         else if(Input.GetMouseButton(0))
         {
             Vector3 move_position = move_now - (move_start - new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+            Debug.Log(move_position);
 
-            if(move_position.x >= -800 && move_position.x <= 2800 && move_position.y >= -1600 && move_position.y <= 2700)
+            if(move_position.x >= 200 && move_position.x <= 1700 && move_position.y >= -690 && move_position.y <= 1550)
                 map_bg.transform.position = move_position;
             else
             {
@@ -129,6 +135,8 @@ public class Map : MonoBehaviour
             mark_dis_text.color = Color.white;
             mark_click_mod = 1;
         }
+
+        player_pick.transform.localPosition = new Vector2(-player.transform.position.x - 500, -player.transform.position.z + 1500);
     }
 
     // 마커 생성

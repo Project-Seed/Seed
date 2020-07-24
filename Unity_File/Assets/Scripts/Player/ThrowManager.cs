@@ -80,27 +80,26 @@ public class ThrowManager : MonoBehaviour
     }
     private bool checkPlantable(RaycastHit hit)
     {
+        bool isWall = checkWall(ref hit);
+
         switch (seed_name)
         {
             case "blue_seed":
-                if (hit.transform.CompareTag("BlueZone"))
-                    return true;
-                break;
-
             case "brown_seed":
-                if (hit.transform.CompareTag("Plantable"))
+                if (isWall)
                     return true;
                 break;
 
             case "red_seed":
             case "white_seed":
-                if (hit.transform.CompareTag("Plantable") || hit.transform.CompareTag("Ground"))
+                if (!isWall)
                     return true;
                 break;
 
             case "green_seed":
             case "lime_seed":
-                return true;
+                if (hit.transform.CompareTag("Plant"))
+                    return true;
                 break;
 
             case "yellow_seed":
@@ -111,16 +110,26 @@ public class ThrowManager : MonoBehaviour
             case "purple_seed":
                 //마을에서는 사용 불가
                 return true;
-                break;
 
             default: return false;
 
         }
         return false;
     }
-    private void OnDrawGizmos()
+
+    private static bool checkWall(ref RaycastHit hit)
     {
-        Gizmos.DrawWireSphere(dest, 0.05f);
+        float angle = Vector3.Angle(hit.normal, Vector3.up);
+        Debug.Log("hit " + hit.transform.gameObject.name + "Angle " + angle);
+        bool isWall;
+
+        if (50.0f <= angle && angle < 180.0f)
+            isWall = true;
+        else if (0.0f <= angle && angle < 50.0f)
+            isWall = false;
+        else
+            isWall = false;
+        return isWall;
     }
 
     private void Throw()
