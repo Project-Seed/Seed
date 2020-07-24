@@ -95,6 +95,7 @@ public class CameraRotater : MonoBehaviour
         //    ok_time += Time.deltaTime;
         //레이캐스팅
 
+
     }
 
     float ClampAngle(float angle, float min, float max)
@@ -136,34 +137,40 @@ public class CameraRotater : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Enter");
         if (other.CompareTag("Player")) return;
-        StopCoroutine(SmoothBackCam());
-        isCollided = true;
-
-    }
-    private void OnTriggerStay(Collider other)
-    {
-        //ok = false;
-        //ok_time = 0;
-        isCollided = true;
-        StopCoroutine(SmoothBackCam());
-
-        if (other.CompareTag("Player"))
-        {
-            camera_offset = origin_camera_offset;
-        }
-        else if (camera_offset.magnitude > maxZoomin)
+        if (camera_offset.magnitude > maxZoomin)
             camera_offset /= 1.1f;
+        StopCoroutine(SmoothBackCam());
+        isCollided = true;
+
     }
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    Debug.Log("stay");
+    //    //ok = false;
+    //    //ok_time = 0;
+    //    isCollided = true;
+    //    StopCoroutine(SmoothBackCam());
+
+    //    if (other.CompareTag("Player"))
+    //    {
+    //        camera_offset = origin_camera_offset;
+    //    }
+    //    else if (camera_offset.magnitude > maxZoomin)
+    //        camera_offset /= 1.1f;
+    //}
 
     private void OnTriggerExit(Collider other)
     {
+        Debug.Log("exit");
+
         isCollided = false;
         Ray ray = new Ray(transform.localPosition, camera_offset);
         //카메라 뒷 공간이 origin offset으로 갈 만큼 있어야함.
         //origin이랑 지금 클로즈업 된 카메라 사이의 거리만큼 레이를 쏘고 그만큼 여유 있으면 뒤로감
         float backDistance = origin_camera_offset.magnitude - camera_offset.magnitude;
-        Debug.DrawLine(camera_offset, origin_camera_offset, Color.black,3.0f);
+        Debug.DrawLine(transform.position, transform.position+origin_camera_offset, Color.red,3.0f);
         if (!Physics.Raycast(ray, backDistance))
         {
             StartCoroutine(SmoothBackCam());

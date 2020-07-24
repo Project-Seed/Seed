@@ -5648,7 +5648,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6187165720384461467
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5728,6 +5728,7 @@ MonoBehaviour:
   mark_dis_text: {fileID: 6505567630863031611}
   player: {fileID: 0}
   player_pick: {fileID: 3951025310715742433}
+  miniMap: {fileID: 0}
 --- !u!1 &2270794317192621515
 GameObject:
   m_ObjectHideFlags: 0
@@ -21843,7 +21844,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2528037338997449798
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22948,7 +22949,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
