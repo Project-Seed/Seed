@@ -126,21 +126,23 @@ public class CameraRotater : MonoBehaviour
     // 뒤에 아무것도 없다면 다시 줌아웃.
     IEnumerator SmoothBackCam()
     {
-        while (camera_offset.magnitude < maxZoomOut)
+        while (camera_offset.magnitude < origin_camera_offset.magnitude)
         {
-            camera_offset /= 1.1f;
+            camera_offset *= 1.1f;
             yield return null;
         }
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) return;
+        StopCoroutine(SmoothBackCam());
 
     }
     private void OnTriggerStay(Collider other)
     {
         //ok = false;
         //ok_time = 0;
+        StopCoroutine(SmoothBackCam());
 
         if (other.CompareTag("Player"))
         {
@@ -152,11 +154,12 @@ public class CameraRotater : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Ray ray = new Ray(transform.localPosition, -transform.forward);
+        Ray ray = new Ray(transform.localPosition, camera_offset);
         //카메라 뒷 공간이 origin offset으로 갈 만큼 있어야함.
         //origin이랑 지금 클로즈업 된 카메라 사이의 거리만큼 레이를 쏘고 그만큼 여유 있으면 뒤로감
         float backDistance = origin_camera_offset.magnitude - camera_offset.magnitude;
-        if (!Physics.Raycast(ray, out RaycastHit hit, backDistance))
+        Debug.DrawLine(camera_offset, origin_camera_offset, Color.black,3.0f);
+        if (!Physics.Raycast(ray, backDistance))
         {
             StartCoroutine(SmoothBackCam());
         }
