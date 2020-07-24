@@ -43,13 +43,17 @@ public class Heart : MonoBehaviour
 
     IEnumerator hp_down_co(Image image, GameObject ob)
     {
-        for(int i=0; i<=20; i++)
+        GameObject.Find("Player").GetComponent<PlayerController>().player_mate.color = new Color(1f, 0.3f, 0.3f, 1);
+
+        for (int i=0; i<=20; i++)
         {
             if(i <= 5)
                 image.color = new Color(1, i / 5f, i / 5f);
             else if(i >= 10)
                 image.color = new Color((10 - (i - 10)) / 10f, (10 - (i - 10)) / 10f, (10 - (i - 10)) / 10f);
             yield return new WaitForSeconds(0.01f); 
-        }      
+        }
+
+        GameObject.Find("Player").GetComponent<PlayerController>().player_mate.color = new Color(1f, 1f, 1f, 1);
     }
 }

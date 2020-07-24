@@ -57,6 +57,8 @@ public class PlayerController : MonoBehaviour
     public GameObject shadow2; // 매달리기 충돌체크용
     public bool climb_up_bool = false;
 
+    public Material player_mate;
+
     int right_crash = 0; // 우클릭 중복 때매
 
     IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 0.3초간 점프금지
@@ -164,6 +166,8 @@ public class PlayerController : MonoBehaviour
             Eat_system.instance.eat_item("blue_seed");
             Eat_system.instance.eat_item("brown_seed");
         }
+
+        player_mate.color = new Color(1f, 1f, 1f, 1);
     }
 
     private void Update()                               // 키 입력은 Update에서 받고
