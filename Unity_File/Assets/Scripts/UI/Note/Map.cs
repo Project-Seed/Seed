@@ -30,11 +30,14 @@ public class Map : MonoBehaviour
     public GameObject player;
     public GameObject player_pick;
 
+    public MiniMap miniMap;
+
     private void Awake()
     {
         Camera.main.orthographicSize = 5;
 
         player = GameObject.Find("Player");
+        miniMap = GameObject.Find("MiniMap").GetComponent<MiniMap>();
     }
 
     void Update()
@@ -162,7 +165,12 @@ public class Map : MonoBehaviour
     {
         if (mark_click_mod == 0)
         {
-            GameObject marks = Instantiate(mark, new Vector3(mark_maker_ob.transform.position.x, mark_maker_ob.transform.position.y, 0), Quaternion.identity, map_bg.transform); // ItemSpawner 밑 자식으로 복제
+            GameObject mark_ = Instantiate(mark, new Vector3(mark_maker_ob.transform.position.x, mark_maker_ob.transform.position.y, 0), 
+                Quaternion.identity, map_bg.transform); // ItemSpawner 밑 자식으로 복제
+            mark_.GetComponent<Image>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1);
+            miniMap.marks.Add(mark_);
+            miniMap.mark_re();
+
             mark_maker_ob.SetActive(false);
         }
     }
@@ -171,7 +179,10 @@ public class Map : MonoBehaviour
         if (mark_click_mod == 1)
         {
             mark_maker_ob.SetActive(false);
+
+            miniMap.marks.Remove(marks_ob);
             Destroy(marks_ob);
+            miniMap.mark_re();
         }
     }
 } 

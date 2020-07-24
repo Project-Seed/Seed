@@ -106,13 +106,13 @@ public class PlayerController : MonoBehaviour
 
         if (hang_vecter == 0)
         {
-            hang_x = (hang_ob.transform.position.x - 0.3f - gameObject.transform.position.x) / 10f;
+            hang_x = (hang_ob.transform.position.x - 0.0f - gameObject.transform.position.x) / 10f;
             hang_y = (hang_ob.transform.position.y + 0.2f - gameObject.transform.position.y - 1f) / 10f;
             hang_z = (hang_ob.transform.position.z - gameObject.transform.position.z) / 10f;
         }
         else
         {
-            hang_x = (hang_ob.transform.position.x + 0.3f - gameObject.transform.position.x) / 10f;
+            hang_x = (hang_ob.transform.position.x + 0.0f - gameObject.transform.position.x) / 10f;
             hang_y = (hang_ob.transform.position.y + 0.2f - gameObject.transform.position.y - 1f) / 10f;
             hang_z = (hang_ob.transform.position.z - gameObject.transform.position.z) / 10f;
         }
@@ -120,6 +120,8 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x + hang_x, gameObject.transform.position.y + hang_y, gameObject.transform.position.z + hang_z);
+
+            gameObject.transform.Translate(-transform.forward / 20f);
             yield return new WaitForSeconds(0.01f);
         }
 

@@ -29,7 +29,21 @@ public class CameraRotater : MonoBehaviour
     {
         camera_offset = origin_camera_offset;
     }
-    private void Start()
+    public IEnumerator CameraShake(float duration, float mag)
+    {
+        float time = 0.0f;
+        while (time < duration)
+        {
+            float z = Random.Range(-1f, 1f) * mag;
+
+            camera_offset *= 1.05f;
+            time += Time.deltaTime;
+
+            yield return null;
+        }
+        camera_offset = origin_camera_offset;
+    }
+    private void Awake()
     {
         MouseX = transform.eulerAngles.y;
         MouseY = transform.eulerAngles.x;
@@ -58,6 +72,9 @@ public class CameraRotater : MonoBehaviour
             else if (input_mouse_wheel < 0 && camera_offset.magnitude <= maxZoomOut)
                 camera_offset *= 1.1f;
         }
+        else
+            if (camera_offset.magnitude >= maxZoomin)
+            camera_offset /= 1.1f;
 
         MouseX += Input.GetAxis("Mouse X") * rotate_speed;
         MouseY -= Input.GetAxis("Mouse Y") * rotate_speed;
