@@ -451,7 +451,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2290084937190997130}
-  m_LocalRotation: {x: 0.5441586, y: -0.000000007217928, z: 0.000000004681502, w: 0.83898246}
+  m_LocalRotation: {x: 0.5441586, y: 0.000000007183874, z: -0.0000000046594137, w: 0.83898246}
   m_LocalPosition: {x: 0, y: 3.09, z: -1.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -551,10 +551,7 @@ MonoBehaviour:
   m_AnimatedTarget: {fileID: 3283635716051111724}
   m_LayerIndex: 0
   m_ShowDebugText: 0
-  m_ChildCameras:
-  - {fileID: 2553144517043599824}
-  - {fileID: 4416801790696475369}
-  - {fileID: 4542030576551225977}
+  m_ChildCameras: []
   m_Instructions:
   - m_FullHash: -178524345
     m_VirtualCamera: {fileID: 2553144517043599824}
@@ -1192,6 +1189,7 @@ MonoBehaviour:
   shadow: {fileID: 5567448235291450199}
   shadow2: {fileID: 2240117920719751163}
   climb_up_bool: 0
+  player_mate: {fileID: 2100000, guid: eaedc0b41a02f814f9852cabe496c727, type: 2}
 --- !u!114 &7914510643502694924
 MonoBehaviour:
   m_ObjectHideFlags: 0
