@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6379256665091790072}
   - component: {fileID: 1887063111188155254}
   - component: {fileID: 6195078963760853717}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: brown_seed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,6 +92,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52103e7d9c5e76542835598946cccb8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  render: {fileID: 0}
+  collider: {fileID: 0}
 --- !u!135 &6195078963760853717
 SphereCollider:
   m_ObjectHideFlags: 0
