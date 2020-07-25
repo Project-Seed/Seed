@@ -13,7 +13,7 @@ Properties {
 SubShader {
     Tags {"Queue"="AlphaTest" "IgnoreProjector"="True" "RenderType"="TransparentCutout"}
     LOD 200
-    Cull OFF
+
 CGPROGRAM
 #pragma target 3.0
 #pragma surface surf Lambert alphatest:_Cutoff vertex:vert addshadow
@@ -47,7 +47,7 @@ void FastSinCos (float4 val, out float4 s, out float4 c) {
  
 void vert (inout appdata_full v) {
    
-    float factor = (1 - _ShakeDisplacement -  v.color.r) * 0.5;
+	float factor = (1 - _ShakeDisplacement -  v.color.r) * 0.5;
        
     const float _WindSpeed  = (_ShakeWindspeed  +  v.color.g );    
     const float _WaveScale = _ShakeDisplacement;

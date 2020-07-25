@@ -39,6 +39,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Illum:
+        m_Texture: {fileID: 2800000, guid: 5a57fb0f7c6b0d24cb245cbf93273acd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 615389b2b29a4fe4e92c1dc2a24fa1c8, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -55,6 +59,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Ramp:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -67,14 +75,18 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _Rigidness: 25
     - _ShakeBending: 0.3
     - _ShakeDisplacement: 0.3
     - _ShakeTime: 0.3
     - _ShakeWindspeed: 0.3
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _Speed: 25
     - _SrcBlend: 1
+    - _SwayMax: 0.005
     - _UVSec: 0
+    - _YOffset: 0.5
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
