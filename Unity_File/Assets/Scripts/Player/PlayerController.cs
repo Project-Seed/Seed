@@ -77,15 +77,15 @@ public class PlayerController : MonoBehaviour
 
         for (int i = 0; i < 20; i++)
         {
-            gameObject.transform.Translate(0, 0.02f, 0);
+            gameObject.transform.Translate(0, 0.02f, 0.01f);
             yield return new WaitForSeconds(0.01f);
         }
 
         yield return new WaitForSeconds(1.4f);
 
-        for (int i = 0; i < 35; i++)
+        for (int i = 0; i < 30; i++)
         {
-            gameObject.transform.Translate(0, 0.03f, 0);
+            gameObject.transform.Translate(0, 0.025f, 0.01f);
             yield return new WaitForSeconds(0.01f);
         }
 
