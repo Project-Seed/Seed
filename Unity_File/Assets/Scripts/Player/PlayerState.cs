@@ -69,7 +69,6 @@ public class PlayerState : MonoBehaviour
             if (fly_y - 4f > gameObject.transform.position.y && state_sky == 0)
             {
                 animator.SetTrigger("sky_ing");
-                Debug.Log("sky_ing");
                 state_sky = 1;
             }
         }
@@ -145,7 +144,9 @@ public class PlayerState : MonoBehaviour
             lending_time = true;
             StartCoroutine("lending_coroutine");
 
-            State.instance.hp_down(2);
+
+            int reduce_num = (int)(fly_y - gameObject.transform.position.y) / 4;
+            State.instance.hp_down(reduce_num);
         }
         state_fly = 0; 
     }

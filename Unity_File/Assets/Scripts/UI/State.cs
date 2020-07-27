@@ -122,10 +122,13 @@ public class State : MonoBehaviour
     {
         for(int i=0; i<num; i++)
         {
-            int hp_int = (PlayerState.instance.hp - 1) / 2;
-            hearts[hp_int].GetComponent<Heart>().hp_down((PlayerState.instance.hp - 1) % 2);
+            if (PlayerState.instance.hp != 0)
+            {
+                int hp_int = (PlayerState.instance.hp - 1) / 2;
+                hearts[hp_int].GetComponent<Heart>().hp_down((PlayerState.instance.hp - 1) % 2);
 
-            PlayerState.instance.hp--;
+                PlayerState.instance.hp--;
+            }
         }
     }
 
