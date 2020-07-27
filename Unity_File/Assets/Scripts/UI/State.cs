@@ -16,6 +16,8 @@ public class State : MonoBehaviour
     public GameObject viewport_hp;
     public GameObject viewport_radi;
 
+    public Bleeding bleeding;
+
     public bool white_seed; // 하얀 충돌했는지
 
 
@@ -120,6 +122,7 @@ public class State : MonoBehaviour
 
     public void hp_down(int num)
     {
+        bleeding.Attacked();
         for(int i=0; i<num; i++)
         {
             if (PlayerState.instance.hp != 0)
