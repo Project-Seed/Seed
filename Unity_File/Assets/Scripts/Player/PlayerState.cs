@@ -62,6 +62,8 @@ public class PlayerState : MonoBehaviour
             InputManager.instance.click_mod = 1;
             die_check = true;
             animator.SetTrigger("die");
+
+            StartCoroutine(gameover_image());
         }
 
         if (state_fly == 1 && dont_fly == false)
@@ -103,15 +105,11 @@ public class PlayerState : MonoBehaviour
         animator.SetInteger("move", state_move);
     }
 
-    /*
-    private void LateUpdate()
+    IEnumerator gameover_image()
     {
-        if (shoot_check)
-        {
-            spine.LookAt(target.position); //플레이어의 상체부분이 타겟 위치 보기
-            spine.rotation = Quaternion.Euler(ress);
-        }
-    }*/
+        yield return new WaitForSeconds(4f);
+        GameObject.Find("Game_over").GetComponent<Game_over>().image_on();
+    }
 
     public void dash_on()
     {
