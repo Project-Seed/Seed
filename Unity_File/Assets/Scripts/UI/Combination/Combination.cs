@@ -144,7 +144,7 @@ public class Combination : MonoBehaviour
             Eat_system.instance.eat_item(recipe_choose);
 
             StartCoroutine(GameObject.Find("BigItem_get").GetComponent<BigItem_get>().
-                        active_on(recipe_choose));
+                        active_on(recipe_choose, false));
 
             for (int i = 1; i <= System.Convert.ToInt32(GameSystem.instance.combination_list[seach_num]["item_num"]); i++)
             {

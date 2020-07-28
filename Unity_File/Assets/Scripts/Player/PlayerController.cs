@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.Assertions.Must;
+using UnityEngine.Experimental.XR;
 
 public class PlayerController : MonoBehaviour
 {
@@ -58,6 +59,8 @@ public class PlayerController : MonoBehaviour
     public bool climb_up_bool = false;
 
     public Material player_mate;
+
+    public GameObject chest_ob;
 
     int right_crash = 0; // 우클릭 중복 때매
 
@@ -512,6 +515,12 @@ public class PlayerController : MonoBehaviour
                 eat_objects.GetComponent<SphereCollider>().enabled = false;
                 StartCoroutine(Key_guide.instance.object_ing());
             }
+
+            if (Input.GetKeyDown(KeyCode.E) && Key_guide.instance.door.activeSelf)
+            {
+                StartCoroutine(Key_guide.instance.door_ing());
+                chest_ob.GetComponent<Chest>().open();
+            }
         }
 
         // 열려라 도감!
@@ -612,6 +621,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+        Debug.Log(collision.name);
+
         if (collision.gameObject.name == "left")
             hang_vecter = 0;
         else if (collision.gameObject.name == "right")
@@ -653,6 +664,15 @@ public class PlayerController : MonoBehaviour
 
             Key_guide.instance.climb_on();
         }
+
+        if(collision.gameObject.name == "Chest_trigger")
+        {
+            if (collision.gameObject.GetComponent<Chest>().on == false)
+            {
+                chest_ob = collision.gameObject;
+                Key_guide.instance.door_on();
+            }
+        }
     }
 
     private void OnTriggerExit(Collider collision)
@@ -679,6 +699,11 @@ public class PlayerController : MonoBehaviour
             climb_crash = false;
 
             Key_guide.instance.climb_off();
+        }
+
+        if (collision.gameObject.name == "Chest_trigger")
+        {
+            Key_guide.instance.door_off();
         }
     }
 

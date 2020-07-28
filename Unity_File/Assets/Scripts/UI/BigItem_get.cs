@@ -13,6 +13,8 @@ public class BigItem_get : MonoBehaviour
     public GameObject kira1;
     public GameObject kira2;
 
+    bool mouse_s = false;
+
     private void Awake()
     {
         background.GetComponent<Button>().enabled = false;
@@ -29,8 +31,14 @@ public class BigItem_get : MonoBehaviour
         kira2.transform.Rotate(0, 0, -150 * Time.deltaTime);
     }
 
-    public IEnumerator active_on(string names)
+    public IEnumerator active_on(string names, bool mouse)
     {
+        if(mouse)
+        {
+            mouse_s = mouse;
+            InputManager.instance.game_stop();
+        }
+
         background.color = new Color(0, 0, 0, 0);
         name_text.color = new Color(1, 1, 1, 0);
         explanation_text.color = new Color(1, 1, 1, 0);
@@ -62,6 +70,7 @@ public class BigItem_get : MonoBehaviour
 
     public void click()
     {
+        Debug.Log("click");
         StartCoroutine(active_off());
 
         background.GetComponent<Button>().enabled = false;
@@ -77,6 +86,12 @@ public class BigItem_get : MonoBehaviour
             image.color = new Color(1, 1, 1, (20 - i) / 20f);
 
             yield return new WaitForSeconds(0.01f);
+        }
+
+        if (mouse_s)
+        {
+            mouse_s = false;
+            InputManager.instance.game_start();
         }
 
         back_ob.SetActive(false);
