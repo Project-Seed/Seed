@@ -43,6 +43,9 @@ public class PlayerState : MonoBehaviour
     public Vector3 ress;
 
 
+    public GameObject game_overs;
+
+
     public static PlayerState Instance
     {
         get { return instance; }
@@ -59,7 +62,7 @@ public class PlayerState : MonoBehaviour
     {
         if (hp <= 0 && die_check == false)
         {
-            InputManager.instance.click_mod = 1;
+            InputManager.instance.game_stop();
             die_check = true;
             animator.SetTrigger("die");
 
@@ -108,7 +111,8 @@ public class PlayerState : MonoBehaviour
     IEnumerator gameover_image()
     {
         yield return new WaitForSeconds(4f);
-        GameObject.Find("Game_over").GetComponent<Game_over>().image_on();
+        game_overs.SetActive(true);
+        game_overs.GetComponent<Game_over>().image_on();
     }
 
     public void dash_on()
