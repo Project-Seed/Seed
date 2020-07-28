@@ -55,7 +55,7 @@ public class PlayerState : MonoBehaviour
     {
         instance = this;
 
-        spine = animator.GetBoneTransform(HumanBodyBones.Chest); // 상체값 가져오기
+        //spine = animator.GetBoneTransform(HumanBodyBones.Chest); // 상체값 가져오기
     }
 
     void Update()

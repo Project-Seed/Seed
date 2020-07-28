@@ -502,7 +502,7 @@ public class PlayerController : MonoBehaviour
                             Instantiate(Resources.Load<GameObject>("Tutorial/Plant_book"), GameObject.Find("Canvas").transform);
                             Eat_system.instance.eat_item("key");
                             Eat_system.instance.eat_item("mini_latter");
-                            InputManager.instance.click_mod = 1;
+                            InputManager.instance.game_stop();
                         break;
 
                     case "Paper":
@@ -613,7 +613,7 @@ public class PlayerController : MonoBehaviour
     {
         player_state.jump();
 
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.0f);
 
         player_rigidbody.AddForce(Vector3.up * player_jump_power, ForceMode.Impulse);   //점프
         StartCoroutine(StopJumping());
@@ -621,8 +621,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log(collision.name);
-
         if (collision.gameObject.name == "left")
             hang_vecter = 0;
         else if (collision.gameObject.name == "right")
