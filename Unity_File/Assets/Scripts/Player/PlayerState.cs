@@ -43,6 +43,9 @@ public class PlayerState : MonoBehaviour
     public Vector3 ress;
 
 
+    public GameObject game_overs;
+
+
     public static PlayerState Instance
     {
         get { return instance; }
@@ -52,16 +55,18 @@ public class PlayerState : MonoBehaviour
     {
         instance = this;
 
-        spine = animator.GetBoneTransform(HumanBodyBones.Chest); // 상체값 가져오기
+        //spine = animator.GetBoneTransform(HumanBodyBones.Chest); // 상체값 가져오기
     }
 
     void Update()
     {
         if (hp <= 0 && die_check == false)
         {
-            InputManager.instance.click_mod = 1;
+            InputManager.instance.game_stop();
             die_check = true;
             animator.SetTrigger("die");
+
+            StartCoroutine(gameover_image());
         }
 
         if (state_fly == 1 && dont_fly == false)
@@ -69,7 +74,6 @@ public class PlayerState : MonoBehaviour
             if (fly_y - 4f > gameObject.transform.position.y && state_sky == 0)
             {
                 animator.SetTrigger("sky_ing");
-                Debug.Log("sky_ing");
                 state_sky = 1;
             }
         }
@@ -104,15 +108,12 @@ public class PlayerState : MonoBehaviour
         animator.SetInteger("move", state_move);
     }
 
-    /*
-    private void LateUpdate()
+    IEnumerator gameover_image()
     {
-        if (shoot_check)
-        {
-            spine.LookAt(target.position); //플레이어의 상체부분이 타겟 위치 보기
-            spine.rotation = Quaternion.Euler(ress);
-        }
-    }*/
+        yield return new WaitForSeconds(4f);
+        game_overs.SetActive(true);
+        game_overs.GetComponent<Game_over>().image_on();
+    }
 
     public void dash_on()
     {
@@ -145,7 +146,9 @@ public class PlayerState : MonoBehaviour
             lending_time = true;
             StartCoroutine("lending_coroutine");
 
-            State.instance.hp_down(2);
+
+            int reduce_num = (int)(fly_y - gameObject.transform.position.y) / 4;
+            State.instance.hp_down(reduce_num);
         }
         state_fly = 0; 
     }

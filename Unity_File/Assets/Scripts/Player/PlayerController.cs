@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.Assertions.Must;
+using UnityEngine.Experimental.XR;
 
 public class PlayerController : MonoBehaviour
 {
@@ -59,6 +60,8 @@ public class PlayerController : MonoBehaviour
 
     public Material player_mate;
 
+    public GameObject chest_ob;
+
     int right_crash = 0; // 우클릭 중복 때매
 
     IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 0.3초간 점프금지
@@ -77,15 +80,15 @@ public class PlayerController : MonoBehaviour
 
         for (int i = 0; i < 20; i++)
         {
-            gameObject.transform.Translate(0, 0.02f, 0);
+            gameObject.transform.Translate(0, 0.02f, 0.01f);
             yield return new WaitForSeconds(0.01f);
         }
 
         yield return new WaitForSeconds(1.4f);
 
-        for (int i = 0; i < 35; i++)
+        for (int i = 0; i < 30; i++)
         {
-            gameObject.transform.Translate(0, 0.03f, 0);
+            gameObject.transform.Translate(0, 0.025f, 0.01f);
             yield return new WaitForSeconds(0.01f);
         }
 
@@ -499,7 +502,7 @@ public class PlayerController : MonoBehaviour
                             Instantiate(Resources.Load<GameObject>("Tutorial/Plant_book"), GameObject.Find("Canvas").transform);
                             Eat_system.instance.eat_item("key");
                             Eat_system.instance.eat_item("mini_latter");
-                            InputManager.instance.click_mod = 1;
+                            InputManager.instance.game_stop();
                         break;
 
                     case "Paper":
@@ -511,6 +514,12 @@ public class PlayerController : MonoBehaviour
 
                 eat_objects.GetComponent<SphereCollider>().enabled = false;
                 StartCoroutine(Key_guide.instance.object_ing());
+            }
+
+            if (Input.GetKeyDown(KeyCode.E) && Key_guide.instance.door.activeSelf)
+            {
+                StartCoroutine(Key_guide.instance.door_ing());
+                chest_ob.GetComponent<Chest>().open();
             }
         }
 
@@ -604,7 +613,7 @@ public class PlayerController : MonoBehaviour
     {
         player_state.jump();
 
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.0f);
 
         player_rigidbody.AddForce(Vector3.up * player_jump_power, ForceMode.Impulse);   //점프
         StartCoroutine(StopJumping());
@@ -653,6 +662,15 @@ public class PlayerController : MonoBehaviour
 
             Key_guide.instance.climb_on();
         }
+
+        if(collision.gameObject.name == "Chest_trigger")
+        {
+            if (collision.gameObject.GetComponent<Chest>().on == false)
+            {
+                chest_ob = collision.gameObject;
+                Key_guide.instance.door_on();
+            }
+        }
     }
 
     private void OnTriggerExit(Collider collision)
@@ -679,6 +697,11 @@ public class PlayerController : MonoBehaviour
             climb_crash = false;
 
             Key_guide.instance.climb_off();
+        }
+
+        if (collision.gameObject.name == "Chest_trigger")
+        {
+            Key_guide.instance.door_off();
         }
     }
 
