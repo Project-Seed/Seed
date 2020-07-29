@@ -237,4 +237,9 @@ public class PlayerState : MonoBehaviour
         InputManager.instance.game_start();
         animator.SetTrigger("lying_end");
     }
+
+    public void box_open()
+    {
+        animator.SetTrigger("box_open");
+    }
 }

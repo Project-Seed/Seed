@@ -520,6 +520,10 @@ public class PlayerController : MonoBehaviour
             {
                 StartCoroutine(Key_guide.instance.door_ing());
                 chest_ob.GetComponent<Chest>().open();
+
+                rotate_ob.transform.LookAt(chest_ob.transform);
+                rotate_ob.transform.rotation = new Quaternion(0,rotate_ob.transform.rotation.y,0,0);
+                player_state.box_open();
             }
         }
 
