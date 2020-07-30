@@ -109,24 +109,15 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(0.3f);
 
-        if (hang_vecter == 0)
-        {
-            hang_x = (hang_ob.transform.position.x - 0.0f - gameObject.transform.position.x) / 10f;
-            hang_y = (hang_ob.transform.position.y + 0.2f - gameObject.transform.position.y - 1f) / 10f;
-            hang_z = (hang_ob.transform.position.z - gameObject.transform.position.z) / 10f;
-        }
-        else
-        {
-            hang_x = (hang_ob.transform.position.x + 0.0f - gameObject.transform.position.x) / 10f;
-            hang_y = (hang_ob.transform.position.y + 0.2f - gameObject.transform.position.y - 1f) / 10f;
-            hang_z = (hang_ob.transform.position.z - gameObject.transform.position.z) / 10f;
-        }
+        hang_x = (hang_ob.transform.position.x - gameObject.transform.position.x) / 10f;
+        hang_y = (hang_ob.transform.position.y + 0.2f - gameObject.transform.position.y - 1f) / 10f;
+        hang_z = (hang_ob.transform.position.z - gameObject.transform.position.z) / 10f;
 
         for (int i = 0; i < 10; i++)
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x + hang_x, gameObject.transform.position.y + hang_y, gameObject.transform.position.z + hang_z);
 
-            gameObject.transform.Translate(-transform.forward / 20f);
+            //gameObject.transform.Translate(-rotate_ob.transform.forward / 20f);
             yield return new WaitForSeconds(0.01f);
         }
 
@@ -140,7 +131,7 @@ public class PlayerController : MonoBehaviour
 
         for (int i = 0; i < 10; i++)
         {
-            gameObject.transform.Translate(rotate_ob.transform.forward * Time.deltaTime * 15,Space.World);
+            gameObject.transform.Translate(rotate_ob.transform.forward * Time.deltaTime * 15, Space.World);
             
             yield return new WaitForSeconds(0.01f);
         }
@@ -625,11 +616,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.name == "left")
-            hang_vecter = 0;
-        else if (collision.gameObject.name == "right")
-            hang_vecter = 1;
-
         switch(collision.gameObject.name)
         {
             case "trigger1":
