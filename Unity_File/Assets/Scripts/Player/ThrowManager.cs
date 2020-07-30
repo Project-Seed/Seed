@@ -60,7 +60,7 @@ public class ThrowManager : MonoBehaviour
 
     private bool isPlantable()
     {
-        float distance = 20.0f;
+        float distance = 10.0f;
         //Debug.DrawRay(sub_cam.position, sub_cam.forward * distance, Color.green, 3.0f);
         if (Physics.Raycast(sub_cam.position, sub_cam.forward, out RaycastHit hit, distance))
         {
@@ -170,7 +170,7 @@ public class ThrowManager : MonoBehaviour
         //Debug.Log("Throw Aim : " + aimForward);
 
         //tmp.GetComponent<Plant>().red_go = aimForward;
-        bullet_rig.AddForce(dest * 10, ForceMode.Impulse);
+        bullet_rig.AddForce(dest * 20, ForceMode.Impulse);
 
         //StartCoroutine(cameraShaker.CameraShake(0.15f, 0.1f));
         //궤도를 따라 움직이는 코루틴 시작

@@ -53,7 +53,17 @@ public class CameraRotater : MonoBehaviour
 
         far = camera_offset.magnitude;
     }
-
+    //private void Update()
+    //{
+    //    Ray rayFront = new Ray(transform.position, transform.forward);
+    //    if(Physics.Raycast(rayFront,out RaycastHit hit, camera_offset.magnitude))
+    //    {
+    //        if (hit.transform.CompareTag("Player")) return;
+    //        //플레이어 말고 다른게 부딪혔다! (지형 지물 빼고 다 Raycast Off해놓기)
+    //        if (camera_offset.magnitude > maxZoomin)
+    //            camera_offset /= 1.1f;
+    //    }
+    //}
     private void LateUpdate()
     {
         if (InputManager.instance.click_mod != 0)
@@ -167,7 +177,7 @@ public class CameraRotater : MonoBehaviour
         //카메라 뒷 공간이 origin offset으로 갈 만큼 있어야함.
         //origin이랑 지금 클로즈업 된 카메라 사이의 거리만큼 레이를 쏘고 그만큼 여유 있으면 뒤로감
         float backDistance = origin_camera_offset.magnitude - camera_offset.magnitude;
-        Debug.DrawLine(transform.position, transform.position+origin_camera_offset, Color.red,3.0f);
+        Debug.DrawLine(transform.position, transform.position + origin_camera_offset, Color.red, 3.0f);
         if (!Physics.Raycast(ray, backDistance))
         {
             StartCoroutine(SmoothBackCam());
