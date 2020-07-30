@@ -147,7 +147,6 @@ public class CameraRotater : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Enter");
         if (other.CompareTag("Player")) return;
         if (camera_offset.magnitude > maxZoomin)
             camera_offset /= 1.1f;
@@ -173,8 +172,6 @@ public class CameraRotater : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("exit");
-
         isCollided = false;
         Ray ray = new Ray(transform.localPosition, camera_offset);
         //카메라 뒷 공간이 origin offset으로 갈 만큼 있어야함.

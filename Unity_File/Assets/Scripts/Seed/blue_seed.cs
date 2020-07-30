@@ -19,6 +19,11 @@ public class blue_seed : MonoBehaviour
             pc.hang_ob = blue;
             pc.hang_crash = true;
 
+            if (gameObject.name == "left")
+                pc.hang_vecter = 0;
+            else
+                pc.hang_vecter = 1;
+
             Key_guide.instance.climb_on();
         }
     }
