@@ -116,8 +116,6 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x + hang_x, gameObject.transform.position.y + hang_y, gameObject.transform.position.z + hang_z);
-
-            //gameObject.transform.Translate(-rotate_ob.transform.forward / 20f);
             yield return new WaitForSeconds(0.01f);
         }
 
