@@ -91,8 +91,9 @@ public class PlayerState : MonoBehaviour
             idle_time += Time.deltaTime;
 
 
-        float climb_blend = 0;
+        float climb_blend = 0.5f;
 
+        /*
         if (updown_check && !left_check && !right_check)
             climb_blend = 0.5f;
         else if (updown_check && left_check && !right_check)
@@ -103,6 +104,7 @@ public class PlayerState : MonoBehaviour
             climb_blend = 0f;
         else if (!updown_check && !left_check && right_check)
             climb_blend = 1f;
+        */
 
         animator.SetFloat("climb_Blend", climb_blend);
         animator.SetInteger("move", state_move);

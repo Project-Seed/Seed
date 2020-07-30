@@ -37,8 +37,8 @@ public class PlayerController : MonoBehaviour
 
     public bool climb_crash = false; // 갈색 충돌시 true
     public bool climb_mod = false; // 갈색 충돌시 키 누르면 true
-    public Vector3 climb_po; // 충돌후 갈색 위치, 오르기 제한 범위때매
-    public Quaternion climb_ro; // 충돌후 갈색 각도, r 누를때 정면 바라보기 위해
+    public GameObject climb_ob;
+    public GameObject climb_point_ob;// 갈색에서 매달릴곳
     public bool climb_time = false; // 매달리면 0.5초간만트루
 
     public bool hang_crash = false; // 파랑 충돌시 true
@@ -213,13 +213,10 @@ public class PlayerController : MonoBehaviour
                     climb_mod = true;
                     player_state.climb_on();
 
-                    rotate_ob.transform.rotation = new Quaternion(0, 0, 0, 0);
-                    //transform.Translate(0, 0.3f, 0.2f);
-                    transform.localRotation = Quaternion.Euler(-climb_ro.eulerAngles.x, climb_ro.eulerAngles.y + 180, 0);
-                    //lookAt = transform.forward;
-                    //Quaternion dir2 = main_cam.localRotation;
-                    //dir2.x = 0f; dir2.z = 0f;
-                    //transform.localRotation = dir2;
+                    gameObject.transform.position = climb_point_ob.transform.position;
+                    rotate_ob.transform.LookAt(climb_ob.transform);
+                    Debug.Log(rotate_ob.transform.localRotation.eulerAngles.y);
+                    rotate_ob.transform.localRotation = Quaternion.Euler(0, rotate_ob.transform.localRotation.eulerAngles.y, 0);
 
                     climb_time = true;
                     StartCoroutine(climb_05());
@@ -310,35 +307,6 @@ public class PlayerController : MonoBehaviour
                             player_state.dash_off();
                             is_run = false;
                         }
-                    }
-                    
-                    else if (GameSystem.instance.item_search(qick.choose_item, "category") == "consumable")
-                    {/*
-                        // 같은 내용 inventory 스크립트에도 적기!!!!!!!ㅈ
-
-                        if (GameSystem.instance.item_num[qick.item_name] >= 1 && InputManager.instance.click_mod == 0)
-                        {
-                            switch (GameSystem.instance.item_search(qick.item_name, "name"))
-                            {
-                                case "portion":
-                                    if (PlayerState.instance.hp + 4 < PlayerState.instance.max_hp)
-                                        State.instance.hp_up(4);
-                                    else
-                                        State.instance.hp_up(PlayerState.instance.max_hp - PlayerState.instance.hp);
-
-                                    GameSystem.instance.item_num[qick.item_name]--;
-
-                                    if (GameSystem.instance.item_num[qick.item_name] == 0)
-                                        GameSystem.instance.item_time.Remove(qick.item_name);
-                                    break;
-
-                                case "mini_latter":
-                                    InputManager.instance.click_mod = 1;
-                                    Quest_clear_system.instance.clear_trigger[8]++;
-                                    Instantiate(Resources.Load<GameObject>("Tutorial/Mini_latter"), GameObject.Find("Canvas").transform);
-                                    break;
-                            }
-                        }*/
                     }
                 }
                 //우클릭 발사 취소.
@@ -510,8 +478,9 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(Key_guide.instance.door_ing());
                 chest_ob.GetComponent<Chest>().open();
 
+
                 rotate_ob.transform.LookAt(chest_ob.transform);
-                rotate_ob.transform.rotation = new Quaternion(0,rotate_ob.transform.rotation.y,0,0);
+                rotate_ob.transform.localRotation = Quaternion.Euler(new Vector3(0, rotate_ob.transform.localRotation.eulerAngles.y, 0));
                 player_state.box_open();
             }
         }
@@ -644,8 +613,8 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.name == "brown_trigger" && climb_mod == false)
         {
-            climb_ro = collision.transform.rotation;
-            climb_po = collision.transform.position;
+            climb_ob = collision.gameObject;
+            climb_point_ob = collision.gameObject.GetComponent<brown_trigger>().climb_point_ob;
             climb_crash = true;
 
             Key_guide.instance.climb_on();

@@ -20,7 +20,6 @@ public class Bleeding : MonoBehaviour
 
         while (sumTime < bleedingTime / 2)
         {
-            Debug.Log(alpha);
             alpha += Time.deltaTime / bleedingTime;
             img.color = new Color(1f, 1f, 1f, alpha);
             sumTime += Time.deltaTime / bleedingTime;
@@ -32,7 +31,6 @@ public class Bleeding : MonoBehaviour
         }
         while (sumTime >= bleedingTime / 2 && sumTime < bleedingTime)
         {
-            Debug.Log(alpha);
             alpha -= Time.deltaTime / bleedingTime; 
             img.color = new Color(1f, 1f, 1f, alpha);
             sumTime += Time.deltaTime / bleedingTime;
