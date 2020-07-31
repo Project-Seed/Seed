@@ -6,7 +6,7 @@ public class Shadow2 : MonoBehaviour
 {
     public PlayerController playerController;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
