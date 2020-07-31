@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
     public GameObject climb_ob;
     public GameObject climb_point_ob;// 갈색에서 매달릴곳
     public bool climb_time = false; // 매달리면 0.5초간만트루
+    public GameObject climb_head; // 상단 이동 위해서
+    public GameObject climb_fornt; // 앞 이동 위해서
 
     public bool hang_crash = false; // 파랑 충돌시 true
     public int hang_mod = 0; // 기본 0 매달리기 1 떨어지기 2
@@ -76,6 +78,7 @@ public class PlayerController : MonoBehaviour
         player_state.climb_up();
         climb_up_bool = true;
 
+        /*
         yield return new WaitForSeconds(0.4f);
 
         for (int i = 0; i < 20; i++)
@@ -93,6 +96,11 @@ public class PlayerController : MonoBehaviour
         }
 
         yield return new WaitForSeconds(0.2f);
+        */
+        gameObject.transform.Translate(rotate_ob.transform.forward * 2);
+        gameObject.transform.Translate(rotate_ob.transform.up * 2);
+        yield return new WaitForSeconds(3f);
+        
 
         climb_up_bool = false;
         shadow_out();
@@ -213,10 +221,14 @@ public class PlayerController : MonoBehaviour
                     climb_mod = true;
                     player_state.climb_on();
 
+                    Vector3 a = climb_fornt.transform.position;
                     gameObject.transform.position = climb_point_ob.transform.position;
                     rotate_ob.transform.LookAt(climb_ob.transform);
-                    Debug.Log(rotate_ob.transform.localRotation.eulerAngles.y);
-                    rotate_ob.transform.localRotation = Quaternion.Euler(0, rotate_ob.transform.localRotation.eulerAngles.y, 0);
+                    gameObject.transform.position = a;
+                    //gameObject.transform.Translate((climb_fornt.transform.position - rotate_ob.transform.position).normalized * 0.5f);
+
+                    // Debug.Log(rotate_ob.transform.localRotation.eulerAngles.y);
+                    // rotate_ob.transform.localRotation = Quaternion.Euler(0, rotate_ob.transform.localRotation.eulerAngles.y, 0);
 
                     climb_time = true;
                     StartCoroutine(climb_05());
@@ -254,9 +266,9 @@ public class PlayerController : MonoBehaviour
 
 
                 if (Input.GetKey(KeyCode.W))
-                    gameObject.transform.Translate(0, Time.deltaTime, 0);
+                    gameObject.transform.Translate((climb_head.transform.position - rotate_ob.transform.position).normalized * Time.deltaTime);
                 if (Input.GetKey(KeyCode.S))
-                    gameObject.transform.Translate(0, -Time.deltaTime, 0);
+                    gameObject.transform.Translate((climb_head.transform.position - rotate_ob.transform.position).normalized * -Time.deltaTime);
                 /*
                 if (Input.GetKey(KeyCode.D))
                     gameObject.transform.Translate(Time.deltaTime, 0, 0);
@@ -264,7 +276,7 @@ public class PlayerController : MonoBehaviour
                     gameObject.transform.Translate(-Time.deltaTime, 0, 0);
                 */
 
-                if(climb_crash == false) // 떨어진다!
+                if (climb_crash == false) // 떨어진다!
                 {
                     climb_mod = false;
                     player_state.climb_off();
@@ -613,7 +625,7 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.name == "brown_trigger" && climb_mod == false)
         {
-            climb_ob = collision.gameObject;
+            climb_ob = collision.gameObject.GetComponent<brown_trigger>().climb_model_ob;
             climb_point_ob = collision.gameObject.GetComponent<brown_trigger>().climb_point_ob;
             climb_crash = true;
 

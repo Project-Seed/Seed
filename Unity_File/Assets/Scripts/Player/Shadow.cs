@@ -17,7 +17,6 @@ public class Shadow : MonoBehaviour
     {
         if (other.gameObject.name == "brown_trigger" && a)
         {
-            Debug.Log("dd");
             a = false;
             StartCoroutine(playerController.climb_up());
         }

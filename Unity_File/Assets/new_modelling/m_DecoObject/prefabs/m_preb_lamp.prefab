@@ -600,7 +600,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 50
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -4923,7 +4923,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -4952,7 +4952,7 @@ GameObject:
   - component: {fileID: 3459764526354700228}
   - component: {fileID: 2561439030439839090}
   m_Layer: 0
-  m_Name: M_Lamp (2)
+  m_Name: m_preb_lamp
   m_TagString: Plantable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

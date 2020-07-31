@@ -8,7 +8,6 @@ public class CameraRotater : MonoBehaviour
     // 캐릭터 주위를 회전. 카메라만 별도로 움직임.
     public Transform head;
     public Transform player;
-    [SerializeField] private float rotate_angle = 2.0f;        // 카메라 회전각도 (1초에 2도)
     public Vector3 offset;
     public float rotate_speed = 2.0f;
     public float minY = -40f;
