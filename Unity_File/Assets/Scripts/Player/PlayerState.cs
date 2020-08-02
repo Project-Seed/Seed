@@ -191,6 +191,7 @@ public class PlayerState : MonoBehaviour
     {
         animator.ResetTrigger("climb_off");
         animator.ResetTrigger("climb_up");
+        animator.SetBool("climb_finish", false);
         animator.SetTrigger("climb_on");
         dont_fly = true;
         state_sky = 0;
@@ -203,6 +204,13 @@ public class PlayerState : MonoBehaviour
     public void climb_up()
     {
         animator.SetTrigger("climb_up");
+    }
+
+    public void climb_finish()
+    {
+        animator.SetBool("climb_finish", true);
+
+        gameObject.transform.position = gameObject.GetComponent<PlayerController>().climb_finish.transform.position;
     }
 
     public void hang_on()

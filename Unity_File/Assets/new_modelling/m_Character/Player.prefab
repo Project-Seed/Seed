@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 644362430610815821}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6688135207076952842}
@@ -79,7 +79,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   head: {fileID: 2139280866815697494}
   player: {fileID: 8780300512582525261}
-  rotate_angle: 2
   offset: {x: 0, y: 0, z: 0}
   rotate_speed: 1
   minY: -50
@@ -451,7 +450,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2290084937190997130}
-  m_LocalRotation: {x: 0.5075687, y: -0.000000023203945, z: 0.000000013669269, w: 0.8616113}
+  m_LocalRotation: {x: 0.5075687, y: -0.000000026239757, z: 0.000000015457644, w: 0.8616113}
   m_LocalPosition: {x: 0, y: 3.09, z: -1.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -631,6 +630,36 @@ MonoBehaviour:
     m_ParentHash: 756556552
   - m_Hash: -557323768
     m_ParentHash: 756556552
+--- !u!1 &3993871053304461258
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1904782035634082242}
+  m_Layer: 0
+  m_Name: climb_finish
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1904782035634082242
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3993871053304461258}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0.2}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 6688135207076952842}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5559392077596502287
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,7 +947,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   head: {fileID: 9037311857879858183}
   player: {fileID: 8780300512582525261}
-  rotate_angle: 2
   offset: {x: 0, y: 0, z: 0}
   rotate_speed: 1
   minY: -70
@@ -1244,6 +1272,7 @@ MonoBehaviour:
   climb_time: 0
   climb_head: {fileID: 5559392077596502287}
   climb_fornt: {fileID: 644362430610815821}
+  climb_finish: {fileID: 3993871053304461258}
   hang_crash: 0
   hang_mod: 0
   hang_ob: {fileID: 0}
@@ -1334,6 +1363,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: C4_seed_Ani20@default
+      objectReference: {fileID: 0}
+    - target: {fileID: 2187449669427467095, guid: 85d3fb5d7baca2141976d1c110709470,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 85d3fb5d7baca2141976d1c110709470,
         type: 3}

@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     public bool climb_time = false; // 매달리면 0.5초간만트루
     public GameObject climb_head; // 상단 이동 위해서
     public GameObject climb_fornt; // 앞 이동 위해서
+    public GameObject climb_finish;
 
     public bool hang_crash = false; // 파랑 충돌시 true
     public int hang_mod = 0; // 기본 0 매달리기 1 떨어지기 2
@@ -78,29 +79,10 @@ public class PlayerController : MonoBehaviour
         player_state.climb_up();
         climb_up_bool = true;
 
-        /*
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(4f);
 
-        for (int i = 0; i < 20; i++)
-        {
-            gameObject.transform.Translate(0, 0.02f, 0.01f);
-            yield return new WaitForSeconds(0.01f);
-        }
-
-        yield return new WaitForSeconds(1.4f);
-
-        for (int i = 0; i < 30; i++)
-        {
-            gameObject.transform.Translate(0, 0.025f, 0.01f);
-            yield return new WaitForSeconds(0.01f);
-        }
-
-        yield return new WaitForSeconds(0.2f);
-        */
-        gameObject.transform.Translate(rotate_ob.transform.forward * 2);
-        gameObject.transform.Translate(rotate_ob.transform.up * 2);
-        yield return new WaitForSeconds(3f);
-        
+        player_state.climb_finish();
+  
 
         climb_up_bool = false;
         shadow_out();
