@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExampleItem : MonoBehaviour, IItem
+public class ExampleItem : MonoBehaviour
 {
-    public MeshRenderer render;
-    public SphereCollider collider;
+    public List<GameObject> items;
+    public bool mountain;
+
+    private MeshRenderer render;
+    private new SphereCollider collider;
     private ParticleSystem twinkle;
 
     private void Awake()
@@ -36,10 +39,5 @@ public class ExampleItem : MonoBehaviour, IItem
     {
         yield return new WaitForSeconds(30f);
         make();
-    }
-
-    public void Collided()
-    {
-        Debug.Log("Collied with Example Item!");
     }
 }

@@ -626,7 +626,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit(Collider collision)
     {
-        IItem item = collision.GetComponent<IItem>(); //IItem을 상속받는 모든 아이템들
+        ExampleItem item = collision.GetComponent<ExampleItem>(); //IItem을 상속받는 모든 아이템들
         if (item != null)                         //아이템과 부딪혔다면 함수를 호출하고 지움.
         {
             Key_guide.instance.item_off();
@@ -658,7 +658,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay(Collider collision)
     {
-        IItem item = collision.GetComponent<IItem>(); //IItem을 상속받는 모든 아이템들
+        ExampleItem item = collision.GetComponent<ExampleItem>(); //IItem을 상속받는 모든 아이템들
         if (item != null)                         //아이템과 부딪혔다면 함수를 호출하고 지움.
         {
             eat_bool = true;
