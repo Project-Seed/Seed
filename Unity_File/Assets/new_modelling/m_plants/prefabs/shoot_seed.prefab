@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 557861872891006086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -111,6 +111,26 @@ MonoBehaviour:
   plant: {fileID: 0}
   seed_name: 
   red_go: {x: 0, y: 0, z: 0}
+  meshFilter: {fileID: 5529772786269996195}
+  meshRenderer: {fileID: 2270159898458536026}
+  meshes:
+  - {fileID: -5825609053228864120, guid: fb37e08c5ca6ac646a660a4fc57843d7, type: 3}
+  - {fileID: 2430219216670366689, guid: f67721d1264ab6f47bbef0e4ea3f74fa, type: 3}
+  - {fileID: 2305057517805747481, guid: e14b1d9b71aee864f8d4223cdaf0495d, type: 3}
+  - {fileID: -2649273699175003558, guid: c8cfb4a89c35ee74abd17be075115d6a, type: 3}
+  - {fileID: 696528311112868226, guid: 87300b1e3891b8d4da3aacb960ac5d55, type: 3}
+  - {fileID: -8004985173706472173, guid: 37d9442f18370564aa2adb28cdee183b, type: 3}
+  - {fileID: 8410287007969783784, guid: ffdcd96179d6f894ebbf3991e8c454e6, type: 3}
+  - {fileID: -6221407393602739976, guid: 231eaef8406aab346bc2a420d2af1fb5, type: 3}
+  materials:
+  - {fileID: 2100000, guid: 0a29679e3a2f28f44a5c11009f3e83c3, type: 2}
+  - {fileID: 2100000, guid: 9b5526b6ba510a947b6e01388c603c49, type: 2}
+  - {fileID: 2100000, guid: 068a65b9552c80d46a6f7f33552af517, type: 2}
+  - {fileID: 7599676373126013760, guid: c8cfb4a89c35ee74abd17be075115d6a, type: 3}
+  - {fileID: 2100000, guid: 766ee20703dcdbe459f140301e5e5529, type: 2}
+  - {fileID: 5794188417929560486, guid: 37d9442f18370564aa2adb28cdee183b, type: 3}
+  - {fileID: -36768396648145599, guid: ffdcd96179d6f894ebbf3991e8c454e6, type: 3}
+  - {fileID: 8353920464786074878, guid: 231eaef8406aab346bc2a420d2af1fb5, type: 3}
 --- !u!54 &6701415386582170592
 Rigidbody:
   m_ObjectHideFlags: 0
