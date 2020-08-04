@@ -33,7 +33,7 @@ public class TargetGroup : MonoBehaviour
     public void AddTarget()
     {
         if (targetGroup.m_Targets.Length < 2)
-            targetGroup.AddMember(npc.transform, 2, 0.5f);
+            targetGroup.AddMember(npc.transform, 1, 1.5f);
 
         if (npc!=null)
         {
