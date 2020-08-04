@@ -12,10 +12,6 @@ public class SaveData_content : MonoBehaviour
     public Text time;
     public Text quest;
 
-    public GameObject slider;
-    public Slider hp;
-    public Slider radiation;
-
     public GameObject save_ob;
     public GameObject load_ob;
 
@@ -30,7 +26,7 @@ public class SaveData_content : MonoBehaviour
 
         GameSystem.instance.save_gema(click_num);
 
-        for(int i=0; i<10; i++)
+        for(int i=0; i<6; i++)
         {
             saveDatas[i].open();
         }
@@ -54,7 +50,7 @@ public class SaveData_content : MonoBehaviour
 
     public void click()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 6; i++)
         {
             saveDatas[i].choose.SetActive(false);
         }
@@ -71,7 +67,7 @@ public class SaveData_content : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.X))
             {
-                string strFile = "./Assets/save_data" + click_num.ToString() + ".xml";
+                string strFile = GameSystem.instance.save_path + "./save_data" + click_num.ToString() + ".xml";
                 FileInfo fileInfo = new FileInfo(strFile); // 파일 있는지 체크
 
                 if (fileInfo.Exists)

@@ -42,11 +42,14 @@ public class GameSystem : MonoBehaviour
 
     public Dictionarys dictionary_sc;
 
+    public string save_path = Application.persistentDataPath;
+
     public void load_game(int num)
     {
-        XDocument save_data = XDocument.Load("./save_data" + num.ToString() + ".xml");
+        
+        XDocument save_data = XDocument.Load(save_path + "./save_data" + num.ToString() + ".xml");
 
-        Light_system.instance.time = Convert.ToInt32(save_data.Element("root").Element("solo").Element("time").Value);
+        Light_system.instance.time = float.Parse(save_data.Element("root").Element("solo").Element("time").Value);
         character.transform.position = new Vector3(
             float.Parse(save_data.Element("root").Element("solo").Element("ch_po_x").Value),
             float.Parse(save_data.Element("root").Element("solo").Element("ch_po_y").Value),
@@ -101,7 +104,7 @@ public class GameSystem : MonoBehaviour
         XDocument document = new XDocument();
         document.Add(save_data);
 
-        document.Save("./save_data" + num.ToString() + ".xml");
+        document.Save(save_path + "./save_data" + num.ToString() + ".xml");
     }
 
     [Flags]
