@@ -5,7 +5,10 @@ using UnityEngine;
 public class ExampleItem : MonoBehaviour
 {
     public List<GameObject> items;
+    private List<GameObject> items_true = new List<GameObject>(); // 조건에 맞는 아이템
     public bool mountain;
+
+    GameObject gameObjects;
 
     private MeshRenderer render;
     private new SphereCollider collider;
@@ -13,26 +16,40 @@ public class ExampleItem : MonoBehaviour
 
     private void Awake()
     {
-        render = GetComponent<MeshRenderer>();
         collider = GetComponent<SphereCollider>();
         twinkle = GetComponentInChildren<ParticleSystem>();
+
+        if (mountain)
+        {
+            items_true.Add(items[0]);
+            items_true.Add(items[1]);
+        }
+
+        make();
     }
 
     public void eat()
     {
-        render.enabled = false;
         collider.enabled = false;
         if (twinkle)
             twinkle.Stop();
+
+        Destroy(gameObjects);
+
         StartCoroutine(making());
     }
 
     public void make()
     {
-        render.enabled = true;
         collider.enabled = true;
         if (twinkle)
             twinkle.Play();
+
+        int num = Random.Range(0, items_true.Count);
+
+        gameObjects = Instantiate(items_true[num], gameObject.transform.position, Quaternion.identity, gameObject.transform);
+        gameObjects.transform.localScale = new Vector3(1, 1, 1);
+        gameObject.name = items_true[num].name;
     }
 
     IEnumerator making()
