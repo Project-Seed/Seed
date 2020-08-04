@@ -42,7 +42,7 @@ public class GameSystem : MonoBehaviour
 
     public Dictionarys dictionary_sc;
 
-    public string save_path = Application.persistentDataPath;
+    public string save_path = "";
 
     public void load_game(int num)
     {
