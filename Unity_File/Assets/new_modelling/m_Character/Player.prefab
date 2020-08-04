@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 2728388103423010570}
   - component: {fileID: 2553144517043599824}
   - component: {fileID: 2513515536136407555}
+  - component: {fileID: 9201444256503677341}
   m_Layer: 2
   m_Name: MainCam
   m_TagString: Camera
@@ -132,6 +133,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.2, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &9201444256503677341
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425331414821829588}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1493069284194099855
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,7 +467,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2290084937190997130}
-  m_LocalRotation: {x: 0.5075687, y: -0.000000026239757, z: 0.000000015457644, w: 0.8616113}
+  m_LocalRotation: {x: 0.5075687, y: -0.000000022241553, z: 0.000000013102333, w: 0.8616113}
   m_LocalPosition: {x: 0, y: 3.09, z: -1.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

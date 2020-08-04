@@ -1485,6 +1485,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 8258a60f44b717842a02ec9cfee7c282,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d954fa3041e2d14086a7bb481b84e18, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8258a60f44b717842a02ec9cfee7c282, type: 3}
 --- !u!1 &281052206 stripped
@@ -2535,7 +2540,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772594512}
-  m_LocalRotation: {x: 0.003215804, y: 0.9731537, z: -0.2297304, w: 0.013622366}
+  m_LocalRotation: {x: 0.003215803, y: 0.9731537, z: -0.22973041, w: 0.01362236}
   m_LocalPosition: {x: -3.7247138, y: 1.8391749, z: 1.8111004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4318,7 +4323,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1252363120}
   m_LocalRotation: {x: 0.061628457, y: 0.7044161, z: -0.061628457, w: 0.7044161}
-  m_LocalPosition: {x: -5.1114564, y: 1.8000002, z: 3.4570003}
+  m_LocalPosition: {x: -5.112024, y: 1.8000002, z: 3.4570003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5451,7 +5456,7 @@ PrefabInstance:
     - target: {fileID: 4720121949307452465, guid: 60283bddc5264024893416fd49fc70aa,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.5034566
+      value: -1.504024
       objectReference: {fileID: 0}
     - target: {fileID: 4720121949307452465, guid: 60283bddc5264024893416fd49fc70aa,
         type: 3}
@@ -8001,6 +8006,7 @@ GameObject:
   - component: {fileID: 1739530162}
   - component: {fileID: 1739530165}
   - component: {fileID: 1739530166}
+  - component: {fileID: 1739530170}
   - component: {fileID: 1739530164}
   - component: {fileID: 1739530167}
   - component: {fileID: 1739530168}
@@ -8220,6 +8226,18 @@ MonoBehaviour:
   dialogue: {fileID: 166139795}
   movie: {fileID: 1045756394}
   movie_obj: {fileID: 1045756393}
+--- !u!114 &1739530170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739530161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab36a779bb4ad8446ac49658991a031c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1770026083
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,9 +22,6 @@ public class CameraRotater : MonoBehaviour
     public bool lockZoom;
     private bool isZoomIn;
 
-    bool ok = true;
-    float ok_time = 0;
-    float far;
     public void ToOriginOffset()
     {
         camera_offset = origin_camera_offset;
@@ -49,8 +46,6 @@ public class CameraRotater : MonoBehaviour
         MouseY = transform.eulerAngles.x;
         camera_offset = transform.localPosition - head.transform.localPosition;
         origin_camera_offset = camera_offset;
-
-        far = camera_offset.magnitude;
     }
     //private void Update()
     //{
