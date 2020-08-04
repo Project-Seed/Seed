@@ -192,7 +192,7 @@ public class GameSystem : MonoBehaviour
     {
         for (int i = 0; i < item_list.Count; i++)
         {
-            if (item_list[i]["name"] == name)
+            if (item_list[i]["name"].Equals(name))
             {
                 return item_list[i][category];
             }

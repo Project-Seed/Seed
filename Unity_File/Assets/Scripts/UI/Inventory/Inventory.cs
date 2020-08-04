@@ -58,16 +58,6 @@ public class Inventory : MonoBehaviour
 
     private void OnEnable()
     {
-        if (item_choose != null)
-        {
-            StopCoroutine(TypeSentence());
-            sentence = GameSystem.instance.item_search(item_choose, "explanation_ko");
-            StartCoroutine(TypeSentence());
-        }
-    }
-
-    private void Update()
-    {
         for (int i = 0; i < 40; i++)
         {
             if (i < GameSystem.instance.item_time.Count)
@@ -80,6 +70,13 @@ public class Inventory : MonoBehaviour
                 item_box[i].GetComponent<Inventory_box>().image.sprite = alpha;
                 item_box[i].GetComponentInChildren<Text>().text = "";
             }
+        }
+
+        if (item_choose != null)
+        {
+            StopCoroutine(TypeSentence());
+            sentence = GameSystem.instance.item_search(item_choose, "explanation_ko");
+            StartCoroutine(TypeSentence());
         }
     }
 
