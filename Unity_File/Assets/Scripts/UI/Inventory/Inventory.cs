@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    public GameObject note;
+
     public GameObject viewport;
     public GameObject content;
-    public GameObject quick_button;
     public bool quick_bool = false;
     public GameObject quick_bg;
     public List<GameObject> item_box;
@@ -32,8 +33,6 @@ public class Inventory : MonoBehaviour
     
     private void Awake()
     {
-        //in_qu = GameObject.Find("Quick_slot").GetComponent<Inven_quick>();
-
         for (int i=0; i<40; i++)
         {
             GameObject gameObject = Instantiate(content, new Vector3(0, 0, 0), Quaternion.identity, viewport.transform); // viewport 밑 자식으로 복제
@@ -82,57 +81,6 @@ public class Inventory : MonoBehaviour
                 item_box[i].GetComponentInChildren<Text>().text = "";
             }
         }
-
-        /*
-        if (Input.GetKeyDown(KeyCode.Q))
-        { 
-            if(quick_bool == true)
-            {
-                if(quick_mod == false)
-                {
-                    quick_mod = true;
-                    quick_name = item_choose;
-                    quick_bg.SetActive(true);
-                }
-                else
-                {
-                    quick_mod = false;
-                    quick_bg.SetActive(false);
-                }
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1) && quick_mod == true)
-        {
-            in_qu.item_set(0, quick_name);
-            quick_mod = false;
-            quick_bg.SetActive(false);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && quick_mod == true)
-        {
-            in_qu.item_set(1, quick_name);
-            quick_mod = false;
-            quick_bg.SetActive(false);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && quick_mod == true)
-        {
-            in_qu.item_set(2, quick_name);
-            quick_mod = false;
-            quick_bg.SetActive(false);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4) && quick_mod == true)
-        {
-            in_qu.item_set(3, quick_name);
-            quick_mod = false;
-            quick_bg.SetActive(false);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha5) && quick_mod == true)
-        {
-            in_qu.item_set(4, quick_name);
-            quick_mod = false;
-            quick_bg.SetActive(false);
-        }
-        */
     }
 
     public void Inventory_click(GameObject gameObject) // 인벤토리 내용물 클릭
@@ -163,26 +111,15 @@ public class Inventory : MonoBehaviour
 
             item_names.text = GameSystem.instance.item_search(item_choose, "name_ko");
             item_image.sprite = gameObject.GetComponent<Inventory_box>().image.sprite;
-            /*
-            if (GameSystem.instance.item_search(item_choose, "category") == "seed")
-            {
-                quick_button.SetActive(true);
-                quick_bool = true;
 
-                spand_button.SetActive(false);
-            }
-            else */if (GameSystem.instance.item_search(item_choose, "category") == "consumable")
+            if (GameSystem.instance.item_search(item_choose, "category") == "consumable")
             {
-                //quick_button.SetActive(true);
-                //quick_bool = true;
-                quick_button.SetActive(false);
                 quick_bool = false;
 
                 spand_button.SetActive(true);
             }
             else
             {
-                quick_button.SetActive(false);
                 quick_bool = false;
 
                 spand_button.SetActive(false);
@@ -213,7 +150,7 @@ public class Inventory : MonoBehaviour
                     break;
 
                 case "mini_latter":
-                    gameObject.SetActive(false);
+                    note.SetActive(false);
 
                     InputManager.instance.click_mod = 1;
                     Quest_clear_system.instance.clear_trigger[8]++;

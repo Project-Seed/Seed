@@ -699,7 +699,10 @@ public class PlayerController : MonoBehaviour
                 case "Hari3_Book":
                     name = "해리포터 3권";
                     if (GameSystem.instance.quest_state[6] == 3)
+                    {
                         key_on = true;
+                        eat_objects = collision.gameObject;
+                    }
                     else
                         key_on = false;
                     break;
@@ -707,7 +710,10 @@ public class PlayerController : MonoBehaviour
                 case "Hari4_Book":
                     name = "해리포터 4권";
                     if (Quest_clear_system.instance.clear_trigger[7] == 1)
+                    {
                         key_on = true;
+                        eat_objects = collision.gameObject;
+                    }
                     else
                         key_on = false;
                     break;
@@ -715,7 +721,10 @@ public class PlayerController : MonoBehaviour
                 case "Plant_Book":
                     name = "식물책";
                     if (GameSystem.instance.quest_state[8] == 1)
+                    {
                         key_on = true;
+                        eat_objects = collision.gameObject;
+                    }
                     else
                         key_on = false;
                     break;
@@ -723,13 +732,14 @@ public class PlayerController : MonoBehaviour
                 case "Paper":
                     name = "연구자료";
                     if (GameSystem.instance.quest_state[10] == 1)
+                    {
                         key_on = true;
+                        eat_objects = collision.gameObject;
+                    }
                     else
                         key_on = false;
                     break;
             }
-
-            eat_objects = collision.gameObject;
 
             if(key_on ==true)
                 Key_guide.instance.object_on(name, cameras.WorldToScreenPoint(collision.gameObject.transform.position));
