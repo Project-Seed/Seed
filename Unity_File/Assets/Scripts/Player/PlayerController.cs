@@ -67,10 +67,10 @@ public class PlayerController : MonoBehaviour
 
     int right_crash = 0; // 우클릭 중복 때매
 
-    IEnumerator StopJumping()                  // 이단 점프를 막기 위해 점프시 0.3초간 점프금지
+    IEnumerator StopJumping()             
     {
         stop_jumping = true;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.7f);
         stop_jumping = false;
     }
     
@@ -116,6 +116,8 @@ public class PlayerController : MonoBehaviour
     IEnumerator hang_land()
     {
         player_state.hang_land();
+        yield return new WaitForSeconds(0.2f);
+        hang_mod = 0;
 
         for (int i = 0; i < 10; i++)
         {
@@ -219,7 +221,6 @@ public class PlayerController : MonoBehaviour
                 if (hang_mod == 2)
                 {
                     StartCoroutine(hang_land());
-                    hang_mod = 0;
                 }
                 else if (hang_crash == true && hang_mod == 0)
                 {
@@ -561,7 +562,7 @@ public class PlayerController : MonoBehaviour
     {
         player_state.jump();
 
-        yield return new WaitForSeconds(0.0f);
+        yield return new WaitForSeconds(0.05f);
 
         player_rigidbody.AddForce(Vector3.up * player_jump_power, ForceMode.Impulse);   //점프
         StartCoroutine(StopJumping());
