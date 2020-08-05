@@ -137,14 +137,11 @@ public class CameraRotater : MonoBehaviour
     {
         if (camera_offset.magnitude < origin_camera_offset.magnitude)
         {
-            Debug.Log("Back");
-            camera_offset *= 1.05f; //줌아웃
+            camera_offset *= 1.05f;
             yield return null;
         }
         else if (camera_offset.magnitude >= origin_camera_offset.magnitude)
         {
-            Debug.Log("Origin");
-
             camera_offset = origin_camera_offset;
             isZoomIn = false;
             yield break;
@@ -155,20 +152,15 @@ public class CameraRotater : MonoBehaviour
     {
         if (camera_offset.magnitude > distance)
         {
-            Debug.Log("In");
             camera_offset /= 1.05f; //줌인
             yield return null;
         }
         else if (camera_offset.magnitude <= maxZoomin)
         {
-            Debug.Log("MaxZoomin");
-
             camera_offset = camera_offset.normalized * maxZoomin;
             isZoomIn = false;
             yield break;
         }
-        else
-            Debug.Log("no!"+camera_offset.magnitude+" "+distance);
     }
     void LineCast()
     {
@@ -178,7 +170,6 @@ public class CameraRotater : MonoBehaviour
         {
             distance = Mathf.Clamp(hit.distance, maxZoomin, maxZoomOut);
             StartCoroutine(SmoothZoomInCam(distance));
-            Debug.Log("HIT");
             //distance만큼 줌인.
 
             //return new Vector3(hit.point.x + hit.normal.x * 0.5f, hit.point.y, hit.point.z + hit.normal.z * 0.5f);

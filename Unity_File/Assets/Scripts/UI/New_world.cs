@@ -199,6 +199,10 @@ public class New_world : MonoBehaviour
                     text.text = "산 윗 자락";
                     PlayerState.instance.radiation_level = 2;
                     break;
+
+                case "BridgePond":
+                    PlayerState.instance.radiation_level = 4;
+                    break;
             }
 
             now_map = GameSystem.instance.map_name;
