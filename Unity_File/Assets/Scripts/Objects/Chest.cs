@@ -21,7 +21,7 @@ public class Chest : MonoBehaviour
     {
         animator.SetTrigger("open");
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.85f);
 
         string recipe_choose = "portion";
         Eat_system.instance.eat_item(recipe_choose);
