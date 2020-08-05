@@ -44,20 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f6a49d405310944fb9cd55bef9e018f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridType: 0
+  gridType: 1
   LOD: 0.2
   LODPower: 3
   customMesh: {fileID: 0}
   material: {fileID: 2100000, guid: deafa17c6e01f8b43ae33c12383ebaec, type: 2}
   sun: {fileID: 0}
-  sizeX: 60
-  sizeZ: 60
-  noise: 0.6
+  sizeX: 100
+  sizeZ: 50
+  noise: 0
   enableReflection: 1
   enableRefraction: 0
   reflection:
     disablePixelLights: 1
-    textureSize: 512
+    textureSize: 256
     clipPlaneOffset: 0.07
     reflectLayers:
       serializedVersion: 2
