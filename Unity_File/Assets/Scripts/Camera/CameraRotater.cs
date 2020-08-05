@@ -17,7 +17,7 @@ public class CameraRotater : MonoBehaviour
     float input_mouse_wheel;
     Vector3 camera_offset;
     Vector3 origin_camera_offset;
-    float maxZoomin = 2.0f;
+    float maxZoomin = 1.5f;
     float maxZoomOut = 8.0f;
     public bool lockZoom;
     private bool isZoomIn;
@@ -85,8 +85,9 @@ public class CameraRotater : MonoBehaviour
         Quaternion ro = Quaternion.Euler(MouseY, MouseX, 0f);
         Vector3 po = ro * camera_offset;
 
-       // po = LineCast(po);
+        // po = LineCast(po);
 
+        LineCast();
         transform.localRotation = Quaternion.Slerp(transform.localRotation, ro, 0.5f);
         transform.localPosition = Vector3.Lerp(transform.localPosition, po, 0.5f);
         transform.LookAt(head);
@@ -134,10 +135,10 @@ public class CameraRotater : MonoBehaviour
     // 뒤에 아무것도 없다면 다시 줌아웃.
     IEnumerator SmoothBackCam()
     {
-        if (camera_offset.magnitude < maxZoomOut)
+        if (camera_offset.magnitude < origin_camera_offset.magnitude)
         {
             Debug.Log("Back");
-            camera_offset *= 1.1f;
+            camera_offset *= 1.05f; //줌아웃
             yield return null;
         }
         else if (camera_offset.magnitude >= origin_camera_offset.magnitude)
@@ -150,17 +151,42 @@ public class CameraRotater : MonoBehaviour
         }
     }
 
-    Vector3 LineCast(Vector3 originPos)
+    IEnumerator SmoothZoomInCam(float distance)
     {
-        if (Physics.Linecast(transform.position, head.position, out RaycastHit hit))
+        if (camera_offset.magnitude > distance)
         {
-            if (hit.transform.CompareTag("Player")) return originPos;
+            Debug.Log("In");
+            camera_offset /= 1.05f; //줌인
+            yield return null;
+        }
+        else if (camera_offset.magnitude <= maxZoomin)
+        {
+            Debug.Log("MaxZoomin");
+
+            camera_offset = camera_offset.normalized * maxZoomin;
+            isZoomIn = false;
+            yield break;
+        }
+        else
+            Debug.Log("no!"+camera_offset.magnitude+" "+distance);
+    }
+    public float distance;
+    void LineCast()
+    {
+        float distance;
+        Vector3 desiredCamPos = head.TransformPoint(transform.localPosition.normalized * maxZoomOut);
+        if (Physics.Linecast(head.position, desiredCamPos, out RaycastHit hit))
+        {
+            distance = Mathf.Clamp(hit.distance, maxZoomin, maxZoomOut);
+            StartCoroutine(SmoothZoomInCam(distance));
             Debug.Log("HIT");
-            return new Vector3(hit.point.x + hit.normal.x * 0.5f, hit.point.y, hit.point.z + hit.normal.z * 0.5f);
+            //distance만큼 줌인.
+
+            //return new Vector3(hit.point.x + hit.normal.x * 0.5f, hit.point.y, hit.point.z + hit.normal.z * 0.5f);
             //조ㅓㅏ표 이동말고 원래 카메라 회전이랑 같은 원리로 이동시켜야함. y를 위로 올리자
         }
         else
-            return originPos;
+            StartCoroutine(SmoothBackCam());
     }
 
     //IEnumerator CheckBehind()
