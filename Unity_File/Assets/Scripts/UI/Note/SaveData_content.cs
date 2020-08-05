@@ -26,7 +26,7 @@ public class SaveData_content : MonoBehaviour
 
         GameSystem.instance.save_gema(click_num);
 
-        for(int i=0; i<6; i++)
+        for (int i = 0; i < 6; i++)
         {
             saveDatas[i].open();
         }
@@ -41,13 +41,6 @@ public class SaveData_content : MonoBehaviour
         GameSystem.instance.load_game(click_num);
     }
 
-    public void close()
-    {
-        save_ob.SetActive(false);
-        load_ob.SetActive(false);
-        key_ok = true;
-    }
-
     public void click()
     {
         for (int i = 0; i < 6; i++)
@@ -56,39 +49,42 @@ public class SaveData_content : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void yes()
+    {
+        if (save_ob.activeSelf == true)
+            save_game();
+        else if (load_ob.activeSelf == true)
+            load_game();
+    }
+
+    public void no()
+    {
+        save_ob.SetActive(false);
+        load_ob.SetActive(false);
+        key_ok = true;
+    }
+
+    public void saves()
     {
         if (key_ok == true)
         {
-            if (Input.GetKeyDown(KeyCode.Z))
+            save_ob.SetActive(true);
+            key_ok = false;
+        }
+    }
+
+    public void loads()
+    {
+        if (key_ok == true)
+        {
+            string strFile = GameSystem.instance.save_path + "./save_data" + click_num.ToString() + ".xml";
+            FileInfo fileInfo = new FileInfo(strFile); // 파일 있는지 체크
+
+            if (fileInfo.Exists)
             {
-                save_ob.SetActive(true);
+                load_ob.SetActive(true);
                 key_ok = false;
             }
-            else if (Input.GetKeyDown(KeyCode.X))
-            {
-                string strFile = GameSystem.instance.save_path + "./save_data" + click_num.ToString() + ".xml";
-                FileInfo fileInfo = new FileInfo(strFile); // 파일 있는지 체크
-
-                if (fileInfo.Exists)
-                {
-                    load_ob.SetActive(true);
-                    key_ok = false;
-                }
-                else
-                {
-
-                }
-            }
-        }
-        else
-        {
-            if (Input.GetKeyDown(KeyCode.Z) && save_ob.activeSelf == true)
-                save_game();
-            else if (Input.GetKeyDown(KeyCode.Z) && load_ob.activeSelf == true)
-                load_game();
-            else if (Input.GetKeyDown(KeyCode.X))
-                close();
         }
     }
 }
