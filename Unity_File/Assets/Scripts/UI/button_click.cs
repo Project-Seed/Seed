@@ -12,24 +12,30 @@ public class button_click : MonoBehaviour
     public Sprite up;
     public Sprite click;
 
+    bool up_true = false;
+    public bool click_on = false;
+
     void Update()
     {
-        //if (Input.GetMouseButtonDown(0))
-        //    image.sprite = click;
-        //else if (Input.GetMouseButtonUp(0))
-        //    image.sprite = normal;
+        if (up_true && click_on)
+        {
+            if (Input.GetMouseButtonDown(0))
+                image.sprite = click;
+            else if (Input.GetMouseButtonUp(0))
+                image.sprite = normal;
+        }
     }
 
 
     public void ups()
     {
         image.sprite = up;
-        Debug.Log("up");    
+        up_true = true;
     }
 
     public void downs()
     {
         image.sprite = normal;
-        Debug.Log("down");
+        up_true = false;
     }
 }

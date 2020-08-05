@@ -126,15 +126,11 @@ public class Inventory : MonoBehaviour
 
     public void spand()
     {
-        // 붙여온거에다 gameObject.SetActive(false); 이거만 추가
-
         if (GameSystem.instance.item_num[item_choose] >= 1)
         {
             switch (GameSystem.instance.item_search(item_choose, "name"))
             {
                 case "portion":
-                    gameObject.SetActive(false);
-
                     if (PlayerState.instance.hp + 4 < PlayerState.instance.max_hp)
                         State.instance.hp_up(4);
                     else

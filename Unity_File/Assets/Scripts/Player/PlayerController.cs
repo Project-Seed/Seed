@@ -148,6 +148,7 @@ public class PlayerController : MonoBehaviour
             Eat_system.instance.eat_item("blue_seed");
             Eat_system.instance.eat_item("brown_seed");
         }
+        Eat_system.instance.eat_item("portion");
 
         player_mate.color = new Color(1f, 1f, 1f, 1);
     }
