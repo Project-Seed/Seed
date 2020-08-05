@@ -80,8 +80,25 @@ public class State : MonoBehaviour
         StartCoroutine(Update_Radiation());
         StartCoroutine(hit_radi());
 
-        hp_down(PlayerState.instance.max_hp - PlayerState.instance.hp);
-        radi_up(PlayerState.instance.radiation);
+        int e_hp = 20;
+        for (int i = 0; i < PlayerState.instance.max_hp - PlayerState.instance.hp; i++)
+        {
+            if (PlayerState.instance.hp != 0)
+            {
+                int hp_int = (e_hp - 1) / 2;
+                hearts[hp_int].GetComponent<Heart>().hp_down((PlayerState.instance.hp - 1) % 2);
+
+                e_hp--;
+            }
+        }
+        int e_radi = 0;
+        for (int i = 0; i < PlayerState.instance.radiation; i++)
+        {
+            int radi_int = e_radi / 2;
+            radis[radi_int].GetComponent<Radi>().radi_up(PlayerState.instance.radiation % 2);
+
+            e_radi++;
+        }
     }
 
     IEnumerator Update_Radiation()
