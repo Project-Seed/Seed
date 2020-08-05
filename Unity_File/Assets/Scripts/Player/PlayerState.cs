@@ -248,4 +248,9 @@ public class PlayerState : MonoBehaviour
     {
         animator.SetTrigger("box_open");
     }
+
+    public void reborn()
+    {
+        animator.SetTrigger("reborn");
+    }
 }

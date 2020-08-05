@@ -55,6 +55,35 @@ public class State : MonoBehaviour
         }
     }
 
+    public void restart()
+    {
+        for (int i = 0; i < hearts.Count; i++)
+        {
+            Destroy(hearts[i]);
+        }
+        for (int i = 0; i < radis.Count; i++)
+        {
+            Destroy(radis[i]);
+        }
+        hearts.Clear();
+        radis.Clear();
+
+        for (int i = 0; i < PlayerState.instance.max_hp / 2; i++)
+        {
+            hearts.Add(Instantiate(heart, new Vector3(0, 0, 0), Quaternion.identity, viewport_hp.transform));
+        }
+        for (int j = 0; j < PlayerState.instance.max_radiation / 2; j++)
+        {
+            radis.Add(Instantiate(radi, new Vector3(0, 0, 0), Quaternion.identity, viewport_radi.transform));
+        }
+
+        StartCoroutine(Update_Radiation());
+        StartCoroutine(hit_radi());
+
+        hp_down(PlayerState.instance.max_hp - PlayerState.instance.hp);
+        radi_up(PlayerState.instance.radiation);
+    }
+
     IEnumerator Update_Radiation()
     {
         while (true)

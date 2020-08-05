@@ -7,6 +7,7 @@ public class Game_over : MonoBehaviour
 {
     public List<Image> image;
     public List<Text> texts;
+    public GameObject load_choose;
 
     private void OnEnable()
     {
@@ -45,4 +46,19 @@ public class Game_over : MonoBehaviour
     {
         LoadingSceneManager.LoadScene("Title_Scene");
     }
+
+    public void load()
+    {
+        load_choose.SetActive(true);
+    }
+
+    public void restart()
+    {
+        load_choose.SetActive(false);
+        gameObject.SetActive(false);
+
+        PlayerState.instance.reborn();
+        State.instance.restart();
+        InputManager.instance.click_mod = 0;
+    }    
 }

@@ -19,6 +19,9 @@ public class SaveData_content : MonoBehaviour
 
     bool key_ok = true;
 
+    public bool die = false;
+    public Game_over game_Over;
+
     public void save_game()
     {
         key_ok = true;
@@ -37,6 +40,9 @@ public class SaveData_content : MonoBehaviour
     {
         key_ok = true;
         load_ob.SetActive(false);
+
+        if (die)
+            game_Over.restart();
 
         GameSystem.instance.load_game(click_num);
     }
