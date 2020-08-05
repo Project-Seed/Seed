@@ -94,6 +94,7 @@ public class GameSystem : MonoBehaviour
                 new XElement("ch_ro_z", character.transform.rotation.z),
                 new XElement("hp", playerstate.hp),
                 new XElement("radiation", playerstate.radiation),
+                new XElement("map_name", map_name),
                 new XElement("save_time", DateTime.Now.ToString(("yyyy-MM-dd HH:mm:ss tt")))),
             new XElement("item_num", item_num.Select(kv => new XElement(kv.Key, kv.Value))), // dictionary 정석
             new XElement("quest_state", quest_state.Select(kv => new XElement("char" + kv.Key.ToString(), kv.Value))), // key가 int

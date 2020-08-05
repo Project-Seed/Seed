@@ -38,7 +38,7 @@ public class SaveData : MonoBehaviour
         {
             XDocument save_data = XDocument.Load(GameSystem.instance.save_path + "./save_data" + num.ToString() + ".xml");
 
-            save.text = GameSystem.instance.map_name;
+            save.text = save_data.Element("root").Element("solo").Element("map_name").Value;
             time.text = save_data.Element("root").Element("solo").Element("save_time").Value;
         }
         else

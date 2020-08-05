@@ -41,10 +41,10 @@ public class SaveData_content : MonoBehaviour
         key_ok = true;
         load_ob.SetActive(false);
 
+        GameSystem.instance.load_game(click_num);
+
         if (die)
             game_Over.restart();
-
-        GameSystem.instance.load_game(click_num);
     }
 
     public void click()
