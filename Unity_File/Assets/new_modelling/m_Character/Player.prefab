@@ -84,7 +84,10 @@ MonoBehaviour:
   rotate_speed: 1
   minY: -50
   maxY: 40
+  maxZoomin: 1.5
+  maxZoomOut: 8
   lockZoom: 1
+  distance: 0
 --- !u!114 &2553144517043599824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,7 +470,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2290084937190997130}
-  m_LocalRotation: {x: 0.5075687, y: -0.000000022241553, z: 0.000000013102333, w: 0.8616113}
+  m_LocalRotation: {x: 0.5075687, y: 0.000000022237808, z: -0.000000013100123, w: 0.8616113}
   m_LocalPosition: {x: 0, y: 3.09, z: -1.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -646,6 +649,10 @@ MonoBehaviour:
   - m_Hash: 1661675135
     m_ParentHash: 756556552
   - m_Hash: -557323768
+    m_ParentHash: 756556552
+  - m_Hash: -1907008658
+    m_ParentHash: 756556552
+  - m_Hash: 1644571650
     m_ParentHash: 756556552
 --- !u!1 &3993871053304461258
 GameObject:
@@ -968,7 +975,10 @@ MonoBehaviour:
   rotate_speed: 1
   minY: -70
   maxY: 10
+  maxZoomin: 1.5
+  maxZoomOut: 8
   lockZoom: 1
+  distance: 0
 --- !u!114 &4416801790696475369
 MonoBehaviour:
   m_ObjectHideFlags: 0

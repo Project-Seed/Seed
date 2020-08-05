@@ -5,11 +5,19 @@ using UnityEngine.UI;
 
 public class Game_over : MonoBehaviour
 {
-    public Image image;
+    public List<Image> image;
+    public List<Text> texts;
 
     private void OnEnable()
     {
-        image.color = new Color(1, 1, 1, 0);
+        for (int i = 0; i < image.Count; i++)
+        {
+            image[i].color = new Color(1, 1, 1, 0);
+        }
+        for (int i = 0; i < texts.Count; i++)
+        {
+            texts[i].color = new Color(1, 1, 1, 0);
+        }
     }
 
     public void image_on()
@@ -19,10 +27,22 @@ public class Game_over : MonoBehaviour
 
     IEnumerator on()
     {
-        for (int i = 0; i <= 150; i++)
+        for (int i = 0; i <= 100; i++)
         {
-            image.color = new Color(1, 1, 1, i / 150f);
+            for (int j = 0; j < image.Count; j++)
+            {
+                image[j].color = new Color(1, 1, 1, i / 100f);
+            }
+            for (int j = 0; j < texts.Count; j++)
+            {
+                texts[j].color = new Color(1, 1, 1, i / 100f);
+            }
             yield return new WaitForSeconds(0.01f);
         }
+    }
+
+    public void home()
+    {
+        LoadingSceneManager.LoadScene("Title_Scene");
     }
 }

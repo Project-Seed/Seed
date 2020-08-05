@@ -17,8 +17,8 @@ public class CameraRotater : MonoBehaviour
     float input_mouse_wheel;
     Vector3 camera_offset;
     Vector3 origin_camera_offset;
-    float maxZoomin = 1.5f;
-    float maxZoomOut = 8.0f;
+    public float maxZoomin = 1.5f;
+    public float maxZoomOut = 8.0f;
     public bool lockZoom;
     private bool isZoomIn;
 
@@ -170,7 +170,6 @@ public class CameraRotater : MonoBehaviour
         else
             Debug.Log("no!"+camera_offset.magnitude+" "+distance);
     }
-    public float distance;
     void LineCast()
     {
         float distance;
