@@ -57,7 +57,7 @@ public class MiniMap : MonoBehaviour
                 break;
         }
 
-        map.transform.localPosition = new Vector2(player.transform.position.x + 500, player.transform.position.z - 1500);
+        map.transform.localPosition = new Vector2((player.transform.position.x*2) + 1000, (player.transform.position.z*2) - 3000);
 
         for (int i = 0; i < mini_marks.Count; i++)
         {

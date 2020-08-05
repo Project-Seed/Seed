@@ -207,10 +207,6 @@ public class PlayerController : MonoBehaviour
                     gameObject.transform.position = climb_point_ob.transform.position;
                     rotate_ob.transform.LookAt(climb_ob.transform);
                     gameObject.transform.position = a;
-                    //gameObject.transform.Translate((climb_fornt.transform.position - rotate_ob.transform.position).normalized * 0.5f);
-
-                    // Debug.Log(rotate_ob.transform.localRotation.eulerAngles.y);
-                    // rotate_ob.transform.localRotation = Quaternion.Euler(0, rotate_ob.transform.localRotation.eulerAngles.y, 0);
 
                     climb_time = true;
                     StartCoroutine(climb_05());
@@ -286,10 +282,7 @@ public class PlayerController : MonoBehaviour
                     {
                         if (GameSystem.instance.item_num[qick.choose_item] >= 1 && InputManager.instance.click_mod == 0)
                         {
-                            //throw_mode = true;
                             GameSystem.instance.SetMode(1); //발사모드
-                            Debug.Log("발사모드");
-                            //child.localRotation = Quaternion.Slerp(child.localRotation, transform.localRotation, 0.5f);
 
                             throwManager.mouse_down(qick.choose_item);
 
@@ -308,9 +301,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (GameSystem.instance.GetModeNum() == 1)
                     {
-                        //throw_mode = false;
                         GameSystem.instance.SetMode(0); //기본모드
-                        Debug.Log("기본모드");
 
                         throwManager.mouse_up(false);//발사 옵션 false. 발사 취소
 
@@ -679,27 +670,34 @@ public class PlayerController : MonoBehaviour
                 case "Radio":
                     name = "라디오";
                     key_on = true;
+                    eat_objects = collision.gameObject;
                     break;
 
                 case "Frame":
                     name = "가족사진";
                     key_on = true;
+                    eat_objects = collision.gameObject;
                     break;
 
                 case "Letter":
                     name = "편지";
                     key_on = true;
+                    eat_objects = collision.gameObject;
                     break;
 
                 case "Book":
                     name = "다이어리";
                     key_on = true;
+                    eat_objects = collision.gameObject;
                     break;
 
                 case "Hari3_Book":
                     name = "해리포터 3권";
                     if (GameSystem.instance.quest_state[6] == 3)
+                    {
                         key_on = true;
+                        eat_objects = collision.gameObject;
+                    }
                     else
                         key_on = false;
                     break;
@@ -707,7 +705,10 @@ public class PlayerController : MonoBehaviour
                 case "Hari4_Book":
                     name = "해리포터 4권";
                     if (Quest_clear_system.instance.clear_trigger[7] == 1)
+                    {
                         key_on = true;
+                        eat_objects = collision.gameObject;
+                    }
                     else
                         key_on = false;
                     break;
@@ -715,7 +716,10 @@ public class PlayerController : MonoBehaviour
                 case "Plant_Book":
                     name = "식물책";
                     if (GameSystem.instance.quest_state[8] == 1)
+                    {
                         key_on = true;
+                        eat_objects = collision.gameObject;
+                    }
                     else
                         key_on = false;
                     break;
@@ -723,13 +727,14 @@ public class PlayerController : MonoBehaviour
                 case "Paper":
                     name = "연구자료";
                     if (GameSystem.instance.quest_state[10] == 1)
+                    {
                         key_on = true;
+                        eat_objects = collision.gameObject;
+                    }
                     else
                         key_on = false;
                     break;
             }
-
-            eat_objects = collision.gameObject;
 
             if(key_on ==true)
                 Key_guide.instance.object_on(name, cameras.WorldToScreenPoint(collision.gameObject.transform.position));

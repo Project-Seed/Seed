@@ -19,10 +19,6 @@ public class SaveData : MonoBehaviour
     public Text save;
     public Text time;
 
-    public GameObject slider;
-    public Slider hp;
-    public Slider radiation;
-
     public SaveData_content saveData_Content;
 
     public GameObject choose;
@@ -35,28 +31,20 @@ public class SaveData : MonoBehaviour
 
     public void open()
     {
-        string strFile = "./Assets/save_data" + num.ToString() + ".xml";
+        string strFile = GameSystem.instance.save_path + "./save_data" + num.ToString() + ".xml";
         FileInfo fileInfo = new FileInfo(strFile); // 파일 있는지 체크
 
         if (fileInfo.Exists)
         {
-            XDocument save_data = XDocument.Load("./Assets/save_data" + num.ToString() + ".xml");
+            XDocument save_data = XDocument.Load(GameSystem.instance.save_path + "./save_data" + num.ToString() + ".xml");
 
             save.text = GameSystem.instance.map_name;
             time.text = save_data.Element("root").Element("solo").Element("save_time").Value;
-
-            slider.SetActive(true);
-            hp.value = float.Parse(save_data.Element("root").Element("solo").Element("hp").Value);
-            hp.maxValue = PlayerState.instance.max_hp;
-            radiation.value = float.Parse(save_data.Element("root").Element("solo").Element("radiation").Value);
-            radiation.maxValue = PlayerState.instance.max_radiation;
         }
         else
         {
             save.text = "Empty Slot";
             time.text = "";
-
-            slider.SetActive(false);
         }
     }
 
@@ -65,12 +53,12 @@ public class SaveData : MonoBehaviour
         saveData_Content.click();
         choose.SetActive(true);
 
-        string strFile = "./Assets/save_data" + num.ToString() + ".xml";
+        string strFile = GameSystem.instance.save_path + "./save_data" + num.ToString() + ".xml";
         FileInfo fileInfo = new FileInfo(strFile); // 파일 있는지 체크
 
         if (fileInfo.Exists)
         {
-            XDocument save_data = XDocument.Load("./Assets/save_data" + num.ToString() + ".xml");
+            XDocument save_data = XDocument.Load(GameSystem.instance.save_path + "./save_data" + num.ToString() + ".xml");
 
             saveData_Content.save.text = save.text;
             saveData_Content.time.text = time.text;
@@ -83,20 +71,12 @@ public class SaveData : MonoBehaviour
             }
 
             saveData_Content.quest.text = a;
-
-            saveData_Content.slider.SetActive(true);
-            saveData_Content.hp.value = hp.value;
-            saveData_Content.hp.maxValue = hp.maxValue;
-            saveData_Content.radiation.value = radiation.value;
-            saveData_Content.radiation.maxValue = radiation.maxValue;
         }
         else
         {
             saveData_Content.save.text = save.text;
             saveData_Content.time.text = time.text;
             saveData_Content.quest.text = "";
-
-            saveData_Content.slider.SetActive(false);
         }
 
         saveData_Content.click_num = num;
