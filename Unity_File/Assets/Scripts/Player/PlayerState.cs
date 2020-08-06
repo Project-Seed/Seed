@@ -252,5 +252,6 @@ public class PlayerState : MonoBehaviour
     public void reborn()
     {
         animator.SetTrigger("reborn");
+        die_check = false;
     }
 }
