@@ -2540,7 +2540,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772594512}
-  m_LocalRotation: {x: 0.0032158028, y: 0.9731537, z: -0.22973041, w: 0.013622359}
+  m_LocalRotation: {x: 0.0032157972, y: 0.9731537, z: -0.22973041, w: 0.013622335}
   m_LocalPosition: {x: -3.7247138, y: 1.8391749, z: 1.8111004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5444,6 +5444,11 @@ PrefabInstance:
       propertyPath: player_mate
       value: 
       objectReference: {fileID: 2100000, guid: 1a48df25da0aed34d85010cf9720e04f, type: 2}
+    - target: {fileID: 8780300512582525260, guid: 60283bddc5264024893416fd49fc70aa,
+        type: 3}
+      propertyPath: tuto
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4687158027988317513, guid: 60283bddc5264024893416fd49fc70aa,
         type: 3}
       propertyPath: m_ChildCameras.Array.size
@@ -9336,7 +9341,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5, z: 0.5}
-  m_Center: {x: 0, y: 1.11, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &2122151323
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9391,7 +9396,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2122151321}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.04, y: 0.58, z: 3.497}
+  m_LocalPosition: {x: 1.04, y: 0.77, z: 3.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
