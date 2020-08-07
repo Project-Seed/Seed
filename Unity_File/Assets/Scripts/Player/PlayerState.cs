@@ -38,6 +38,9 @@ public class PlayerState : MonoBehaviour
     public bool left_check = false;
     public bool right_check = false;
     public bool shoot_check = false; // 사격 모드시 트루
+    public bool shoot_check2 = false; // 사격 모드시 트루
+
+    public GameObject gun;
 
     public bool lending_time = false; // true면 0.5초간 착지후 발이 아파 못움직임
 
@@ -179,13 +182,17 @@ public class PlayerState : MonoBehaviour
     public void shoot_ready()
     {
         animator.SetBool("shoot_start", true);
-
+        shoot_check2 = true;
         StartCoroutine(shoot_readys());
+
+        gun.SetActive(true);
     }
     IEnumerator shoot_readys()
     {
         yield return new WaitForSeconds(0.8f);
-        shoot_check = true;
+        
+        if(shoot_check2 == true)
+            shoot_check = true;
     }
 
     public void shoot()
@@ -195,7 +202,9 @@ public class PlayerState : MonoBehaviour
         animator.SetBool("shoot_start", false);
 
         shoot_check = false;
-        StopCoroutine(shoot_readys());
+        shoot_check2 = false;
+
+        gun.SetActive(false);
     }
     public void shoot_stop()
     {
@@ -204,7 +213,9 @@ public class PlayerState : MonoBehaviour
         animator.SetTrigger("shoot_stop2");
 
         shoot_check = false;
-        StopCoroutine(shoot_readys());
+        shoot_check2 = false;
+
+        gun.SetActive(false);
     }
 
     public void climb_on()
