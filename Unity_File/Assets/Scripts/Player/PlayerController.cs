@@ -67,6 +67,8 @@ public class PlayerController : MonoBehaviour
 
     int right_crash = 0; // 우클릭 중복 때매
 
+    public bool tuto = false; // 튜토리얼 이면 트루
+
     IEnumerator StopJumping()             
     {
         stop_jumping = true;
@@ -161,24 +163,30 @@ public class PlayerController : MonoBehaviour
         {
             if (mapChecker.MapCheck(0.4f))
             {
-                if (movement != Vector3.zero)
+                if (!tuto)
                 {
-                    if (!followDust.isPlaying)
-                        followDust.Play();
+                    if (movement != Vector3.zero)
+                    {
+                        if (!followDust.isPlaying)
+                            followDust.Play();
+                    }
+                    else
+                        followDust.Stop();
                 }
-                else
-                    followDust.Stop();
 
                 is_jumping = false;
                 player_state.landing();
             }
-            else if(!is_jumping)
+            else if (!is_jumping)
             {
                 is_jumping = true;
                 player_state.flying(gameObject.transform.position.y);
             }
-            else if (followDust.isPlaying)
+            else if (!tuto)
+            {
+                if (followDust.isPlaying)
                     followDust.Pause();
+            }
 
             if (Input.GetButtonDown("Jump"))
             {
@@ -257,15 +265,18 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftShift) && GameSystem.instance.GetModeNum() == 0)
+            if (!tuto)
             {
-                player_state.dash_on();
-                is_run = true;
-            }
-            else if (Input.GetKeyUp(KeyCode.LeftShift))
-            {
-                player_state.dash_off();
-                is_run = false;
+                if (Input.GetKeyDown(KeyCode.LeftShift) && GameSystem.instance.GetModeNum() == 0)
+                {
+                    player_state.dash_on();
+                    is_run = true;
+                }
+                else if (Input.GetKeyUp(KeyCode.LeftShift))
+                {
+                    player_state.dash_off();
+                    is_run = false;
+                }
             }
             
             if (Input.GetMouseButtonDown(1) && !is_jumping)
@@ -515,7 +526,7 @@ public class PlayerController : MonoBehaviour
         {
             lookAt = movement;
         }
-        else
+        else if(!tuto)
             followDust.Stop();
 
         //문제점. 대각선이동시에는? 방향을 정해주는게 아니라(look at=) 곱해줘야함. . .
