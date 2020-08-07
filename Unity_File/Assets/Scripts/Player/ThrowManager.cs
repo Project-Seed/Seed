@@ -9,6 +9,7 @@ public class ThrowManager : MonoBehaviour
     public Transform aim; // 실제 씨앗이 나가는 총구.
     public GameObject seed; // 씨앗 모델
     public GameObject aim_sp; // 조준선 스프라이트
+    public Image cant_shoot_sp; // 쏠 수 없음 스프라이트
     private GameObject throw_sprite;    // 임시스프라이트
     private GameObject tmp;  //임시씨앗
     private bool target_on;
@@ -18,25 +19,57 @@ public class ThrowManager : MonoBehaviour
     string seed_name;
     public CameraRotater cameraShaker;
 
-        // aim 캐릭터 따라다니도록 했는데,,수정해야될듯. 카메라 위로 올리면 aim도 위로 올라가야해서. 
-        // Ray쏴서 2차원->3차원 좌표로 바꾼걸 Aim으로 써야될듯
-        //카메라에서 Ray를 쏘고 그 닿은 곳에 씨앗이 가도록. 출발점은 캐릭터 손. 도착지는 카메라 기준 에임점이 닿은곳.
+    // aim 캐릭터 따라다니도록 했는데,,수정해야될듯. 카메라 위로 올리면 aim도 위로 올라가야해서. 
+    // Ray쏴서 2차원->3차원 좌표로 바꾼걸 Aim으로 써야될듯
+    //카메라에서 Ray를 쏘고 그 닿은 곳에 씨앗이 가도록. 출발점은 캐릭터 손. 도착지는 카메라 기준 에임점이 닿은곳.
     //발사취소는 우클릭 했을 때만.
     //조준선은 씨앗 조건에 따라 초록/빨강
     //빨강일때도 쏠 수 있는데 그러면 조건 안 맞아서 먼지만 날림
+    private IEnumerator FadeIn(Image img)
+    {
+        for (int i = 0; i <= 30; i++)
+        {
+            img.color = new Color(1, 1, 1, i / 30f);
+            yield return new WaitForSeconds(0.01f);
+        }
+        StartCoroutine(FadeOut(cant_shoot_sp));
+    }
+
+    private IEnumerator FadeOut(Image img)
+    {
+        yield return new WaitForSeconds(0.3f);
+
+        for (int i = 0; i <= 30; i++)
+        {
+            img.color = new Color(1, 1, 1, (30 - i) / 30f);
+            yield return new WaitForSeconds(0.01f);
+        }
+        img.enabled = false;
+    }
 
     public bool ThrowSeed(bool option)//좌클릭 발사 or 발사취소
     {
         aim_sp.SetActive(false);
         target_on = false;
 
-        if (option && isPlantable())//option true이면 발사. option false는 발사 취소한 경우.
+        if (option)//option true이면 발사. option false는 발사 취소한 경우.
         {
-            tmp = Instantiate(seed, aim.position, aim.rotation);
-            tmp.GetComponent<Plant>().seed_name = seed_name;
-            Rigidbody bullet_rig = tmp.GetComponent<Rigidbody>();
-            bullet_rig.AddForce(dest * 20, ForceMode.Impulse);
-            return true;
+            if (!isPlantable()) //불가피한 취소
+            {
+                cant_shoot_sp.enabled = true; //창 띄우기
+                cant_shoot_sp.color = new Color(1, 1, 1, 1);
+                StartCoroutine(FadeIn(cant_shoot_sp));
+                return false;
+            }
+            else
+            {
+                //발사
+                tmp = Instantiate(seed, aim.position, aim.rotation);
+                tmp.GetComponent<Plant>().seed_name = seed_name;
+                Rigidbody bullet_rig = tmp.GetComponent<Rigidbody>();
+                bullet_rig.AddForce(dest * 20, ForceMode.Impulse);
+                return true;
+            }
         }
         else
             return false;
