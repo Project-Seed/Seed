@@ -273,11 +273,10 @@ public class PlayerController : MonoBehaviour
                 player_state.dash_off();
                 is_run = false;
             }
-
             
             if (Input.GetMouseButtonDown(1) && !is_jumping)
             {
-                //우클릭 타겟팅 시작.
+                //우클릭==조준.
                 if (right_crash == 0)
                 {
                     if (GameSystem.instance.item_search(qick.choose_item, "category") == "seed") // 씨앗 타입이어야지만 던져짐
@@ -286,7 +285,7 @@ public class PlayerController : MonoBehaviour
                         {
                             GameSystem.instance.SetMode(1); //발사모드
 
-                            throwManager.mouse_down(qick.choose_item);
+                            throwManager.TargetOn(qick.choose_item);
 
                             player_state.shoot_ready();
 
@@ -305,7 +304,7 @@ public class PlayerController : MonoBehaviour
                     {
                         GameSystem.instance.SetMode(0); //기본모드
 
-                        throwManager.mouse_up(false);//발사 옵션 false. 발사 취소
+                        throwManager.ThrowSeed(false);//발사 옵션 false. 발사 취소
 
                         player_state.shoot_stop();
 
@@ -324,27 +323,22 @@ public class PlayerController : MonoBehaviour
                 if (GameSystem.instance.GetModeNum()==1) //취소를 안했을 경우에만 발사
                 {
                     GameSystem.instance.SetMode(0); //기본모드
-                    Debug.Log("기본모드");
 
-                    throwManager.mouse_up(true);//발사 허가
+                    //발사 허가
+                    if (throwManager.ThrowSeed(true))
+                    {
+                        GameSystem.instance.item_num[qick.choose_item]--;
 
-                    GameSystem.instance.item_num[qick.choose_item]--;
+                        if (GameSystem.instance.item_num[qick.choose_item] == 0)
+                            GameSystem.instance.item_time.Remove(qick.choose_item);
 
-                    if (GameSystem.instance.item_num[qick.choose_item] == 0)
-                        GameSystem.instance.item_time.Remove(qick.choose_item);       
-                   
-                    player_state.shoot();
+                        player_state.shoot();
+                    }
+                    else
+                        player_state.shoot_stop();
 
                     right_crash = 0;
                 }
-                //if (throw_mode) //취소를 안했을 경우에만 발사
-                //{
-                //    throw_mode = false;
-                //    GameSystem.instance.item_num[qick.item_name]--;
-                //    throwManager.mouse_up(true);
-
-                //    player_state.shoot();
-                //}
             }
 
             input_horizontal = Input.GetAxis("Horizontal");
