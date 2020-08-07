@@ -231,12 +231,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            // 임시, 반드시 삭제요망
-            if (Input.GetKey(KeyCode.Z))
-            {
-                gameObject.transform.position = new Vector3(-179f, 39.17f, 1319.7f);
-            }
-
             if (climb_mod == true && climb_up_bool == false)
             {
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D))
