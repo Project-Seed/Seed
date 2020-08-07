@@ -70,7 +70,6 @@ public class BigItem_get : MonoBehaviour
 
     public void click()
     {
-        Debug.Log("click");
         StartCoroutine(active_off());
 
         background.GetComponent<Button>().enabled = false;

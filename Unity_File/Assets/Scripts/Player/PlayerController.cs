@@ -518,7 +518,6 @@ public class PlayerController : MonoBehaviour
 
     private void Moving()
     {
-        //movement
         movement = transform.forward * input_vertical + transform.right * input_horizontal;
         movement = movement.normalized;
 
@@ -529,27 +528,11 @@ public class PlayerController : MonoBehaviour
         else if(!tuto)
             followDust.Stop();
 
-        //문제점. 대각선이동시에는? 방향을 정해주는게 아니라(look at=) 곱해줘야함. . .
         if (climb_mod == false && hang_mod == 0 && player_state.lending_time == false)
         {
             Vector3 newPos = transform.localPosition +
                     transform.TransformDirection(movement * (is_run ? player_run_speed : player_speed) * Time.deltaTime);
-            //player_rigidbody.velocity = -movement * 100.0f * Time.deltaTime;
             player_rigidbody.MovePosition(newPos);
-
-            //transform.Translate(movement * (is_run ? player_run_speed : player_speed) * Time.deltaTime, Space.Self);
-
-            //RayCasting
-            //Vector3 dir = newPos - transform.localPosition;
-            //Ray ray = new Ray(transform.localPosition, dir);
-            //Debug.DrawLine(transform.localPosition, newPos ,Color.blue,3.0f);
-            //if(!Physics.Raycast(ray ,out RaycastHit hit, movement.magnitude))
-            //{
-            //    //안맞았으면 그대로 감
-            //    player_rigidbody.MovePosition(newPos);
-            //}
-            //else
-            //    player_rigidbody.MovePosition(hit.point);
         }
         if ((Mathf.Abs(movement.z) + Mathf.Abs(movement.x)) >= 1 && climb_mod == false && hang_mod == 0)
             player_state.state_move = 1;

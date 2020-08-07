@@ -399,7 +399,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2073240721847925456}
-  - component: {fileID: 5407756966072131116}
   m_Layer: 0
   m_Name: Gress (4)
   m_TagString: Untagged
@@ -420,21 +419,8 @@ Transform:
   m_Children:
   - {fileID: 3465364503505487934}
   m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -19.134, z: 0}
---- !u!135 &5407756966072131116
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 670671413918712585}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &687536236225241727
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,7 +508,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 270700630637093316}
-  - component: {fileID: 142325053929422645}
   m_Layer: 0
   m_Name: Gress (19)
   m_TagString: Untagged
@@ -545,21 +530,8 @@ Transform:
   - {fileID: 525345277448846975}
   - {fileID: 476978865560132506}
   m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 19
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 181.127, z: 0}
---- !u!135 &142325053929422645
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 789045170823931692}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &840114237916028749
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,7 +619,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2289117953970174033}
-  - component: {fileID: 7661103866524208359}
   m_Layer: 0
   m_Name: Gress (21)
   m_TagString: Untagged
@@ -669,21 +640,8 @@ Transform:
   - {fileID: 1936998243047143176}
   - {fileID: 3999809812488657038}
   m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 21
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &7661103866524208359
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 851117640650103961}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &869525107011325187
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,50 +1656,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &3178254125959496611
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5362120186650128994}
-  - component: {fileID: 2251002707125588502}
-  m_Layer: 0
-  m_Name: Gress (20)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5362120186650128994
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3178254125959496611}
-  m_LocalRotation: {x: -0, y: -0.16619925, z: -0, w: 0.9860922}
-  m_LocalPosition: {x: -0.378, y: 0, z: 0.824}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 20
-  m_LocalEulerAnglesHint: {x: 0, y: -19.134, z: 0}
---- !u!135 &2251002707125588502
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3178254125959496611}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3214640384070309316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1985,7 +1899,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6505708944574585219}
-  - component: {fileID: 4908834773836518692}
   m_Layer: 0
   m_Name: Gress (22)
   m_TagString: Untagged
@@ -2008,21 +1921,8 @@ Transform:
   - {fileID: 5912895020972691173}
   - {fileID: 8419454735046375390}
   m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 22
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 161.99301, z: 0}
---- !u!135 &4908834773836518692
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3401005958691434190}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3464532605862031961
 GameObject:
   m_ObjectHideFlags: 0
@@ -2266,7 +2166,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 530553674069769585}
-  - component: {fileID: 3735860212592453704}
   m_Layer: 0
   m_Name: Gress (7)
   m_TagString: Untagged
@@ -2289,21 +2188,8 @@ Transform:
   - {fileID: 9072030872720395747}
   - {fileID: 342210836432568520}
   m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 161.99301, z: 0}
---- !u!135 &3735860212592453704
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3633731951778395366}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3832137108825918881
 GameObject:
   m_ObjectHideFlags: 0
@@ -2313,7 +2199,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5657055809501979660}
-  - component: {fileID: 677638640649073672}
   m_Layer: 0
   m_Name: Gress (10)
   m_TagString: Untagged
@@ -2336,65 +2221,8 @@ Transform:
   - {fileID: 4696065751815196402}
   - {fileID: 55840762917586336}
   m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 161.99301, z: 0}
---- !u!135 &677638640649073672
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3832137108825918881}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &3901069593359262378
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7019029170949802856}
-  - component: {fileID: 2237740875206338753}
-  m_Layer: 0
-  m_Name: Gress (12)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7019029170949802856
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3901069593359262378}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.19399999, y: 0, z: 0.274}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &2237740875206338753
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3901069593359262378}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4184676339623568358
 GameObject:
   m_ObjectHideFlags: 0
@@ -2551,50 +2379,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &4449373822597442254
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6563124978542272727}
-  - component: {fileID: 7329077759470357190}
-  m_Layer: 0
-  m_Name: Gress (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6563124978542272727
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4449373822597442254}
-  m_LocalRotation: {x: -0, y: -0.16619925, z: -0, w: 0.9860922}
-  m_LocalPosition: {x: -0.184, y: 0, z: 0.55}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: -19.134, z: 0}
---- !u!135 &7329077759470357190
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4449373822597442254}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4485484609018576519
 GameObject:
   m_ObjectHideFlags: 0
@@ -2604,7 +2388,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7568196363761673233}
-  - component: {fileID: 8049526433863884371}
   m_Layer: 0
   m_Name: Gress (3)
   m_TagString: Untagged
@@ -2627,21 +2410,8 @@ Transform:
   - {fileID: 1149416836852132720}
   - {fileID: 2995062362308325322}
   m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &8049526433863884371
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4485484609018576519}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4485844657657201553
 GameObject:
   m_ObjectHideFlags: 0
@@ -2651,7 +2421,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3386147627372332492}
-  - component: {fileID: 3434332904692337851}
   m_Layer: 0
   m_Name: Gress (16)
   m_TagString: Untagged
@@ -2674,21 +2443,8 @@ Transform:
   - {fileID: 19526000338399638}
   - {fileID: 817164281470353601}
   m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 16
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 181.127, z: 0}
---- !u!135 &3434332904692337851
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4485844657657201553}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4597986049015105543
 GameObject:
   m_ObjectHideFlags: 0
@@ -2932,7 +2688,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7643881395455873185}
-  - component: {fileID: 5296522623703540443}
   m_Layer: 0
   m_Name: Gress (11)
   m_TagString: Untagged
@@ -2955,21 +2710,8 @@ Transform:
   - {fileID: 896302021733597149}
   - {fileID: 2124256944510329557}
   m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 130.26701, z: 0}
---- !u!135 &5296522623703540443
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5515389816328711597}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5609932227070232478
 GameObject:
   m_ObjectHideFlags: 0
@@ -3048,50 +2790,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &5729243909164615530
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4173775718773684848}
-  - component: {fileID: 6641952658820478815}
-  m_Layer: 0
-  m_Name: Gress
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4173775718773684848
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5729243909164615530}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &6641952658820478815
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5729243909164615530}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6000426589645747831
 GameObject:
   m_ObjectHideFlags: 0
@@ -3101,7 +2799,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5448730611510713923}
-  - component: {fileID: 2503427216216418532}
   m_Layer: 0
   m_Name: Gress (2)
   m_TagString: Untagged
@@ -3122,21 +2819,8 @@ Transform:
   m_Children:
   - {fileID: 418590817567260611}
   m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -50.86, z: 0}
---- !u!135 &2503427216216418532
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6000426589645747831}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6438395721696410613
 GameObject:
   m_ObjectHideFlags: 0
@@ -3224,7 +2908,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6003750504901584869}
-  - component: {fileID: 116836583372617497}
   m_Layer: 0
   m_Name: Gress (14)
   m_TagString: Untagged
@@ -3247,21 +2930,8 @@ Transform:
   - {fileID: 8582989556458635474}
   - {fileID: 4266588329162621162}
   m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 14
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 161.99301, z: 0}
---- !u!135 &116836583372617497
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6460287010701661916}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6469273633055454673
 GameObject:
   m_ObjectHideFlags: 0
@@ -3271,7 +2941,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7230146962618122815}
-  - component: {fileID: 7407532419023428296}
   m_Layer: 0
   m_Name: Gress (17)
   m_TagString: Untagged
@@ -3294,21 +2963,8 @@ Transform:
   - {fileID: 4214041561246954286}
   - {fileID: 1037521975049023356}
   m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 17
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 130.26701, z: 0}
---- !u!135 &7407532419023428296
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6469273633055454673}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6599235112043523402
 GameObject:
   m_ObjectHideFlags: 0
@@ -3318,7 +2974,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2139158831419239578}
-  - component: {fileID: 7678603388079687935}
   m_Layer: 0
   m_Name: Gress (13)
   m_TagString: Untagged
@@ -3339,21 +2994,8 @@ Transform:
   m_Children:
   - {fileID: 2956501867457804195}
   m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 13
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: -50.86, z: 0}
---- !u!135 &7678603388079687935
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6599235112043523402}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6717968043065652172
 GameObject:
   m_ObjectHideFlags: 0
@@ -3675,7 +3317,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1174920392991488143}
-  - component: {fileID: 2574866712726511636}
   m_Layer: 0
   m_Name: Gress (23)
   m_TagString: Untagged
@@ -3698,21 +3339,8 @@ Transform:
   - {fileID: 7110427419865287980}
   - {fileID: 4809358926372380064}
   m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 23
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 130.26701, z: 0}
---- !u!135 &2574866712726511636
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7373044042966444456}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7414965834303862399
 GameObject:
   m_ObjectHideFlags: 0
@@ -3722,7 +3350,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 728717365701279906}
-  - component: {fileID: 1185070472866287151}
   m_Layer: 0
   m_Name: Gress (8)
   m_TagString: Untagged
@@ -3745,21 +3372,8 @@ Transform:
   - {fileID: 5482125061735815470}
   - {fileID: 4635619340273271988}
   m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 130.26701, z: 0}
---- !u!135 &1185070472866287151
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7414965834303862399}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7452470578115159218
 GameObject:
   m_ObjectHideFlags: 0
@@ -3769,7 +3383,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3606161255865137091}
-  - component: {fileID: 6233777275723792945}
   m_Layer: 0
   m_Name: Gress (6)
   m_TagString: Untagged
@@ -3792,21 +3405,8 @@ Transform:
   - {fileID: 2727701398766864881}
   - {fileID: 5872345916108164050}
   m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 181.127, z: 0}
---- !u!135 &6233777275723792945
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7452470578115159218}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7574468112109402999
 GameObject:
   m_ObjectHideFlags: 0
@@ -3816,7 +3416,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2921739760872297269}
-  - component: {fileID: 1919337422986644823}
   m_Layer: 0
   m_Name: Gress (15)
   m_TagString: Untagged
@@ -3837,21 +3436,8 @@ Transform:
   m_Children:
   - {fileID: 9133750656080933235}
   m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 15
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: -50.86, z: 0}
---- !u!135 &1919337422986644823
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7574468112109402999}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7798856897381234863
 GameObject:
   m_ObjectHideFlags: 0
@@ -4008,50 +3594,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &7841724492169913107
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4565487898769691424}
-  - component: {fileID: 7426598198056581244}
-  m_Layer: 0
-  m_Name: Gress (18)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4565487898769691424
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7841724492169913107}
-  m_LocalRotation: {x: -0, y: -0.16619925, z: -0, w: 0.9860922}
-  m_LocalPosition: {x: 0.264, y: 0, z: 0.19999999}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 18
-  m_LocalEulerAnglesHint: {x: 0, y: -19.134, z: 0}
---- !u!135 &7426598198056581244
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7841724492169913107}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8011891050675085723
 GameObject:
   m_ObjectHideFlags: 0
@@ -4235,8 +3777,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4173775718773684848}
-  - {fileID: 6563124978542272727}
   - {fileID: 5448730611510713923}
   - {fileID: 7568196363761673233}
   - {fileID: 2073240721847925456}
@@ -4247,15 +3787,12 @@ Transform:
   - {fileID: 4044717070938723283}
   - {fileID: 5657055809501979660}
   - {fileID: 7643881395455873185}
-  - {fileID: 7019029170949802856}
   - {fileID: 2139158831419239578}
   - {fileID: 6003750504901584869}
   - {fileID: 2921739760872297269}
   - {fileID: 3386147627372332492}
   - {fileID: 7230146962618122815}
-  - {fileID: 4565487898769691424}
   - {fileID: 270700630637093316}
-  - {fileID: 5362120186650128994}
   - {fileID: 2289117953970174033}
   - {fileID: 6505708944574585219}
   - {fileID: 1174920392991488143}
@@ -4427,7 +3964,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3951206549105191108}
-  - component: {fileID: 9116516135836694665}
   m_Layer: 0
   m_Name: Gress (5)
   m_TagString: Untagged
@@ -4450,21 +3986,8 @@ Transform:
   - {fileID: 3855803709626594849}
   - {fileID: 1129122772227261845}
   m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -50.86, z: 0}
---- !u!135 &9116516135836694665
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8313805377624851108}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8325024829906765230
 GameObject:
   m_ObjectHideFlags: 0
@@ -4552,7 +4075,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4044717070938723283}
-  - component: {fileID: 259972164468216343}
   m_Layer: 0
   m_Name: Gress (9)
   m_TagString: Untagged
@@ -4575,21 +4097,8 @@ Transform:
   - {fileID: 4616119443100240635}
   - {fileID: 6519194777461910973}
   m_Father: {fileID: 2194927386533408305}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 181.127, z: 0}
---- !u!135 &259972164468216343
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8484249816057955671}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8586655834383396042
 GameObject:
   m_ObjectHideFlags: 0
