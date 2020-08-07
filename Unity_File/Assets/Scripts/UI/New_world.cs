@@ -46,20 +46,20 @@ public class New_world : MonoBehaviour
         line.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 3);
         text.color = new Color(1, 1, 1, 0);
 
-        for (int i = 0; i <= 200; i++)
+        for (int i = 0; i <= 150; i++)
         {
             if (i <= 20)
                 me.color = new Color(1, 1, 1, i / 20f);
-            else if (i <= 50)
+            else if (i <= 40)
             {
-                line.GetComponent<RectTransform>().sizeDelta = new Vector2((i - 20) / 30f * 622f, 3);
-                text.color = new Color(1, 1, 1, (i - 20) / 30f);
+                line.GetComponent<RectTransform>().sizeDelta = new Vector2((i - 20) / 20f * 622f, 3);
+                text.color = new Color(1, 1, 1, (i - 20) / 20f);
             }
-            else if (i >= 170)
+            else if (i >= 130)
             {
-                me.color = new Color(1, 1, 1, (200 - i) / 30f);
-                line.GetComponent<RectTransform>().sizeDelta = new Vector2((200 - i) / 30f * 622f, 3);
-                text.color = new Color(1, 1, 1, (200 - i) / 30f);
+                me.color = new Color(1, 1, 1, (150 - i) / 20f);
+                line.GetComponent<RectTransform>().sizeDelta = new Vector2((150 - i) / 20f * 622f, 3);
+                text.color = new Color(1, 1, 1, (150 - i) / 20f);
             }
 
             yield return new WaitForSeconds(0.01f);

@@ -20,6 +20,10 @@ public class PlayerState : MonoBehaviour
 
     public Animator animator;
 
+    public Transform target;
+    Transform chest;
+
+
     public int state_move = 0; // 0 정지 1 이동
     public int state_dash = 0; // 0 안함 1 대쉬
 
@@ -37,12 +41,6 @@ public class PlayerState : MonoBehaviour
 
     public bool lending_time = false; // true면 0.5초간 착지후 발이 아파 못움직임
 
-
-    public Transform spine; // 상체
-    public Transform target; // 조준시 상체 바라볼곳
-    public Vector3 ress;
-
-
     public GameObject game_overs;
 
 
@@ -55,7 +53,7 @@ public class PlayerState : MonoBehaviour
     {
         instance = this;
 
-        //spine = animator.GetBoneTransform(HumanBodyBones.Chest); // 상체값 가져오기
+        chest = animator.GetBoneTransform(HumanBodyBones.RightUpperArm); // 상체값 가져오기
     }
 
     void Update()
@@ -108,6 +106,15 @@ public class PlayerState : MonoBehaviour
 
         animator.SetFloat("climb_Blend", climb_blend);
         animator.SetInteger("move", state_move);
+    }
+
+    private void LateUpdate()
+    {
+        if (shoot_check)
+        {
+            chest.LookAt(target.position);
+            chest.rotation = chest.rotation * Quaternion.Euler(180, 90 + 180+10, 10);
+        }
     }
 
     IEnumerator gameover_image()
@@ -172,6 +179,13 @@ public class PlayerState : MonoBehaviour
     public void shoot_ready()
     {
         animator.SetBool("shoot_start", true);
+
+        StartCoroutine(shoot_readys());
+    }
+    IEnumerator shoot_readys()
+    {
+        yield return new WaitForSeconds(0.8f);
+        shoot_check = true;
     }
 
     public void shoot()
@@ -179,12 +193,18 @@ public class PlayerState : MonoBehaviour
         animator.SetTrigger("shoot");
         animator.SetTrigger("shoot2");
         animator.SetBool("shoot_start", false);
+
+        shoot_check = false;
+        StopCoroutine(shoot_readys());
     }
     public void shoot_stop()
     {
         animator.SetBool("shoot_start", false);
         animator.SetTrigger("shoot_stop");
         animator.SetTrigger("shoot_stop2");
+
+        shoot_check = false;
+        StopCoroutine(shoot_readys());
     }
 
     public void climb_on()
