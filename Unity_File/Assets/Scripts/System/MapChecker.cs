@@ -21,7 +21,7 @@ public class MapChecker : MonoBehaviour
             {
                 GameSystem.instance.map_name = hit.collider.gameObject.name;
             }
-                return true;
+            return true;
         }
         return false;
 

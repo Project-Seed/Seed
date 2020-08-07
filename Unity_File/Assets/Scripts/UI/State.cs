@@ -77,9 +77,6 @@ public class State : MonoBehaviour
             radis.Add(Instantiate(radi, new Vector3(0, 0, 0), Quaternion.identity, viewport_radi.transform));
         }
 
-        StartCoroutine(Update_Radiation());
-        StartCoroutine(hit_radi());
-
         int e_hp = 20;
         for (int i = 0; i < PlayerState.instance.max_hp - PlayerState.instance.hp; i++)
         {

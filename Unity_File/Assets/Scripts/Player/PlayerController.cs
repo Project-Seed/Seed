@@ -491,8 +491,8 @@ public class PlayerController : MonoBehaviour
                 note.SetActive(false);
             else
             {
-                note.SetActive(true);
-                composer.SetActive(false);               
+                composer.SetActive(false);
+                note.SetActive(true);                           
             }
         }
 

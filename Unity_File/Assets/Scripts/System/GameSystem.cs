@@ -19,6 +19,7 @@ public class GameSystem : MonoBehaviour
     public List<Dictionary<string, string>> item_list; // 아이템 DB
     public List<Dictionary<string, string>> combination_list; // 조합 테이블
     public List<Dictionary<string, string>> quest_list; // 퀘스트 DB
+    public List<Dictionary<string, string>> world_list; // 지도 방사능 DB
 
     public List<string> item_time; // 먹은 아이템 순서
     public Dictionary<string, int> item_num = new Dictionary<string, int>(); // 먹은 아이템 갯수
@@ -171,6 +172,8 @@ public class GameSystem : MonoBehaviour
         {
             quest_state.Add(i+1, 0); // 퀘스트 진행상태 등록
         }
+
+        world_list = CSV_Reader.Read("World_Table"); // 지역 방사능 로드
 
         dictionary_sc.before_awake();
     }

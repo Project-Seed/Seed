@@ -28,9 +28,15 @@ public class Map : MonoBehaviour
     int mark_click_mod = 0; // 지도클릭 0, 마크클릭 1
 
     public GameObject player;
+    public GameObject model;
     public GameObject player_pick;
 
     public MiniMap miniMap;
+
+    public GameObject warp;
+    public float warp_point_x;
+    public float warp_point_y;
+    public float warp_point_z;
 
     private void Awake()
     {
@@ -140,6 +146,7 @@ public class Map : MonoBehaviour
         }
 
         player_pick.transform.localPosition = new Vector2(-player.transform.position.x - 500, -player.transform.position.z + 1500);
+        player_pick.transform.rotation = Quaternion.Euler(0,0,-model.transform.rotation.eulerAngles.y + 90);
     }
 
     // 마커 생성
@@ -184,5 +191,30 @@ public class Map : MonoBehaviour
             Destroy(marks_ob);
             miniMap.mark_re();
         }
+    }
+
+    public void warp_on(int warp_point)
+    {
+        warp.SetActive(true);
+
+        switch(warp_point)
+        {
+            case 1:
+                warp_point_x = 361;
+                warp_point_y = 75.5f;
+                warp_point_z = 434;
+                break;
+        }
+    }
+    public void warp_ok()
+    {
+        warp.SetActive(false);
+        GameObject.Find("Note").SetActive(false);
+        player.transform.position = new Vector3(warp_point_x,warp_point_y,warp_point_z);
+    }
+
+    public void warp_no()
+    {
+        warp.SetActive(false);
     }
 } 
