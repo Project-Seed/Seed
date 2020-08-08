@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class MapChecker : MonoBehaviour
 {
-    void Start()
-    {
-    }
-
     void Update()
     {
         MapCheck(5.0f);
@@ -24,6 +20,5 @@ public class MapChecker : MonoBehaviour
             return true;
         }
         return false;
-
     }
 }
