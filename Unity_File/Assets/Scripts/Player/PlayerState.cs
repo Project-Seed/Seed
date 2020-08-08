@@ -189,7 +189,7 @@ public class PlayerState : MonoBehaviour
     }
     IEnumerator shoot_readys()
     {
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.6f);
         
         if(shoot_check2 == true)
             shoot_check = true;
