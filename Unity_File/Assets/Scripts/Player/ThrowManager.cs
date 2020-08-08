@@ -98,7 +98,7 @@ public class ThrowManager : MonoBehaviour
 
     private bool isPlantable()
     {
-        float distance = 10.0f;
+        float distance = 20.0f;
         if (Physics.Raycast(sub_cam.position, sub_cam.forward, out RaycastHit hit, distance))
         {
             if (checkPlantable(hit))
@@ -114,7 +114,9 @@ public class ThrowManager : MonoBehaviour
     }
     private bool checkPlantable(RaycastHit hit)
     {
-        bool isWall = checkWall(ref hit,seed_name);
+        if (hit.transform.CompareTag("DontShoot")) return false;
+
+        bool isWall = checkWall(ref hit, seed_name);
 
         switch (seed_name)
         {
@@ -156,14 +158,14 @@ public class ThrowManager : MonoBehaviour
         float angle = Vector3.Angle(hit.normal, Vector3.up);
         Debug.Log("hit " + hit.transform.gameObject.name + "Angle " + angle);
         bool isWall;
-        if (type == "blue_seed")
+        if (type.Equals("blue_seed"))
         {
             if (70.0f <= angle && angle < 130.0f)
                 isWall = true;
             else
                 isWall = false;
         }
-        else if (type == "brown_seed")
+        else if (type.Equals("brown_seed"))
         {
             if (60.0f <= angle && angle < 90.0f)
                 isWall = true;
