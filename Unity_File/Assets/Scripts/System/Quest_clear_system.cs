@@ -49,6 +49,7 @@ public class Quest_clear_system : MonoBehaviour
         if (GameSystem.instance.quest_state[12] == 2)
         {
             GameSystem.instance.quest_state[12] = 3;
+            clear_reward(12);
             GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[12 - 1]["title"], true);
             GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re();
         }
@@ -62,6 +63,7 @@ public class Quest_clear_system : MonoBehaviour
         if (GameSystem.instance.quest_state[15] == 2)
         {
             GameSystem.instance.quest_state[15] = 3;
+            clear_reward(15);
             GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[15 - 1]["title"], true);
             GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re();
         }
@@ -69,6 +71,7 @@ public class Quest_clear_system : MonoBehaviour
         if(GameSystem.instance.quest_state[16] == 1)
         {
             GameSystem.instance.quest_state[16] = 3;
+            clear_reward(16);
             GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[16 - 1]["title"], true);
             GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re();
         }
@@ -86,6 +89,7 @@ public class Quest_clear_system : MonoBehaviour
         if (GameSystem.instance.quest_state[5] == 2)
         {
             GameSystem.instance.quest_state[5] = 3;
+            clear_reward(5);
             GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[5 - 1]["title"], true);
             GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re();
         }
@@ -93,6 +97,7 @@ public class Quest_clear_system : MonoBehaviour
         if (GameSystem.instance.quest_state[20] == 1)
         {
             GameSystem.instance.quest_state[20] = 3;
+            clear_reward(20);
             GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[20 - 1]["title"], true);
             GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re();
         }
@@ -100,6 +105,7 @@ public class Quest_clear_system : MonoBehaviour
         if (GameSystem.instance.quest_state[21] == 1)
         {
             GameSystem.instance.quest_state[21] = 3;
+            clear_reward(21);
             GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[21 - 1]["title"], true);
             GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re();
         }
@@ -111,6 +117,7 @@ public class Quest_clear_system : MonoBehaviour
                     clear_trigger[quest_num] == item_num)
         {
             GameSystem.instance.quest_state[quest_num] = 3;
+            clear_reward(quest_num);
             GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[quest_num - 1]["title"], true);
             GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re();
         }
@@ -220,11 +227,11 @@ public class Quest_clear_system : MonoBehaviour
                 break;
             case 20:
                 // 트루엔딩
-                Debug.Log("트루엔딩");
+                Debug.Log("트루엔딩"); Eat_system.instance.eat_item("gunpowder");
                 break;
             case 21:
                 // 배드엔딩
-                Debug.Log("배드엔딩");
+                Debug.Log("배드엔딩"); Eat_system.instance.eat_item("coal");
                 break;
         }
     }
