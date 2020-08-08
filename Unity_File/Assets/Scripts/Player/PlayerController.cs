@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
 
     public bool hang_crash = false; // 파랑 충돌시 true
     public int hang_mod = 0; // 기본 0 매달리기 1 떨어지기 2
+    public bool hang_end = false; // r연타 방지용
     public GameObject hang_ob; // 매달리는 파랑이
     public float hang_x;
     public float hang_y;
@@ -118,7 +119,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator hang_land()
     {
         player_state.hang_land();
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.25f);
         hang_mod = 0;
 
         for (int i = 0; i < 10; i++)
@@ -127,6 +128,8 @@ public class PlayerController : MonoBehaviour
             
             yield return new WaitForSeconds(0.01f);
         }
+
+        hang_end = false;
     }
     IEnumerator climb_05()
     {
@@ -230,10 +233,11 @@ public class PlayerController : MonoBehaviour
                 {
                     StartCoroutine(hang_land());
                 }
-                else if (hang_crash == true && hang_mod == 0)
+                else if (hang_crash == true && hang_mod == 0 && hang_end == false)
                 {
                     StartCoroutine(hang_jump());
 
+                    hang_end = true;
                     hang_mod = 1;
                     player_state.hang_on();
                 }
