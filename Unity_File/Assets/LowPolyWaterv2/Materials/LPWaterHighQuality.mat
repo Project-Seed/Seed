@@ -9,8 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: LPWaterHighQuality
   m_Shader: {fileID: 4800000, guid: 8165be4dd0b12774d80426d906df9c38, type: 3}
-  m_ShaderKeywords: LPW_FOAM WATER_REFLECTIVE _EDGEBLEND_ON _EMISSION _LIGHTABS_ON
-    _SHADING_FLAT _WAVES_HIGHQUALITY _ZWRITE_ON
+  m_ShaderKeywords: LPW_FOAM _EDGEBLEND_ON _EMISSION _LIGHTABS_ON _SHADING_FLAT _WAVES_HIGHQUALITY
+    _ZWRITE_ON
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -48,7 +48,7 @@ Material:
     - _BumpSpeed: 0.2
     - _Cull: 0
     - _Cull_: 2
-    - _Diffuse: 0.7
+    - _Diffuse: 0.53
     - _Direction: 180
     - _Distort: 0
     - _Distortion: 1
@@ -64,7 +64,7 @@ Material:
     - _Length: 3
     - _LightAbs: 1
     - _NormalOffset: 1
-    - _Opacity: 0.2
+    - _Opacity: 0.45
     - _PointLights: 0
     - _RHeight: 0.25
     - _RHeight_: 0.45524997
@@ -78,7 +78,7 @@ Material:
     - _Shadow: 0.5
     - _ShoreDistance: 0.5
     - _ShoreIntensity: 1
-    - _Specular: 44
+    - _Specular: 95
     - _Speed: 0.5
     - _Speed_: 0.91049993
     - _Steepness: 0.2
@@ -89,11 +89,11 @@ Material:
     - _Waves: 2
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0, g: 1, b: 0.751724, a: 1}
-    - _DeepColor: {r: 0, g: 0.6006591, b: 0.75735295, a: 1}
+    - _Color: {r: 0.28630233, g: 0.24065503, b: 0.3018868, a: 1}
+    - _DeepColor: {r: 0.2627451, g: 0.36862746, b: 0.31888223, a: 1}
     - _Direction_: {r: -1, g: -0.00000008742278, b: -1.0926, a: -0.000000095518125}
     - _FresColor: {r: 0.525519, g: 0.72743106, b: 0.7941176, a: 1}
     - _ShoreColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SpecColor: {r: 0.5955882, g: 0.57104737, b: 0.35472533, a: 1}
+    - _SpecColor: {r: 1, g: 0.97671944, b: 0.759434, a: 1}
     - _Sun: {r: 0.3213938, g: 0.76604444, b: -0.5566705, a: 0}
     - _SunColor: {r: 1, g: 1, b: 1, a: 1}

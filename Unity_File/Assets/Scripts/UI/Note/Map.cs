@@ -57,7 +57,6 @@ public class Map : MonoBehaviour
         else if(Input.GetMouseButton(0))
         {
             Vector3 move_position = move_now - (move_start - new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
-            Debug.Log(move_position);
 
             if(move_position.x >= 200 && move_position.x <= 1700 && move_position.y >= -690 && move_position.y <= 1550)
                 map_bg.transform.position = move_position;
