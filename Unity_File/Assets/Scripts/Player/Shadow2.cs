@@ -13,4 +13,12 @@ public class Shadow2 : MonoBehaviour
             playerController.shadow_out();
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name == "brown_trigger")
+        {
+            playerController.shadow_out();
+        }
+    }
 }

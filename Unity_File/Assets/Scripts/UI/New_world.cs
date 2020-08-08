@@ -22,7 +22,7 @@ public class New_world : MonoBehaviour
     { 
         if(now_map != GameSystem.instance.map_name)
         {
-            StopCoroutine(view());
+            StopAllCoroutines();
             StartCoroutine(view());
 
             for(int i=0; i<GameSystem.instance.world_list.Count;i++)
