@@ -285,4 +285,31 @@ public class PlayerState : MonoBehaviour
         animator.SetTrigger("reborn");
         die_check = false;
     }
+
+    public void sleep_on()
+    {
+        InputManager.instance.game_stop();
+        animator.SetTrigger("sleep_on");
+
+        StartCoroutine(wake_up());
+    }
+
+    IEnumerator wake_up()
+    {
+        yield return new WaitForSeconds(3f);
+        // 검은 화면 사라졌다. 1초
+
+        yield return new WaitForSeconds(2f);
+        gameObject.transform.position = new Vector3(503.7633f, 58.55602f, 808.3416f);
+        // 검은 화면 나왔 1초
+
+        yield return new WaitForSeconds(2f);
+        animator.SetTrigger("sleep_off");
+
+        yield return new WaitForSeconds(2f);
+        GameSystem.instance.quest_state[15] = 1;
+        GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[15 - 1]["title"], false);
+        GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re();
+        InputManager.instance.game_start();
+    }
 }

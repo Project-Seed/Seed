@@ -5,7 +5,7 @@ using UnityEngine;
 public class Chest : MonoBehaviour
 {
     public bool on = false;
-    public string recipe_choose = "portion";
+    public string recipe_choose = "medi_01";
     public Animator animator;
 
     public void open()

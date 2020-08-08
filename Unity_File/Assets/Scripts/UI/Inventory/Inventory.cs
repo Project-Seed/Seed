@@ -130,7 +130,19 @@ public class Inventory : MonoBehaviour
         {
             switch (GameSystem.instance.item_search(item_choose, "name"))
             {
-                case "portion":
+                case "medi_01":
+                    if (PlayerState.instance.hp + 2 < PlayerState.instance.max_hp)
+                        State.instance.hp_up(2);
+                    else
+                        State.instance.hp_up(PlayerState.instance.max_hp - PlayerState.instance.hp);
+
+                    GameSystem.instance.item_num[item_choose]--;
+
+                    if (GameSystem.instance.item_num[item_choose] == 0)
+                        GameSystem.instance.item_time.Remove(item_choose); 
+                    break;
+
+                case "medi_02":
                     if (PlayerState.instance.hp + 4 < PlayerState.instance.max_hp)
                         State.instance.hp_up(4);
                     else
@@ -139,7 +151,19 @@ public class Inventory : MonoBehaviour
                     GameSystem.instance.item_num[item_choose]--;
 
                     if (GameSystem.instance.item_num[item_choose] == 0)
-                        GameSystem.instance.item_time.Remove(item_choose); 
+                        GameSystem.instance.item_time.Remove(item_choose);
+                    break;
+
+                case "medi_03":
+                    if (PlayerState.instance.hp + 6 < PlayerState.instance.max_hp)
+                        State.instance.hp_up(6);
+                    else
+                        State.instance.hp_up(PlayerState.instance.max_hp - PlayerState.instance.hp);
+
+                    GameSystem.instance.item_num[item_choose]--;
+
+                    if (GameSystem.instance.item_num[item_choose] == 0)
+                        GameSystem.instance.item_time.Remove(item_choose);
                     break;
 
                 case "mini_latter":

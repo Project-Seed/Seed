@@ -5,8 +5,7 @@ using UnityEngine;
 public class ExampleItem : MonoBehaviour
 {
     public List<GameObject> items;
-    private List<GameObject> items_true = new List<GameObject>(); // 조건에 맞는 아이템
-    public bool mountain;
+    public List<int> items_true = new List<int>(); // 조건에 맞는 아이템
 
     GameObject gameObjects;
 
@@ -18,12 +17,6 @@ public class ExampleItem : MonoBehaviour
     {
         collider = GetComponent<SphereCollider>();
         twinkle = GetComponentInChildren<ParticleSystem>();
-
-        if (mountain)
-        {
-            items_true.Add(items[0]);
-            items_true.Add(items[1]);
-        }
 
         make();
     }
@@ -47,9 +40,9 @@ public class ExampleItem : MonoBehaviour
 
         int num = Random.Range(0, items_true.Count);
 
-        gameObjects = Instantiate(items_true[num], gameObject.transform.position, Quaternion.identity, gameObject.transform);
+        gameObjects = Instantiate(items[items_true[num]], gameObject.transform.position, Quaternion.identity, gameObject.transform);
         gameObjects.transform.localScale = new Vector3(1, 1, 1);
-        gameObject.name = items_true[num].name;
+        gameObject.name = items[items_true[num]].name;
     }
 
     IEnumerator making()
