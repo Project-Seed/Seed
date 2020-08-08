@@ -37,6 +37,7 @@ public class New_world : MonoBehaviour
             }
 
             now_map = GameSystem.instance.map_name;
+            TerrainManager.instance.CallTerrainManager();
         }
     }
 

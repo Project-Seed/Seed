@@ -1,29 +1,39 @@
 ﻿using UnityEngine;
 
-class TerrainLoader : MonoBehaviour
+public class TerrainLoader : MonoBehaviour
 {
-    public GameObject[] terrain;
-   // private MeshRenderer renderer;
+    public GameObject[] loadTerrains;
+    public GameObject[] unloadTerrains;
 
-    //private void Start()
-    //{
-    //    renderer = GetComponent<MeshRenderer>();
-    //    renderer.enabled = false;
-    //}
+    public void LoadUnLoad()
+    {
+        if (!loadTerrains.Length.Equals(0))
+            for (int i = 0; i < loadTerrains.Length; ++i)
+            {
+                Debug.Log("Load" + loadTerrains[i].name);
+                loadTerrains[i].SetActive(true);
+            }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.tag.Equals("Player"))
-    //    {
-    //        for (int i = 0; i < terrain.Length; ++i)
-    //            terrain[i].SetActive(true);
-    //    }
-    //}
+        if (!unloadTerrains.Length.Equals(0))
+            for (int j = 0; j < unloadTerrains.Length; ++j)
+            {
+                Debug.Log("UnLoad" + unloadTerrains[j].name);
+                unloadTerrains[j].SetActive(false);
+            }
+    }
+
+    public void Load()
+    {
+        if (loadTerrains.Length.Equals(0)) return;
+        for (int i = 0; i < loadTerrains.Length; ++i)
+            loadTerrains[i].SetActive(true);
+    }
 
     public void UnLoad()
     {
-        for (int i = 0; i < terrain.Length; ++i)
-            terrain[i].SetActive(true);
+        if (unloadTerrains.Length.Equals(0)) return;
+        for (int i = 0; i < unloadTerrains.Length; ++i)
+            unloadTerrains[i].SetActive(false);
     }
 }
 

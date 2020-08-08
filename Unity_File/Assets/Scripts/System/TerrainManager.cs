@@ -5,12 +5,21 @@ using UnityEngine.Events;
 
 public class TerrainManager : MonoBehaviour
 {
-    public GameObject[] terrain;
-    public UnityEvent onCall; //호출당했음
-
-    public void CallTerrain()
+    public GameObject[] terrains;
+    public static TerrainManager instance;
+    private TerrainLoader loader;
+    public static TerrainManager Instance
     {
-        if (onCall != null)
-            onCall.Invoke();
+        get { return instance; }
+    }
+
+    private void Awake()
+    {
+        instance = this;
+    }
+    public void CallTerrainManager()
+    {
+        if (loader = GameObject.Find(GameSystem.instance.map_name).GetComponent<TerrainLoader>())
+            loader.LoadUnLoad();
     }
 }
