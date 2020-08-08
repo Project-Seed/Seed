@@ -19,7 +19,7 @@ class TerrainUnloader : MonoBehaviour
     //            terrain[i].SetActive(false);
     //    }
     //}
-    public void Load()
+    public void UnLoad()
     {
         for (int i = 0; i < terrain.Length; ++i)
             terrain[i].SetActive(false);
