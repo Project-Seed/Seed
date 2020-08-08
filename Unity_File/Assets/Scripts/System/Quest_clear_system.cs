@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Permissions;
 using UnityEngine;
 
 public class Quest_clear_system : MonoBehaviour
@@ -17,13 +18,15 @@ public class Quest_clear_system : MonoBehaviour
     {
         instance = this;
 
-        for (int i = 1; i <= 11; i++) // 퀘스트 갯수 많큼 늘려주세요
+        for (int i = 1; i <= 13; i++) // 퀘스트 갯수 많큼 늘려주세요
             clear_trigger.Add(i, 0);
     }
 
     void Update()
     {
-        if(GameSystem.instance.quest_state[1] == 1)
+        //state를 3으로 하여 퀘스트를 끝낼경우 GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re(); 필수!!!
+
+        if (GameSystem.instance.quest_state[1] == 1)
             GameSystem.instance.quest_state[1] = 2;
 
         if (GameSystem.instance.quest_state[2] == 1)
@@ -40,51 +43,30 @@ public class Quest_clear_system : MonoBehaviour
             GameSystem.instance.item_num["sticky_moss"] >= 1)
             GameSystem.instance.quest_state[5] = 2;
 
-        if (GameSystem.instance.quest_state[6] == 1 &&
-            clear_trigger[6] == 4)
-        {
-            GameSystem.instance.quest_state[6] = 3;
+        state_changer(6, 4);
+        state_changer(7, 2);
+        state_changer(8, 1);
+        state_changer(9, 1);
+        state_changer(10, 1);
+        state_changer(11, 1);
 
-            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[6 - 1]["title"], true);
+        if (GameSystem.instance.quest_state[12] == 2)
+        {
+            GameSystem.instance.quest_state[12] = 3;
+            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re();
         }
 
-        if (GameSystem.instance.quest_state[7] == 1 &&
-            clear_trigger[7] == 2)
+        state_changer(13, 1);
+    }
+
+    void state_changer(int quest_num, int item_num)
+    {
+        if (GameSystem.instance.quest_state[quest_num] == 1 &&
+                    clear_trigger[quest_num] == item_num)
         {
-            GameSystem.instance.quest_state[7] = 3;
-
-            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[7 - 1]["title"], true);
-        }
-
-        if (GameSystem.instance.quest_state[8] == 1 &&
-            clear_trigger[8] == 1)
-        {
-            GameSystem.instance.quest_state[8] = 3;
-
-            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[8 - 1]["title"], true);
-        }
-
-        if (GameSystem.instance.quest_state[9] == 1 &&
-            clear_trigger[9] == 1)
-        {
-            GameSystem.instance.quest_state[9] = 3;
-            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[9 - 1]["title"], true);
-        }
-
-        if (GameSystem.instance.quest_state[10] == 1 &&
-            clear_trigger[10] == 1)
-        {
-            GameSystem.instance.quest_state[10] = 3;
-
-            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[10 - 1]["title"], true);
-        }
-
-        if (GameSystem.instance.quest_state[11] == 1 &&
-            clear_trigger[11] == 1)
-        {
-            GameSystem.instance.quest_state[11] = 3;
-
-            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[11 - 1]["title"], true);
+            GameSystem.instance.quest_state[quest_num] = 3;
+            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[quest_num - 1]["title"], true);
+            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re();
         }
     }
 
@@ -123,6 +105,12 @@ public class Quest_clear_system : MonoBehaviour
             case 11:
                 data = "집 밖으로 나가기";
                 break;
+            case 12:
+                data = "마을주민 찾아가기";
+                break;
+            case 13:
+                data = "돌을 넘어 가기";
+                break;
         }
 
         return data;
@@ -148,7 +136,9 @@ public class Quest_clear_system : MonoBehaviour
             case 9:
             case 10:
             case 11:
-                break;
+            case 12:
+            case 13:
+                break;  
         }
     }
 }

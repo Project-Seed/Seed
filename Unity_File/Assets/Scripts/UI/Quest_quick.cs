@@ -11,7 +11,7 @@ public class Quest_quick : MonoBehaviour
 
     public GameObject active;
     public Text quest_text;
-    public Text clear_text;
+    public Image clear_text;
 
     public void quest_re()
     {
@@ -46,7 +46,7 @@ public class Quest_quick : MonoBehaviour
         quest_text.color = new Color(0, 0, 0, 0);
         clear_text.color = new Color(1, 0.9701258f, 0.7311321f, 0);
 
-        for (int i = 0; i <= 200; i++)
+        for (int i = 0; i <= 100; i++)
         {
             if (i <= 15)
             {
@@ -61,16 +61,16 @@ public class Quest_quick : MonoBehaviour
                 else
                     clear_text.color = new Color(1, 0.9701258f, 0.7311321f, 0);
             }
-            else if(i >= 185)
+            else if(i >= 85)
             {
                 active.GetComponent<RectTransform>().pivot = new Vector2(0f, 0.5f);
                 active.GetComponent<RectTransform>().anchoredPosition = new Vector2(-1920f, 250f);
 
-                active.GetComponent<RectTransform>().sizeDelta = new Vector2((200 - i) / 15f * 1920, 120);
-                quest_text.color = new Color(0, 0, 0, (200 - i) / 15f);
+                active.GetComponent<RectTransform>().sizeDelta = new Vector2((100 - i) / 15f * 1920, 120);
+                quest_text.color = new Color(0, 0, 0, (100 - i) / 15f);
 
                 if (clear_on)
-                    clear_text.color = new Color(1, 0.9701258f, 0.7311321f, (200 - i) / 15f);
+                    clear_text.color = new Color(1, 0.9701258f, 0.7311321f, (100 - i) / 15f);
                 else
                     clear_text.color = new Color(1, 0.9701258f, 0.7311321f, 0);
             }

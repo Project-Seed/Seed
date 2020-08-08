@@ -150,13 +150,6 @@ public class PlayerController : MonoBehaviour
         lookAt = transform.forward;
         is_run = false;
 
-        for (int i = 0; i < 5; ++i)
-        {
-            Eat_system.instance.eat_item("blue_seed");
-            Eat_system.instance.eat_item("brown_seed");
-        }
-        Eat_system.instance.eat_item("portion");
-
         player_mate.color = new Color(1f, 1f, 1f, 1);
     }
 

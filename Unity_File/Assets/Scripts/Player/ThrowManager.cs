@@ -156,7 +156,7 @@ public class ThrowManager : MonoBehaviour
     private static bool checkWall(ref RaycastHit hit, string type)
     {
         float angle = Vector3.Angle(hit.normal, Vector3.up);
-        Debug.Log("hit " + hit.transform.gameObject.name + "Angle " + angle);
+
         bool isWall;
         if (type.Equals("blue_seed"))
         {

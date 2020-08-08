@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,6 +33,8 @@ public class Dialogue : MonoBehaviour
     int quest_now; // 충돌 npc의 퀘스트 진행상태
 
     public bool open_on = false; // 외부에서 대화 불러서 했으면 변화 없어서 에러 해결
+
+    private bool solo = false;
     
 
     void Update()
@@ -50,6 +53,7 @@ public class Dialogue : MonoBehaviour
                     StartCoroutine(Key_guide.instance.talk_ing());
                     InputManager.instance.game_stop();
 
+                    solo = false;
                     dialogue_box.SetActive(true);
                     dialogue_box_bool = true;
 
@@ -63,7 +67,7 @@ public class Dialogue : MonoBehaviour
             }
         }
 
-        if (dialogue_box.activeSelf)
+        if (dialogue_box.activeSelf && solo == false)
             GameSystem.instance.talk_trigger = true;
         else
             GameSystem.instance.talk_trigger = false;
@@ -159,6 +163,7 @@ public class Dialogue : MonoBehaviour
 
         InputManager.instance.game_stop();
 
+        solo = true;
         dialogue_box.SetActive(true);
         dialogue_box_bool = true;
 
