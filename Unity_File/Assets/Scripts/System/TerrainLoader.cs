@@ -7,6 +7,12 @@ public class TerrainLoader : MonoBehaviour
 
     public void LoadUnLoad()
     {
+        if (!unloadTerrains.Length.Equals(0))
+            for (int j = 0; j < unloadTerrains.Length; ++j)
+            {
+                Debug.Log("UnLoad" + unloadTerrains[j].name);
+                unloadTerrains[j].SetActive(false);
+            }
         if (!loadTerrains.Length.Equals(0))
             for (int i = 0; i < loadTerrains.Length; ++i)
             {
@@ -14,12 +20,6 @@ public class TerrainLoader : MonoBehaviour
                 loadTerrains[i].SetActive(true);
             }
 
-        if (!unloadTerrains.Length.Equals(0))
-            for (int j = 0; j < unloadTerrains.Length; ++j)
-            {
-                Debug.Log("UnLoad" + unloadTerrains[j].name);
-                unloadTerrains[j].SetActive(false);
-            }
     }
 
     public void Load()
