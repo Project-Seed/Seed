@@ -70,6 +70,10 @@ public class GameSystem : MonoBehaviour
         foreach (var load in save_data.Element("root").Element("quest_state").Elements())
             quest_state.Add(Convert.ToInt32(load.Name.LocalName.Substring(4)), Convert.ToInt32(load.Value)); // key가 int
 
+        Quest_clear_system.instance.clear_trigger = new Dictionary<int, int>();
+        foreach (var load in save_data.Element("root").Element("clear_trigger").Elements())
+            Quest_clear_system.instance.clear_trigger.Add(Convert.ToInt32(load.Name.LocalName.Substring(4)), Convert.ToInt32(load.Value));
+
         dictionarys.dictionary_num = new Dictionary<string, bool>();
         foreach (var load in save_data.Element("root").Element("dictionary_num").Elements())
             dictionarys.dictionary_num.Add(load.Name.LocalName, bool.Parse(load.Value));
@@ -99,6 +103,7 @@ public class GameSystem : MonoBehaviour
                 new XElement("save_time", DateTime.Now.ToString(("yyyy-MM-dd HH:mm:ss tt")))),
             new XElement("item_num", item_num.Select(kv => new XElement(kv.Key, kv.Value))), // dictionary 정석
             new XElement("quest_state", quest_state.Select(kv => new XElement("char" + kv.Key.ToString(), kv.Value))), // key가 int
+            new XElement("clear_trigger", Quest_clear_system.instance.clear_trigger.Select(kv => new XElement("char" + kv.Key.ToString(), kv.Value))),
             new XElement("dictionary_num", dictionarys.dictionary_num.Select(kv => new XElement(kv.Key, kv.Value))),
             new XElement("item_time", item_time.Select(kv => new XElement(kv))) // list 정석
             ); 

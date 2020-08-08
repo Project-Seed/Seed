@@ -18,7 +18,7 @@ public class Quest_clear_system : MonoBehaviour
     {
         instance = this;
 
-        for (int i = 1; i <= 13; i++) // 퀘스트 갯수 많큼 늘려주세요
+        for (int i = 1; i <= 21; i++) // 퀘스트 갯수 많큼 늘려주세요
             clear_trigger.Add(i, 0);
     }
 
@@ -39,10 +39,6 @@ public class Quest_clear_system : MonoBehaviour
             GameSystem.instance.item_num["coal"] >= 5)
             GameSystem.instance.quest_state[4] = 2;
 
-        if (GameSystem.instance.quest_state[5] == 1 &&
-            GameSystem.instance.item_num["sticky_moss"] >= 1)
-            GameSystem.instance.quest_state[5] = 2;
-
         state_changer(6, 4);
         state_changer(7, 2);
         state_changer(8, 1);
@@ -53,10 +49,60 @@ public class Quest_clear_system : MonoBehaviour
         if (GameSystem.instance.quest_state[12] == 2)
         {
             GameSystem.instance.quest_state[12] = 3;
+            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[12 - 1]["title"], true);
             GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re();
         }
 
         state_changer(13, 1);
+
+        if (GameSystem.instance.quest_state[14] == 1 &&
+            GameSystem.instance.item_num["sticky_moss"] >= 1)
+            GameSystem.instance.quest_state[14] = 2;
+
+        if (GameSystem.instance.quest_state[15] == 2)
+        {
+            GameSystem.instance.quest_state[15] = 3;
+            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[15 - 1]["title"], true);
+            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re();
+        }
+
+        if(GameSystem.instance.quest_state[16] == 1)
+        {
+            GameSystem.instance.quest_state[16] = 3;
+            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[16 - 1]["title"], true);
+            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re();
+        }
+
+        if (GameSystem.instance.quest_state[17] == 1 &&
+            GameSystem.instance.item_num["coal"] >= 2)
+            GameSystem.instance.quest_state[17] = 2;
+
+        state_changer(18, 1);
+
+        if (GameSystem.instance.quest_state[19] == 1 &&
+            GameSystem.instance.item_num["fix_box"] >= 1)
+            GameSystem.instance.quest_state[19] = 2;
+
+        if (GameSystem.instance.quest_state[5] == 2)
+        {
+            GameSystem.instance.quest_state[5] = 3;
+            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[5 - 1]["title"], true);
+            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re();
+        }
+
+        if (GameSystem.instance.quest_state[20] == 1)
+        {
+            GameSystem.instance.quest_state[20] = 3;
+            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[20 - 1]["title"], true);
+            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re();
+        }
+
+        if (GameSystem.instance.quest_state[21] == 1)
+        {
+            GameSystem.instance.quest_state[21] = 3;
+            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[21 - 1]["title"], true);
+            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re();
+        }
     }
 
     void state_changer(int quest_num, int item_num)
@@ -84,9 +130,6 @@ public class Quest_clear_system : MonoBehaviour
             case 4:
                 data = "석탄 " + GameSystem.instance.item_num["coal"].ToString() + " / 5";
                 break;
-            case 5:
-                data = "끈적이는 이끼 " + GameSystem.instance.item_num["sticky_moss"].ToString() + " / 1";
-                break;
             case 6:
                 data = "라디오, 가족사진, 편지, 다이어리 찾기 " + clear_trigger[6] + " / 4";
                 break;
@@ -111,6 +154,28 @@ public class Quest_clear_system : MonoBehaviour
             case 13:
                 data = "돌을 넘어 가기";
                 break;
+            case 14:
+                data = "끈적이는 이끼 " + GameSystem.instance.item_num["sticky_moss"].ToString() + " / 1";
+                break;
+            case 15:
+                data = "홉스 아저씨와 대화하기";
+                break;
+            case 16:
+                data = "동굴 조사하기";
+                break;
+            case 17:
+                data = "석탄 " + GameSystem.instance.item_num["coal"].ToString() + " / 2";
+                break;
+            case 18:
+                data = "방해물 제거하기";
+                break;
+            case 19:
+                data = "수리상자 " + GameSystem.instance.item_num["fix_box"].ToString() + " / 1";
+                break;
+            case 20:
+            case 21:
+                data = "";
+                break;
         }
 
         return data;
@@ -126,10 +191,6 @@ public class Quest_clear_system : MonoBehaviour
             case 4:
                 Eat_system.instance.eat_item("aliquot_part");
                 break;
-            case 5:
-                Eat_system.instance.eat_item("aliquot_part");
-                GameObject.Find("Map_Decoration").transform.Find("M_Brige").gameObject.SetActive(true);
-                break;
             case 6:
             case 7:
             case 8:
@@ -137,8 +198,34 @@ public class Quest_clear_system : MonoBehaviour
             case 10:
             case 11:
             case 12:
+            case 18:
+                break;
             case 13:
-                break;  
+            case 15:
+            case 16:
+            case 5:
+                Eat_system.instance.eat_item("aliquot_part");
+                break;
+            case 14:
+                Eat_system.instance.eat_item("aliquot_part");
+                GameObject.Find("BridgeTimeline").GetComponent<TimelineController>().Play();
+                break;
+            case 17:
+                Eat_system.instance.eat_item("gunpowder");
+                Eat_system.instance.eat_item("gunpowder");
+                Eat_system.instance.eat_item("gunpowder");
+                break;
+            case 19:
+                // 수리 전경
+                break;
+            case 20:
+                // 트루엔딩
+                Debug.Log("트루엔딩");
+                break;
+            case 21:
+                // 배드엔딩
+                Debug.Log("배드엔딩");
+                break;
         }
     }
 }

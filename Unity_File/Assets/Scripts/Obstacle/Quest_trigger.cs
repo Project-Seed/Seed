@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.TerrainAPI;
 using UnityEngine;
 
 public class Quest_trigger : MonoBehaviour
@@ -21,17 +22,16 @@ public class Quest_trigger : MonoBehaviour
             {
                 case 1:
                     if (GameSystem.instance.quest_state[12] == 0)
+                    {
+                        GameSystem.instance.quest_state[5] = 1;
+                        GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re();
                         dialogue.solo_talk(29);
+                    }
                     break;
 
                 case 2:
                     if (GameSystem.instance.quest_state[13] == 0)
-                    {
-                        Eat_system.instance.eat_item("blue_seed");
-                        Eat_system.instance.eat_item("brown_seed");
-                        Eat_system.instance.eat_item("brown_seed");
                         dialogue.solo_talk(30);
-                    }
                     break;
 
                 case 3:
@@ -39,6 +39,30 @@ public class Quest_trigger : MonoBehaviour
                         Quest_clear_system.instance.clear_trigger[13] = 1;
                     break;
 
+                case 4:
+                    PlayerState.instance.sleep_on();
+                    break;
+
+                case 5:
+                    if (GameSystem.instance.quest_state[16] == 0)
+                        dialogue.solo_talk(37);
+                    else if (GameSystem.instance.quest_state[18] == 0)
+                        dialogue.solo_talk(41);
+                    break;
+
+                case 6:
+                    if (GameSystem.instance.quest_state[18] == 1)
+                        Quest_clear_system.instance.clear_trigger[18] = 1;
+                    break;
+
+                case 7:
+                    if (GameSystem.instance.quest_state[19] == 2)
+                    {
+                        GameSystem.instance.quest_state[19] = 3;
+                        GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[19 - 1]["title"], true);
+                        GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re();
+                    }
+                    break;
             }
         }
     }

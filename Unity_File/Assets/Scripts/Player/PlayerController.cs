@@ -192,7 +192,10 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if(Input.GetKeyDown(KeyCode.R) && climb_up_bool == false)
+            if(Input.GetKeyDown(KeyCode.Z)) // 임시!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                PlayerState.instance.sleep_on();
+
+            if (Input.GetKeyDown(KeyCode.R) && climb_up_bool == false)
             {
                 if (Key_guide.instance.climb.activeSelf)
                     StartCoroutine(Key_guide.instance.climb_ing());
@@ -460,7 +463,6 @@ public class PlayerController : MonoBehaviour
             {
                 StartCoroutine(Key_guide.instance.door_ing());
                 chest_ob.GetComponent<Chest>().open();
-
 
                 rotate_ob.transform.LookAt(chest_ob.transform);
                 rotate_ob.transform.localRotation = Quaternion.Euler(new Vector3(0, rotate_ob.transform.localRotation.eulerAngles.y, 0));

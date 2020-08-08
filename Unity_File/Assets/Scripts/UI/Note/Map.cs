@@ -177,10 +177,40 @@ public class Map : MonoBehaviour
 
         switch(warp_point)
         {
-            case 1:
+            case 1: // 마스
                 warp_point_x = 361;
                 warp_point_y = 75.5f;
                 warp_point_z = 434;
+                break;
+
+            case 2: // 홉스
+                warp_point_x = 503;
+                warp_point_y = 59;
+                warp_point_z = 808;
+                break;
+
+            case 3: // 터널
+                warp_point_x = 73;
+                warp_point_y = 41;
+                warp_point_z = 1482;
+                break;
+
+            case 4: // 유격훈련장
+                warp_point_x = -1642;
+                warp_point_y = 100;
+                warp_point_z = 1169;
+                break;
+
+            case 5: // 전파탑
+                warp_point_x = -1835;
+                warp_point_y = 100;
+                warp_point_z = 1375;
+                break;
+
+            case 6: // 공학자의 마을
+                warp_point_x = 511;
+                warp_point_y = 50;
+                warp_point_z = 2927;
                 break;
         }
     }
