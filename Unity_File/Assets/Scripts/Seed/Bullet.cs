@@ -99,7 +99,7 @@ public class Bullet : MonoBehaviour
                 if (collision.gameObject.CompareTag("Purple"))
                 {
                     collision.gameObject.SetActive(false);
-                    particleInvoker.InvokePurple( collision.gameObject.transform);
+                    particleInvoker.InvokePurple(collision.gameObject.transform);
                 }
                 //Instantiate(boom, gameObject.transform.position, gameObject.transform.rotation);
                 //particleInvoker.InvokePurple();

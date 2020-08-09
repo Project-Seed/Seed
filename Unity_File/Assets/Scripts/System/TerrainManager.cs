@@ -21,7 +21,5 @@ public class TerrainManager : MonoBehaviour
     {
         if (loader = GameObject.Find(GameSystem.instance.map_name).GetComponent<TerrainLoader>())
             loader.LoadUnLoad();
-        else
-            Debug.LogError("Cant FInd TerrainLoader");
     }
 }
