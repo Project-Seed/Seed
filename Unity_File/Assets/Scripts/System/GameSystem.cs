@@ -224,15 +224,11 @@ public class GameSystem : MonoBehaviour
         return null;
     }
 
-    public void sound_start(string st)
+    public void sound_start(int num)
     {
-        switch(st)
-        {
-            case "die":
-                audioSource.clip = sounds[0];
-                break;
-        }
+        audioSource.clip = sounds[num];
 
+        Debug.Log("d");
         audioSource.Play();
     }
 }

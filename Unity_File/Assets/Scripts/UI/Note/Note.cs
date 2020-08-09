@@ -38,6 +38,8 @@ public class Note : MonoBehaviour
         icon_image[2].sprite = icon_off_sp[2];
         icon_image[3].sprite = icon_off_sp[3];
         icon_image[4].sprite = icon_off_sp[4];
+
+        GameSystem.instance.sound_start(0);
     }
 
     public void On_diary()
@@ -53,6 +55,8 @@ public class Note : MonoBehaviour
         icon_image[2].sprite = icon_off_sp[2];
         icon_image[3].sprite = icon_off_sp[3];
         icon_image[4].sprite = icon_off_sp[4];
+
+        GameSystem.instance.sound_start(0);
     }
 
     public void On_map()
@@ -68,6 +72,8 @@ public class Note : MonoBehaviour
         icon_image[2].sprite = icon_on_sp[2];
         icon_image[3].sprite = icon_off_sp[3];
         icon_image[4].sprite = icon_off_sp[4];
+
+        GameSystem.instance.sound_start(0);
     }
 
     public void On_quest()
@@ -83,6 +89,8 @@ public class Note : MonoBehaviour
         icon_image[2].sprite = icon_off_sp[2];
         icon_image[3].sprite = icon_on_sp[3];
         icon_image[4].sprite = icon_off_sp[4];
+
+        GameSystem.instance.sound_start(0);
     }
 
     public void On_inven()
@@ -98,6 +106,8 @@ public class Note : MonoBehaviour
         icon_image[2].sprite = icon_off_sp[2];
         icon_image[3].sprite = icon_off_sp[3];
         icon_image[4].sprite = icon_on_sp[4];
+
+        GameSystem.instance.sound_start(0);
     }
 
     public void close_note()

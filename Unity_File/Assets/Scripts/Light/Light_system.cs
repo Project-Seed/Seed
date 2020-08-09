@@ -32,8 +32,8 @@ public class Light_system : MonoBehaviour
 
         if(Application.isPlaying && InputManager.instance.click_mod == 0 && tuto == false)
         {
-            //time += Time.deltaTime / 150;
-           // time += Time.deltaTime / 2;
+            time += Time.deltaTime / 150;
+            //time += Time.deltaTime / 2;
             time %= 24;
             updatelighting(time / 24f);
         }

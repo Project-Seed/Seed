@@ -501,6 +501,8 @@ public class PlayerController : MonoBehaviour
                     note.SetActive(false);
                     composer.SetActive(true);
                 }
+
+                GameSystem.instance.sound_start(11);
             }
         }
 
@@ -516,6 +518,8 @@ public class PlayerController : MonoBehaviour
                     composer.SetActive(false);
                     note.SetActive(true);
                 }
+
+                GameSystem.instance.sound_start(11);
             }
         }
 
