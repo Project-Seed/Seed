@@ -185,14 +185,16 @@ public class GameSystem : MonoBehaviour
 
         world_list = CSV_Reader.Read("World_Table"); // 지역 방사능 로드
 
-        dictionary_sc.before_awake();
+        if(SceneManager.GetActiveScene().name == "Game_SceneNew")
+            dictionary_sc.before_awake();
 
         audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     private void Start()
     {
-        Load_nodie.instance.loads();
+        if (SceneManager.GetActiveScene().name == "Game_SceneNew")
+            Load_nodie.instance.loads();
     }
 
     public void GameStart()

@@ -35,7 +35,7 @@ public class LoadingSceneManager : MonoBehaviour
             Debug.Log(timer);
             yield return null;
 
-            timer += Time.deltaTime/5f;
+            timer += Time.deltaTime/10f;
 
 
             slider.value = timer;

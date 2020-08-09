@@ -19,6 +19,14 @@ public class End : MonoBehaviour
 
     IEnumerator wake_up()
     {
+        InputManager.instance.game_stop();
+
+        for (int i=0; i<=100; i++)
+        {
+            image.color = new Color(1, 1, 1, i / 100f);
+            yield return new WaitForSeconds(0.01f);
+        }
+
         for (int i = 0; i < 4; i++)
         {
             image.sprite = sprites[i];
@@ -32,7 +40,21 @@ public class End : MonoBehaviour
     {
         if(click_ok)
         {
-            gameObject.SetActive(false);
+            click_ok = false;
+
+            StartCoroutine(wake_up2());
         }
+    }
+
+    IEnumerator wake_up2()
+    {
+        for (int i = 0; i <= 100; i++)
+        {
+            image.color = new Color(1, 1, 1, (100-i) / 100f);
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        InputManager.instance.game_start();
+        gameObject.SetActive(false);   
     }
 }
