@@ -2540,7 +2540,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772594512}
-  m_LocalRotation: {x: 0.0032157972, y: 0.9731537, z: -0.22973041, w: 0.013622335}
+  m_LocalRotation: {x: 0.003215797, y: 0.9731537, z: -0.22973041, w: 0.013622335}
   m_LocalPosition: {x: -3.7247138, y: 1.8391749, z: 1.8111004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -8106,8 +8106,10 @@ MonoBehaviour:
   talk_trigger: 0
   talk_npc_ob: {fileID: 0}
   map_name: 
+  map_name_ko: 
   dictionary_sc: {fileID: 1725568132}
   save_path: 
+  sounds: []
 --- !u!4 &1739530163
 Transform:
   m_ObjectHideFlags: 0
@@ -8132,11 +8134,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: feb1b34f29990e34abb83f579c612059, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -8243,6 +8245,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e8970424775af44bed3a4bfe5d8920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  good: {fileID: 0}
+  bad: {fileID: 0}
 --- !u!114 &1739530167
 MonoBehaviour:
   m_ObjectHideFlags: 0

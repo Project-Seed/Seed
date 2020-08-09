@@ -7,11 +7,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Blue
-  m_Shader: {fileID: 4800000, guid: 105434f3fa6c793438772b3ebb873dda, type: 3}
-  m_ShaderKeywords: _EMISSION
-  m_LightmapFlags: 1
-  m_EnableInstancingVariants: 0
+  m_Name: mat_Plant_desert
+  m_Shader: {fileID: 4800000, guid: 2ca18745aa7cfbd4b82b6c35ab653971, type: 3}
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA _ALPHATEST_ON _GLOSSYREFLECTIONS_OFF _SPECULARHIGHLIGHTS_OFF
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 570565b3971a10b4da7abdfe96255a96, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -35,20 +35,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Displacement:
-        m_Texture: {fileID: 2800000, guid: 570565b3971a10b4da7abdfe96255a96, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 8826a229fae0bb04aaa8883bb7064e5a, type: 3}
+    - _Illum:
+        m_Texture: {fileID: 2800000, guid: 5a57fb0f7c6b0d24cb245cbf93273acd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MaskTex:
-        m_Texture: {fileID: 2800000, guid: 570565b3971a10b4da7abdfe96255a96, type: 3}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 1dda2308b0ff0124da94993f9cb19acc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -63,37 +59,35 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Ramp:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
-    - _ColorMask: 15
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _Dis: 0
     - _DstBlend: 0
-    - _EmissionScaleUI: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0
-    - _GlossyReflections: 1
-    - _Grow: -0.5
-    - _Metallic: 0
-    - _Mode: 0
+    - _Glossiness: 0.08
+    - _GlossyReflections: 0
+    - _Metallic: 0.46
+    - _Mode: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _Rigidness: 25
+    - _ShakeBending: 0.3
+    - _ShakeDisplacement: 0.3
+    - _ShakeTime: 0.3
+    - _ShakeWindspeed: 0.3
     - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
+    - _SpecularHighlights: 0
+    - _Speed: 25
     - _SrcBlend: 1
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _Tess: 4
-    - _Thickness: -2.4
+    - _SwayMax: 0.005
     - _UVSec: 0
-    - _UseUIAlphaClip: 0
+    - _YOffset: 0.5
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.97794116, g: 0.97794116, b: 0.97794116, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
-    - _EmissionColorUI: {r: 1, g: 1, b: 1, a: 1}
-    - _TileOff: {r: 1, g: 1, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
