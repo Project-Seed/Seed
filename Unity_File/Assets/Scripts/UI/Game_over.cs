@@ -19,6 +19,8 @@ public class Game_over : MonoBehaviour
         {
             texts[i].color = new Color(1, 1, 1, 0);
         }
+
+        GameSystem.instance.sound_start(2);
     }
 
     public void image_on()
