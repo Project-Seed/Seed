@@ -18,10 +18,10 @@ public class NpcController : MonoBehaviour
 
     private void Update()
     {
-        if (dialogue.dialogue_box.activeSelf == true)
-            animator.SetBool("talk", true);
-        else
-            animator.SetBool("talk", false);
+        //if (dialogue.dialogue_box.activeSelf == true)
+        //    animator.SetBool("talk", true);
+        //else
+        //    animator.SetBool("talk", false);
     }
 
 
