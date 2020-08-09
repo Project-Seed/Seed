@@ -29,11 +29,8 @@ public class State : MonoBehaviour
     private void Awake()
     {
         instance = this;
-    }
 
-    void Start()
-    {
-        for(int i=0; i< PlayerState.instance.max_hp / 2; i++)
+        for (int i = 0; i < PlayerState.instance.max_hp / 2; i++)
         {
             hearts.Add(Instantiate(heart, new Vector3(0, 0, 0), Quaternion.identity, viewport_hp.transform));
         }
@@ -45,6 +42,7 @@ public class State : MonoBehaviour
         StartCoroutine(Update_Radiation());
         StartCoroutine(hit_radi());
     }
+
 
     private void Update()
     {
@@ -186,8 +184,8 @@ public class State : MonoBehaviour
         for (int i = 0; i < num; i++)
         {
             int radi_int = PlayerState.instance.radiation / 2;
+            Debug.Log(num);
             radis[radi_int].GetComponent<Radi>().radi_up(PlayerState.instance.radiation % 2);
-
             PlayerState.instance.radiation++;
         }
     }
