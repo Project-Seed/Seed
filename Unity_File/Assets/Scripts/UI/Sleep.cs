@@ -16,7 +16,7 @@ public class Sleep : MonoBehaviour
     {
         for (int i = 0; i <= 50; i++)
         {
-            image.color = new Color(0, 0, 0, i / 50f);
+            image.color = new Color(0, 0, 0, (50-i) / 50f);
 
             yield return new WaitForSeconds(0.01f);
         }
