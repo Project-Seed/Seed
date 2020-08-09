@@ -71,6 +71,9 @@ public class PlayerController : MonoBehaviour
 
     public bool tuto = false; // 튜토리얼 이면 트루
 
+    public AudioSource audioSource;
+    private bool walk_sound = false;
+
     IEnumerator StopJumping()             
     {
         stop_jumping = true;
@@ -339,6 +342,8 @@ public class PlayerController : MonoBehaviour
                             GameSystem.instance.item_time.Remove(qick.choose_item);
 
                         player_state.shoot();
+
+                        GameSystem.instance.sound_start(6);
                     }
                     else
                         player_state.shoot_stop();
@@ -563,9 +568,22 @@ public class PlayerController : MonoBehaviour
             player_rigidbody.MovePosition(newPos);
         }
         if ((Mathf.Abs(movement.z) + Mathf.Abs(movement.x)) >= 1 && climb_mod == false && hang_mod == 0)
+        {
             player_state.state_move = 1;
+        }
         else
             player_state.state_move = 0;
+
+        if (walk_sound == false && player_state.state_move == 1)
+        {
+            audioSource.Play();
+            walk_sound = true;
+        }
+        else if (walk_sound == true && player_state.state_move == 0)
+        {
+            audioSource.Stop();
+            walk_sound = false;
+        }
     }
 
     IEnumerator Jumping()

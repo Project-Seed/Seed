@@ -115,6 +115,8 @@ public class Bullet : MonoBehaviour
                 {
                     collision.gameObject.SetActive(false);
                     particleInvoker.InvokePurple(collision.gameObject.transform);
+
+                    GameSystem.instance.sound_start(1);
                 }
                 //Instantiate(boom, gameObject.transform.position, gameObject.transform.rotation);
                 //particleInvoker.InvokePurple();

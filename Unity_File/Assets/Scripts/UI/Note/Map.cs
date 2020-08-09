@@ -137,7 +137,7 @@ public class Map : MonoBehaviour
     {
         warp.SetActive(true);
 
-        switch(warp_point)
+        switch (warp_point)
         {
             case 1: // 마스
                 warp_point_x = 361;
@@ -181,6 +181,8 @@ public class Map : MonoBehaviour
         warp.SetActive(false);
         GameObject.Find("Note").SetActive(false);
         player.transform.position = new Vector3(warp_point_x,warp_point_y,warp_point_z);
+
+        GameSystem.instance.sound_start(9);
     }
 
     public void warp_no()

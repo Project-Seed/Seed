@@ -41,6 +41,8 @@ public class Quest_quick : MonoBehaviour
 
     public IEnumerator active_on(string name, bool clear_on)
     {
+        GameSystem.instance.sound_start(8);
+
         active.SetActive(true);
         quest_text.text = name;
         quest_text.color = new Color(0, 0, 0, 0);

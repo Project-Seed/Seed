@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Media;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -166,6 +167,8 @@ public class State : MonoBehaviour
 
     public void hp_down(int num)
     {
+        GameSystem.instance.sound_start(3);
+
         bleeding.Attacked();
         for(int i=0; i<num; i++)
         {

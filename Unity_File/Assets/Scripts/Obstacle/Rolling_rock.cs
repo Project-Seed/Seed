@@ -30,6 +30,7 @@ public class Rolling_rock : MonoBehaviour
         if (collision.gameObject.name == "Player" && cooltime == 0)
         {
             StartCoroutine(die());
+            GameSystem.instance.sound_start(5);
         }
     }
 }

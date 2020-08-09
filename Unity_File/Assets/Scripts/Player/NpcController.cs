@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class NpcController : MonoBehaviour
 {
     private Dialogue dialogue; // 다이얼로그
+    public Animator animator;
 
     public GameObject name_position;
     public string npc_name;
@@ -13,6 +14,14 @@ public class NpcController : MonoBehaviour
     private void Start()
     {
         dialogue = GameObject.Find("Dialogue").GetComponent<Dialogue>();
+    }
+
+    private void Update()
+    {
+        if (dialogue.dialogue_box.activeSelf == true)
+            animator.SetBool("talk", true);
+        else
+            animator.SetBool("talk", false);
     }
 
 

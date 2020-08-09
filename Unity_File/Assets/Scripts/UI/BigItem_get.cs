@@ -39,6 +39,8 @@ public class BigItem_get : MonoBehaviour
             InputManager.instance.game_stop();
         }
 
+        GameSystem.instance.sound_start(10);
+
         background.color = new Color(0, 0, 0, 0);
         name_text.color = new Color(1, 1, 1, 0);
         explanation_text.color = new Color(1, 1, 1, 0);

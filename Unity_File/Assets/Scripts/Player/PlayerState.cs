@@ -70,6 +70,8 @@ public class PlayerState : MonoBehaviour
             die_check = true;
             animator.SetTrigger("die");
 
+            GameSystem.instance.sound_start(2);
+
             StartCoroutine(gameover_image());
         }
 
@@ -154,7 +156,7 @@ public class PlayerState : MonoBehaviour
 
     public void landing()
     {
-        if(state_sky == 1 && state_fly == 1)
+        if(state_sky == 1 && state_fly == 1 && wake_s)
         {
             state_sky = 0;
             animator.SetTrigger("lending");
@@ -281,6 +283,7 @@ public class PlayerState : MonoBehaviour
     public void box_open()
     {
         animator.SetTrigger("box_open");
+        GameSystem.instance.sound_start(4);
     }
 
     public void reborn()

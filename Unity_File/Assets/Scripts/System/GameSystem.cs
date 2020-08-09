@@ -228,7 +228,6 @@ public class GameSystem : MonoBehaviour
     {
         audioSource.clip = sounds[num];
 
-        Debug.Log("d");
         audioSource.Play();
     }
 }
