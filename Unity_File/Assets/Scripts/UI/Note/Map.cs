@@ -58,7 +58,7 @@ public class Map : MonoBehaviour
         {
             Vector3 move_position = move_now - (move_start - new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
 
-            if(move_position.x >= 200 && move_position.x <= 1700 && move_position.y >= -690 && move_position.y <= 1550)
+            if(move_position.x >= 200 - 750 && move_position.x <= 1700 + 750 && move_position.y >= -690 - 750 && move_position.y <= 1550 + 750)
                 map_bg.transform.position = move_position;
             else
             {
