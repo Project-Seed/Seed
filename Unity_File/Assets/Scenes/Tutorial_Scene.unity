@@ -2614,7 +2614,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772594512}
-  m_LocalRotation: {x: 0.0032158066, y: 0.9731537, z: -0.22973041, w: 0.013622375}
+  m_LocalRotation: {x: 0.0032158005, y: 0.9731537, z: -0.22973041, w: 0.01362235}
   m_LocalPosition: {x: -3.7247138, y: 1.8391749, z: 1.8111004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2818,7 +2818,7 @@ Light:
   m_Color: {r: 0.6603774, g: 0.48561412, b: 0.14017446, a: 1}
   m_Intensity: 1
   m_Range: 10
-  m_SpotAngle: 113.900894
+  m_SpotAngle: 170
   m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
@@ -3793,11 +3793,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Quest_quick
       objectReference: {fileID: 0}
-    - target: {fileID: 797879523577510400, guid: ad8328882383a66458cd496db4dcd641,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 797879523577510401, guid: ad8328882383a66458cd496db4dcd641,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3902,31 +3897,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 797879525277863300, guid: ad8328882383a66458cd496db4dcd641,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5647103516519638562, guid: ad8328882383a66458cd496db4dcd641,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5647103516519638562, guid: ad8328882383a66458cd496db4dcd641,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5647103516519638562, guid: ad8328882383a66458cd496db4dcd641,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5647103516519638562, guid: ad8328882383a66458cd496db4dcd641,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad8328882383a66458cd496db4dcd641, type: 3}
@@ -8196,7 +8166,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 52b15baaeb7f24b48898c56caa9bba7c, type: 3}
   - {fileID: 8300000, guid: 0c081c6d78e2dd9429941a4522bc5425, type: 3}
   - {fileID: 8300000, guid: 3fb071671ab3f604796b64d87b9000fc, type: 3}
-  - {fileID: 8300000, guid: bb35c4ed8a938af46916061edabe798d, type: 3}
+  - {fileID: 8300000, guid: c5844d01eaaf2974d97af9b8871fa6b0, type: 3}
   - {fileID: 8300000, guid: 670d63b328d13c64e8ff8ab33ec5b559, type: 3}
   - {fileID: 8300000, guid: 2fec1657230ac1a49a9e3e388035fe6d, type: 3}
   - {fileID: 8300000, guid: 1f9d5f5f8b0824e4ea9a41f92dbd4a27, type: 3}

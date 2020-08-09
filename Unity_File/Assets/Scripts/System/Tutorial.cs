@@ -13,6 +13,7 @@ public class Tutorial : MonoBehaviour
         switch(num)
         {
             case 1:
+                GameSystem.instance.sound_start(7);
                 movie_obj.SetActive(true);
                 movie.StartDialogue(0);  
                 break;

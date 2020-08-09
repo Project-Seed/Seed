@@ -543,6 +543,8 @@ public class PlayerController : MonoBehaviour
             gameObject.GetComponent<Rigidbody>().isKinematic = false;
         }
 
+        if (is_jumping)
+            audioSource.Stop();
     }
 
     private void FixedUpdate()
@@ -580,19 +582,22 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator soundss()
     {
-        if(player_state.state_move == 1)
+        while (true)
         {
-            if (is_run == true)
-                audioSource.clip = clip_run;
+            if (player_state.state_move == 1)
+            {
+                if (is_run == true)
+                    audioSource.clip = clip_run;
+                else
+                    audioSource.clip = clip_walk;
+
+                audioSource.Play();
+            }
             else
-                audioSource.clip = clip_walk;
+                audioSource.Stop();
 
-            audioSource.Play();
+            yield return new WaitForSeconds(1f);
         }
-        else
-            audioSource.Stop();
-
-        yield return new WaitForSeconds(1f);
     }
 
 

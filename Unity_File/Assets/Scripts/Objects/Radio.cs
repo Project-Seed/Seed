@@ -15,5 +15,7 @@ public class Radio : MonoBehaviour
         actives = true;
         GetComponent<TimelineController>().Play();
         meshRenderer.material = blue;
+
+        GameSystem.instance.sound_start(7);
     }
 }
