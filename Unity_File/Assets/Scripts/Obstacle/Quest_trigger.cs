@@ -46,7 +46,7 @@ public class Quest_trigger : MonoBehaviour
                 case 5:
                     if (GameSystem.instance.quest_state[16] == 0)
                         dialogue.solo_talk(37);
-                    else if (GameSystem.instance.quest_state[18] == 0)
+                    else if (GameSystem.instance.quest_state[17] != 0 && GameSystem.instance.quest_state[18] == 0)
                         dialogue.solo_talk(41);
                     break;
 

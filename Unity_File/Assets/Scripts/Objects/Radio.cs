@@ -10,10 +10,6 @@ public class Radio : MonoBehaviour
 
     public MeshRenderer meshRenderer;
 
-    private void Awake()
-    {
-        fixs();
-    }
     public void fixs()
     {
         actives = true;

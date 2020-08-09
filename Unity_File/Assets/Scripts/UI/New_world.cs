@@ -20,7 +20,7 @@ public class New_world : MonoBehaviour
 
     private void Update()
     { 
-        if(now_map != GameSystem.instance.map_name && text.text != GameSystem.instance.map_name_ko)
+        if(now_map != GameSystem.instance.map_name)
         {
             StopAllCoroutines();
             StartCoroutine(view());
