@@ -90,9 +90,9 @@ public class Bullet : MonoBehaviour
                     {
                         t = collision.gameObject.transform.parent.GetChild(1);
 
-                        t.localScale = new Vector3(t.localScale.x * 2,
-                                t.localScale.y * 2,
-                                t.localScale.z * 2);
+                        t.localScale = new Vector3(t.localScale.x,
+                                t.localScale.y * 3,
+                                t.localScale.z);
                     }
                 }
                 break;

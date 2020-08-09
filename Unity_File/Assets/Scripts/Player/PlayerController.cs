@@ -4,6 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.Experimental.XR;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -150,7 +151,11 @@ public class PlayerController : MonoBehaviour
         throwManager = GetComponent<ThrowManager>();
         mapChecker = GetComponentInChildren<MapChecker>();
         followDust = GetComponentInChildren<ParticleSystem>();
-        qick = GameObject.Find("Quick_slot_new").GetComponent<Quick_slot_new>();
+
+        if (SceneManager.GetActiveScene().name == "Game_SceneNew")
+        {
+            qick = GameObject.Find("Quick_slot_new").GetComponent<Quick_slot_new>();
+        }
         child = transform.GetChild(0);
         dialogue = GameObject.Find("Dialogue").GetComponent<Dialogue>();
         lookAt = transform.forward;
@@ -199,9 +204,6 @@ public class PlayerController : MonoBehaviour
                     StartCoroutine(Jumping());
                 }
             }
-
-            if(Input.GetKeyDown(KeyCode.Z)) // 임시!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                PlayerState.instance.sleep_on();
 
             if (Input.GetKeyDown(KeyCode.R) && climb_up_bool == false)
             {
