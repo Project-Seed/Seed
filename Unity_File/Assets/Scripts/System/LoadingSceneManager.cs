@@ -32,7 +32,6 @@ public class LoadingSceneManager : MonoBehaviour
         float timer = 0.0f;
         while (!op.isDone)
         {
-            Debug.Log(timer);
             yield return null;
 
             timer += Time.deltaTime/10f;

@@ -70,8 +70,6 @@ public class PlayerState : MonoBehaviour
             die_check = true;
             animator.SetTrigger("die");
 
-            GameSystem.instance.sound_start(2);
-
             StartCoroutine(gameover_image());
         }
 
