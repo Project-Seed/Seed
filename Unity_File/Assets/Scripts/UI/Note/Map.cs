@@ -23,8 +23,6 @@ public class Map : MonoBehaviour
     public GameObject mark_maker_ob;
     public GameObject mark;
     GameObject marks_ob; // 눌러진 마크
-    public Text mark_make_text;
-    public Text mark_dis_text;
     int mark_click_mod = 0; // 지도클릭 0, 마크클릭 1
 
     public GameObject player;
@@ -67,64 +65,28 @@ public class Map : MonoBehaviour
             }
         }
 
-        
-        // 지도 확대 축소
-        //float wheelInput = Input.GetAxis("Mouse ScrollWheel");
-        //if (wheelInput > 0)
-        //{
-        //    if (map_scale <= 12)
-        //    {
-        //        map_scale++;
-        //        map_bg.transform.localScale = new Vector3(map_bg.transform.localScale.x + 0.1f, map_bg.transform.localScale.y + 0.1f, 1);
-
-
-        //        /*
-        //        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize- wheelInput, 3, 5);
-        //        wheelInput *= Vector3.Distance(map_bg.transform.position, map_bg.transform.position + (Camera.main.ScreenToViewportPoint(Input.mousePosition) - map_bg.transform.position)) * 0.0005f;
-        //        map_bg.transform.position += (Camera.main.ScreenToViewportPoint(Input.mousePosition) - map_bg.transform.position) * wheelInput;
-        //        */
-        //        //map_bg.transform.Translate((960 - Input.mousePosition.x) * map_scale / 20, (540 - Input.mousePosition.y) * map_scale / 20, 0);
-        //    }
-        //}
-        //else if (wheelInput < 0)
-        //{
-        //    if (map_scale >= 4)
-        //    {
-        //        map_scale--;
-        //        map_bg.transform.localScale = new Vector3(map_bg.transform.localScale.x - 0.1f, map_bg.transform.localScale.y - 0.1f, 1);
-
-
-        //        /*
-        //        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - wheelInput, 3, 5);
-        //        wheelInput *= Vector3.Distance(map_bg.transform.position, map_bg.transform.position + (Camera.main.ScreenToViewportPoint(Input.mousePosition) - map_bg.transform.position)) * 0.0005f;
-        //        map_bg.transform.position += (Camera.main.ScreenToViewportPoint(Input.mousePosition) - map_bg.transform.position) * wheelInput;
-        //        */
-        //        //map_bg.transform.Translate((960 - Input.mousePosition.x) * map_scale / 20, (540 - Input.mousePosition.y) * map_scale / 20, 0);
-        //    }
-        //}
-
-
-
         // 마커 생성
         if (Input.GetMouseButtonDown(1) && push_bg == true && push_mark == false && mark_maker_ob.activeSelf == false)
         {
             mark_maker_ob.SetActive(true);
             mark_maker_ob.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
-            mark_make_text.color = Color.white;
-            mark_dis_text.color = Color.grey;
             mark_click_mod = 0;
         }
         else if (Input.GetMouseButtonDown(1) && push_bg == true && push_mark == true && mark_maker_ob.activeSelf == false)
         {
             mark_maker_ob.SetActive(true);
             mark_maker_ob.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
-            mark_make_text.color = Color.grey;
-            mark_dis_text.color = Color.white;
             mark_click_mod = 1;
         }
 
         player_pick.transform.localPosition = new Vector2(-player.transform.position.x - 500, -player.transform.position.z + 1500);
         player_pick.transform.rotation = Quaternion.Euler(0,0,-model.transform.rotation.eulerAngles.y + 90);
+    }
+
+    private void OnEnable()
+    {
+        player_pick.transform.localPosition = new Vector2(-player.transform.position.x - 500, -player.transform.position.z + 1500);
+        map_bg.GetComponent<RectTransform>().localPosition = -player_pick.GetComponent<RectTransform>().localPosition;
     }
 
     // 마커 생성

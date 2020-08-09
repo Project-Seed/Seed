@@ -63,8 +63,6 @@ public class MiniMap : MonoBehaviour
         {
             if ((mini_marks[i].transform.position - character_point.transform.position).magnitude > 115)
             {
-                Vector2 a = new Vector3(1500, 1500, 0);
-
                 mini_marks_far[i].SetActive(true);
                 mini_marks[i].SetActive(false);
                 mini_marks_far[i].transform.localPosition = (mini_marks[i].transform.position - character_point.transform.position).normalized * 115;
@@ -89,15 +87,15 @@ public class MiniMap : MonoBehaviour
 
         for(int i=0; i<marks.Count; i++)
         {
-            GameObject mark_ = Instantiate(mark_pre, new Vector3(marks[i].GetComponent<RectTransform>().anchoredPosition.x, marks[i].GetComponent<RectTransform>().anchoredPosition.y, 0),
+            GameObject mark_ = Instantiate(mark_pre, new Vector3(marks[i].GetComponent<RectTransform>().anchoredPosition.x * 2, marks[i].GetComponent<RectTransform>().anchoredPosition.y * 3, 0),
                 Quaternion.identity, map.transform); // ItemSpawner 밑 자식으로 복제
-            mark_.transform.localPosition = new Vector2(marks[i].GetComponent<RectTransform>().anchoredPosition.x, marks[i].GetComponent<RectTransform>().anchoredPosition.y);
+            mark_.transform.localPosition = new Vector2(marks[i].GetComponent<RectTransform>().anchoredPosition.x * 2, marks[i].GetComponent<RectTransform>().anchoredPosition.y * 2);
             mark_.GetComponent<Image>().color = marks[i].GetComponent<Image>().color;
             mini_marks.Add(mark_);
 
-            GameObject mark_2 = Instantiate(mark_pre, new Vector3(marks[i].GetComponent<RectTransform>().anchoredPosition.x, marks[i].GetComponent<RectTransform>().anchoredPosition.y, 0),
+            GameObject mark_2 = Instantiate(mark_pre, new Vector3(marks[i].GetComponent<RectTransform>().anchoredPosition.x * 2, marks[i].GetComponent<RectTransform>().anchoredPosition.y * 2, 0),
                 Quaternion.identity, zeros.transform); // ItemSpawner 밑 자식으로 복제
-            mark_2.transform.localPosition = new Vector2(marks[i].GetComponent<RectTransform>().anchoredPosition.x, marks[i].GetComponent<RectTransform>().anchoredPosition.y);
+            mark_2.transform.localPosition = new Vector2(marks[i].GetComponent<RectTransform>().anchoredPosition.x * 2, marks[i].GetComponent<RectTransform>().anchoredPosition.y * 2);
             mark_2.GetComponent<Image>().color = marks[i].GetComponent<Image>().color;
             mini_marks_far.Add(mark_2);
         }
