@@ -78,11 +78,23 @@ public class Bullet : MonoBehaviour
                 break;
 
             case "green_seed":
-                if (collision.gameObject.CompareTag("Plant2") || collision.gameObject.name == "brown_seed")
+                if (collision.gameObject.CompareTag("Plant2"))
+                {
                     collision.transform.localScale =
                             new Vector3(collision.transform.localScale.x * 2,
                             collision.transform.localScale.y * 2,
                             collision.transform.localScale.z * 2);
+
+                    Transform t;
+                    if (collision.gameObject.name == "brown_seed")
+                    {
+                        t = collision.gameObject.transform.parent.GetChild(1);
+
+                        t.localScale = new Vector3(t.localScale.x * 2,
+                                t.localScale.y * 2,
+                                t.localScale.z * 2);
+                    }
+                }
                 break;
 
             case "lime_seed":

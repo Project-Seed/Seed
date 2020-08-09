@@ -51,8 +51,6 @@ public class GameSystem : MonoBehaviour
 
     public void load_game(int num)
     {
-        Debug.Log("D");
-        
         XDocument save_data = XDocument.Load(save_path + "./save_data" + num.ToString() + ".xml");
 
         Light_system.instance.time = float.Parse(save_data.Element("root").Element("solo").Element("time").Value);
