@@ -492,24 +492,30 @@ public class PlayerController : MonoBehaviour
         // 열려라 도감!
         if (Input.GetKeyDown(KeyCode.C))
         {
-            if (composer.activeSelf == true)
-                composer.SetActive(false);
-            else
+            if (dialogue.dialogue_box.activeSelf == false)
             {
-                note.SetActive(false);
-                composer.SetActive(true);
+                if (composer.activeSelf == true)
+                    composer.SetActive(false);
+                else
+                {
+                    note.SetActive(false);
+                    composer.SetActive(true);
+                }
             }
         }
 
         // 열려라 다이어리!
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (note.activeSelf == true)
-                note.SetActive(false);
-            else
+            if (dialogue.dialogue_box.activeSelf == false)
             {
-                composer.SetActive(false);
-                note.SetActive(true);                           
+                if (note.activeSelf == true)
+                    note.SetActive(false);
+                else
+                {
+                    composer.SetActive(false);
+                    note.SetActive(true);
+                }
             }
         }
 

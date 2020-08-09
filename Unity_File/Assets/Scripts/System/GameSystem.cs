@@ -183,6 +183,11 @@ public class GameSystem : MonoBehaviour
         dictionary_sc.before_awake();
     }
 
+    private void Start()
+    {
+        Load_nodie.instance.loads();
+    }
+
     public void GameStart()
     {
         LoadingSceneManager.LoadScene("Tutorial_Scene");
