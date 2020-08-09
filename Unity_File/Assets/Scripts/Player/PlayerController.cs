@@ -73,6 +73,8 @@ public class PlayerController : MonoBehaviour
 
     public AudioSource audioSource;
     private bool walk_sound = false;
+    public AudioClip clip_walk;
+    public AudioClip clip_run;
 
     IEnumerator StopJumping()             
     {
@@ -155,6 +157,8 @@ public class PlayerController : MonoBehaviour
         is_run = false;
 
         player_mate.color = new Color(1f, 1f, 1f, 1);
+
+        StartCoroutine(soundss());
     }
 
     private void Update()                               // 키 입력은 Update에서 받고
@@ -573,18 +577,24 @@ public class PlayerController : MonoBehaviour
         }
         else
             player_state.state_move = 0;
-
-        if (walk_sound == false && player_state.state_move == 1)
-        {
-            audioSource.Play();
-            walk_sound = true;
-        }
-        else if (walk_sound == true && player_state.state_move == 0)
-        {
-            audioSource.Stop();
-            walk_sound = false;
-        }
     }
+    IEnumerator soundss()
+    {
+        if(player_state.state_move == 1)
+        {
+            if (is_run == true)
+                audioSource.clip = clip_run;
+            else
+                audioSource.clip = clip_walk;
+
+            audioSource.Play();
+        }
+        else
+            audioSource.Stop();
+
+        yield return new WaitForSeconds(1f);
+    }
+
 
     IEnumerator Jumping()
     {

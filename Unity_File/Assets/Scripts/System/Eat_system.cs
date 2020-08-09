@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Eat_system : MonoBehaviour
 {
@@ -34,8 +35,11 @@ public class Eat_system : MonoBehaviour
             GameSystem.instance.item_time.Add(name);
         GameSystem.instance.item_num[name] += 1;
 
-        if (Dictionarys.instance.dictionary_num[name] == false) // '한번도' 못먹었던 아이템이면 (도감용)
-            Dictionarys.instance.dictionary_num[name] = true;
+        if (SceneManager.GetActiveScene().name == "Game_SceneNew")
+        {
+            if (Dictionarys.instance.dictionary_num[name] == false) // '한번도' 못먹었던 아이템이면 (도감용)
+                Dictionarys.instance.dictionary_num[name] = true;
+        }
 
         GameObject item = Instantiate(eat_box, new Vector3(0, 0, 0), Quaternion.identity, view.transform);
         item.GetComponent<Eat_box>().image.sprite = Resources.Load<Sprite>("Item2D/" + name);
