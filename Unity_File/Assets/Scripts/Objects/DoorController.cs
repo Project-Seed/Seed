@@ -21,6 +21,8 @@ public class DoorController : MonoBehaviour
         if (!open.GetBool("isOpen"))
         {
             open.SetBool("isOpen", true);
+
+            GameSystem.instance.sound_start(12);
         }
     }
 
