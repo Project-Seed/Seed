@@ -21,9 +21,12 @@ public class Bullet : MonoBehaviour
         Vector3 normal = point.normal;
 
         //pos는 Ray 쏜 곳.
-        if(plant.seed_name == "red_seed" || plant.seed_name == "white_seed")
+        if (plant.seed_name == "red_seed" || plant.seed_name == "white_seed")
+        {
             plant.PlantSeed(pos, normal, true, false);
-        else if(plant.seed_name == "blue_seed")
+            plant.red_go = gameObject.transform.position;
+        }
+        else if (plant.seed_name == "blue_seed")
             plant.PlantSeed(pos, normal, false, true);
         else
             plant.PlantSeed(pos, normal, false, false);

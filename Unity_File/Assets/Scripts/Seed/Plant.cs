@@ -83,16 +83,13 @@ class Plant : MonoBehaviour
 
         if(red == true)
         {
-            obj.transform.rotation = Quaternion.LookRotation(red_go);
-            obj.transform.rotation = Quaternion.Euler(new Vector3(0, obj.transform.rotation.eulerAngles.y, 0));
+            obj.transform.LookAt(GameObject.Find("Player").transform.position);
+            obj.transform.rotation = Quaternion.Euler(new Vector3(0, obj.transform.rotation.eulerAngles.y + 180, 0));
         }
         else if(blue == true)
         {
             obj.transform.rotation = Quaternion.Euler(new Vector3(0, obj.transform.rotation.eulerAngles.y, obj.transform.rotation.eulerAngles.z));
         }
-
-
-        Debug.Log("Planted At"+pos);
     }
 
     public void PlantFail(Vector3 pos, Vector3 normal,string name)

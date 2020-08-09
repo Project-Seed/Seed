@@ -55,6 +55,7 @@ public class State : MonoBehaviour
         }
     }
 
+    /*
     public void restart()
     {
         for (int i = 0; i < hearts.Count; i++)
@@ -96,7 +97,7 @@ public class State : MonoBehaviour
 
             e_radi++;
         }
-    }
+    }*/
 
     IEnumerator Update_Radiation()
     {

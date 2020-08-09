@@ -51,6 +51,8 @@ public class GameSystem : MonoBehaviour
 
     public void load_game(int num)
     {
+        Debug.Log("D");
+        
         XDocument save_data = XDocument.Load(save_path + "./save_data" + num.ToString() + ".xml");
 
         Light_system.instance.time = float.Parse(save_data.Element("root").Element("solo").Element("time").Value);
@@ -62,8 +64,10 @@ public class GameSystem : MonoBehaviour
             float.Parse(save_data.Element("root").Element("solo").Element("ch_ro_x").Value),
             float.Parse(save_data.Element("root").Element("solo").Element("ch_ro_y").Value),
             float.Parse(save_data.Element("root").Element("solo").Element("ch_ro_z").Value),0);
-        playerstate.hp = int.Parse(save_data.Element("root").Element("solo").Element("hp").Value);
-        playerstate.radiation = int.Parse(save_data.Element("root").Element("solo").Element("radiation").Value);
+        //playerstate.hp = int.Parse(save_data.Element("root").Element("solo").Element("hp").Value);
+        //playerstate.radiation = int.Parse(save_data.Element("root").Element("solo").Element("radiation").Value);
+        State.instance.hp_down(playerstate.max_hp - int.Parse(save_data.Element("root").Element("solo").Element("hp").Value));
+        State.instance.radi_up(int.Parse(save_data.Element("root").Element("solo").Element("radiation").Value));
 
         item_num = new Dictionary<string, int>();
         foreach (var load in save_data.Element("root").Element("item_num").Elements())

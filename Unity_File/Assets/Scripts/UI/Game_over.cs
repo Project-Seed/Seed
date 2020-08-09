@@ -58,7 +58,7 @@ public class Game_over : MonoBehaviour
         gameObject.SetActive(false);
 
         PlayerState.instance.reborn();
-        State.instance.restart();
+        //State.instance.restart();
         InputManager.instance.click_mod = 0;
     }    
 }

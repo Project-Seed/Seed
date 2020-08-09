@@ -6,10 +6,9 @@ using UnityEngine.UI;
 
 public class Bleeding : MonoBehaviour
 {
-    private Image img;
+    public Image img;
     void Start()
     {
-        img = GetComponent<Image>();
         img.enabled = false;
     }
 
