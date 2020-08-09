@@ -54,16 +54,6 @@ public class Quest_trigger : MonoBehaviour
                     if (GameSystem.instance.quest_state[18] == 1)
                         Quest_clear_system.instance.clear_trigger[18] = 1;
                     break;
-
-                case 7:
-                    if (GameSystem.instance.quest_state[19] == 2)
-                    {
-                        GameSystem.instance.quest_state[19] = 3;
-                        Quest_clear_system.instance.clear_reward(19);
-                        GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[19 - 1]["title"], true);
-                        GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re();
-                    }
-                    break;
             }
         }
     }

@@ -40,6 +40,7 @@ public class GameSystem : MonoBehaviour
     public GameObject talk_npc_ob; // 주문하신 대화하는 npc오브젝트
 
     public string map_name;
+    public string map_name_ko;
 
     public Dictionarys dictionary_sc;
 
@@ -47,7 +48,6 @@ public class GameSystem : MonoBehaviour
 
     public void load_game(int num)
     {
-        
         XDocument save_data = XDocument.Load(save_path + "./save_data" + num.ToString() + ".xml");
 
         Light_system.instance.time = float.Parse(save_data.Element("root").Element("solo").Element("time").Value);
@@ -99,7 +99,7 @@ public class GameSystem : MonoBehaviour
                 new XElement("ch_ro_z", character.transform.rotation.z),
                 new XElement("hp", playerstate.hp),
                 new XElement("radiation", playerstate.radiation),
-                new XElement("map_name", map_name),
+                new XElement("map_name_ko", map_name_ko),
                 new XElement("save_time", DateTime.Now.ToString(("yyyy-MM-dd HH:mm:ss tt")))),
             new XElement("item_num", item_num.Select(kv => new XElement(kv.Key, kv.Value))), // dictionary 정석
             new XElement("quest_state", quest_state.Select(kv => new XElement("char" + kv.Key.ToString(), kv.Value))), // key가 int

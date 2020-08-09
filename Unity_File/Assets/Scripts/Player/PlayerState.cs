@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerState : MonoBehaviour
 {
@@ -296,14 +297,24 @@ public class PlayerState : MonoBehaviour
 
     IEnumerator wake_up()
     {
-        yield return new WaitForSeconds(3f);
-        // 검은 화면 사라졌다. 1초
+        Image sleep = GameObject.Find("Sleep").GetComponent<Image>();
 
         yield return new WaitForSeconds(2f);
+        for (int i = 0; i <= 100; i++)
+        {
+            sleep.color = new Color(0, 0, 0, i / 100f);
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        yield return new WaitForSeconds(1f);
         gameObject.transform.position = new Vector3(503.7633f, 58.55602f, 808.3416f);
-        // 검은 화면 나왔 1초
+        for (int i = 0; i <= 100; i++)
+        {
+            sleep.color = new Color(0, 0, 0, (100 - i) / 100f);
+            yield return new WaitForSeconds(0.01f);
+        }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         animator.SetTrigger("sleep_off");
 
         yield return new WaitForSeconds(2f);

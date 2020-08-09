@@ -12,6 +12,7 @@ public class Key_guide : MonoBehaviour
     public GameObject climb;
     public GameObject objects;
     public GameObject door;
+    public GameObject fix;
 
     public GameObject item_name_ob;
     public Text item_name;
@@ -192,6 +193,39 @@ public class Key_guide : MonoBehaviour
     public void door_off()
     {
         door.SetActive(false);
+    }
+
+    public void fix_on()
+    {
+        fix.SetActive(true);
+    }
+    public IEnumerator fix_ing()
+    {
+        white.SetActive(true);
+        white.transform.position = fix.transform.position;
+        for (int i = 0; i < 20; i++)
+        {
+            if (i < 5)
+            {
+                white.GetComponent<Image>().color = new Color(1, 1, 1, i / 5f);
+                yield return new WaitForSeconds(0.01f);
+            }
+            else if (i == 5)
+            {
+                fix.SetActive(false);
+                yield return new WaitForSeconds(0.01f);
+            }
+            else
+            {
+                white.GetComponent<Image>().color = new Color(1, 1, 1, (20 - i) / 15f);
+                yield return new WaitForSeconds(0.01f);
+            }
+        }
+        white.SetActive(false);
+    }
+    public void fix_off()
+    {
+        fix.SetActive(false);
     }
 
     public void object_on(string name, Vector3 ts)

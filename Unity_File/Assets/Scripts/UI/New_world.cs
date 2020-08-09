@@ -30,6 +30,7 @@ public class New_world : MonoBehaviour
                 if(GameSystem.instance.world_list[i]["name"] == GameSystem.instance.map_name)
                 {
                     text.text = GameSystem.instance.world_list[i]["name_ko"];
+                    GameSystem.instance.map_name_ko = text.text;
                     PlayerState.instance.radiation_level = int.Parse(GameSystem.instance.world_list[i]["level"]);
 
                     i = GameSystem.instance.world_list.Count;

@@ -208,9 +208,9 @@ public class Map : MonoBehaviour
                 break;
 
             case 6: // 공학자의 마을
-                warp_point_x = 511;
-                warp_point_y = 50;
-                warp_point_z = 2927;
+                warp_point_x = 584;
+                warp_point_y = 68;
+                warp_point_z = 2900;
                 break;
         }
     }

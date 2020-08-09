@@ -9,6 +9,9 @@ public class Quest_clear_system : MonoBehaviour
 
     public Dictionary<int, int> clear_trigger = new Dictionary<int, int>();
 
+    public GameObject good;
+    public GameObject bad;
+
     public static Quest_clear_system Instance
     {
         get { return instance; }
@@ -85,14 +88,6 @@ public class Quest_clear_system : MonoBehaviour
         if (GameSystem.instance.quest_state[19] == 1 &&
             GameSystem.instance.item_num["fix_box"] >= 1)
             GameSystem.instance.quest_state[19] = 2;
-
-        if (GameSystem.instance.quest_state[5] == 2)
-        {
-            GameSystem.instance.quest_state[5] = 3;
-            clear_reward(5);
-            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[5 - 1]["title"], true);
-            GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re();
-        }
 
         if (GameSystem.instance.quest_state[20] == 1)
         {
@@ -179,6 +174,9 @@ public class Quest_clear_system : MonoBehaviour
             case 19:
                 data = "수리상자 " + GameSystem.instance.item_num["fix_box"].ToString() + " / 1";
                 break;
+            case 5:
+                data = "공학자의 마을 전파탑 수리하기";
+                break;
             case 20:
             case 21:
                 data = "";
@@ -226,12 +224,10 @@ public class Quest_clear_system : MonoBehaviour
                 // 수리 전경
                 break;
             case 20:
-                // 트루엔딩
-                Debug.Log("트루엔딩"); Eat_system.instance.eat_item("gunpowder");
+                good.SetActive(true);
                 break;
             case 21:
-                // 배드엔딩
-                Debug.Log("배드엔딩"); Eat_system.instance.eat_item("coal");
+                bad.SetActive(true);
                 break;
         }
     }
