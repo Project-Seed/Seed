@@ -10,6 +10,7 @@ public class TimelineController : MonoBehaviour
     public void Play()
     {
         playableDirector.Play();
-        bridge.SetActive(true);
+        if (bridge)
+            bridge.SetActive(true);
     }
 }

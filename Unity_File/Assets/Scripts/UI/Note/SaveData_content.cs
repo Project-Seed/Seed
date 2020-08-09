@@ -41,10 +41,12 @@ public class SaveData_content : MonoBehaviour
         key_ok = true;
         load_ob.SetActive(false);
 
-        GameSystem.instance.load_game(click_num);
-
         if (die)
             game_Over.restart();
+
+        Load_nodie.instance.num = click_num;
+        Load_nodie.instance.load_on = true;
+        LoadingSceneManager.LoadScene("Game_SceneNew");
     }
 
     public void click()

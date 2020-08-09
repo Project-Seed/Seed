@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
     public Material player_mate;
 
     public GameObject chest_ob;
+    public GameObject radio_ob;
 
     int right_crash = 0; // 우클릭 중복 때매
 
@@ -468,29 +469,53 @@ public class PlayerController : MonoBehaviour
                 rotate_ob.transform.localRotation = Quaternion.Euler(new Vector3(0, rotate_ob.transform.localRotation.eulerAngles.y, 0));
                 player_state.box_open();
             }
+
+            if (Input.GetKeyDown(KeyCode.E) && Key_guide.instance.fix.activeSelf)
+            {
+                if(radio_ob.name == "radioTower1")
+                {
+                    GameSystem.instance.quest_state[19] = 3;
+                    Quest_clear_system.instance.clear_reward(19);
+                    GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[19 - 1]["title"], true);
+                    GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re();
+                }
+                if (radio_ob.name == "radioTower2")
+                {
+                    GameSystem.instance.quest_state[5] = 2;
+                }
+
+                StartCoroutine(Key_guide.instance.fix_ing());
+                radio_ob.GetComponent<Radio>().fixs();
+            }
         }
 
         // 열려라 도감!
         if (Input.GetKeyDown(KeyCode.C))
         {
-            if (composer.activeSelf == true)
-                composer.SetActive(false);
-            else
+            if (dialogue.dialogue_box.activeSelf == false)
             {
-                note.SetActive(false);
-                composer.SetActive(true);
+                if (composer.activeSelf == true)
+                    composer.SetActive(false);
+                else
+                {
+                    note.SetActive(false);
+                    composer.SetActive(true);
+                }
             }
         }
 
         // 열려라 다이어리!
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (note.activeSelf == true)
-                note.SetActive(false);
-            else
+            if (dialogue.dialogue_box.activeSelf == false)
             {
-                composer.SetActive(false);
-                note.SetActive(true);                           
+                if (note.activeSelf == true)
+                    note.SetActive(false);
+                else
+                {
+                    composer.SetActive(false);
+                    note.SetActive(true);
+                }
             }
         }
 
@@ -572,6 +597,23 @@ public class PlayerController : MonoBehaviour
             case "trigger_2floar":
                 dialogue.solo_talk(28);
                 break;
+
+
+            case "radioTower1":
+                if (collision.gameObject.GetComponent<Radio>().actives == false && GameSystem.instance.quest_state[19] == 2)
+                {
+                    radio_ob = collision.gameObject;
+                    Key_guide.instance.fix_on();
+                }
+                break;
+
+            case "radioTower2":
+                if (collision.gameObject.GetComponent<Radio>().actives == false && GameSystem.instance.quest_state[5] == 1)
+                {
+                    radio_ob = collision.gameObject;
+                    Key_guide.instance.fix_on();
+                }
+                break;
         }
 
         if (collision.gameObject.name == "white_seed_area")
@@ -627,6 +669,11 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.name == "Chest_trigger")
         {
             Key_guide.instance.door_off();
+        }
+
+        if (collision.gameObject.name == "radioTower1" || collision.gameObject.name == "radioTower2")
+        {
+            Key_guide.instance.fix_off();
         }
     }
 
