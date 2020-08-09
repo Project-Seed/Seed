@@ -47,6 +47,8 @@ public class PlayerState : MonoBehaviour
 
     public GameObject game_overs;
 
+    private bool wake_s = true;
+
 
     public static PlayerState Instance
     {
@@ -71,7 +73,7 @@ public class PlayerState : MonoBehaviour
             StartCoroutine(gameover_image());
         }
 
-        if (state_fly == 1 && dont_fly == false)
+        if (state_fly == 1 && dont_fly == false && wake_s)
         {
             if (fly_y - 4f > gameObject.transform.position.y && state_sky == 0)
             {
@@ -297,6 +299,8 @@ public class PlayerState : MonoBehaviour
 
     IEnumerator wake_up()
     {
+        wake_s = false;
+
         Image sleep = GameObject.Find("Sleep").GetComponent<Image>();
 
         yield return new WaitForSeconds(2f);
@@ -322,5 +326,7 @@ public class PlayerState : MonoBehaviour
         GameObject.Find("Quest_quick").GetComponent<Quest_quick>().start_co(GameSystem.instance.quest_list[15 - 1]["title"], false);
         GameObject.Find("Quest_quick").GetComponent<Quest_quick>().quest_re();
         InputManager.instance.game_start();
+
+        wake_s = true;
     }
 }

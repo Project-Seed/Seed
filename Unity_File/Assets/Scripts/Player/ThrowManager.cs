@@ -134,7 +134,7 @@ public class ThrowManager : MonoBehaviour
 
             case "green_seed":
             case "lime_seed":
-                if (hit.transform.CompareTag("Plant"))
+                if (hit.transform.CompareTag("Plant2"))
                     return true;
                 break;
 
