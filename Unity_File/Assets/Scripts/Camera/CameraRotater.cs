@@ -200,17 +200,23 @@ public class CameraRotater : MonoBehaviour
     //        yield return null;
     //    }
     //}
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag("Player")) return;
-    //    if (camera_offset.magnitude > maxZoomin)
-    //    {
-    //        camera_offset /= 1.1f;
-    //        isZoomIn = true;
-    //        CheckBehind();
-    //    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player")) return;
+        if (other.CompareTag("Ground"))
+        {
+            if (camera_offset.magnitude > maxZoomin)
+            {
+                camera_offset /= 1.05f; //줌인
+            }
+            else if (camera_offset.magnitude <= maxZoomin)
+            {
+                camera_offset = camera_offset.normalized * maxZoomin;
+                isZoomIn = false;
+            }
+        }
 
-    //}
+    }
     //private void OnTriggerStay(Collider other)
     //{
     //    Debug.Log("stay");
