@@ -46,6 +46,9 @@ public class GameSystem : MonoBehaviour
 
     public string save_path = "";
 
+    private AudioSource audioSource;
+    public List<AudioClip> sounds = new List<AudioClip>();
+
     public void load_game(int num)
     {
         XDocument save_data = XDocument.Load(save_path + "./save_data" + num.ToString() + ".xml");
@@ -181,6 +184,8 @@ public class GameSystem : MonoBehaviour
         world_list = CSV_Reader.Read("World_Table"); // 지역 방사능 로드
 
         dictionary_sc.before_awake();
+
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     private void Start()
@@ -213,5 +218,17 @@ public class GameSystem : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void sound_start(string st)
+    {
+        switch(st)
+        {
+            case "die":
+                audioSource.clip = sounds[0];
+                break;
+        }
+
+        audioSource.Play();
     }
 }
