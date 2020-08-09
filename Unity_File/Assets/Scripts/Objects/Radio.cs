@@ -10,9 +10,14 @@ public class Radio : MonoBehaviour
 
     public MeshRenderer meshRenderer;
 
+    private void Awake()
+    {
+        fixs();
+    }
     public void fixs()
     {
         actives = true;
+        GetComponent<TimelineController>().Play();
         meshRenderer.material = blue;
     }
 }
