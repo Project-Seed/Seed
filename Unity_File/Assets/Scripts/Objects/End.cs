@@ -9,6 +9,7 @@ public class End : MonoBehaviour
     public List<Image> image;
 
     public bool click_ok = false;
+    public bool your_good = false;
 
     private void Start()
     {
@@ -17,9 +18,15 @@ public class End : MonoBehaviour
 
     IEnumerator wake_up()
     {
-        yield return new WaitForSeconds(2f);
-
         InputManager.instance.game_stop();
+
+        if(your_good)
+            GameObject.Find("BGM").GetComponent<End_sound>().good_play();
+        else
+            GameObject.Find("BGM").GetComponent<End_sound>().bad_play();
+
+
+        yield return new WaitForSeconds(2f);
 
 
         for (int j = 0; j < 4; j++)
@@ -68,6 +75,7 @@ public class End : MonoBehaviour
         }
 
         InputManager.instance.game_start();
+        GameObject.Find("BGM").GetComponent<End_sound>().normal_play();
         gameObject.SetActive(false);   
     }
 }
