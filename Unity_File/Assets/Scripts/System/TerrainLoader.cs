@@ -10,13 +10,11 @@ public class TerrainLoader : MonoBehaviour
         if (!unloadTerrains.Length.Equals(0))
             for (int j = 0; j < unloadTerrains.Length; ++j)
             {
-                Debug.Log("UnLoad" + unloadTerrains[j].name);
                 unloadTerrains[j].SetActive(false);
             }
         if (!loadTerrains.Length.Equals(0))
             for (int i = 0; i < loadTerrains.Length; ++i)
             {
-                Debug.Log("Load" + loadTerrains[i].name);
                 loadTerrains[i].SetActive(true);
             }
 

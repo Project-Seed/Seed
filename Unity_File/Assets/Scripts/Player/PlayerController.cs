@@ -812,7 +812,6 @@ public class PlayerController : MonoBehaviour
 
     public void shadow_out()
     {
-        Debug.Log("갈색 떨어짐");
         climb_crash = false;
 
         shadow2.SetActive(false);

@@ -184,7 +184,6 @@ public class State : MonoBehaviour
         for (int i = 0; i < num; i++)
         {
             int radi_int = PlayerState.instance.radiation / 2;
-            Debug.Log(num);
             radis[radi_int].GetComponent<Radi>().radi_up(PlayerState.instance.radiation % 2);
             PlayerState.instance.radiation++;
         }

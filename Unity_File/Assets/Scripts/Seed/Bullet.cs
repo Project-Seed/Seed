@@ -35,7 +35,6 @@ public class Bullet : MonoBehaviour
     private static bool checkWall(ref Collision hit,string type)
     {
         float angle = Vector3.Angle(hit.GetContact(0).normal, Vector3.up);
-        Debug.Log("hit " + hit.transform.gameObject.name + "Angle " + angle);
         bool isWall;
         if (type == "blue_seed")
         {
